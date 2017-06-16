@@ -56,6 +56,23 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
 			$this->_redirect('*/*/');
             }
 
+  public function deletesliderimageAction()
+    {
+ 
+            $sliderid = Mage::app()->getRequest()->getPost('id');
+            $delData = Mage::getModel('btslider/btslider')->load($sliderid);
+
+            Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+              try {
+                 $delData->delete();
+
+              } catch(Exception $e) {
+                  echo "Image #".$delData->getId()." could not be removed: ".$e->getMessage();
+              }
+               Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully deleted.'));
+			  $this->_redirect('*/*/');
+          }
+
 	public function editAction() {
 		$id     = $this->getRequest()->getParam('id');
 		$model  = Mage::getModel('btslider/btslider')->load($id);
