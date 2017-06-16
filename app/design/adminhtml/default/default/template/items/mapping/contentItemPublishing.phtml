@@ -1,0 +1,175 @@
+<style type="text/css">
+.variation {
+    overflow: hidden;
+}
+.variation .varBox .varColor {
+    display: block;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+.variation .varBox {
+    padding: 1px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 2px 2px 2px 2px;
+    float: left;
+    display: block;
+    margin-right: 9px;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+}
+
+div{
+
+    background: none repeat scroll 0% 0% transparent;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    outline: 0px none;
+    vertical-align: baseline;
+}
+span{
+    background: none repeat scroll 0% 0% transparent;
+    border: 0px none;
+    outline: 0px none;
+    vertical-align: baseline;
+}
+.variation .maskColor-two {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.variation .varColor.color-two {
+    top: 5px;
+    left: 0px;
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.variation .varLabel {
+    padding: 2px 0px;
+    float: left;
+    display: block;
+    margin-right: 5px;
+}
+</style>
+<?php 
+$data['root_id'] = '';
+$data['revise'] = '';
+$data = $this->getData();
+
+?>
+<div class="content-header">
+  <table cellspacing="0">
+  <?php if(isset($data['revise']) && $data['revise']){?>
+    <tr>
+      <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('items')->__('Revise Item') ?></h3></td>
+      <td class="a-right"><?php  echo $this->getButtonsHtml() ?></td>
+    </tr>
+  <?php } else { ?>
+  	 <tr>
+      <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('items')->__('Publish Item') ?></h3></td>
+      <td class="a-right"><?php  echo $this->getButtonsHtml() ?></td>
+    </tr>
+  <?php } ?>
+  </table>
+  </div>
+  <p class="switcher">
+    <label for="store_switcher">Choose Magento Root Category:</label>
+    <select onchange="return mageRootCategory(this);" id="meli_category_switcher" name="meli_category_switcher">
+      <?php
+foreach($data['mageRootCollection'] as $key => $value ){
+	echo '<option value="'.$key.'"';
+	if($key == $data['root_id']){  $selected = 'selected'; } else { $selected = '';};
+	echo $selected .'>&nbsp;&nbsp;'.$value.'&nbsp;&nbsp;</option>';
+}
+?>
+    </select>
+<?php if(isset($data['revise']) && $data['revise']){?>
+	<form  id="edit_form" action="<?php echo $this->getUrl('*/*/revise');?>" method="post" >
+<?php } else { ?>
+	<form  id="edit_form" action="<?php echo $this->getUrl('*/*/post');?>" method="post" >
+<?php } ?>
+<div style="text-align:right;">
+<?php if(isset($data['revise']) && $data['revise']){?>
+	<input name="button" type="button" value="Revise Item" onclick="edit_form.submit()" class="form-button scalable save" />
+<?php } else {?>
+	<input name="button" type="button" value="Publish Item" onclick="edit_form.submit()" class="form-button scalable save" />
+<?php } ?>
+
+</div>
+  <div> <?php echo $this->getGridHtml() ?> </div>
+  <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+</form>
+<script type="text/javascript">
+    function mageRootCategory(obj) {
+        var categoryParam = obj.value ? 'root_id/' + obj.value + '/' : '';
+        if (obj.categoryParam) {
+            categoryParam = obj.categoryParam;
+        }
+           setLocation('<?php echo $this->getUrl('*/*/*');?>' + categoryParam);
+        }
+</script>
+ <script type="text/javascript">/* <![CDATA[ */
+function FillQuantityWanted(id){if(trim(document.getElementById(id).value)==""){document.getElementById(id).value='1';}}
+function validQuantityWanted(val,id){if(trim(val)!=""){if(isNaN(val)){alert("Please enter valid quantity.");document.getElementById(id).value='1';document.getElementById(id).focus();return false;}else if(trim(val)==""||trim(val)<1||!validString(val))
+{alert("Please enter valid quantity.");document.getElementById(id).value='1';document.getElementById(id).focus();return false;}}}
+function validString(myString)
+{var valid_string=new String("1234567890");for(var i=0;i<myString.length;i++)
+{var search_exp=myString.substr(i,1);var answerIdx=valid_string.search(search_exp);if(answerIdx==0)
+{if(search_exp==".")
+{return false;}}
+if(answerIdx==-1)
+{return false;}}
+return true;}
+function trim(str)
+{return str.replace(/^\s*|\s*$/g,"");}/* ]]> */</script>
+
+<script type="text/javascript">
+    function showItemVariationOnPublish(DivId,Pid,Revise){
+    var OriginalString = document.getElementById(DivId).innerHTML;
+    var StrippedString = OriginalString.replace(/(<([^>]+)>)/ig,"");
+    if(trim(StrippedString) == 'View Variation'){
+      new Ajax.Request('<?php echo $this->getUrl('items/index/getVariationOnPublish/')?>Pid/'+Pid+'/Revise/'+Revise, {
+        method:     'get',
+        data:     'test',
+        onSuccess: function(transport){
+          $('data_'+DivId).innerHTML = transport.responseText;
+			document.getElementById('data_'+DivId).style.display="block";
+			document.getElementById('hide_'+DivId).style.display="block";
+			document.getElementById(DivId).style.display="none";  
+        }
+      });
+    }
+    }
+	
+	function hideItemVariationOnPublish (DivId,Pid,Revise){
+		document.getElementById('data_'+DivId).style.display="none";
+		document.getElementById('hide_'+DivId).style.display="none"; 
+		document.getElementById(DivId).style.display="block"; 
+	}
+</script>
+<script type="text/javascript">
+    function loadProductImage(DivId,Pid){
+		var OriginalString = document.getElementById(DivId).innerHTML;
+		var StrippedString = OriginalString.replace(/(<([^>]+)>)/ig,"");
+		if(trim(StrippedString)=='Click here to view image(s)'){
+			new Ajax.Request('<?php echo $this->getUrl('items/index/getItemImagesAjax/')?>Pid/'+Pid, {
+				method:     'get',
+				data:     'test',
+				onSuccess: function(transport){
+					$(DivId).innerHTML = transport.responseText; 
+				}
+			});
+		}
+    }
+</script>

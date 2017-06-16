@@ -1,0 +1,13 @@
+<?php $_element = $this->getElement() ?>
+<?php if (!$_element->getNoDisplay()): ?>
+<tr>
+    <td colspan="3" class="value">
+    	<?php echo trim($_element->getElementHtml()) ?>
+    	<?php if($_element->getNote()):?>
+    	<p id="note_<?php echo $_element->getId()?>" class="note"><span>
+    		<?php echo $_element->getNote();?>
+    	</span></p>
+    	<?php endif;?>
+    </td>
+</tr>
+<?php endif; ?>

@@ -1,0 +1,103 @@
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$modules_enable = Mage::getStoreConfig('advanced/modules_disable_output');
+$theme=Mage::helper('welldone');
+$_customtab = $this->getProduct()->getWd_customtab();
+$_customtabtitle = $this->getProduct()->getWd_customtabtitle();
+$prev_next=($theme->getLayoutOption('product/prevnext') && gettype(Mage::registry('current_category'))!='NULL');
+$catalog_mode=$theme->getConfigOption('general/catalog_mode');
+$sku=$theme->getLayoutOption('product/sku');
+$stars=$theme->getLayoutOption('product/stars');
+$ajax_add_to_cart=Mage::getStoreConfig('ajax_addto/product_btns/to_cart');
+$custom_html_in_product=$this->getProduct()->getWd_customhtml();
+$tabs=$theme->getLayoutOption('product/tabs');
+$theme_ajax=Mage::helper('ajaxaddto');
+$media=$theme->getLayoutOption('product/media');
+
+
+$side_left='col-sm-4 col-md-4 col-lg-5 hidden-xs';
+$side_right='product-info col-sm-8 col-md-4 col-lg-4';
+if(empty($custom_html_in_product))
+{
+    $side_left='col-sm-5 col-md-5 col-lg-6 '.(($media=='cloudzoom')?'hidden-xs':'');
+    $side_right='product-info col-sm-7 col-md-7 col-lg-6';
+}
+?>
+<button type="button" class="close icon-clear" data-dismiss="modal"></button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+        <div class="col-sm-6">
+            <div class="product-info">
+                <div class="product-info__title">
+                    <h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+                    <div class="rating product-info__rating visible-xs"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></div>
+                </div>
+                <?php if (!$catalog_mode):?>
+                    <?php echo $this->getChildHtml('product_type_data')?>
+                    <?php echo $this->getTierPriceHtml()?>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('media_mobile') ?>
+                <?php if ($stars): ?>
+                    <div class="rating product-info__rating hidden-xs">
+                        <?php  echo $theme->ratingStars('<span class="icon-star"></span>','',$_product,$this);?>
+                    </div>
+                <?php endif; ?>
+                <div class="divider divider--xs product-info__divider"></div>
+                <?php echo $this->getChildHtml('alert_urls') ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+                <?php if ($_product->getShortDescription()): ?>
+                    <div class="product-info__description">
+                        <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                    </div>
+                <?php endif; ?>
+                <div class="divider divider--xs product-info__divider"></div>
+                <?php if (!$catalog_mode): ?>
+                    <div class="divider divider--xs"></div>
+                    <ul class="product-links product-links--inline">
+                        <?php  echo $theme_ajax->wishlistLink('<li><a href="#"><span class="icon icon-favorite"></span>Add to wishlist</a></li>',$_product,$this,false);?>
+                        <?php if ($this->canEmailToFriend()): ?>
+                            <li><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><span class="icon icon-mail-fill"></span><?php echo $this->__('Email to a Friend') ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $j('#mainProductImg').css({'visibility':'hidden'});
+    $j('.product-images-carousel').css({'visibility':'hidden'});
+    $j('#mainProductImg').imagesLoaded(function() {
+        var imgH = $j('#mainProductImg').find('img').height();
+        console.log(imgH);
+        $j('#mainProductImg').css({'min-height': imgH+'px'});
+        $j('#mainProductImg').css({'visibility':'visible'});
+        $j('.product-images-carousel').css({'visibility':'visible'});
+    })
+    $j('#smallGallery a').click(function(e){
+        e.preventDefault();
+        var targ = $j(this).parent('li').index();
+        console.log(targ)
+        var curImg = $j('#mainProductImg').find('li.active');
+        var cur = curImg.index();
+        console.log(cur)
+        if (targ == cur) {
+            return false;
+        }
+        else {
+            var newImg = $j('#mainProductImg').find('li:nth-child('+ (targ+1) +')');
+            //console.log (targ);
+            curImg.removeClass('active');
+            newImg.addClass('active')
+        }
+    })
+    $j('.tooltip-link').tooltip();
+    // bootstrap minus and plus
+
+
+
+</script>

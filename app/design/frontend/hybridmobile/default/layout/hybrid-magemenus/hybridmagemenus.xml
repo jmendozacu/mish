@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * 
+ */
+-->
+<layout version="0.1.0">
+
+	<default>
+		<reference name="top.menu">
+	        <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+				<template>hybridmodules/hybrid-magemenus/hybrid-mobilemenu.phtml</template>
+			</action>
+	    </reference>
+	</default>
+
+	<cms_index_index>
+        <reference name="cms_page">
+	        <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+				<template>hybridmodules/hybrid-magemenus/hybrid-mobilemenu.phtml</template>
+			</action>
+	    </reference>
+    </cms_index_index>
+
+</layout>

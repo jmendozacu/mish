@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <vendors translate="label" module="vendorscontact">
+            <groups>
+                <vendors_contact translate="label" module="vendorscontact">
+                    <label>Vendor Contact</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <sender_email_identity translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender_email_identity>
+						
+						<email_template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorscontact/system_config_source_email</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template>
+						
+                    </fields>
+                </vendors_contact>
+            </groups>
+        </vendors>
+    </sections>
+</config>

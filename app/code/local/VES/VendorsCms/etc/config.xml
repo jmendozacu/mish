@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<config>
+   	<frontend>
+   		<routers>
+            <vendors>
+				<args>
+					<modules>
+						<vendorscms before="VES_Vendors">VES_VendorsCms_Vendor</vendorscms>
+					</modules>
+				</args>
+			</vendors>
+        </routers>
+        <routers>
+            <vendorscms>
+                <use>standard</use>
+                <args>
+                    <module>VES_VendorsCms</module>
+                    <frontName>vendorscms</frontName>
+                </args>
+            </vendorscms>
+        </routers>
+        <layout>
+            <updates>
+                <vendorscms>
+                    <file>ves_vendors/cms.xml</file>
+                </vendorscms>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <VES_VendorsCms>
+                    <files>
+                        <default>ves_vendors/cms.csv</default>
+                    </files>
+                </VES_VendorsCms>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+		<layout>
+			<updates>
+				<vendorscms>
+					<file>ves_vendors/cms.xml</file>
+				</vendorscms>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <VES_VendorsCms>
+                    <files>
+                        <default>ves_vendors/cms.csv</default>
+                    </files>
+                </VES_VendorsCms>
+            </modules>
+        </translate>
+    </adminhtml>
+    <vendors>
+    	<menu>
+    		<cms module="vendorscms">
+    			<title>CMS</title>
+    			<frontend_class>cms</frontend_class>
+    			<sort_order>40</sort_order>
+    			<children>
+    				<pages module="vendorscms">
+		    			<title>Pages</title>
+		    			<sort_order>10</sort_order>
+		    			<action>vendors/cms_page/</action>
+		    		</pages>
+		    		<block module="vendorscms">
+		    			<title>Static Blocks</title>
+		    			<sort_order>20</sort_order>
+		    			<action>vendors/cms_block/</action>
+		    		</block>
+		    		<app module="vendorscms">
+		    			<title>Frontend Apps</title>
+		    			<sort_order>30</sort_order>
+		    			<action>vendors/cms_app/</action>
+		    		</app>
+    			</children>
+    		</cms>
+		</menu>
+		
+		<!-- Add  Frontend App Type-->
+    	<ves_frontend_app>
+    		<static_block module="vendorscms">
+    			<title>CMS Static Block</title>
+    			<class>vendorscms/app_staticblock</class>
+    		</static_block>
+    	</ves_frontend_app>
+    	
+    	<group_options>
+			<cms module="vendorscms">
+				<title>CMS</title>
+				<sort_order>20</sort_order>
+				<fields>
+					<enabled>
+						<label>Enable CMS Feature</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>10</sort_order>
+					</enabled>
+				</fields>
+			</cms>
+		</group_options>
+        <group_options>
+            <address module="vendorscms">
+                <title>Sales Address</title>
+                <sort_order>20</sort_order>
+                <fields>
+                    <enabled>
+                        <label>Enable Sales Address</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>10</sort_order>
+                    </enabled>
+                </fields>
+            </address>
+        </group_options>
+        <group_options>
+            <emailenable module="vendorscms">
+                <title>Email,Middle Name</title>
+                <sort_order>21</sort_order>
+                <fields>
+                    <enabled>
+                        <label>Enable Email and Middle Name</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>11</sort_order>
+                    </enabled>
+                </fields>
+            </emailenable>
+        </group_options>
+    </vendors>
+    <global>
+    	<!-- Add filter for cms template processor -->
+    	<ves_filter>
+    		<block module="vendorscms">
+    			<title>Static Block</title>
+    			<class>vendorscms/template_filter_block</class>
+    			<note><![CDATA[Use <strong>{{block block_id="BLOCK_IDENTIFIER"}}</strong> to add a static block.]]></note>
+    		</block>
+    		<url module="vendorscms">
+    			<title>Vendor Url</title>
+    			<class>vendorscms/template_filter_url</class>
+    			<note><![CDATA[Use <strong>{{url path=PATH}}</strong> to add an URL.]]></note>
+    		</url>
+    	</ves_filter>
+    	<app_page_groups>
+    		<all_page module="vendorscms">
+    			<title>All Pages</title>
+    			<class>vendorscms/app_page_group_page_all</class>
+    			<sort_order>20</sort_order>
+    		</all_page>
+    		<product module="vendorscms">
+    			<title>Product</title>
+    			<class>vendorscms/app_page_group_product</class>
+    			<sort_order>10</sort_order>
+    		</product>
+    		<specified_page module="vendorscms">
+    			<title>Specified Pages</title>
+    			<class>vendorscms/app_page_group_page_specified</class>
+    			<sort_order>30</sort_order>
+    		</specified_page>
+    	</app_page_groups>
+    	<events>
+            <vendor_page_controller_router_match_before>
+                <observers>
+                    <vendorscms>
+                        <class>VES_VendorsCms_Controller_Router</class>
+                        <method>vendor_cms_controller_router_match</method>
+                    </vendorscms>
+                </observers>
+            </vendor_page_controller_router_match_before>
+            
+            <!-- Remove some configuration which is not used from vendor page -->
+            <ves_vendorsconfig_form_fieldset_prepare_before>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>ves_vendorsconfig_form_fieldset_prepare_before</method>
+                    </vendorscms>
+                </observers>
+            </ves_vendorsconfig_form_fieldset_prepare_before>
+            
+            <!-- Add frontend app options tab for static block -->
+            <ves_vendorscms_cms_app_add_tab_static_block>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>ves_vendorscms_cms_app_add_tab_static_block</method>
+                    </vendorscms>
+                </observers>
+            </ves_vendorscms_cms_app_add_tab_static_block>
+            
+            <!-- Save App After -->
+            <vendorscms_app_save_after>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>vendorscms_app_save_after</method>
+                    </vendorscms>
+                </observers>
+            </vendorscms_app_save_after>
+            
+            <controller_action_layout_generate_blocks_after>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>controller_action_layout_generate_blocks_after</method>
+                    </vendorscms>
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+            <ves_vendor_menu_check_acl>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>ves_vendor_menu_check_acl</method>
+                    </vendorscms>
+                </observers>
+            </ves_vendor_menu_check_acl>
+            
+            <vendors_controller_pre_dispatch>
+            	<observers>
+                    <vendorscms>
+                        <class>vendorscms/observer</class>
+                        <method>vendors_controller_pre_dispatch</method>
+                    </vendorscms>
+                </observers>
+            </vendors_controller_pre_dispatch>
+        </events>
+        <models>
+             <vendorscms>
+                <class>VES_VendorsCms_Model</class>
+                <resourceModel>vendorscms_resource</resourceModel>
+            </vendorscms>
+            <vendorscms_resource>
+                <class>VES_VendorsCms_Model_Resource</class>
+                <entities>
+                    <page>
+                    	<table>ves_vendor_cms_page</table>
+                    </page>
+                    <block>
+                    	<table>ves_vendor_cms_block</table>
+                    </block>
+                    <app>
+                    	<table>ves_vendor_cms_app</table>
+                    </app>
+                    <appoption>
+                    	<table>ves_vendor_cms_app_option</table>
+                    </appoption>
+                </entities>
+           	</vendorscms_resource>
+        </models>
+        <resources>
+	        <vendorcms_setup>
+	            <setup>
+	                <module>VES_VendorsCms</module>
+	                <class>VES_VendorsCms_Model_Resource_Setup</class>
+	            </setup>
+	        </vendorcms_setup>
+	    </resources>
+        <blocks>
+            <vendorscms>
+                <class>VES_VendorsCms_Block</class>
+            </vendorscms>
+            <page>
+            	<rewrite>
+            		<html_header>VES_VendorsCms_Block_Page_Html_Header</html_header>
+            	</rewrite>
+            </page>
+        </blocks>
+        <helpers>
+            <vendorscms>
+                <class>VES_VendorsCms_Helper</class>
+            </vendorscms>
+        </helpers>
+    </global>
+    <vendor_config>
+    	<design>
+    		<config>
+    			<show_cms_breadcrumbs>1</show_cms_breadcrumbs>
+    		</config>
+    	</design>
+    </vendor_config>
+</config>

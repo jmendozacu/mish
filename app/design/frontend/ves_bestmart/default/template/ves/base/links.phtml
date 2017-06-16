@@ -1,0 +1,32 @@
+<?php
+/*
+* Ves Magento Theme Framework for Prestashop 1.6.x
+*
+* @package   vesblockbuilder
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+if (isset($links) && $links): 
+$id = rand().time();
+?>
+<div class="footer-link block" id="accordion<?php echo $id ?>">
+    <div class="block-title">
+        <?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+        <strong> <span>  <?php echo $widget_heading; ?> </span> </strong>
+            <a data-toggle="collapse" data-parent="#accordion<?php echo $id ?>" href="#collapseOne<?php echo $id ?>" class="panel-title hidden-lg hidden-md">
+               <i class="fa fa-chevron-down">&nbsp;</i>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div id="collapseOne<?php echo $id ?>" class="block-content collapse in" >     
+        <ul class="nav-links">
+            <?php foreach($links as $key=>$ac): ?>
+                <li><a href="<?php echo $ac['link']; ?>"><?php echo $ac['text']; ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

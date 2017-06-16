@@ -1,0 +1,77 @@
+<?php
+/**
+* aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE-COMMUNITY.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * aheadWorks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * aheadWorks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Randomprice
+ * @version    1.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE-COMMUNITY.txt
+ */
+?>
+<div class="aw-randomprice-container" id="aw-randomprice-container">
+    <?php echo $this->getBlockHtml($this->_appliedRule); ?>
+</div>
+
+<div id="aw-randomprice-wait-message" style="display:none;">
+    <p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif', array('_area' => 'adminhtml')) ?>" alt="<?php echo $this->__('Please wait...'); ?>" /><br /><?php echo $this->__('Please wait...') ?></p>
+</div>
+
+<style>
+    #aw-randomprice-wait-message .loader{background:#FFF4E9;border:2px solid #F1AF73;color:#D85909;font-weight:bold;left:43%;padding:15px 60px;position:fixed;text-align:center;top:45%;width:120px;z-index:1000;}
+    .product-options-bottom .aw-randomprice-container{
+        width: 210px;
+        padding-left: 25px;
+        padding-bottom:20px;
+        float: left;
+    }
+</style>
+<script>
+
+    document.observe("dom:loaded", function() {
+
+        var aw_randomprice_wait=$('aw-randomprice-wait-message');
+        var options_box=$$('.product-options-bottom .price-box')[0];
+        if( typeof options_box != 'undefined' ){
+            var copy = $('aw-randomprice-container').cloneNode(true);
+            options_box.insert({after: copy});
+        }
+
+        $$('.aw-randomprice-container a').each(
+        function (link){link.observe('click', function(event) { 
+                event.stop();
+                aw_randomprice_wait.show();
+                new Ajax.Request(link.href,
+                {
+                    method:'get',
+                    onSuccess: function(transport){
+
+                        $$('li.error-msg').each(function(element) {
+                            element.remove();
+                        });
+                
+                        $$('body')[0].insert( {after: transport.responseText  } );
+                        aw_randomprice_wait.hide();
+                    },
+                    onFailure: function(){ window.location.reload(); }
+                });
+            })});
+    });
+</script>

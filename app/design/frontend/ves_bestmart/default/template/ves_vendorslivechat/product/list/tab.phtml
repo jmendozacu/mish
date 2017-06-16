@@ -1,0 +1,29 @@
+
+<section class="ves-tabs-chatlive ves-livechat-box-create" style="display:none">
+    <div class="ves-livechat-box-button hidden-button" style="display: none">
+    </div>
+
+    <div class="ves-livechat-box-content" style="display: none">
+        <header class="top-bar">
+            <div class="left" id="ves_vendor_ticket_title">
+                <h1></h1>
+            </div>
+            <div class="right">
+                <span class="icon icon-closed" onclick="ChatOption.closeBox()"></span>
+            </div>
+        </header>
+        <div class="content">
+            <div class="content-box" id="ves-livechat-box-create-form-online" style="display: none">
+                <?php echo $this->getChildHtml("form_online") ?>
+            </div>
+            <div class="content-box" id="ves-livechat-box-create-form-offline" style="display: none">
+                <?php echo $this->getChildHtml("form_offline") ?>
+            </div>
+        </div>
+        <div id="ves_livechat_loading" class="ves_livechat-loading-box" style="display: none;"><img src="<?php echo $this->getSkinUrl('ves_vendors/images/livechat/loading.gif')?>" /><br /></div>
+        <div id="ves_livechat_overlay" class="ves_livechat-overlay" style="display: none;"></div>
+    </div>
+</section>
+<script type="text/javascript">
+    var loadingBox = new LiveChatLoadingBox('ves_livechat_loading','ves_livechat_overlay');
+</script>

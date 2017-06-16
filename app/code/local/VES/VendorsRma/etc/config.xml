@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsRma>
+            <version>1.0.1.0</version>
+        </VES_VendorsRma>
+    </modules>
+    <frontend>
+        <routers>
+            <vendorsrma>
+                <use>standard</use>
+                <args>
+                    <module>VES_VendorsRma</module>
+                    <frontName>vesrma</frontName>
+                </args>
+            </vendorsrma>
+            <vendors>
+                <args>
+                    <modules>
+                        <vendorsrma before="VES_Vendors">VES_VendorsRma_Vendor</vendorsrma>
+                    </modules>
+                </args>
+            </vendors>
+        </routers>
+        <layout>
+            <updates>
+                <vendorsrma>
+                    <file>ves_vendors/rma.xml</file>
+                </vendorsrma>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <VES_VendorsRma>
+                    <files>
+                        <default>ves_vendors/rma.csv</default>
+                    </files>
+                </VES_VendorsRma>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <vendorsrma before="Mage_Adminhtml">VES_VendorsRma_Adminhtml</vendorsrma>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <vendors>
+        <menu>
+            <sales module="vendorsrma" translate="title">
+                <children>
+                    <rma>
+                        <title>RMA</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <all>
+                                <title>All RMA</title>
+                                <sort_order>10</sort_order>
+                                <action>vendors/rma_request/all</action>
+                            </all>
+                            <pending>
+                                <title>Pending Requests</title>
+                                <sort_order>20</sort_order>
+                                <action>vendors/rma_request/</action>
+                            </pending>
+                         </children>
+                    </rma>
+                </children>
+            </sales>
+        </menu>
+    </vendors>
+    <adminhtml>
+		<menu>
+            <sales module="vendorsrma" translate="title">
+                <children>
+                    <orders>
+                        <title>RMA</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <all>
+                                <title>All RMA</title>
+                                <sort_order>10</sort_order>
+                                <action>adminhtml/rma_request/all</action>
+                            </all>
+                            <pending>
+                                <title>Pending Review Requests</title>
+                                <sort_order>20</sort_order>
+                                <action>adminhtml/rma_request/</action>
+                            </pending>
+                            <!-- 
+                            <status>
+                                <title>Manage Statuses</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/rma_status</action>
+                            </status>
+                             -->
+                            <type>
+                                <title>Manage Types</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/rma_type</action>
+                            </type>
+                           
+                            <reason>
+                                <title>Manage Reasons</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/rma_reason</action>
+                            </reason>
+                            
+                            <mestemplate>
+                                <title>Manage Message Templates</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/rma_mestemplate</action>
+                            </mestemplate>
+                            <setting>
+                                <title>Settings</title>
+                                <sort_order>50</sort_order>
+                                <action>adminhtml/system_config/edit/section/vendorsrma</action>
+                            </setting>
+                        </children>
+                    </orders>
+                </children>
+            </sales>
+		</menu>
+
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+					 <sales module="vendorsrma" translate="title">
+		              		<children>
+		                  	<orders>
+	                            <title>RMA</title>
+	                            <sort_order>10</sort_order>
+	                            <children>
+	                                <all module="vendorsrma" translate="title">
+	                                    <title>All RMA</title>
+	                                    <sort_order>0</sort_order>
+	                                </all>
+	                                <pending module="vendorsrma" translate="title">
+	                                    <title>Pending Requests</title>
+	                                    <sort_order>10</sort_order>
+	                                </pending>
+	                                <status module="vendorsrma" translate="title">
+	                                    <title>Manage Statuses</title>
+	                                    <sort_order>100</sort_order>
+	                                </status>
+	                                <type module="vendorsrma" translate="title">
+	                                    <title>Manage Types</title>
+	                                    <sort_order>100</sort_order>
+	                                </type>
+	                                <reason module="vendorsrma" translate="title">
+	                                    <title>Manage Reasons</title>
+	                                    <sort_order>100</sort_order>
+	                                </reason>
+	                                <setting module="vendorsrma" translate="title">
+	                                    <title>Settings</title>
+	                                    <sort_order>1000</sort_order>
+	                                </setting>
+	                            </children>
+							</orders>
+						</children>
+						</sales>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <vendorsrma translate="title" module="vendorsrma">
+                                            <title>RMA</title>
+                                        </vendorsrma>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<vendorsrma>
+					<file>ves_vendors/rma.xml</file>
+				</vendorsrma>
+			</updates>
+		</layout>
+		
+		 <translate>
+            <modules>
+                <VES_VendorsRma>
+                    <files>
+                        <default>ves_vendors/rma.csv</default>
+                    </files>
+                </VES_VendorsRma>
+            </modules>
+        </translate>
+        
+    </adminhtml>   
+    <global>
+        <models>
+            <vendorsrma>
+                <class>VES_VendorsRma_Model</class>
+                <resourceModel>vendorsrma_resource</resourceModel>
+            </vendorsrma>
+            <vendorsrma_resource>
+                <class>VES_VendorsRma_Model_Resource</class>
+                <entities>
+                    <request>
+                        <table>ves_vendor_rma_request</table>
+                    </request>
+                    <item>
+                        <table>ves_vendor_rma_item</table>
+                    </item>
+                    <status>
+                        <table>ves_vendor_rma_status</table>
+                    </status>
+                    <type>
+                        <table>ves_vendor_rma_type</table>
+                    </type>
+                    <note>
+                        <table>ves_vendor_rma_note</table>
+                    </note>
+                    <reason>
+                        <table>ves_vendor_rma_reason</table>
+                    </reason>
+                    <address>
+                        <table>ves_vendor_rma_customer_address</table>
+                    </address>
+                    <message>
+                        <table>ves_vendor_rma_message</table>
+                    </message>
+                    
+                    <template>
+                        <table>ves_vendor_rma_status_template</table>
+                    </template>
+                    
+                    <mestemplate>
+                        <table>ves_vendor_rma_message_template</table>
+                    </mestemplate>
+                    
+                    <history>
+                        <table>ves_vendor_rma_status_history</table>
+                    </history>
+                </entities>
+            </vendorsrma_resource>
+        </models>
+        <resources>
+            <vendorsrma_setup>
+                <setup>
+                    <module>VES_VendorsRma</module>
+                    <class>VES_VendorsRma_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </vendorsrma_setup>
+
+            <vendorsrma_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </vendorsrma_write>
+            <vendorsrma_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </vendorsrma_read>
+
+        </resources>
+        <blocks>
+            <vendorsrma>
+                <class>VES_VendorsRma_Block</class>
+            </vendorsrma>
+        </blocks>
+        <helpers>
+            <vendorsrma>
+                <class>VES_VendorsRma_Helper</class>
+            </vendorsrma>
+        </helpers>
+
+
+        <template>
+            <email>
+            <!-- email by customer -->
+                <vesrma_templates_customer_base_template module="vendorsrma">
+                    <label>Vendor RMA Base template for customer (Default Template from Locale)</label>
+                    <file>ves_vendors/rma/customer.html</file>
+                    <type>html</type>
+                </vesrma_templates_customer_base_template>
+
+                <vesrma_templates_admin_base_template module="vendorsrma">
+                    <label>Vendor RMA Base template for admin (Default Template from Locale)</label>
+                    <file>ves_vendors/rma/admin.html</file>
+                    <type>html</type>
+                </vesrma_templates_admin_base_template>
+
+                <vesrma_templates_vendor_base_template module="vendorsrma">
+                    <label>Vendor RMA Base template for vendor (Default Template from Locale)</label>
+                    <file>ves_vendors/rma/vendor.html</file>
+                    <type>html</type>
+                </vesrma_templates_vendor_base_template>
+				
+				<vesrma_templates_mark_base_template module="vendorsrma">
+                    <label>Vendor RMA Base template for vendor (Default Template from Locale)</label>
+                    <file>ves_vendors/rma/mark.html</file>
+                    <type>html</type>
+                </vesrma_templates_mark_base_template>
+
+
+            </email>
+        </template>
+    </global>
+    <default>
+        <vendorsrma>
+            <general>
+                <order_expiry_day>30</order_expiry_day>
+                <allow_guests_request>1</allow_guests_request>
+                <allow_print>1</allow_print>
+                <enable_reasons>1</enable_reasons>
+                <allow_other_reasons>1</allow_other_reasons>
+                <allow_per_order>1</allow_per_order>
+                <confirm_shipping>1</confirm_shipping>
+                <allow_send_refund>1</allow_send_refund>
+                <confirm_shipping_text>
+                    Having clicked "Yes", you won't be able to cancel RMA or make any changes.
+                    Please ensure that:
+                    1. You have included the RMA Label inside the package
+                    2. You have sent the package to the RMA department
+                </confirm_shipping_text>
+                <allow_file_extension>txt,jpg,jpeg,png,gif,pdf,zip,rar</allow_file_extension>
+                <max_size_upload>2048</max_size_upload>
+                <max_time_wait_sate>24</max_time_wait_sate>
+            </general>
+            <policy>
+                <enable>1</enable>
+            </policy>
+            <contact>
+                <enable>1</enable>
+                <name>Customer Service</name>
+            </contact>
+            <email>
+                <sender>general</sender>
+                <base_template_customer>vesrma_templates_customer_base_template</base_template_customer>
+                <base_template_admin>vesrma_templates_admin_base_template</base_template_admin>
+                <base_template_vendor>vesrma_templates_vendor_base_template</base_template_vendor>
+				<base_template_mark>vesrma_templates_mark_base_template</base_template_mark>
+
+            </email>
+        </vendorsrma>
+    </default>
+     <crontab>
+        <jobs>
+            <VES_VendorsRma>
+                <schedule>
+                    <cron_expr>*/60 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>vendorsrma/observer::autoChangeState</model>
+                </run>
+            </VES_VendorsRma>
+        </jobs>
+    </crontab>
+</config>

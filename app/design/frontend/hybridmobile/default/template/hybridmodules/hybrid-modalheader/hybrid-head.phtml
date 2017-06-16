@@ -1,0 +1,103 @@
+<?php
+/**
+ *
+ * Overrides template/page/html/head.phtml - adds jQuery mobile
+ */
+?>
+<title>
+    <?php echo htmlspecialchars(html_entity_decode($this->getTitle())) ?>
+</title>
+<?php
+// Get Tocuh Icon
+$configData = Mage::getStoreConfig('hybrid_mobile');
+if (isset($configData['header_settings']['store_touch_icon']))
+    $store_touch_icon = $configData['header_settings']['store_touch_icon'];
+else
+    $store_touch_icon = '';
+if($store_touch_icon == '')
+  { $store_touch_icon = $this->getSkinUrl('images/touchicon.png'); }
+else
+  { $store_touch_icon = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'hybridmobile-touch-icons/'. $store_touch_icon; };
+?>
+
+<meta name="msapplication-tap-highlight" content="no"/>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<!-- Open Graph -->
+<?php if (Mage::registry('current_product')) : ?>
+<? $og_product = Mage::registry('current_product') ?>
+<!-- Need to make FB app id dynamic -->
+<meta property="fb:app_id"  content="" />
+<meta property="og:title" content="<?=$og_product->getName()?>" />
+<meta property="og:image" content="<?=$og_product->getImageUrl()?>" />
+<meta property="og:description" content="<?=$og_product->getDescription()?>" />
+<meta property="og:type" content="product" />
+<meta property="og:url" content="<?=$og_product->getProductUrl()?>" />
+<meta property="og:site_name" content="<?=Mage::app()->getStore()->getFrontendName()?>" />
+<meta property="product:price:amount" content="<?=number_format($og_product->getFinalPrice(), 2, '.', '')?>" />
+<meta property="product:price:currency" content="USD" />
+<?php endif;?>
+<!-- End Open Graph -->
+
+<!-- <link rel="apple-touch-icon" href="apple-touch-icon-iphone.png">
+<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+<link rel="apple-touch-startup-image" href="/startup-image.png"> -->
+<link rel="apple-touch-icon" href="<?php echo  $store_touch_icon; ?>">
+
+<!-- Favicon -->
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<script type="text/javascript">
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+</script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?= $this->getSkinUrl('css/jquery.mobile-1.4.0.css') ?>">
+<!-- <link rel="stylesheet" type="text/css" href="<?= $this->getSkinUrl('css/idangerous.swiper.css') ?>"> -->
+<link rel="stylesheet" type="text/css" href="<?= $this->getSkinUrl('css/swiper.css') ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/styles.php') ?>">
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php
+// Check if disabling ajax loading
+// $configData = Mage::getStoreConfig('hybrid_mobile');
+// $disableajax = $configData['general']['disableajax'];
+$disableajax = 1;
+?>
+<!-- Latest jQuery -->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery-2.1.0.min.js') ?>"></script>
+<script type="text/javascript">
+<?php if($disableajax == 1): ?>
+    jQuery(document).on("mobileinit", function(){
+        jQuery.mobile.ajaxEnabled = false;
+    });
+<?php else: ?>
+    jQuery(document).on("mobileinit", function(){
+        jQuery.mobile.defaultPageTransition = 'slide';
+    });
+<?php endif; ?>
+</script>
+<!-- jQuery Mobile -->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.mobile-1.4.0.min.js') ?>"></script>
+<!-- jQuery Plugins -->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/imagesloaded.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.ellipsis.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/snap.min.js') ?>"></script>
+<!-- // <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/idangerous.swiper.min.js') ?>"></script> -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/swiper.jquery.min.js') ?>"></script>
+
+<!-- Custom jQuery script -->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/scripts.js') ?>"></script>
+
+
+<!-- Debugging Tool -->
+<!-- <script src="http://192.168.168.144:8080/target/target-script-min.js#anonymous"></script> -->

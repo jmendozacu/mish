@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mirasvit_seo.css</stylesheet></action>
+        </reference>	
+	    <reference name="before_body_end">
+	        <block type="seo/description" name="seodescription" template="seo/description.phtml" after='-'/>
+	    </reference>
+    </default>
+    <catalog_product_view>
+        <reference name="content">
+            <block type="seo/goodrelations" name="goodrelations" template="seo/goodrelations.phtml" after='-'/>
+            <block type="seo/richsnippet" name="richsnippet" template="seo/richsnippet/aggregated.phtml" after='-'/>
+        </reference>    
+    </catalog_product_view>
+    <review_product_list>
+        <reference name="content">
+            <block type="seo/richsnippet" name="richsnippet" template="seo/richsnippet/aggregated.phtml" after='-'/>
+        </reference>    
+    </review_product_list>        
+</layout>

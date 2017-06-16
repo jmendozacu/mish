@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_vendors_quotation_index>
+    	<reference name="content">
+            <block type="vendorsquote/adminhtml_quote" name="vendor.quote" />
+        </reference>
+    </adminhtml_vendors_quotation_index>
+
+	<adminhtml_vendors_quotation_view>
+		<update handle="vendors_quote_view" />
+		<reference name="quote_items">
+			<action method="setCanEditItems"><value>0</value></action>
+		</reference>
+	</adminhtml_vendors_quotation_view>
+	
+    <vendors_quote_index>
+    	<reference name="content">
+            <block type="vendorsquote/vendor_quote" name="vendor.quote" />
+        </reference>
+    </vendors_quote_index>
+    
+    <vendors_quote_view>
+    	<!-- <update handle="editor"/> -->
+    	<reference name="head">
+    		<action method="addCss"><stylesheet>ves_vendors/quote/styles.css</stylesheet></action>
+    		<action method="addJs"><stylesheet>ves_vendors/quote/js.js</stylesheet></action>
+    		<action method="addJs"><file>mage/adminhtml/sales.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftmessage.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
+            <action method="addJs"><file>varien/configurable.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftoptions/tooltip.js</file></action>
+            <block type="adminhtml/template" name="optional_zip_countries" as="optional_zip_countries" template="directory/js/optional_zip_countries.phtml" />
+    	</reference>
+    	
+        <reference name="js">
+            <block type="adminhtml/template" template="ves_vendorsquote/quote/view/js.phtml" name="create" />
+        </reference>
+        
+        <reference name="content">
+            <block type="vendorsquote/vendor_quote_view" name="vendor.quote.view"></block>
+            <block type="adminhtml/catalog_product_composite_configure" name="composite_configure" />
+        </reference>
+        
+        <reference name="left">
+            <block type="vendorsquote/vendor_quote_view_tabs" name="vendor.quote.tabs">
+                <block type="vendorsquote/vendor_quote_view_tab_info" name="quote_tab_info" template="ves_vendorsquote/quote/view/tab/info.phtml">
+                    <block type="vendorsquote/vendor_quote_view_items" name="quote_items" template="ves_vendorsquote/quote/view/items.phtml">
+                        <action method="addItemRender"><type>default</type><block>vendorsquote/vendor_quote_view_items_renderer_default</block><template>ves_vendorsquote/quote/view/items/renderer/default.phtml</template></action>
+                        <action method="addItemRender"><type>default</type><block>vendorsquote/vendor_quote_view_items_renderer_default</block><template>ves_vendorsquote/quote/view/items/renderer/default.phtml</template></action>
+                        
+                        <action method="addColumnRender"><column>qty</column><block>vendorsquote/vendor_quote_view_items_column_qty</block><template>ves_vendorsquote/quote/view/items/column/qty.phtml</template></action>
+                        <action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template></action>
+                        <action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name_configurable</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template><type>configurable</type></action>
+                        <action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name_bundle</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template><type>bundle</type></action>
+                        <block type="core/text_list" name="order_item_extra_info" />
+                        <block type="vendorsquote/vendor_quote_view_items_add" template="ves_vendorsquote/quote/view/add_product.phtml" name="search" as="search">
+		                    <block type="vendorsquote/vendor_quote_view_items_add_grid" name="grid" as="grid" />
+		                </block>
+                    </block>
+                    <block type="vendorsquote/vendor_quote_view_tab_info_message" name="quote_messages" template="ves_vendorsquote/quote/view/tab/info/message.phtml" />
+                </block>
+                <action method="addTab"><name>quote_info</name><block>quote_tab_info</block></action>
+            </block>
+        </reference>
+    </vendors_quote_view>
+    
+    <vendors_quote_new>
+    	<reference name="content">
+            <block type="vendorsquote/vendor_quote_add" name="vendor.quote.add"></block>
+        </reference>
+    </vendors_quote_new>
+    
+    <vendors_quote_items>
+		<block type="vendorsquote/vendor_quote_view_items" name="quote_items" template="ves_vendorsquote/quote/view/items_ajax.phtml">
+			<action method="addItemRender"><type>default</type><block>vendorsquote/vendor_quote_view_items_renderer_default</block><template>ves_vendorsquote/quote/view/items/renderer/default.phtml</template></action>
+			<action method="addItemRender"><type>default</type><block>vendorsquote/vendor_quote_view_items_renderer_default</block><template>ves_vendorsquote/quote/view/items/renderer/default.phtml</template></action>
+		   
+			<action method="addColumnRender"><column>qty</column><block>vendorsquote/vendor_quote_view_items_column_qty</block><template>ves_vendorsquote/quote/view/items/column/qty.phtml</template></action>
+			<action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template></action>
+			<action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name_configurable</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template><type>configurable</type></action>
+			<action method="addColumnRender"><column>name</column><block>vendorsquote/vendor_quote_view_items_column_name_bundle</block><template>ves_vendorsquote/quote/view/items/column/name.phtml</template><type>bundle</type></action>
+			<block type="core/text_list" name="order_item_extra_info" />
+		</block>
+		<block type="vendorsquote/vendor_quote_view_items_add" template="ves_vendorsquote/quote/view/add_product.phtml" name="search">
+            <block type="vendorsquote/vendor_quote_view_items_add_grid" name="grid" />
+        </block>
+    </vendors_quote_items>
+    
+    
+    <vendor_quote_email_items>
+		<block type="vendorsquote/email_quote_items" name="items" template="ves_vendorsquote/email/quote/items.phtml">
+			<action method="addItemRender"><type>default</type><block>vendorsquote/email_quote_item_renderer</block><template>ves_vendorsquote/email/quote/item/default.phtml</template></action>
+			<action method="addItemRender"><type>simple</type><block>vendorsquote/email_quote_item_renderer</block><template>ves_vendorsquote/email/quote/item/default.phtml</template></action>
+			<action method="addItemRender"><type>configurable</type><block>vendorsquote/email_quote_item_renderer_configurable</block><template>ves_vendorsquote/email/quote/item/default.phtml</template></action>
+			<action method="addItemRender"><type>bundle</type><block>vendorsquote/email_quote_item_renderer_bundle</block><template>ves_vendorsquote/email/quote/item/default.phtml</template></action>
+		</block>
+	</vendor_quote_email_items>
+</layout>

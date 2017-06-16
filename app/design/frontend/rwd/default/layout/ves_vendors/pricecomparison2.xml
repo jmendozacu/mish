@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_product_view>
+    	<reference name="product.info">
+    		<action method="setTemplate"><template>ves_pricecomparison2/catalog/product/view.phtml</template></action>
+	    	<block type="pricecomparison2/product" name="vendors.product.pricecomparison2" template="ves_pricecomparison2/vendor_list.phtml" as="price_comparison">
+	   			<block type="pricecomparison2/product_price" name="vendors.product.pricecomparison2.price" template="ves_pricecomparison2/vendor_list/price.phtml"/>
+	   			<block type="pricecomparison2/product_vendor" name="vendors.product.pricecomparison2.vendor" template="ves_pricecomparison2/vendor_list/vendor.phtml"/>
+	   			<block type="pricecomparison2/product_description" name="vendors.product.pricecomparison2.description" template="ves_pricecomparison2/vendor_list/description.phtml"/>
+	   			<block type="pricecomparison2/product_addtocart" name="vendors.product.pricecomparison2.addtocart" template="ves_pricecomparison2/vendor_list/addtocart.phtml"/>
+	   			<action method="addColumn" translate="title"><name>vendor_info</name><title>Vendor</title><block>vendors.product.pricecomparison2.vendor</block><sortorder>10</sortorder><width>200</width></action>
+	   			<action method="addColumn" translate="title"><name>description</name><title>Description</title><block>vendors.product.pricecomparison2.description</block><sortorder>30</sortorder><width /></action>
+	   			<action method="addColumn" translate="title"><name>product_price</name><title>Price</title><block>vendors.product.pricecomparison2.price</block><sortorder>100</sortorder><width>80</width><sortable>1</sortable></action>
+	   			<action method="addColumn" translate="title"><name>add_to_cart</name><title /><block>vendors.product.pricecomparison2.addtocart</block><sortorder>200</sortorder><width>100</width></action>
+	   		</block>
+   		</reference>
+    </catalog_product_view>
+    <!-- This fix is for RWD theme to work with option swatcher -->
+    <PRODUCT_TYPE_configurable>
+    	<reference name="head">
+    		<action method="addItem">
+    			<type>skin_js</type><name>ves_vendors/pricecomparison2/js.js</name>
+    		</action>
+    	</reference>
+    </PRODUCT_TYPE_configurable>
+</layout> 

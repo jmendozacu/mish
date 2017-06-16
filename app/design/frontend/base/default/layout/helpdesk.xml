@@ -1,0 +1,36 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0"> 
+	<customer_account>
+		<reference name="head">
+			<action method="addItem" ifconfig="help_desk/email/enabled"><type>js_css</type><name>helpdesk/helpdesk.css</name></action>			
+		</reference>
+        <reference name="customer_account_navigation">
+			<action method="addLink" translate="label" module="helpdesk" ifconfig="help_desk/email/enabled"><label>Help desk</label><path>helpdesk</path><title>Help Desk</title><prepare>true</prepare></action>          
+        </reference>
+    </customer_account> 
+	<helpdesk_index_index>  
+		<update handle="customer_account"/> 
+		<reference name="head">
+			<action method="addItem" ifconfig="help_desk/email/enabled"><type>js</type><name>helpdesk/helpdesk.css</name></action>
+		</reference>		
+		<reference name="my.account.wrapper">
+			<block type="helpdesk/createticket" name="helpdesk_createticket" as="helpdesk_createticket"/>
+			
+		</reference>	
+		<reference name="helpdesk_createticket">
+				<action method="setTemplate" ifconfig="help_desk/email/enabled">
+					<template>helpdesk/createticket.phtml</template>
+				</action> 
+			</reference>
+	</helpdesk_index_index>   
+	<helpdesk_index_view>  
+		<update handle="customer_account"/> 
+		<reference name="head">
+			<action method="addItem" ifconfig="help_desk/email/enabled"><type>js_css</type><name>js/helpdesk/helpdesk.css</name></action>
+		</reference>
+		<reference name="my.account.wrapper">
+		  <block type="helpdesk/viewticket" name="helpdesk_viewticket" template="helpdesk/viewticket.phtml"/> 
+		</reference> 
+	</helpdesk_index_view>   
+</layout>   
+	

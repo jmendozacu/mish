@@ -1,0 +1,33 @@
+<!--@subject {{var store.getFrontendName()}}: Personal Logistic Approval Mail  @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var pl_name":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$order.getCustomerName()":"Customer Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var order.increment_id":"Order Id",
+"var order.getCreatedAtFormated('long')":"Order Created At (datetime)",
+"var order.getBillingAddress().format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.getShippingAddress().format('html')":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+"layout handle=\"sales_email_order_items\" order=$order":"Order Items Grid",
+"var order.getEmailCustomerNote()":"Email Order Note"}
+@-->
+<!--@styles
+@-->
+
+<div>
+    <div>
+      <h3>Personal Logistic Approval mail-</h3>
+    </div>
+    <div>
+        <span>Dear {{var pl_name}}</span>
+        <p>Congratulations, you are approved by admin in Mishmarketplace.</p>
+        <p>Your login credentials are-</p>
+        <span>Email- {{var pl_email}}</span><br>
+        <span>Password- {{var password}}</span><br>
+        
+    </div>
+</div>

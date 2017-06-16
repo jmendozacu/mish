@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- vendor review page -->
+    
+    <vendorspage_rating_index>
+        <label>Vendor Rating</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference> 
+        <reference name="head">
+            <action method="addCss"><stylesheet>ves_vendors/css/vendorsreview.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="vendorsreview/vendor_rating_list" name="review.vendor.rating.list" template="ves_vendorsreview/vendor/rating/view/list.phtml">
+                <block type="vendorsreview/vendor_rating_form" name="review_form" template="ves_vendorsreview/vendor/rating/form.phtml"/>
+                
+            </block>
+        </reference>
+    </vendorspage_rating_index>
+    
+    <catalog_product_view>
+
+    	<reference name="vendors.product.pricecomparison2">
+    		<block type="vendorsreview/pricecomparison2_vendor" name="vendors.pricecomparison2.product.review" template="ves_vendorsreview/pricecomparison2/vendor.phtml"/>
+    		<action method="addColumn" translate="title"><name>vendor_review_rating</name><title>Rating</title><block>vendors.pricecomparison2.product.review</block><sortorder>100</sortorder><width>120</width><sortable>1</sortable></action>
+    	</reference>
+
+    </catalog_product_view>
+	<!--
+Customer account home dashboard layout
+-->
+
+    <customer_account_index translate="label">
+        <reference name="my.account.wrapper">
+            <block type="vendorsreview/customer_account_notification" name="vendorsreview_customer_account_dashboard_hello" as="hello" template="ves_vendorsreview/customer/account/notification.phtml" before="-"/>
+        </reference>
+    </customer_account_index>
+    
+</layout> 

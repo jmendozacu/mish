@@ -1,0 +1,112 @@
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo Mage::getStoreConfig('vendors/vendors_map/api_code') ?>&v=3.17.15&sensor=true&libraries=places"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/map.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/upload/jquery-1.8.2.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/upload/jquery-ui.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/upload/fileuploader.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/jquery.colorbox-min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'ves_vendors/map/upload/jquery.noconflict.js' ?>"></script>
+		<script type="text/javascript">
+  	    var circle = null;
+		var customer_marker = null;
+		var infowindows = new Array();
+		var neighborhoods = new Array();
+		var messages = new Array();
+        var JS_PATH = '<?php echo Mage::getBaseUrl('js') ?>';
+		var initPosition = new google.maps.LatLng(<?php echo $this->getDefaultLocationLat() ?>, <?php echo $this->getDefaultLocationLng() ?>);
+		var markers = new Array();
+		var new_markers = null;
+        var edit_marker = null;
+	    var infowindow;
+		var map;
+        var directionsService = new google.maps.DirectionsService();
+		var customer_marker_check = false;
+		var SAEARCH_ADDRESS_BY_PRODUCT = '<?php echo $this->getUrl("storelocator/seller/searchp") ?>';
+	    var SAEARCH_ADDRESS_BY_ADDRESS = '<?php echo $this->getUrl("storelocator/seller/searcha") ?>';
+        var DEFAUlT_MARKER = false;
+        var NOTE_VALIDATE_NAME = '<?php echo $this->__("Product name must be filled out") ?>';
+        var NOTE_VALIDATE_ADDRESS = '<?php echo $this->__("Address must be filled out") ?>';
+        $j(".map-colorbox-logo").colorbox({rel:'map-colorbox-logo'});
+		Event.observe(window,"load",function(){
+					initializeGoogleMap();
+                    resetFormSearch();
+	    });
+</script>
+			
+<div class="header-map">
+		<h1><?php echo $this->getHeader() ?></h1>
+		<p><?php echo $this->getSubHeader() ?></p>
+</div>
+<div class="content-map">
+	<div class="search-map">
+		<div class="search-map-field">
+			<p><?php echo $this->__('Product name')?></p>
+			<input id="vendor-map-name" type="text" size="40" class="input-text" />
+		</div>
+
+		<div class="search-map-field">
+			<p><?php echo $this->__('City')?>  </p>
+			<input id="vendor-map-city" type="text" size="40" class="input-text" />
+		</div>
+        <div class="search-map-field">
+            <p><?php echo $this->__('State/Province')?>  </p>
+            <select id="vendor-map-region-id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="select" style="display:none;">
+                <option value=""><?php echo $this->__('Please select') ?></option>
+            </select>
+            <input type="text" id="vendor-map-region" name="region"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+        </div>
+        <div class="search-map-field">
+            <p><?php echo $this->__('Country')?>  </p>
+            <select id="vendor-map-country" name="country_id" title="<?php echo $this->__('Country') ?>" class="select">
+                <option value=""><?php echo $this->__('Please select') ?></option>
+                <?php foreach($this->getCountryCollection() as $country ) : ?>
+                    <option value="<?php echo $country->getId() ?>"><?php echo $country->getName() ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div class="search-map-field">
+            <p><?php echo $this->__('Zip')?></p>
+            <input id="vendor-map-zip" type="text" size="40" class="input-text" />
+        </div>
+        <div class="search-map-field">
+            <p><?php echo $this->__('Group')?>  </p>
+            <select id="vendor-map-attribute" name="attribute" title="<?php echo $this->__('Group')?>') ?>" class="select">
+                <option value=""><?php echo $this->__('All') ?></option>
+                <?php foreach($this->getOptionTypeMap() as $key=>$value ) : ?>
+                    <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div class="search-map-field">
+            <p><?php echo $this->__('Distance')?></p>
+            <select name="km" class="select" id="vendor-map-radius">
+                <?php foreach($this->getOptionKmMap() as $value=>$km): ?>
+                    <option value="<?php echo $value ?>"><?php  echo $km ?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+
+        <div style="clear:both; margin-top:10px;"></div>
+        <div class="search-map-button">
+            <button class="button" style="" onclick="codeAddress()" type="button" title="Search"><span><span><?php echo Mage::helper("vendorsmap")->__("Search") ?></span></span></button>
+            <button class="button" style="" onclick="resetFormSearch()" type="button" title="Reset"><span><span><?php echo Mage::helper("vendorsmap")->__("Reset") ?></span></span></button>
+        </div>
+	</div>
+	<div class="vendor-map">
+			<div class="left-map" >
+				   	<div id="address_list" class="vendor_address_list" style="display:none">
+					</div>
+			</div>
+			 <div class="right-map">
+		    	<div id="map_canvas" style="width: 100%; height: 500px; overflow: hidden;"></div>
+			</div>
+			<div style="clear:both; margin-top:10px;"></div>
+			<div id="ves_map_loading" class="ves_map_loading" style="display: none;"><img src="<?php echo $this->getSkinUrl('ves_vendors/images/map/loading.gif')?>" /><br /></div>
+			<div id="ves_map_overlay" class="ves_map_overlay" style="display: none;"></div>	
+	</div>
+</div>
+
+<script type="text/javascript">
+ new RegionUpdater('vendor-map-country', 'vendor-map-region', 'vendor-map-region-id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+ var loadingBox = new MapLoadingBox('ves_map_loading','ves_map_overlay');
+</script>

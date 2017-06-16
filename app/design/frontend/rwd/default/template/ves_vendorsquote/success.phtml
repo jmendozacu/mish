@@ -1,0 +1,18 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Your Quote Request has been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<p><strong><?php echo $this->__('Thank you for your interest!') ?></strong></p>
+
+<?php if ($this->getQuoteId()):?>
+<?php if ($this->getCanViewQuote()) :?>
+    <p><?php echo $this->__('Your quote request # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewQuoteUrl()), $this->escapeHtml($this->getQuoteId()))) ?></p>
+<?php  else :?>
+    <p><?php echo $this->__('Your quote request # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewQuestQuoteUrl()), $this->escapeHtml($this->getQuoteId()))) ?></p>
+<?php endif;?>
+    <p><?php echo $this->__(' You will receive a Quote Request confirmation email with a link to track progress.') ?></p>
+<?php endif;?>
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>

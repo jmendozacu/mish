@@ -1,0 +1,186 @@
+<?php 
+	$shippingprofiles = '';
+	$optionsShippingType = '';
+	$optionsShippingTypeOption = '';
+	$optionsCondition ='';
+
+
+	$shippingprofiles = Mage::registry('shippingprofiles')->getData();
+	
+	$optionsShippingType = $this->getData('optionsShippingType');
+	$optionsShippingTypeOption = $this->getData('optionsShippingTypeOption');
+	
+	if($this->getRequest()->getParam('store')){
+		$storeId = (int) $this->getRequest()->getParam('store');
+	} else if(Mage::helper('items')-> getMlDefaultStoreId()){
+		$storeId = Mage::helper('items')-> getMlDefaultStoreId();
+	} else {
+		$storeId = $this->getStoreId();
+	}
+?>
+
+<div class="entry-edit">
+  <form enctype="multipart/form-data" method="post" action="<?php echo $this->getUrl('*/*/save',array('id' => $this->getRequest()->getParam('id'), 'store' => $storeId));?>" id="edit_form" onSubmit="return formValidation();">
+    <div style="" id="">
+      <div class="entry-edit">
+        <div class="entry-edit-head">
+          <h4 class="icon-head head-edit-form fieldset-legend">Add Profile</h4>
+          <div class="form-buttons"></div>
+        </div>
+        <div id="shippingprofile_form" class="fieldset ">
+          <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+              <tbody>
+                <tr>
+                  <td class="label"><label for="shipping_profile">Shipping Profile <span class="required">*</span></label></td>
+                  <td class="value"><input type="text" class="required-entry input-text required-entry" value="<?php echo (isset($shippingprofiles['shipping_profile'])) ? $shippingprofiles['shipping_profile']:''; ?>" name="shipping_profile" id="shipping_profile"></td>
+                </tr>
+                <tr>
+                  <td class="label" ><label for="shipping_mode">Shipping Mode <span class="required">*</span></label></td>
+                  <td class="value" ><select class="required-entry required-entry  select" name="shipping_mode" id="shipping_mode" onChange="onChangeShippingMode(this.value);">
+                      <?php
+	  if(count($optionsShippingType) > 0){
+		foreach($optionsShippingType as $key => $value ){
+			echo '<option value="'.$key.'"';
+			if(isset($shippingprofiles['shipping_mode']) && $key == $shippingprofiles['shipping_mode']){  $selected = 'selected'; } else { $selected = '';};
+			echo $selected .'>&nbsp;&nbsp;'.$value.'&nbsp;&nbsp;</option>';
+		}
+	}
+	?>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="label" id="shipping_method_lable"  colspan="2"><div id="shipping_method_id" style=" display:none;">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="width:185px"><label for="shipping_method">Shipping Method <span class="required">*</span></label></td>
+                          <td class="value" align="left" style="width:500px"><select class="select" name="shipping_method" id="shipping_method" onChange="onChangesShippingMethod(this.value);">
+                              <?php
+						  if(count($optionsShippingTypeOption) > 0){
+							foreach($optionsShippingTypeOption as $key => $value ){
+								echo '<option value="'.$key.'"';
+								if(isset($shippingprofiles['shipping_method']) && $key == $shippingprofiles['shipping_method']){  $selected = 'selected'; } else { $selected = '';};
+								echo $selected .'>&nbsp;&nbsp;'.$value.'&nbsp;&nbsp;</option>';
+							}
+						}
+						?>
+                            </select>
+                          </td>
+                        </tr>
+                      </table>
+                    </div></td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="shipping_service_name[]">&nbsp;</label></td>
+                  <td class="value" ><?php 
+		$html = '';
+		if(isset($shippingprofiles['shipping_custom']) && count($shippingprofiles['shipping_custom']) > 0){
+			$optionCount=0;
+			foreach($shippingprofiles['shipping_custom'] as $shippingprofile){
+				$optionCount ++;
+				$html .= '<table width="500" border="0" cellspacing="2" cellpadding="0">';
+						if($optionCount == 1){
+				$html .= '<tr>
+							<td>Service Name</td>
+							<td>Cost</td>
+							<td>&nbsp;</td>
+						  </tr>';
+						  }	
+				$html .= '<tr>
+							<td><input type="hidden" value="'.$shippingprofile['custom_shipping_id'].'" name="custom_shipping_id[]"><input type="text" value="'.$shippingprofile['shipping_service_name'].'" name="shipping_service_name[]"></td>
+							<td><input type="text" value="'.$shippingprofile['shipping_cost'].'" name="shipping_cost[]"></td>
+							<td width="100">&nbsp;';
+							if(count($shippingprofiles['shipping_custom']) == $optionCount){
+							$html .='<button style="" onclick="addElement();" class="scalable add" type="button" title="Add Option" id="add_new_option_button"><span><span><span>Add Option</span></span></span></button>';
+							} else {
+							$html .='<input type="checkbox" name="delete_'.$shippingprofile['custom_shipping_id'].'">&nbsp;Remove';
+							}
+					$html .='</td>
+						  </tr>
+						</table>';
+			}
+			echo $html;
+			echo '<div id="myDiv"> </div><input type="hidden" value="0" id="theValue" />';
+		} else {
+	?>
+                    <div id="id_new_shipping_cost" style=" display:none;">
+                      <input type="hidden" value="0" id="theValue" />
+                      <table width="500" border="0" cellspacing="2" cellpadding="0">
+                        <tr>
+                          <td>Service Name</td>
+                          <td>Cost</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><input type="text" value="" name="shipping_service_name[]"></td>
+                          <td><input type="text" value="" name="shipping_cost[]"></td>
+                          <td width="100"><button style="" onClick="addElement();" class="scalable add" type="button" title="Add Option" id="add_new_option_button"><span><span><span>Add Option</span></span></span></button></td>
+                        </tr>
+                      </table>
+                      <div id="myDiv"> </div>
+                    </div>
+                    <?php } ?>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" name="form_key">
+    </div>
+  </form>
+</div>
+<script type="text/javascript" >
+function addElement() {
+  var ni = document.getElementById('myDiv');
+  var numi = document.getElementById('theValue');
+  var num = (document.getElementById('theValue').value -1)+ 2;
+  numi.value = num;
+  var newdiv = document.createElement('div');
+  var divIdName = 'my'+num+'Div';
+  newdiv.setAttribute('id',divIdName);
+  var nextRow = '<table width="500" border="0" cellspacing="2" cellpadding="0"><tr><td><input type="text" value="" name="shipping_service_name[]"></td><td><input type="text" value="" name="shipping_cost[]"></td></td><td width="100"><button style="" onclick="removeElement(\''+divIdName+'\');" class="scalable delete delete-option" type="button" title="Delete" id="id_293ba24438a8bb8ce6fef0e157de30c4"><span><span><span>Delete</span></span></span></button></td></tr></table>';
+  newdiv.innerHTML = nextRow;
+  ni.appendChild(newdiv);
+}
+
+function removeElement(divNum) {
+  var d = document.getElementById('myDiv');
+  var olddiv = document.getElementById(divNum);
+  d.removeChild(olddiv);
+}
+
+function onChangesShippingMethod(val){
+	if(val == 'enter_shipping_cost'){
+		document.getElementById('id_new_shipping_cost').style.display = 'block';
+	} else {
+		document.getElementById('id_new_shipping_cost').style.display = 'none';
+	}
+}
+
+function onChangeShippingMode(shipping_mode){
+	if(shipping_mode=='custom '){
+		document.getElementById('shipping_method_id').style.display = 'block';
+	} else {
+		document.getElementById('shipping_method_id').style.display = 'none';
+		document.getElementById('id_new_shipping_cost').style.display = 'none';
+	}
+}
+function formValidation(){
+	if(document.getElementById('shipping_method_id').style.display =='block' && document.getElementById('shipping_method_id').value ==''){
+		alert("Please select shipping method.")
+		document.getElementById('shipping_method_id').focus();
+		return false;
+	}
+}
+<?php if(isset($shippingprofiles['shipping_mode'])) { ?>
+	onChangeShippingMode('<?php echo $shippingprofiles['shipping_mode']; ?>');
+<?php } ?>
+<?php if(isset($shippingprofiles['shipping_method'])) { ?>
+	onChangesShippingMethod('<?php echo $shippingprofiles['shipping_method']; ?>');
+<?php } ?>
+</script>

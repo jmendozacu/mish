@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <pricecomparison translate="label" module="pricecomparison">
+            <label>Price Comparison</label>
+            <sort_order>20</sort_order>
+            <groups>                
+                <config translate="label comment">
+                    <label>Configuration</label>
+                    <sort_order>10</sort_order>
+                    <fields>
+                    	<!-- 
+                        <small_logo>
+                    		<label>Small Logo</label>
+                            <frontend_type>image</frontend_type>
+                            <sort_order>20</sort_order>
+                            <comment><![CDATA[This small logo is used to display on price comparision list<br />The Logo size should be 50x50 (pixel)]]></comment>
+                    	</small_logo>
+                    	 -->
+                    </fields>
+                </config>
+            </groups>
+        </pricecomparison>
+    </sections>
+</config>

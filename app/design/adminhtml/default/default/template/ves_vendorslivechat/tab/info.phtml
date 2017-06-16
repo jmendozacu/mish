@@ -1,0 +1,73 @@
+<?php $geo = $this->getGeoIp() ?>
+<div id="main-user-info-tab-<?php echo $this->getSessionId() ?>" class="main-user-info-tab" data-section-content="" style="display: none">
+    <table class="small">
+        <tbody>
+        <tr>
+            <td><?php echo $this->__("Country") ?></td>
+            <td><img src="<?php echo $geo->getFlags()?>" class="icon-country" style="float:left;margin:-3px 10px 0px 0px"/><span><?php echo $geo->getCountryName() ?></span></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Country code:") ?></td>
+            <td><?php echo $geo->getCountryCode() ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("City") ?></td>
+            <td><?php echo $geo->getCity() ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Ip") ?></td>
+            <td><?php echo $this->getSessionBox()->getIp() ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("ID") ?></td>
+            <td><?php echo $this->getSessionId() ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Name") ?></td>
+            <td>
+                <?php echo $this->getSessionBox()->getName() ?>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("E-Mail") ?></td>
+            <td>
+                <a href="mailto:<?php echo $this->getSessionBox()->getEmail() ?>"><?php echo $this->getSessionBox()->getEmail() ?></a>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo $this->__("Created") ?></td>
+            <td><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$this->getSessionBox()->getData("created_time") ) ?></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="button-set button-option">
+            <?php if($this->getStatusSessionBox()) : ?>
+            <button class="scalable save" title="Start Chat" type="button" onclick="control.acceptBox('<?php echo $this->getSessionId() ?>',false)" style="">
+                        <span>
+                        <span><?php echo $this->__("Start Chat") ?></span>
+                        </span>
+            </button>
+            <button class="scalable delete" title="Decline" type="button" onclick="control.declineBox('<?php echo $this->getSessionId() ?>',false)" style="">
+                        <span>
+                        <span><?php echo $this->__("Decline") ?></span>
+                        </span>
+            </button>
+            <?php endif ?>
+        </div>
+        <div class="button-set button-chat">
+            <?php if(!$this->getStatusSessionBox()) : ?>
+                <button class="scalable end" title="End Chat" type="button" onclick="control.endBox('<?php echo $this->getSessionId() ?>',false)" style="">
+                                <span>
+                                    <span><?php echo $this->__("End Chat") ?></span>
+                               </span>
+                </button>
+            <?php endif ?>
+            <button class="scalable" title="Close" type="button" onclick="control.hideBox('<?php echo $this->getSessionId() ?>',false)" style="">
+                        <span>
+                        <span><?php echo $this->__("Close") ?></span>
+                        </span>
+            </button>
+        </div>
+    </div>
+</div>

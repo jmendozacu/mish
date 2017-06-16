@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <items_adminhtml_items_index>
+        <reference name="content">
+            <block type="items/adminhtml_items" name="items" />
+        </reference>
+    </items_adminhtml_items_index>
+	 <items_adminhtml_categorymapping_index>
+        <reference name="content">
+            <block type="items/adminhtml_categorymapping" name="categorymapping" />
+        </reference>
+    </items_adminhtml_categorymapping_index>
+	 <items_adminhtml_itemlisting_index>
+        <reference name="content">
+            <block type="items/adminhtml_itemlisting" name="itemlisting" />
+        </reference>
+    </items_adminhtml_itemlisting_index>
+	 <items_adminhtml_itemattribute_index>
+        <reference name="content">
+            <block type="items/adminhtml_itemattribute" name="itemattribute" />
+        </reference>
+    </items_adminhtml_itemattribute_index>
+
+	 <items_adminhtml_itempublishing_index>
+        <reference name="content">
+            <block type="items/adminhtml_itempublishing" name="itempublishing" />
+        </reference>
+    </items_adminhtml_itempublishing_index>
+	<items_adminhtml_itemtemplates_index>
+        <reference name="content">
+            <block type="items/adminhtml_itemtemplates" name="itemtemplates" />
+        </reference>
+    </items_adminhtml_itemtemplates_index>
+	<items_adminhtml_shippingprofile_index>
+        <reference name="content">
+            <block type="items/adminhtml_shippingprofile" name="shippingprofile" />
+        </reference>
+    </items_adminhtml_shippingprofile_index>
+	
+	<items_adminhtml_shippingprofile_new>
+        <reference name="content">
+            <block type="items/adminhtml_shippingprofile" name="shippingprofile" output="toHtml" template="items/shipping/new/created.phtml" />
+        </reference>
+    </items_adminhtml_shippingprofile_new>
+	
+	<items_adminhtml_paymentprofile_index>
+        <reference name="content">
+            <block type="items/adminhtml_paymentprofile" name="paymentprofile" />
+        </reference>
+    </items_adminhtml_paymentprofile_index>
+
+	<items_adminhtml_itemdetailprofile_index>
+        <reference name="content">
+            <block type="items/adminhtml_itemdetailprofile" name="itemdetailprofile" />
+        </reference>
+    </items_adminhtml_itemdetailprofile_index>
+
+	<items_adminhtml_itemdetailprofile_edit>
+        <update handle="editor"/>
+			<reference name="head">
+				<action method="setCanLoadExtJs"><flag>1</flag></action>
+				<action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+				<action method="addJs"><script>lib/flex.js</script></action>
+				<action method="addJs"><script>lib/FABridge.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+				<action method="addJs"><script>prototype/window.js</script></action>
+				<action method="addJs"><script>tiny_mce/tiny_mce.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/wysiwyg/tiny_mce/setup.js</script></action>				
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
+			</reference>
+    </items_adminhtml_itemdetailprofile_edit>
+
+	<items_adminhtml_attributemapping_index>
+        <reference name="content">
+            <block type="items/adminhtml_attributemapping" name="attributemapping" />
+        </reference>
+    </items_adminhtml_attributemapping_index>
+	<items_adminhtml_itemlisting_edit>
+       <update handle="editor"/>
+			<reference name="head">
+				<action method="setCanLoadExtJs"><flag>1</flag></action>
+				<action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+				<action method="addJs"><script>lib/flex.js</script></action>
+				<action method="addJs"><script>lib/FABridge.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+				<action method="addJs"><script>prototype/window.js</script></action>
+				<action method="addJs"><script>tiny_mce/tiny_mce.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/wysiwyg/tiny_mce/setup.js</script></action>				
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
+			</reference>
+	</items_adminhtml_itemlisting_edit>
+	<items_adminhtml_questions_index>
+			<reference name="content">
+				<block type="items/adminhtml_questions" name="questions" />
+			</reference>
+    </items_adminhtml_questions_index>
+	<items_adminhtml_anstemplate_index>
+			<reference name="content">
+				<block type="items/adminhtml_anstemplate" name="anstemplate" />
+			</reference>
+    </items_adminhtml_anstemplate_index>
+	<items_adminhtml_itemorders_index>
+        <reference name="content">
+            <block type="items/adminhtml_itemorders" name="orders" />
+        </reference>
+    </items_adminhtml_itemorders_index>
+	<items_adminhtml_feedbacks_index>
+        <reference name="content">
+            <block type="items/adminhtml_feedbacks" name="feedbacks" />
+        </reference>
+    </items_adminhtml_feedbacks_index>
+	<items_adminhtml_dashboard_index>
+       <reference name="content">
+            <block type="items/adminhtml_dashboard" name="dashboard"  />
+        </reference>
+    </items_adminhtml_dashboard_index>
+	<default>
+	<reference name="notifications">
+        <block type="items/adminhtml_notification_toolbar" name="mercadolibre_notification_toolbar" as="mercadolibre_notification_toolbar" template="items/notification/toolbar.phtml" />
+	</reference>
+	<reference name="content">
+			 <!--block type="core/store_switcher" name="store_switcher" template="core/stores.phtml"/--> 
+     		<block type="page/switch" name="store_switcher2" as="store_switcher2" template="items/storeswitcher/store.phtml"/>
+	</reference>
+	 </default> 
+	 <items_adminhtml_mastertemplates_index>
+        <reference name="content">
+            <block type="items/adminhtml_mastertemplates" name="mastertemplates" />
+        </reference>
+    </items_adminhtml_mastertemplates_index>
+</layout>

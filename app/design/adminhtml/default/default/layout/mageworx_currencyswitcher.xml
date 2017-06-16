@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Currency Switcher Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_CurrencySwitcher
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<layout>
+    <adminhtml_mageworx_currencyswitcher_relations_index>
+        <reference name="content">
+            <block type="mageworx_currencyswitcher/adminhtml_currency_relations" name="mage.system.currencyrelations" template="mageworx/currencyswitcher/relations_grid.phtml"/>
+        </reference>
+    </adminhtml_mageworx_currencyswitcher_relations_index>
+</layout>

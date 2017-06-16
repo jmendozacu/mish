@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <vendors_logged_in>
+    	<reference name="head">
+    		<action method="addCss"><js>ves_vendors/page/styles.css</js></action>
+    	</reference>
+
+      	<reference name="toplinks">
+      		<action method="addLink" translate="label title" module="vendors"><label>Home Page</label><url helper="vendorspage/getVendorHomePageUrl"/><title>Home Page</title><prepare/><urlParams/><position>5</position><liParams>class="vendor_home"</liParams><aParams>target="_blank"</aParams></action>
+      	</reference>
+    </vendors_logged_in>
+</layout>

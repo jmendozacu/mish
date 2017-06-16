@@ -1,0 +1,87 @@
+<?php $groupid = $this->getRequest()->getParam('id');?>
+<div>
+
+<?php 
+        $groupModel =   $group_model = Mage::getModel('vendors/group')->load($groupid);
+        $selected_cat[] = $groupModel->getSelectedCategory();
+?>
+                  <form id="selectcatid" enctype="multipart/form-data" method="post" ;>
+
+                        <input type="hidden" name="group_id" value="<?php echo $groupid;?>" >
+                        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+
+                <?php $_helper = Mage::helper('catalog/category'); ?>
+                <?php $categoryId = 2;?>
+                <?php $category = Mage::getModel('catalog/category')->load($categoryId); ?>
+                <?php $_categories = $category->getChildrenCategories();?>
+
+                <?php if (count($_categories) > 0): ?>
+                <table border="1">
+                     <thead>
+                            <tr>
+                                <th><?php echo __('Categories');?></th>
+                                <th><?php echo __('Commission');?></th>
+                            </tr>
+                    </thead>
+                     <tbody>
+                       
+                           
+                                <?php foreach($_categories as $_category):
+                                      $catCommission = Mage::getModel('catalog/category')->load($_category->getId())->getData('set_commission');
+                                           
+                                 ?>
+                             <tr>
+                                      <td>
+                                         <input type="radio"  name="selectcategory" id="subcat_<?php echo $_category->getId() ?>" value="<?php echo $_category->getId();?>" <?php if (in_array($_category->getId(), $selected_cat)) {echo "checked";} ?> > 
+                                            <a href="#"><?php echo $_category->getName() ?></a>
+                                      </td>
+                                      <td>
+                                            <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()); ?>
+                                            <?php 
+                                            if($catCommission != ''){
+                                                   echo $catCommission."%"; 
+                                               }
+                                            ?>
+                                    </td>
+                            </tr>
+                                <?php endforeach; ?>
+                            
+                        
+                    </tbody>
+                 </table>
+                <?php endif; ?>
+
+
+
+                   <button onclick="selectcat()" name="Submit" value="Submit">Update</button>
+                   <span id="loader" style="display:none;"><img src="http://www.giftzenie.com/skin/frontend/base/default/images/zoomloader.gif"></span> 
+                   <span id="new_select"></span>
+
+                      
+                </form>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>jQuery.noConflict();</script>
+<script>
+function selectcat() {
+   
+    event.preventDefault();
+        var val = jQuery('#selectcatid').serialize();
+         jQuery('#loader').show();
+        jQuery.ajax({
+            type:'POST',
+            url:'<?php echo Mage::helper("adminhtml")->getUrl('*/*/addGroupcategory'); ?>',
+            data:val,
+            success:function(html){
+                 jQuery('#loader').hide();
+    jQuery('#new_select').html(html); 
+            }/*,
+            error: function () {
+                Success = false;
+            }*/
+        });
+
+    
+}
+</script>

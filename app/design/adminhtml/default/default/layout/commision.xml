@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <commision_adminhtml_commision_index>
+        <reference name="content">
+            <block type="commision/adminhtml_commision" name="commision" />
+        </reference>
+    </commision_adminhtml_commision_index>
+
+     <commision_adminhtml_commision_edit>
+        <reference name="content">
+            <block type="commision/adminhtml_commision_edit" name="customcommision" template="commision/commision.phtml"/>
+        </reference>
+    </commision_adminhtml_commision_edit>
+
+<!-- code for manage commission part starts here -->
+
+      <commision_adminhtml_managecommision_index>
+        <reference name="content">
+            <block type="commision/adminhtml_managecommision" name="managecommision" />
+        </reference>
+    </commision_adminhtml_managecommision_index>
+
+     <commision_adminhtml_managecommision_edit>
+        <reference name="content">
+            <block type="commision/adminhtml_managecommision_edit" name="managecommisionphtml" template="commision/adminmanagecommision.phtml"/>
+        </reference>
+    </commision_adminhtml_managecommision_edit>
+
+    <!-- code for manage commission part ends here -->
+
+
+</layout>

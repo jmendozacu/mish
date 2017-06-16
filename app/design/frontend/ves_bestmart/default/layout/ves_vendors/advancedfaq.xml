@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <sellerspage_home_index>
+     	<reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference> 
+		<reference name="head">
+		 	<action method="addCss"><stylesheet>otto_advancedfaq/styles.css</stylesheet></action>
+		 	<!--  -->
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.accordion.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.raty.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.noconflict.js</script></action> 
+		</reference>
+        <reference name="content">
+             <block type="advancedfaq/kbase" name="kbase" template="otto_advancedfaq/kbase.phtml" >
+             	<block type="advancedfaq/search" name="kbase_search" template="otto_advancedfaq/search.phtml" />
+            	<block type="advancedfaq/list" name="block_faq" />
+            </block>
+        </reference>
+    </sellerspage_home_index>
+    
+  	 <sellerspage_new_index>
+  	 	 <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference> 
+		<reference name="head">
+		 	<action method="addCss"><stylesheet>otto_advancedfaq/styles.css</stylesheet></action>
+		 	
+		 	
+		</reference>
+        <reference name="content">
+             <block type="advancedfaq/kbase" name="kbase" template="otto_advancedfaq/kbase.phtml" >
+             	<block type="advancedfaq/search" name="kbase_search" template="otto_advancedfaq/search.phtml" />
+            	<block type="advancedfaq/faq" name="block_faq" template="otto_advancedfaq/articles/new.phtml" />
+            </block>
+        </reference>
+   	 </sellerspage_new_index>
+  
+    <sellerspage_category_index>
+    	 <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference> 
+		<reference name="head">
+		 	<action method="addCss"><stylesheet>otto_advancedfaq/styles.css</stylesheet></action>
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.accordion.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.raty.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.noconflict.js</script></action> 
+		</reference>
+        <reference name="content">
+            <block type="advancedfaq/kbase" name="kbase" template="otto_advancedfaq/kbase.phtml" >
+             	<block type="advancedfaq/search" name="kbase_search" template="otto_advancedfaq/search.phtml" />
+            	 <block type="advancedfaq/category" name="block_faq"  />
+            </block>
+        </reference>
+    </sellerspage_category_index>
+    
+    <sellerspage_search_index>
+    	 <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference> 
+    	<reference name="head">
+		 	<action method="addCss"><stylesheet>otto_advancedfaq/styles.css</stylesheet></action>
+			 <action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.accordion.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.raty.js</script></action> 
+		 	<action method="addItem"><type>skin_js</type><script>otto_advancedfaq/js/jquery.noconflict.js</script></action> 
+		</reference>
+        <reference name="content">
+            <block type="advancedfaq/kbase" name="kbase" template="otto_advancedfaq/kbase.phtml" >
+        		<block type="advancedfaq/search" name="kbase_search" template="otto_advancedfaq/search.phtml" />
+            	<block type="advancedfaq/search_result" name="block_faq" />
+            </block>
+        </reference>
+    </sellerspage_search_index>
+	
+</layout> 

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <personallogistic_adminhtml_personallogistic_index>
+        <reference name="content">
+            <block type="personallogistic/adminhtml_personallogistic" name="personallogistic" />
+        </reference>
+    </personallogistic_adminhtml_personallogistic_index>
+
+     <personallogistic_adminhtml_personallogisticorders_index>
+        <reference name="content">
+            <block type="personallogistic/adminhtml_personallogisticorders" name="personallogisticorders" />
+        </reference>
+    </personallogistic_adminhtml_personallogisticorders_index>
+
+    <personallogistic_adminhtml_personallogisticorders_edit>
+        <reference name="content">
+            <block type="personallogistic/adminhtml_personallogisticorders" name="personallogisticorders" template="personallogistic/personallogisticorders.phtml" />
+        </reference>
+    </personallogistic_adminhtml_personallogisticorders_edit>
+    <personallogistic_adminhtml_personallogisticadmin_index>
+        <reference name="content">
+            <block type="personallogistic/adminhtml_personallogisticorders" name="personallogisticorders" template="personallogistic/personallogisticadmin.phtml" />
+        </reference>
+    </personallogistic_adminhtml_personallogisticadmin_index>
+
+
+</layout>

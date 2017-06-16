@@ -1,0 +1,77 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $theme=Mage::helper('welldone');?>
+<?php $post = $this->getPost() ?>
+
+<?php if($theme->getLayoutOption('blog/grid')):?>
+    <?php if ($post->isViewableForVisitor()): ?>
+        <div class="post post--column">
+            <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                <a class="post__image" href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>">
+                    <img width="228" src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" />
+                </a>
+            <?php endif; ?>
+            <div class="post__view-btn">
+                <div class="btn-plus">
+                    <div class="btn-plus__links">
+                         <a class="btn-plus__links__icon" href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><span class="icon icon-eye"></span></a> <a class="btn-plus__links__icon" href="<?php echo $post->getPermalink() ?>#post-comments" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><span class="icon icon-message"></span></a> </div>
+                    <a class="btn-plus__toggle btn btn--round" href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><span class="icon icon-dots-horizontal"></span></a>
+                </div>
+            </div>
+            <h5 class="post__title text-uppercase"><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h5>
+            <div class="post__text">
+                <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                    <?php echo $post->getPostExcerpt() ?>
+                <?php else: ?>
+                    <em><?php echo $post->getPostContent() ?></em>
+                <?php endif; ?>
+            </div>
+            <div class="post__meta"> <span class="post__meta__date pull-left"><?php echo $this->getAfterPostContentHtml() ?></span>  </div>
+        </div>
+    <?php endif; ?>
+<?php else:?>
+    <div class="post">
+        <?php echo $this->getBeforePostContentHtml() ?>
+        <h2 class="post__title text-uppercase"><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+        <br>
+        <?php if ($post->isViewableForVisitor()): ?>
+
+            <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                <p>
+                    <a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>">
+                        <img src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" class="img-responsive animate scale"/>
+                    </a>
+                </p>
+                <?php
+                /*
+                 *  getThumbnailImage()
+                    getMediumImage()
+                    getLargeImage()
+                    getFullSizeImage()
+                    getPostThumbnailImage()
+                    getAvailableImage()
+                    getImageByType($type = 'thumbnail')
+                */
+                ?>
+            <?php endif; ?>
+
+
+            <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                <?php echo $post->getPostExcerpt() ?>
+            <?php else: ?>
+                <em><?php echo $post->getPostContent() ?></em>
+            <?php endif; ?>
+            <div class="post__meta"><span class="post__meta__item"><span class="icon icon-clock"></span><?php echo $this->getAfterPostContentHtml() ?></span></div>
+
+        <?php else: ?>
+            <?php echo $this->getPasswordProtectHtml($post) ?>
+        <?php endif; ?>
+
+    </div>
+<?php endif;?>

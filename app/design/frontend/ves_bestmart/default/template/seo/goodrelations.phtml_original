@@ -1,0 +1,64 @@
+<?php
+
+$_product = $this->getProduct();
+$_finalPriceInclTax = $this->helper('tax')->getPrice($_product, $_product->getFinalPrice(), true);
+
+$_minimalPriceInclTax = $_maximalPriceInclTax = false;
+$_priceModel  = $_product->getPriceModel();
+
+if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+    list($_minimalPriceInclTax, $_maximalPriceInclTax) = $_priceModel->getPrices($_product, null, true, false);
+} elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED) {
+    $_minimalPriceValue = $_product->getMinimalPrice();
+    $_inclTax = $this->helper('tax')->getPrice($_product, $_minimalPriceValue, $includingTax = true);
+}
+?>
+<div xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:gr="http://purl.org/goodrelations/v1#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+  <div itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer" class="review-aggregate-hide">
+    <div property="gr:name" content="<?php echo $this->escapeHtml($_product->getName())?>" xml:lang="en"></div>
+    <div property="gr:description" content="<?php echo $this->escapeHtml($_product->getDescription())?>" xml:lang="en"></div>
+    <div rel="foaf:depiction"
+         resource="<?php echo Mage::helper('catalog/image')->init($_product, 'image')?>">
+    </div>
+    <div rel="gr:hasBusinessFunction" resource="http://purl.org/goodrelations/v1#Sell">
+    </div>
+    <div rel="gr:hasPriceSpecification">
+      <div typeof="gr:UnitPriceSpecification">
+        <div property="gr:hasCurrency" content="<?php echo     Mage::app()->getStore()->getCurrentCurrencyCode()?>" datatype="xsd:string"></div>
+        <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE):?>
+            <div property="gr:hasMinCurrencyValue" content="<?php echo $_minimalPriceInclTax?>" datatype="xsd:float"></div>
+            <div property="gr:hasMaxCurrencyValue" content="<?php echo $_maximalPriceInclTax?>" datatype="xsd:float"></div>
+        <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED):?>
+            <div property="gr:hasMinCurrencyValue" content="<?php echo $this->getGroupedMinimalPrice()?>" datatype="xsd:float"></div>
+        <?php else: ?>
+            <div property="gr:hasCurrencyValue" content="<?php echo $_finalPriceInclTax?>" datatype="xsd:float"></div>
+        <?php endif; ?>
+
+      </div>
+    </div>
+
+    <meta itemprop="currency" content="<?php echo $this->getCurrentCurrencyCode()?>" />
+    <?php if ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE):?>
+      <span itemprop="price"><?php echo number_format($_maximalPriceInclTax, 2) ?></span>
+    <?php elseif ($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED):?>
+      <span itemprop="price"><?php echo number_format($this->getGroupedMinimalPrice(), 2) ?></span>
+    <?php else: ?>
+      <span itemprop="price"><?php echo number_format($_finalPriceInclTax, 2) ?></span>
+    <?php endif; ?>
+    <?php if ($_product->getIsInStock()): ?>
+       <span itemprop="availability" content="in_stock">In stock</span>
+    <?php else: ?>
+       <span itemprop="availability" content="out_of_stock">Out of stock</span>
+    <?php endif; ?>
+
+    <?php foreach ($this->getActivePaymentMethods() as $method):?>
+    <div rel="gr:acceptedPaymentMethods"
+         resource="http://purl.org/goodrelations/v1#<?php echo $method?>"></div>
+    <?php endforeach;?>
+  </div>
+</div>

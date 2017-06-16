@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!-- <vendors_promocopy_index_index>
+        <reference name="content">
+           <block type="ampromocopy/vendors_promo_quote_grid" name="vendor.imagessss"  />
+           
+        </reference>
+ </vendors_promocopy_index_index> -->
+ <vendors_promo_quote_index>
+        <reference name="content">
+            <block type="ampromocopy/vendors_promo_quote" name="vendor.quote" />
+        </reference>
+    </vendors_promo_quote_index>
+
+
+   
+    <vendors_promo_quote_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+        <reference name="left">
+            <block type="ampromocopy/vendors_promo_quote_edit_tabs" name="promo_quote_edit_tabs">
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_main" name="promo_quote_edit_tab_main" />
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_conditions" name="promo_quote_edit_tab_conditions"/>
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_actions" name="promo_quote_edit_tab_actions"/>
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_labels" name="promo_quote_edit_tab_labels"/>
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_coupons" name="promo_quote_edit_tab_coupons">
+                <block type="ampromocopy/vendors_promo_quote_edit_tab_coupons_form" name="promo_quote_edit_tab_coupons_form"/>
+                    <block type="ampromocopy/vendors_promo_quote_edit_tab_coupons_grid" name="promo_quote_edit_tab_coupons_grid"/>
+                </block>
+                <action method="addTab"><name>main_section</name><block>promo_quote_edit_tab_main</block></action>
+                <action method="addTab"><name>conditions_section</name><block>promo_quote_edit_tab_conditions</block></action>
+                <action method="addTab"><name>actions_section</name><block>promo_quote_edit_tab_actions</block></action>
+                <action method="addTab"><name>labels_section</name><block>promo_quote_edit_tab_labels</block></action>
+                <action method="addTab"><name>coupons_section</name><block>promo_quote_edit_tab_coupons</block></action>
+            </block>
+            <block type="adminhtml/template" template="promo/salesrulejs.phtml" name="promo_quote_edit_jsinit"/>
+        </reference>
+        <reference name="content">
+            <block type="ampromocopy/vendors_promo_quote_edit" name="promo_quote_edit"></block>
+        </reference>
+    </vendors_promo_quote_edit>
+    <vendors_promo_quote_grid>
+        <remove name="root" />
+        <block type="ampromocopy/vendors_promo_quote_edit_tab_product" name="promo_quote_grid" output="toHtml" />
+    </vendors_promo_quote_grid>
+    <vendors_promo_quote_couponsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ampromocopy/vendors_promo_quote_edit_tab_coupons_grid" name="promo_quote_edit_tab_coupons_grid" />
+        </block>
+    </vendors_promo_quote_couponsgrid>
+</layout>

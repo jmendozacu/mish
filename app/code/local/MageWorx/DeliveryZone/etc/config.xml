@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@mageworx.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ * or send an email to sales@mageworx.com
+ *
+ * @category   MageWorx
+ * @package    MageWorx_DeliveryZone
+ * @copyright  Copyright (c) 2013 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * MageWorx DeliveryZone extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_DeliveryZone
+ * @author     MageWorx Dev Team <dev@mageworx.com>
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_DeliveryZone>
+            <version>1.1.2</version>
+        </MageWorx_DeliveryZone>
+    </modules>
+    <admin>
+        <routers>
+            <deliveryzone>
+                <use>admin</use>
+                <args>
+                    <module>MageWorx_DeliveryZone</module>
+                    <frontName>deliveryzone</frontName>
+                </args>
+            </deliveryzone>
+        </routers>
+    </admin>
+    <frontend>
+        <translate>
+            <modules>
+                <MageWorx_DeliveryZone>
+                    <files>
+                        <default>MageWorx_DeliveryZone.csv</default>
+                    </files>
+                </MageWorx_DeliveryZone>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <deliveryzone>
+                    <file>deliveryzone.xml</file>
+                </deliveryzone>
+            </updates>
+        </layout>
+	<routers>
+            <deliveryzone>
+                <use>standard</use>
+                <args>
+                    <module>MageWorx_DeliveryZone</module>
+                    <frontName>deliveryzone</frontName>
+                </args>
+            </deliveryzone>
+        </routers>
+        <events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>isProductAvailibleCart</method>
+                    </deliveryzone>
+                </observers>
+            </core_block_abstract_to_html_before>
+<!--            <catalog_block_product_list_collection>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>isProductAvailible</method>
+                    </deliveryzone>
+                </observers>
+            </catalog_block_product_list_collection>-->
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>addFreeShippingFlag</method>
+                    </deliveryzone>
+                </observers>
+            </core_block_abstract_to_html_after>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>addShipToList</method>
+                    </deliveryzone>
+                </observers>
+            </core_block_abstract_to_html_after>
+            <catalog_category_collection_load_before>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>filterCategoriesByZone</method>
+                    </deliveryzone>
+                </observers>
+            </catalog_category_collection_load_before>
+            <catalog_controller_category_init_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>isCategoryAllowed</method>
+                        </deliveryzone>
+                </observers>
+            </catalog_controller_category_init_after>
+            <catalog_controller_product_init_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>isProductAllowed</method>
+                    </deliveryzone>
+                </observers>
+            </catalog_controller_product_init_after>
+            <checkout_cart_add_product_before>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>isProductAllowed</method>
+                    </deliveryzone>
+                </observers>
+            </checkout_cart_add_product_before>
+            <catalog_product_collection_load_before>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>filterProductsByZone</method>
+                    </deliveryzone>
+                </observers>
+            </catalog_product_collection_load_before>
+            <catalog_product_list_product_collection_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>filterProductsByZone</method>
+                    </deliveryzone>
+                </observers>
+            </catalog_product_list_product_collection_after>
+<!--            <sales_quote_save_before>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>resetShippingAddress</method>
+                    </deliveryzone>
+                </observers>
+            </sales_quote_save_before>-->
+            <customer_group_save_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>customerGroupSaveAfter</method>
+                    </deliveryzone>
+                </observers>
+            </customer_group_save_after>
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <deliveryzone>
+                    <file>deliveryzone.xml</file>
+                </deliveryzone>
+            </updates>
+        </layout>
+    </adminhtml> 
+     
+    <global>
+        <events>
+            <customer_group_save_after>
+                <observers>
+                    <deliveryzone>
+                        <type>singleton</type>
+                        <class>deliveryzone/observer</class>
+                        <method>customerGroupSaveAfter</method>
+                    </deliveryzone>
+                </observers>
+            </customer_group_save_after>
+        </events>
+        <models>
+            <deliveryzone>
+                <class>MageWorx_DeliveryZone_Model</class>
+                <resourceModel>deliveryzone_mysql4</resourceModel>
+            </deliveryzone>
+            <deliveryzone_mysql4>
+                <class>MageWorx_DeliveryZone_Model_Mysql4</class>
+                <entities>
+                    <zone>
+                        <table>deliveryzone_zones</table>
+                    </zone>
+                    <zone_category>
+                        <table>deliveryzone_categories</table>
+                    </zone_category>
+                    <zone_shippingmethod>
+                        <table>deliveryzone_shippingmethods</table>
+                    </zone_shippingmethod>
+                    <zone_location>
+                        <table>deliveryzone_locations</table>
+                    </zone_location>
+                    <zone_product>
+                        <table>deliveryzone_products</table>
+                    </zone_product>
+                    <customer_group>
+                        <table>deliveryzone_customer_group_carriers</table>
+                    </customer_group>
+                    <rates>
+                        <table>deliveryzone_rates</table>
+                    </rates>
+                    <rates_customergroup>
+                        <table>deliveryzone_rates_customergroup</table>
+                    </rates_customergroup>
+<!--                    <rates_website>
+                        <table>deliveryzone_rates_website</table>
+                    </rates_website>-->
+                    <rates_store>
+                        <table>deliveryzone_rates_store</table>
+                    </rates_store>
+                    <rates_carrier>
+                        <table>deliveryzone_rates_carrier</table>
+                    </rates_carrier>
+                </entities>
+            </deliveryzone_mysql4>
+            <catalog>
+            	<rewrite>
+                    <product>MageWorx_DeliveryZone_Model_Rewrite_Catalog_Product</product>
+            	</rewrite>
+            </catalog>
+            <bundle>
+            	<rewrite>
+                    <product_type>MageWorx_DeliveryZone_Model_Rewrite_Bundle_Product_Type</product_type>
+            	</rewrite>
+            </bundle>
+            <shipping>
+                <rewrite>
+                    <rate_result>MageWorx_DeliveryZone_Model_Rewrite_Shipping_Rate_Result</rate_result>
+                </rewrite>
+            </shipping>
+        </models>
+        <resources>
+            <deliveryzone_setup>
+                <setup>
+                    <module>MageWorx_DeliveryZone</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </deliveryzone_setup>
+            <deliveryzone_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </deliveryzone_write>
+            <deliveryzone_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </deliveryzone_read>
+        </resources>
+        <blocks>
+            <deliveryzone>
+                <class>MageWorx_DeliveryZone_Block</class>
+            </deliveryzone>
+            <adminhtml>
+                <rewrite>
+                    <customer_group_edit_form>MageWorx_DeliveryZone_Block_Rewrite_Adminhtml_Customer_Group_Edit_Form</customer_group_edit_form>
+                </rewrite>
+            </adminhtml>
+            <checkout>
+            	<rewrite>
+                    <onepage_link>MageWorx_DeliveryZone_Block_Rewrite_Checkout_Onepage_Link</onepage_link>
+                    <onepage_shipping>MageWorx_DeliveryZone_Block_Rewrite_Checkout_Onepage_Shipping</onepage_shipping>
+                    <multishipping_link>MageWorx_DeliveryZone_Block_Rewrite_Checkout_Multishipping_Link</multishipping_link>
+                </rewrite>
+            </checkout>
+            <catalog>
+            	<rewrite>
+                    <navigation>MageWorx_DeliveryZone_Block_Rewrite_Catalog_Navigation</navigation>
+                    <product_list>MageWorx_DeliveryZone_Block_Rewrite_Catalog_Product_List</product_list>
+            	</rewrite>
+            </catalog>
+        </blocks>
+        <helpers>
+            <deliveryzone>
+                <class>MageWorx_DeliveryZone_Helper</class>
+            </deliveryzone>
+        </helpers>
+    </global>
+    <default>
+        <mageworx_deliveryzone>
+            <deliveryzone>
+                <first_popup>1</first_popup>
+                <zone_mode>hide</zone_mode>
+                <shipto>0</shipto>
+                <autodetection>0</autodetection>
+                <customergroup_carrier>0</customergroup_carrier>
+            </deliveryzone>
+        </mageworx_deliveryzone>
+        <carriers>
+            <dhlint>
+                <content_type>D</content_type>
+            </dhlint>
+          <deliveryzone>
+               <active>0</active>
+               <model>deliveryzone/carrier_deliveryzone</model>
+               <title>Shipping Suite</title>
+               <name>Shipping Suite Method</name>
+               <price>5.00</price>
+               <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </deliveryzone>
+         </carriers>
+    </default>
+</config>

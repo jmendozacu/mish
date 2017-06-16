@@ -1,0 +1,57 @@
+<?php $messages = $this->getMessageBox() ; ?>
+<section class="ves-tabs-chatlive" id="ves-tabs-chatlive-<?php echo $this->getSessionId() ?>" rel="<?php echo $this->getNumberSessionTab() ?>" vendor="<?php echo $this->getVendor()->getId() ?>">
+    <header class="top-bar"  rel="<?php echo $this->getSessionId() ?>">
+        <div class="left">
+            <span class="icon icon-status <?php echo $this->getClassStatus() ?>" id="ves_vendor_livechat_status_<?php echo $this->getSessionId() ?>"></span>
+            <!-- <span class="icon typicons-message"></span> -->
+            <h1><?php echo $this->getTitle() ?></h1>
+        </div>
+
+        <div class="right" style="<?php echo $this->getDisplayContent() ?>">
+            <span class="icon icon-audio" onclick="ChatOption.changeAudioStatus()"></span>
+            <span class="icon icon-closed" onclick="<?php echo $this->getFunctionClickBox($this->getSessionId()) ?>"></span>
+        </div>
+    </header>
+
+    <div class="content" style="<?php echo $this->getDisplayContent() ?>">
+        <div class="message">
+            <ol class="discussion">
+                <?php foreach($messages as $message): ?>
+                <li class="<?php echo $this->getClassNameMessageBox($message->getData("type")) ?>" id="ves-content-message-<?php echo $message->getId() ?>">
+                    <div class="avatar">
+                        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>"/>
+                    </div>
+                    <div class="messages">
+                        <p>
+                            <span class="title"><?php echo $message->getData("send_by") ?> : </span>
+                            <?php echo $message->getData("content") ?>
+                        </p>
+                        <time datetime="<?php echo $message->getData("created_time") ?>"><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$message->getData("created_time") );?></time>
+                    </div>
+                </li>
+                <?php endforeach ;?>
+                <?php echo $this->getNoteBox($this->getSessionId()) ?>
+            </ol>
+        </div>
+        <div class="reply">
+            <textarea rel = "<?php echo $this->getSessionId() ?>" name="<?php echo $this->getSessionBox()->getData("name") ?>" id="ves_livechat_message_reply_<?php echo $this->getSessionId() ?>" <?php if($this->getStatusSessionBox()) echo 'class="disabled" disabled' ?> autocomplete="off"></textarea>
+
+        </div>
+    </div>
+
+
+    <div  class="ves_livechat_box_confirm" style="display: none;" id="ves_livechat_box_confirm-<?php echo $this->getSessionId() ?>">
+        <button class="button closed" title="Start Chat" type="button" onclick="control.deleteBox('<?php echo $this->getSessionId() ?>')" style="">
+        <span>
+         <span><?php echo Mage::helper("vendorslivechat")->__("End Chat") ?></span>
+           </span>
+        </button>
+        <button class="button" title="Decline" type="button" onclick="ChatOption.hideConfirmBox('<?php echo $this->getSessionId() ?>')" style="">
+       <span>
+          <span><?php echo Mage::helper("vendorslivechat")->__("Cancel") ?></span>
+            </span>
+        </button>
+    </div>
+    <div  class="ves_livechat-overlay" style="display: none;" id="ves_livechat_box_overlay-<?php echo $this->getSessionId() ?>"></div>
+
+</section>

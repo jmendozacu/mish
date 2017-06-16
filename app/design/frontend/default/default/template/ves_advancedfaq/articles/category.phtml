@@ -1,0 +1,95 @@
+	<?php 
+	$categories		= $this->getAllCategories() ;
+	$catSuffix 		= $this->getCatSuffix();
+	$urlKey			= $this->getUrlKey();
+	$vendor = Mage::registry("current_vendor");
+?>
+	<div class="kbase-block kbase-main-category">
+		<div class="kbase-block-content">
+			<ul class="kbase-list level-0">
+			<?php foreach ($categories as $category):?>
+				<?php
+				$tmp = 1;
+				$faqs = $this->getFaq($category->getData('category_id'));?>
+				<?php if(sizeof($faqs)):?>
+				<li>
+					<h2 class="title"><a href="<?php echo  Mage::helper('vendorspage')->getUrl($vendor,$urlKey."/".$category->getData('url_key').$catSuffix) ?>" ><span><?php echo $category->getData('title') ?></span></a></h2>
+					<ul class="level-1">
+						<?php foreach ($faqs as $faq): ?>
+							<li><h5 class="ves_question <?php if(!Mage::helper("advancedfaq")->getEnableAccordion()):?>on<?php endif; ?>">
+								<a ;="" style="cursor: pointer"  href="javascript:void(0)" rel="ves_answer_<?php echo $faq->getId() ?>"><span><?php echo $faq->getData('question') ?></span></a>
+							</h5>
+								<div class="ves_answer" style="<?php if(Mage::helper("advancedfaq")->getEnableAccordion()):?>display:none;<?php endif; ?>"  id="ves_answer_<?php echo $faq->getId() ?>">
+									<div>
+										<div class="kbase-block-content">
+											<div class="faq-answer">
+											<?php echo $faq->getData('answer') ?>
+											</div>	
+										</div>
+										<div class="clearer kbase-article-footer">
+											<p class="article-date"><?php echo  Mage::getModel('core/date')->date('F j, Y',$faq->getData('created_time')); ?></p>
+											<?php if($this->isEnableRating()):?>
+												<div id="rating_2_2" class="faq_rating_container">
+													<a class="rating_on" href=""></a>
+													<a class="rating_on" href="" title="Not bad"></a>
+													<a class="rating_on" href="" title="Average"></a>
+													<a class="rating_half" href="" title="Good"></a>
+													<a class="rating_off" href="" title="Perfect"></a>
+												</div>
+											<?php endif;?>
+										</div>
+									</div>
+								</div>
+							</li>
+							<?php $tmp++ ; 
+							if($tmp > Mage::helper("advancedfaq")->getArticlesPage()):?>
+							<li>
+								<a href="<?php echo  Mage::helper('vendorspage')->getUrl($vendor,$urlKey."/".$category->getData('url_key').$catSuffix) ?>" class="readmore"><span><?php echo $this->__("Read More") ?></span></a>
+							</li>
+							<?php break; ?>
+							<?php endif;?>
+						<?php endforeach;?>
+					</ul>
+				</li>
+				<?php endif;?>
+			<?php endforeach;?>
+			</ul>
+		</div>
+    </div>
+    <script type="text/javascript">
+    <?php if(Mage::helper("advancedfaq")->getEnableAccordion()){ ?>
+    	$$('.ves_question a').each(function(div){
+    	div.observe('click',function(){
+    		var id= div.readAttribute('rel');
+    		if($(id).getStyle('display') != 'none') {
+        		div.parentNode.removeClassName("on");
+    		}
+    		else{
+    			div.parentNode.addClassName("on");
+    		}
+    		<?php 
+    			switch (Mage::helper("advancedfaq")->getEnableAccordionStyle())
+    			{
+    				case VES_AdvancedFaq_Model_System_Config_Source_Style::CONFIG_APPEN:
+    				?>
+    					Effect.toggle(id, 'appear');
+    				<?php 
+    					break;
+    				case VES_AdvancedFaq_Model_System_Config_Source_Style::CONFIG_SLIDE:
+    				?>
+    					Effect.toggle(id, 'slide', { delay: <?php echo  Mage::helper("advancedfaq")->getEnableAccordionDelay() ?> });
+    				<?php 
+    					 break;
+    				 case VES_AdvancedFaq_Model_System_Config_Source_Style::CONFIG_BLIND:
+    					 ?>
+    					 Effect.toggle(id, 'blind', { duration: <?php echo  Mage::helper("advancedfaq")->getEnableAccordionDuration() ?> });
+    				<?php 
+    			     break;
+    			}
+    			?>
+    			
+    		
+    	});
+    	});
+    	<?php } ?>
+	</script>

@@ -1,0 +1,124 @@
+
+<?php $customer = $this->getCustomerInfor() ?>
+<?php $request = $this->getRequestRma() ?>
+<div class="page-title">
+    <h1><span class="title-ticket"><?php echo 'RMA #'.$request->getData('increment_id')?></span><?php echo $this->__(" - "); ?><?php echo Mage::getModel('vendorsrma/source_status')->getTitleById($request->getData('status')); ?>   </h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+
+<form action="<?php echo $this->getPrintUrl() ?>" method="post" id="vesrma-printlabel-form" target="_blank">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__("Contact Information") ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="vesrma-firstname" class="required"><em>*</em><?php echo $this->__("First Name") ?></label>
+                    <div class="input-box">
+                        <input type="text" id="vesrma-firstname" name="printlabel[firstname]" class="input-text required-entry" value="<?php echo $customer->getData("firstname") ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="vesrma-lastname" class="required"><em>*</em><?php echo $this->__("Last Name") ?></label>
+                    <div class="input-box">
+                        <input type="text" id="vesrma-lastname" name="printlabel[lastname]" class="input-text required-entry" value="<?php echo $customer->getData("lastname") ?>" />
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <label for="vesrma-company"><?php echo $this->__("Company") ?></label>
+                <div class="input-box">
+                    <input type="text" id="vesrma-company" class="input-text" name="printlabel[company]" value="<?php echo $customer->getData("company") ?>" />
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="vesrma-telephone" class="required"><em>*</em><?php echo $this->__("Telephone") ?></label>
+                    <div class="input-box">
+                        <input type="text" id="vesrma-telephone" name="printlabel[telephone]" class="input-text required-entry" value="<?php echo $customer->getData("telephone") ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="vesrma-fax"><?php echo $this->__("Fax") ?></label>
+                    <div class="input-box">
+                        <input type="text" id="vesrma-fax" name="printlabel[fax]" class="input-text" value="<?php echo $customer->getData("fax") ?>" />
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__("Return Address") ?></h2>
+        <ul class="form-list">
+            <li class="wide">
+                <label for="vesrma-streetaddress1" class="required"><em>*</em><?php echo $this->__("Street Address") ?></label>
+                <div class="input-box">
+                    <input type="text" id="vesrma-streetaddress1" class="input-text required-entry" name="printlabel[address]" value="<?php echo $customer->getData("address") ?>" />
+                </div>
+            </li>
+
+            <li class="fields">
+                <div class="field">
+                    <label for="vesrma-city" class="required"><em>*</em><?php echo $this->__("City") ?></label>
+                    <div class="input-box">
+                        <input type="text" id="vesrma-city" name="printlabel[city]" class="input-text required-entry" value="<?php echo $customer->getData("city") ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="vesrma-stateprovince"><?php echo $this->__("State/Province") ?></label>
+                    <div class="input-box">
+                        <select id="vesrma_stateprovince_id" name="printlabel[region_id]" class="validate-select">
+                            <option value=""><?php echo $this->__("Please select region, state or province") ?></option>
+                        </select>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            $('vesrma_stateprovince_id').setAttribute('defaultValue',  "<?php echo $customer->getRegionId() ?>");
+                            //]]>
+                        </script>
+                        <input type="text" id="vesrma-stateprovince" name="printlabel[region]" class="input-text" style="display:none;" value="" />
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="vesrma-postcode" class="required"><em>*</em><?php echo $this->__("Zip/Postal Code") ?></label>
+                    <div class="input-box">
+                        <input type="text" name="printlabel[postcode]" id="vesrma-postcode" class="input-text validate-zip-international required-entry" value="<?php echo $customer->getData("postcode") ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="vesrma-country_id" class="required"><em>*</em><?php echo $this->__("Country") ?></label>
+                    <div class="input-box">
+                        <select name="printlabel[country_id]" id="vesrma_country_id" class="validate-select" title="Country" >
+                            <?php foreach($this->getCountryCollection() as $country): ?>
+                                    <option value="<?php echo $country->getId() ?>" <?php if($country->getId() == $customer->getCountryId()) echo "selected" ?>><?php  echo $country->getName() ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__("Additional Information") ?></h2>
+        <ul class="form-list">
+            <li class="wide">
+                <div class="input-box">
+                    <textarea name="printlabel[additional_information]" id="vesrma-additional-info"><?php echo $customer->getData("additional_information") ?></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required">* <?php echo $this->__("Required Fields") ?></p>
+        <button type="submit" title="Submit Request" class="button" id="vesrma-printlabel-submit"><span><span><?php echo $this->__("Print Label") ?></span></span></button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    //<![CDATA[
+    new RegionUpdater('vesrma_country_id', 'vesrma-stateprovince', 'vesrma_stateprovince_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'vesrma-postcode');
+    var dataForm = new VarienForm('vesrma-printlabel-form', true);
+    //]]>
+</script>

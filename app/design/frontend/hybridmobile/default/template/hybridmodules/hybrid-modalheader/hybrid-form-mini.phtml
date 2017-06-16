@@ -1,0 +1,12 @@
+<?php
+/**
+ * 
+ * Overrides template/catalogsearch/form.mini.phtml
+ */
+?>
+
+<div class="searchbar first-time">
+    <form data-ajax="false" name="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+        <input id="search" type="search" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" placeholder="Search for products" />
+    </form>
+</div>

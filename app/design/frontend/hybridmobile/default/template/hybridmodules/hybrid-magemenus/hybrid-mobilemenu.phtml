@@ -1,0 +1,27 @@
+<?php
+/**
+ * 
+ */
+?>
+<?php    
+// Check if collapse 1st level enabled
+$configData = Mage::getStoreConfig('hybrid_mobile');
+$collapse = $configData['menu_settings']['collapse'];
+$_categories = $this->getStoreCategories();
+$url_key = Mage::getSingleton('cms/page')->getIdentifier();
+
+if ($url_key != 'home-page' && false):
+	if ($collapse == "0"): ?>
+			<ul id="mobile-menu" data-role="listview">
+			<?php foreach ($_categories as $category): ?>
+				<?php echo $this->showMobileTree($category, $this) ?>
+			<?php endforeach ?>
+			</ul>
+		<?php else: ?>
+			<ul id="mobile-menu" class="accordion">
+			<?php foreach ($_categories as $category): ?>
+			    <?php echo $this->showMobileTreeCollapsed($category, $this) ?>
+			<?php endforeach ?>
+			</ul>
+	<?php endif; 
+endif; ?>

@@ -1,0 +1,87 @@
+<style type="text/css">
+.variation {
+    overflow: hidden;
+}
+.variation .varBox .varColor {
+    display: block;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+.variation .varBox {
+    padding: 1px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 2px 2px 2px 2px;
+    float: left;
+    display: block;
+    margin-right: 9px;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+}
+
+div{
+
+    background: none repeat scroll 0% 0% transparent;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    outline: 0px none;
+    vertical-align: baseline;
+}
+span{
+    background: none repeat scroll 0% 0% transparent;
+    border: 0px none;
+    outline: 0px none;
+    vertical-align: baseline;
+}
+.variation .maskColor-two {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.variation .varColor.color-two {
+    top: 5px;
+    left: 0px;
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.variation .varLabel {
+    padding: 2px 0px;
+    float: left;
+    display: block;
+    margin-right: 5px;
+}
+</style>
+
+<?php 
+$data['root_id'] = '';
+$data['revise'] = '';
+$data = $this->getData();
+
+?>
+<div class="content-header">
+  <table cellspacing="0">
+  	 <tr>
+      <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('items')->__('Order Manager') ?></h3></td>
+      <td class="a-right"><?php  echo $this->getButtonsHtml() ?></td>
+    </tr>
+  </table>
+  </div>
+  <p class="switcher">
+	<form  id="edit_form" action="<?php echo $this->getUrl('*/*/put');?>" method="post" >
+	<div style="text-align:right;">
+		<input name="button" type="button" value="Save Order Status" onclick="this.edit_form.submit()" class="form-button scalable save" />
+</div>
+  <div> <?php echo $this->getGridHtml() ?> </div>
+  <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+</form>

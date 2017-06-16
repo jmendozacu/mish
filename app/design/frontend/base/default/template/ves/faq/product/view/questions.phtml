@@ -1,0 +1,284 @@
+<?php
+$id = rand().time();
+$product = $this->getProduct();
+$questions = $this->getCollection();
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+
+$helper = Mage::helper('ves_faq');
+Mage::getSingleton('core/session', array('name'=>'frontend'));
+$sessionCustomer = Mage::getSingleton("customer/session");
+$attributes = '';
+if ($sessionCustomer->isLoggedIn()) {
+	$attributes = 'readonly="true"';
+	$customer = Mage::helper('customer')->getCustomer();
+}
+$size = $questions->getSize();
+$filter_category = $this->getRequest()->getParam("filter_category");
+$show_pager = $this->getConfig('show_pager', 'product_page');
+$show_category = $this->getConfig('show_category_info', 'product_page' , 1);
+$show_category_filter = $this->getConfig('show_category_filter', 'product_page' , 0);
+$show_author = $this->getConfig('show_author', 'product_page' , 1);
+$show_author_date = $this->getConfig('show_author_date', 'product_page' , 1);
+?>
+
+<h2><?php echo $this->__('FAQ Question') ?></h2>
+<div class="btn-postquestion">
+	<?php if( $filter_category && (empty($questions) || $size == 0) ){ ?>
+	<div class="reset-filter pull-left">
+		<a class="btn btn-info" title="<?php echo $this->__('Reset Filter'); ?>" href="<?php echo $this->getChild("pager")->getPagerUrl(array('filter_category'=>'', 'p'=>'')) ?>"><?php echo $this->__('Reset Filter'); ?></a>
+	</div>
+	<?php } ?>
+	<div class="faqsaddslide pull-right">
+		<a class="btn-slide" title="<?php echo $this->__('Ask a Question'); ?>" id="fme-faq-btn-slide-open" href="javascript:void(0);" onclick="showPopupQuestion();"><?php echo $this->__('Ask a Question'); ?></a>
+	</div>
+</div>
+<div id="faq_poquestion" class="popquestion">
+	<div class="ask-question-form">
+
+		<form action="<?php echo $this->getSaveUrl(); ?>" id="popup-ask-question-form" name="popup-ask-question-form" method="post" enctype="multipart/form-data">
+
+			<input name="product_id" value="<?php echo $product->getId() ?>" type="hidden">
+			<input name="question_type" id="question_type" value="product_question" type="hidden">
+
+			<div class="fieldset">
+				<h2 class="legend"><?php echo $this->__('Ask a Question'); ?><a class="btn-slide" id="fme-faq-btn-slide-close" href="javascript:" style="display: none; float:right;"></a>
+				</h2>
+
+				<ul class="form-list">
+					<li class="fields">
+
+						<div class="field">
+							<label for="author_name" class="required"><em>*</em><?php echo $this->__("Name"); ?></label>
+							<div class="input-box">
+								<input name="author_name" id="author_name" title="<?php echo $this->__('Customer Name'); ?> " <?php echo $attributes; ?> value="<?php echo isset($customer)?$customer->getFirstname().' '.$customer->getLastname():''; ?>" class="required-entry input-text" type="text">
+							</div>
+						</div>
+
+						<div class="field">
+							<label for="author_email" class="required"><em>*</em><?php echo $this->__("Email");?></label>
+							<div class="input-box">
+								<input name="author_email" <?php echo $attributes; ?> id="author_email" title="Customer Email" value="<?php echo isset($customer)?$customer->getEmail():''; ?>" class="required-entry validate-email input-text" type="text">
+							</div>
+						</div>
+					</li>
+					<?php if($this->getListCategory()->getSize() > 0){ ?>
+					<li class="fields">
+						<div class="field">
+							<label for="category_id" class="required"><em>*</em><?php echo $this->__('Category'); ?></label>
+							<div class="input-box">
+								<select name="category_id" id="category" class="required-entry input-text">
+									<?php foreach ($this->getListCategory() as $_category) { ?>
+									<option value="<?php echo $_category->getCategoryId() ?>"><?php echo$_category->getName(); ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+					</li>
+					<?php } ?>
+					<?php if(isset($customer)){ ?>
+					<li class="fields">
+						<div class="field">
+							<label for="visibility" class="required"><em>*</em><?php echo $this->__('Visibility'); ?></label>
+							<div class="input-box">
+								<select name="visibility" id="visibility" class="required-entry input-text">
+									<option value="1"><?php echo $this->__('Public') ?></option>
+									<option value="2"><?php echo $this->__('Private'); ?></option>
+								</select>
+							</div>
+						</div>
+					</li>
+					<?php } ?>
+					<li class="wide">
+						<label for="title" class="required"><em>*</em><?php echo $this->__('Question'); ?></label>
+						<div class="input-box">
+							<textarea name="title" id="title" title="<?php echo $this->__('Question'); ?>" class="required-entry input-text" rows="5"></textarea>
+						</div>
+					</li>
+					<?php if( $this->getConfig("enabled","recaptcha") ): ?>
+						<li class="wide">
+							<label for="title" class="required"><em>*</em><?php echo $this->__('Captcha'); ?></label>
+							<div class="recaptcha">
+								<?php if( $captcha = $this->getReCaptcha() ) : ?>
+									<?php echo $captcha->getHtml(); ?>
+								<?php endif; ?>
+							</div>
+						</li>
+					<?php endif; ?>
+				</ul>
+				<br>
+				<button onclick="saveQuestionForm()" style="float: right;" type="submit" title="" class="button"><span><span><?php echo $this->__('Submit'); ?></span></span></button>
+			</div>
+			<div class="clearfix"></div>
+		</form>
+	</div>
+</div>
+
+<!-- Questions -->
+<?php if( !empty($questions) && $size > 0  ){ ?>
+
+<div id="faq-question-<?php echo $id ?>" class="faq-question-product">
+	<?php if($show_pager || $show_category_filter){ ?>
+	<div class="toolbar product-filter clearfix">
+		<?php if($show_category_filter): //Show category filter ?>
+		<div class="pull-left filter-category">
+			<select name="filter_category_id" id="filter_category" class="filter-select" onchange="setLocation(this.value)">
+				<option value="<?php echo $this->getChild("pager")->getPagerUrl(array('filter_category'=>'')) ?>"><?php echo $this->__("Filter By Category"); ?></option>
+				<?php foreach ($this->getListCategory() as $_category) { ?>
+				<option value="<?php echo $this->getChild("pager")->getPagerUrl(array('filter_category'=>$_category->getId())) ?>" <?php echo ($filter_category == $_category->getId())?'selected="selected"':'';?> ><?php echo $_category->getName(); ?></option>
+				<?php } ?>
+			</select>
+		</div>
+		<?php endif; ?>
+		<?php if($show_pager): //Show paging?>
+		<div class="pull-right">
+			<?php echo $this->getPagerHtml() ?>
+		</div>
+		<?php endif; ?>
+	</div>
+	<?php } ?>
+
+	<?php foreach ($questions as $_question) { ?>
+	<?php
+	$default_answer = $processor->filter($_question->getDefaultAnswer());
+	$answers = $_question->getData('answers');
+	$description_question = $processor->filter($_question->getDescription());
+	?>
+	<div class="faq-question question-<?php echo $_question->getQuestionId(); ?> question-row">
+		<div class="faq-question-title">
+			<a data-toggle="collapse" data-parent="#faq-question-<?php echo $id; ?>"  href="#faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>">
+				<?php echo $_question->getTitle(); ?>
+			</a>
+			<?php if($default_answer == '' && $answers == '' && $description_question == ''){ ?>
+			<span class="faq-noanswer"><?php echo $this->__('(Not Answerred)'); ?></span>
+			<?php } ?>
+			
+		</div>
+		<?php if($default_answer != '' || $answers != '' || $description_question != ''){ ?>
+		<div id="faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>" class="panel-collapse collapse out">
+			<?php if( $description_question != '' ){ ?>
+			<div class="question-description">
+				<?php echo $description_question; ?>
+			</div>
+			<?php } ?>
+			<?php if( $show_category && $_question->getCategoryId() ){ ?>
+			<div class="question-category-info">
+				<span><?php echo $this->__("Category: ") ?></span><a href="<?php echo $this->getChild("pager")->getPagerUrl(array('filter_category'=>$_question->getCategoryId())); ?>" title=""><?php echo $this->getCategoryTitle($_question->getCategoryId()); ?></a>
+			</div>
+			<?php } ?>
+			<?php if($answers != '' || $default_answer != ''){ ?>
+			<div class="faq-answers">
+				<?php if( $default_answer != '' ){ ?>
+				<div id="answer-<?php echo $_question->getQuestionId().$id; ?>" class="faq-answer" >
+					<div class="faq-answer-content">
+						<?php echo $default_answer; ?>
+					</div>
+					<?php if($show_author_date || $show_author): ?>
+					<div class="answer-date">
+						<?php if($show_author) { ?>
+						<?php echo $this->__('Poster by: ').$_question->getAuthorName(); ?>
+						<?php } ?>
+						<?php if($show_author_date) { ?>
+						&nbsp;<?php echo 'on'; ?>&nbsp;
+						<?php $_ct= new Zend_Date( $_question->getCreatedAt() ); ?>
+						<span class="day"><?php echo $_ct->toString('dd');?></span>
+						<span class="month"><?php echo $_ct->toString('MMM');?></span>
+						<span class="year"><?php echo $_ct->toString('YYY');?></span>
+						<?php } ?>
+					</div>
+					<?php endif; ?>
+				</div>
+				<?php } ?>
+
+				<?php if( $answers && $answers->getSize()>0 ){ ?>
+				<?php foreach ($answers as $_answers){ $id = rand().time(); ?>
+				<div class="faq-answer" id="answer-<?php echo $_answers->getAnswerId().$id; ?>">
+					<?php $answer_content = $processor->filter($_answers->getAnswerContent()); ?>
+					<?php if( $answer_content != ''){ ?>
+					<div class="faq-answer-content">
+						<?php echo $answer_content; ?>
+					</div>
+					<?php } ?>
+					<?php if($show_author_date || $show_author): ?>
+					<div class="answer-date">
+						<?php if($show_author) { ?>
+						<?php echo $this->__('Poster by: ').$_answers->getAuthorName(); ?>
+						<?php } ?>
+						<?php if($show_author_date) { ?>
+						&nbsp;<?php echo 'on'; ?>&nbsp;
+						<?php $_ct= new Zend_Date( $_answers->getCreatedAt() ); ?>
+						<span class="day"><?php echo $_ct->toString('dd');?></span>
+						<span class="month"><?php echo $_ct->toString('MMM');?></span>
+						<span class="year"><?php echo $_ct->toString('YYY');?></span>
+						<?php } ?>
+					</div>
+					<?php endif; ?>
+				</div>
+				<?php } ?>
+				<?php } ?>
+			</div>
+			<?php } ?>
+		</div>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<?php if($show_pager || $show_category_filter){ ?>
+	<div class="footer-toolbar toolbar product-filter clearfix">
+		<?php if($show_category_filter): //Show category filter ?>
+		<div class="pull-left filter-category">
+			<select name="filter_category_id" id="filter_category" class="filter-select" onchange="setLocation(this.value)">
+				<option value=""><?php echo $this->__("Filter By Category"); ?></option>
+				<?php foreach ($this->getListCategory() as $_category) { ?>
+				<option value="<?php echo $this->getChild("pager")->getPagerUrl(array('filter_category'=>$_category->getId())) ?>" <?php echo ($filter_category == $_category->getId())?'selected="selected"':'';?> ><?php echo $_category->getName(); ?></option>
+				<?php } ?>
+			</select>
+		</div>
+		<?php endif; ?>
+		<?php if($show_pager): //Show paging?>
+		<div class="pull-right">
+			<?php echo $this->getPagerHtml() ?>
+		</div>
+		<?php endif; ?>
+	</div>
+	<?php } ?>
+	
+</div>
+
+<?php } ?>
+<!-- Questions -->
+
+
+<script type="text/javascript">
+	//< ![CDATA[
+	var fmefaqForm = new VarienForm('popup-ask-question-form', true);
+	function showPopupQuestion(){
+		jQuery('#faq_poquestion').show();
+		jQuery.colorbox({
+			inline:true,
+			maxWidth: true,
+			opacity: 0.7,
+			width: "700px",
+			height: "650px",
+			open:true,
+			responsive: true,
+			onLoad:function(){
+				jQuery("#cboxNext").remove(0);
+				jQuery("#cboxPrevious").remove(0);
+				jQuery("#cboxCurrent").remove(0);
+			},
+			onClosed:function(){
+				jQuery('#faq_poquestion').hide();
+			},
+			href:"#faq_poquestion" });
+	}
+
+	jQuery(document).ready(function($) {
+		jQuery('.venus-faq .faqsaddslide .btn-slide').click(function() {
+			jQuery('.faq-question').colorbox({ });
+			return false;
+		});
+	});
+	//]]>
+</script>
+
+<div class="clearfix"></div>

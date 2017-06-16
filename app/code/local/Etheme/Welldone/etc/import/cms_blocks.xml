@@ -1,0 +1,2206 @@
+<?xml version="1.0"?>
+<dresscode>
+     <blocks>
+         <block>
+             <title>Welldone Header Social Links</title>
+              <identifier>wd_header_social_links</identifier>
+              <content>
+                    <![CDATA[
+                       <ul>
+                        <li class="social-links__item"><a class="icon icon-facebook" href="#"></a></li>
+                        <li class="social-links__item"><a class="icon icon-twitter" href="#"></a></li>
+                        <li class="social-links__item"><a class="icon icon-google" href="#"></a></li>
+                        <li class="social-links__item"><a class="icon icon-pinterest" href="#"></a></li>
+                        <li class="social-links__item"><a class="icon icon-mail" href="#"></a></li>
+                    </ul>
+                    ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Left Links</title>
+             <identifier>wd_megamenu_links_left</identifier>
+             <content>
+                 <![CDATA[
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="link-name"><i class="icon icon-gear"></i></span>
+                            <span class="caret caret--dots"></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeIn" role="menu">
+                            <li><a href="{{store url=''}}?___store=default">Header 1 (default)</a></li>
+                            <li><a href="{{store url=''}}?___store=art_catalogue">Header 2 (short)</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_content">Header 3 (transparent)</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_categories">Header 4 (max)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{store url=''}}?___store=default">Slider Revolution</a></li>
+                            <li><a href="{{store url=''}}?___store=intro">Slider Full Page</a></li>
+                            <li><a href="{{store url=''}}?___store=left_column">Slider + Banners</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_content">Slider + Header</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{store url=''}}?___store=default">Megamenu 1 (horizontal)</a></li>
+                            <li><a href="{{store url=''}}?___store=left_column">Megamenu 2 (vertical)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{store url=''}}?___store=default">Footer 1 (default)</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_banners">Footer 2 (only copyright)</a></li>
+                            <li><a href="{{store url=''}}?___store=german">Footer 3 (no subscribe)</a></li>
+                            <li><a href="{{store url=''}}?___store=lookbook">Footer 4 (no toplinks)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{store url=''}}?___store=french">Catalog mode</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=default">Listing Ajax</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=lookbook">Listing Not Ajax</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-589.html'}}?___store=intro">Product 1 (default)</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-688.html'}}?___store=default">Product 2 (sticky)</a></li>
+                            <li><a href="{{store url='nolita-cami-681.html'}}?___store=landing_categories">Product 3 (simple)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <span class="link-name">Layouts</span>
+                            <span class="caret caret--dots"></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeIn" role="menu">
+                            <li><a href="{{store url=''}}?___store=default">Default</a></li>
+                            <li><a href="{{store url=''}}?___store=boxed">Boxed</a></li>
+                            <li><a href="{{store url=''}}?___store=full_width">FullWidth</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_content">Transparent Header</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_banners">Landing Banners</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_categories">Landing Category</a></li>
+                            <li><a href="{{store url=''}}?___store=landing_content">Landing Content</a></li>
+                            <li><a href="{{store url=''}}?___store=left_column">Left column</a></li>
+                            <li><a href="{{store url=''}}?___store=art_catalogue">Art catalogue</a></li>
+                            <li><a href="{{store url=''}}?___store=intro">Intro</a></li>
+                            <li><a href="{{store url=''}}?___store=lookbook">Lookbook</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{store url='blog'}}?___store=default" class="dropdown-toggle">
+                            <span class="link-name">BLOG</span>
+                            <span class="caret caret--dots"></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeIn" role="menu">
+                            <li><a href="{{store url='blog'}}?___store=landing_banners">Blog Left Column</a></li>
+                            <li><a href="{{store url='blog'}}?___store=landing_categories">Blog Right Column</a></li>
+                            <li><a href="{{store url='blog'}}?___store=default">Blog Grid</a></li>
+                            <li><a href="{{store url='blog/2015/10/21/wordpress-post-10/'}}?___store=default#post-comments">Blog Comments</a></li>
+                            <li><a href="{{store url='blog/2015/10/21/wordpress-post-10/'}}?___store=default">Post Page</a></li>
+                            <li><a href="{{store url='blog/2015/10/21/wordpress-post-10/'}}?___store=boxed">Post Page + Left Column</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"  class="dropdown-toggle">
+                            <span class="link-name">SHOP</span>
+                            <span class="caret caret--dots"></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeIn" role="menu">
+                            <li><a href="{{store url='women.html'}}?___store=default"><b>Listing</b> Default</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=left_column">Listing Opened Filter</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=art_catalogue">Listing 2 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=boxed">Listing 3 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=default">Listing 4 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=intro">Listing 5 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=french">Listing 6 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=store_n1">Listing 7 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=full_width">Listing 8 items per row</a></li>
+                            <li><a href="{{store url='women.html'}}?___store=german">Listing Closed Attributes Groups</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{store url='elizabeth-knit-top-589.html'}}?___store=intro"><b>Product</b> Tabs - Default</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-688.html'}}?___store=default">Product Tabs - Sticky</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-688.html'}}?___store=default">Product Media - Cloudzoom + Popup</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-589.html'}}?___store=intro">Product Media - Scroll</a></li>
+                            <li><a href="{{store url='nolita-cami-681.html'}}?___store=default">Product without Right column</a></li>
+                            <li><a href="{{store url='accessories/eyewear/aviator-sunglasses.html'}}?___store=default">Product Simple</a></li>
+                            <li><a href="{{store url='elizabeth-knit-top-688.html'}}?___store=default">Product Configurable</a></li>
+                            <li><a href="{{store url='pillow-and-throw-set.html'}}?___store=default">Product Bundle</a></li>
+                            <li><a href="{{store url='home-decor/decorative-accents/vase-set.html'}}?___store=default">Product Grouped</a></li>
+                            <li><a href="{{store url='checkout'}}?___store=lookbook">Checkout Default</a></li>
+                            <li><a href="{{store url='checkout'}}?___store=default">OnePage Checkout</a></li>
+                        </ul>
+                    </li>
+                 ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Right Links</title>
+             <identifier>wd_megamenu_links_right</identifier>
+             <content>
+                 <![CDATA[
+                 <li>
+                    <a href="{{store direct_url='welldone_gallery'}}?___store=default" class=" class="dropdown-toggle""><span class="link-name">Gallery</span><span class="caret caret--dots"></span></a>
+                    <ul class="dropdown-menu animated fadeIn" role="menu">
+                        <li><a href="{{store direct_url='welldone_gallery'}}?___store=boxed">Boxed</a></li>
+                        <li><a href="{{store direct_url='welldone_gallery'}}?___store=full_width">Wide</a></li>
+                    </ul>
+                 </li>
+         <li><a href="#" class="dropdown-toggle"><span  class="link-name">Pages</span><span class="badge badge--menu">!</span><span class="caret caret--dots"></span></a>
+             <ul class="dropdown-menu animated fadeIn" role="menu">
+                 <li><a href="{{store direct_url='welldone_about'}}">About</a></li>
+                 <li><a href="{{store direct_url='welldone_typography'}}">Typography</a></li>
+                 <li><a href="{{store direct_url='catalog/seo_sitemap/category'}}">Sitemap</a></li>
+                 <li><a href="{{store direct_url='contacts'}}">Contact</a></li>
+                 <li><a href="{{store direct_url='customer/account/create'}}">Create Account</a></li>
+                 <li><a href="{{store direct_url='customer/account'}}">Logination</a></li>
+             </ul>
+         </li>
+         <li class="menu-large"><a href="#" class="dropdown-toggle"><span class="link-name">BUY THEME!</span><span class="caret caret--dots"></span></a>
+             <div class="dropdown-menu megamenu animated fadeIn">
+                 <div class="container">
+                     <div class="row megamenu__content">
+                         <div class="col-sm-4">
+                             <div class="text-center"><a href="#"><img src="{{media url=wysiwyg/welldone/wd-present-01.jpg}}" class="img-responsive" alt="welldone"></a>
+                                 <div class="text-uppercase"><a href="#">More than just responsive</a></div>
+                             </div>
+                         </div>
+                         <div class="col-sm-4">
+                             <div class="text-center"><a href="#"><img src="{{media url=wysiwyg/welldone/wd-present-02.jpg}}" class="img-responsive" alt="welldone"></a>
+                                 <div class="text-uppercase"><a href="#">Page builder. Freedom - create your own layout</a></div>
+                             </div>
+                         </div>
+                         <div class="col-sm-4">
+                             <div class="text-center"><a href="#"><img src="{{media url=wysiwyg/welldone/wd-present-03.jpg}}" class="img-responsive" alt="welldone"></a>
+                                 <div class="text-uppercase"><a href="#">Premium plugins/extensions s
+                                     that are included for FREE </a></div>
+                                 (Slider Revolution, Colour swatch, Cloud Zoom, Blog)<br>
+                                 <br>
+                             </div>
+                         </div>
+                         <div class="text-center"><a class="btn btn--wd">BUY THEME</a></div>
+                     </div>
+                 </div>
+             </div>
+         </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Title</title>
+             <identifier>wd_megamenu_title</identifier>
+             <content>
+                 <![CDATA[
+                    CATEGORY
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Top Html</title>
+             <identifier>wd_megamenu_html_top</identifier>
+             <content>
+                 <![CDATA[
+                        <li class="megamenu__columns__top-block text-uppercase">
+                            <ul>
+                                <li><span class="icon icon-box icon--lg"></span><a href="#">GIFTS EXCLUSIVE</a></li>
+                                <li><span class="icon icon-sales-alt icon--lg"></span><a href="#">OFFERS</a></li>
+                            </ul>
+                        </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Btm Html</title>
+             <identifier>wd_megamenu_html_btm</identifier>
+             <content>
+                 <![CDATA[
+                   <li class="megamenu__columns__bottom-block text-uppercase">
+                            <ul>
+                                <li><span class="icon icon-bag icon--lg"></span><a href="#">SPECIAL OFFER</a></li>
+                                <li><span class="icon icon-shop-label icon--lg"></span><a href="#">UP TO 50% OFF DISCOUNTS</a></li>
+                            </ul>
+                        </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone  Megamenu Right Html</title>
+             <identifier>wd_megamenu_html_right</identifier>
+             <content>
+                 <![CDATA[
+                   <li class="megamenu__columns__side-image"><img src="{{media url=wysiwyg/welldone/img-megamenu.jpg}}" alt="Megamenu Image"> </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider</title>
+             <identifier>wd_slider</identifier>
+             <content>
+                 <![CDATA[
+<section class="content" id="slider">
+<div class="tp-banner-container">
+<div class="tp-banner" >
+<ul>
+    {{block type="cms/block" block_id="wd_slider_slide_1"}}
+    {{block type="cms/block" block_id="wd_slider_slide_2"}}
+</ul>
+</div>
+<div class="scroll-to-content"> <a href="#" class="btn btn--round btn--round--lg"><span class="icon icon-arrow-down"></span></a></div>
+</div>
+</section>
+
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.tools.min.js'}}"></script>
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.revolution.min.js'}}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('.tp-banner').show().revolution(
+            {
+                dottedOverlay:"none",
+                delay:16000,
+                startwidth:1170,
+                startheight:700,
+                hideThumbs:200,
+                hideTimerBar:"on",
+
+                thumbWidth:100,
+                thumbHeight:50,
+                thumbAmount:5,
+
+                navigationType:"none",
+                navigationArrows:"",
+                navigationStyle:"",
+
+                touchenabled:"on",
+                onHoverStop:"on",
+
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+
+                parallax:"mouse",
+                parallaxBgFreeze:"on",
+                parallaxLevels:[7,4,3,2,5,4,3,2,1,0],
+
+                keyboardNavigation:"off",
+
+                navigationHAlign:"center",
+                navigationVAlign:"bottom",
+                navigationHOffset:0,
+                navigationVOffset:20,
+
+                soloArrowLeftHalign:"left",
+                soloArrowLeftValign:"center",
+                soloArrowLeftHOffset:20,
+                soloArrowLeftVOffset:0,
+
+                soloArrowRightHalign:"right",
+                soloArrowRightValign:"center",
+                soloArrowRightHOffset:20,
+                soloArrowRightVOffset:0,
+
+                shadow:0,
+                fullWidth:"off",
+                fullScreen:"on",
+
+                spinner:"",
+
+                stopLoop:"off",
+                stopAfterLoops:-1,
+                stopAtSlide:-1,
+
+                shuffle:"off",
+
+                autoHeight:"off",
+                forceFullWidth:"off",
+
+
+
+                hideThumbsOnMobile:"off",
+                hideNavDelayOnMobile:1500,
+                hideBulletsOnMobile:"off",
+                hideArrowsOnMobile:"off",
+                hideThumbsUnderResolution:0,
+
+                hideSliderAtLimit:0,
+                hideCaptionAtLimit:0,
+                hideAllCaptionAtLilmit:0,
+                startWithSlide:0,
+                fullScreenOffsetContainer: ".header"
+            });
+    });	//ready
+
+</script>
+
+
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Slide 1</title>
+             <identifier>wd_slider_slide_1</identifier>
+             <content>
+                 <![CDATA[
+<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+    <!-- MAIN IMAGE -->
+    <img src="{{media url=wysiwyg/welldone/slider/slide-1.jpg}}"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+    <!-- LAYERS -->
+
+    <!-- LAYER NR. 1 -->
+    <div class="tp-caption tp-caption--wd-1  lfb ltt"
+         data-x="center"
+         data-y="center"
+         data-voffset="-100"
+         data-speed="600"
+         data-start="800"
+         data-easing="Power4.easeOut"
+         data-endeasing="Power4.easeIn"
+         style="z-index: 1;">Fashion</div>
+
+    <!-- LAYER NR. 2 -->
+    <div class="tp-caption tp-caption--wd-2 lfb ltt"
+         data-x="center"
+         data-y="center"
+         data-voffset="0"
+         data-speed="600"
+         data-start="900"
+         data-easing="Power4.easeOut"
+         data-endeasing="Power4.easeIn"
+         style="z-index: 2;">Special Occasion</div>
+
+    <!-- LAYER NR. 3 -->
+    <div class="tp-caption tp-caption--wd-3 lfb ltt"
+         data-x="center"
+         data-y="center"
+         data-voffset="70"
+         data-speed="600"
+         data-start="1000"
+         data-easing="Power4.easeOut"
+         data-endeasing="Power4.easeIn"
+         data-captionhidden="on"
+
+         style="z-index: 3;">the New & Exiting 2016 Collection </div>
+
+    <!-- LAYER NR. 4 -->
+    <div class="tp-caption lfb ltt"
+         data-x="center"
+         data-y="center"
+         data-voffset="160"
+         data-speed="600"
+         data-start="1100"
+         data-easing="Power4.easeOut"
+         data-endeasing="Power4.easeIn"
+         style="z-index: 11;"><a href="#" class="btn btn--wd btn--xl">SHOP NOW</a> </div>
+</li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Slide 2</title>
+             <identifier>wd_slider_slide_2</identifier>
+             <content>
+                 <![CDATA[
+<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+              <!-- MAIN IMAGE -->
+              <img src="{{media url=wysiwyg/welldone/slider/slide-2.jpg}}"  alt="slide2"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+              <!-- LAYERS -->
+
+              <!-- LAYER NR. 1 -->
+              <div class="tp-caption tp-caption--wd-4  lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="-150"
+			data-speed="600"
+			data-start="800"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">Welldone <span class="custom-color">:)</span></div>
+
+              <!-- LAYER NR. 2 -->
+              <div class="tp-caption tp-caption--wd-5 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="-70"
+			data-speed="600"
+			data-start="900"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">The Most Popular Store</div>
+
+              <!-- LAYER NR. 3 -->
+              <div class="tp-caption tp-caption--wd-6 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="0"
+			data-speed="600"
+			data-start="1000"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			data-captionhidden="on"
+
+			style="z-index: 10;">Fully Customizable Responsive Theme</div>
+
+              <!-- LAYER NR. 4 -->
+              <div class="tp-caption lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="100"
+			data-speed="600"
+			data-start="1100"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 11;"><a href="#" class="btn btn--wd btn--xl">SHOP NOW</a> </div>
+              <!-- IMAGE NR. 1 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-1"
+			data-x="650"
+			data-y="0"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s7.png}}" alt="Image1"></div>
+
+              <!-- IMAGE NR. 2 -->
+              <div class="tp-caption  lfr ltr rs-parallaxlevel-3"
+			data-x="900"
+			data-y="130"
+			 data-speed="1000"
+			 data-start="1200"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s11.png}}" alt="Image2"></div>
+
+              <!-- IMAGE NR. 3 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="-100"
+			data-y="-10"
+			 data-speed="900"
+			 data-start="1400"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s1.png}}" alt="Image3"></div>
+
+              <!-- IMAGE NR. 4 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-2"
+			data-x="-100"
+			data-y="300"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s2.png}}" alt="Image4"></div>
+
+              <!-- IMAGE NR. 5 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-1"
+			data-x="690"
+			data-y="430"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s12.png}}" alt="Image5"></div>
+
+              <!-- IMAGE NR. 6 -->
+              <div class="tp-caption  fadeIn fadeOut rs-parallaxlevel-2"
+			data-x="100"
+			data-y="150"
+			 data-speed="900"
+			 data-start="1200"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s4.png}}" alt="Image6"></div>
+
+              <!-- IMAGE NR. 7 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-3"
+			data-x="330"
+			data-y="620"
+			 data-speed="900"
+			 data-start="2000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s9.png}}" alt="Image7"></div>
+
+              <!-- IMAGE NR. 8 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="350"
+			data-y="0"
+			 data-speed="900"
+			 data-start="600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s6.png}}" alt="Image8"></div>
+
+              <!-- IMAGE NR. 9 -->
+              <div class="tp-caption  lfr ltr rs-parallaxlevel-2"
+			data-x="950"
+			data-y="600"
+			 data-speed="900"
+			 data-start="2400"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s13.png}}" alt="Image9"></div>
+
+              <!-- IMAGE NR. 10 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-2"
+			data-x="120"
+			data-y="600"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s5.png}}" alt="Image10"></div>
+
+              <!-- IMAGE NR. 11 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="900"
+			data-y="-20"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s10.png}}" alt="Image11"></div>
+
+              <!-- IMAGE NR. 12 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="140"
+			data-y="-20"
+			 data-speed="900"
+			 data-start="800"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s3.png}}" alt="Image12"></div>
+
+              <!-- IMAGE NR. 13 -->
+              <div class="tp-caption  fadeIn fadeOut rs-parallaxlevel-2"
+			data-x="480"
+			data-y="500"
+			 data-speed="900"
+			 data-start="1800"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s8.png}}" alt="Image13"></div>
+            </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Slider Full page</title>
+             <identifier>wd_slider_full_page</identifier>
+             <content>
+                 <![CDATA[
+
+<section class="content" id="slider">
+<div class="tp-banner-container">
+<div class="tp-banner" >
+<ul>
+    {{block type="cms/block" block_id="wd_slider_slide_1"}}
+    {{block type="cms/block" block_id="wd_slider_slide_2_dark"}}
+</ul>
+</div>
+<div class="scroll-to-content"> <a href="#" class="btn btn--round btn--round--lg"><span class="icon icon-arrow-down"></span></a></div>
+</div>
+</section>
+
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.tools.min.js'}}"></script>
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.revolution.min.js'}}"></script>
+<script type="text/javascript">
+ jQuery(document).ready(function() {
+
+
+
+					jQuery('.tp-banner').show().revolution(
+					{
+						dottedOverlay:"none",
+						delay:16000,
+						startwidth:1170,
+						startheight:700,
+						hideThumbs:200,
+						hideTimerBar:"on",
+
+						thumbWidth:100,
+						thumbHeight:50,
+						thumbAmount:5,
+
+						navigationType:"none",
+						navigationArrows:"",
+						navigationStyle:"",
+
+						touchenabled:"on",
+						onHoverStop:"on",
+
+						swipe_velocity: 0.7,
+						swipe_min_touches: 1,
+						swipe_max_touches: 1,
+						drag_block_vertical: false,
+
+						parallax:"mouse",
+						parallaxBgFreeze:"on",
+						parallaxLevels:[7,4,3,2,5,4,3,2,1,0],
+
+						keyboardNavigation:"off",
+
+						navigationHAlign:"center",
+						navigationVAlign:"bottom",
+						navigationHOffset:0,
+						navigationVOffset:20,
+
+						soloArrowLeftHalign:"left",
+						soloArrowLeftValign:"center",
+						soloArrowLeftHOffset:20,
+						soloArrowLeftVOffset:0,
+
+						soloArrowRightHalign:"right",
+						soloArrowRightValign:"center",
+						soloArrowRightHOffset:20,
+						soloArrowRightVOffset:0,
+
+						shadow:0,
+						fullWidth:"off",
+						fullScreen:"on",
+
+						spinner:"",
+
+						stopLoop:"off",
+						stopAfterLoops:-1,
+						stopAtSlide:-1,
+
+						shuffle:"off",
+
+						autoHeight:"off",
+						forceFullWidth:"off",
+
+
+
+						hideThumbsOnMobile:"off",
+						hideNavDelayOnMobile:1500,
+						hideBulletsOnMobile:"off",
+						hideArrowsOnMobile:"off",
+						hideThumbsUnderResolution:0,
+
+						hideSliderAtLimit:0,
+						hideCaptionAtLimit:0,
+						hideAllCaptionAtLilmit:0,
+						startWithSlide:0,
+						fullScreenOffsetContainer: ""
+					});
+
+
+
+
+				});
+
+</script>
+
+
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Slide 2 Dark</title>
+             <identifier>wd_slider_slide_2_dark</identifier>
+             <content>
+                 <![CDATA[
+<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+              <!-- MAIN IMAGE -->
+              <img src="{{media url=wysiwyg/welldone/slider/slide-new-dark.jpg}}"  alt="slide2"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+              <!-- LAYERS -->
+
+              <!-- LAYER NR. 1 -->
+              <div class="tp-caption tp-caption--wd-7  lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="0"
+			data-speed="600"
+			data-start="800"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">The Best Ecommerce</div>
+
+              <!-- LAYER NR. 2 -->
+              <div class="tp-caption tp-caption--wd-7 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="70"
+			data-speed="600"
+			data-start="900"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">Theme Ever Seen</div>
+
+              <!-- LAYER NR. 3 -->
+              <div class="tp-caption tp-caption--wd-8 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="150"
+			data-speed="600"
+			data-start="1000"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			data-captionhidden="on"
+
+			style="z-index: 10;">- Welldone Theme</div>
+
+              <!-- IMAGE NR. 1 -->
+              <div class="tp-caption  lfr ltr rs-parallaxlevel-1"
+			data-x="650"
+			data-y="-140"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/p1.png}}" alt="Image1"></div>
+
+              <!-- IMAGE NR. 2 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-3"
+			data-x="450"
+			data-y="50"
+			 data-speed="900"
+			 data-start="1200"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/p2.png}}" alt="Image2"></div>
+
+              <!-- IMAGE NR. 3 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="300"
+			data-y="-10"
+			 data-speed="900"
+			 data-start="1400"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/p3.png}}" alt="Image3"></div>
+
+              <!-- IMAGE NR. 4 -->
+              <div class="tp-caption  randomrotate ltt rs-parallaxlevel-2"
+			data-x="100"
+			data-y="-10"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/p4.png}}" alt="Image4"></div>
+
+              <!-- IMAGE NR. 5 -->
+              <div class="tp-caption  lfl ltl rs-parallaxlevel-1"
+			data-x="0"
+			data-y="100"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/p5.png}}" alt="Image5"></div>
+
+              <!-- IMAGE NR. 6 -->
+              <div class="tp-caption  randomrotate ltl rs-parallaxlevel-2"
+			data-x="0"
+			data-y="350"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/p6.png}}" alt="Image6"></div>
+
+              <!-- IMAGE NR. 7 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-3"
+			data-x="720"
+			data-y="540"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/p7.png}}" alt="Image7"></div>
+
+              <!-- IMAGE NR. 8 -->
+              <div class="tp-caption  randomrotate ltb rs-parallaxlevel-2"
+			data-x="850"
+			data-y="480"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/p8.png}}" alt="Image8"></div>
+            </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Intro</title>
+             <identifier>wd_slider_intro</identifier>
+             <content><![CDATA[
+<section class="content" id="intro">
+      <!-- START REVOLUTION SLIDER 3.1 rev5 fullwidth mode -->
+      <div class="tp-banner-container">
+        <div class="tp-banner" >
+          <ul>
+            {{block type="cms/block" block_id="wd_slider_intro_slide_1"}}
+            {{block type="cms/block" block_id="wd_slider_intro_slide_2"}}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.tools.min.js'}}"></script>
+<script type="text/javascript" src="{{skin url='vendor/rs-plugin/js/jquery.themepunch.revolution.min.js'}}"></script>
+<script type="text/javascript">
+
+				jQuery(document).ready(function() {
+
+
+
+					jQuery('.tp-banner').show().revolution(
+					{
+						dottedOverlay:"none",
+						delay:16000,
+						startwidth:1170,
+						startheight:700,
+						hideThumbs:200,
+						hideTimerBar:"on",
+
+						thumbWidth:100,
+						thumbHeight:50,
+						thumbAmount:5,
+
+						navigationType:"none",
+						navigationArrows:"",
+						navigationStyle:"",
+
+						touchenabled:"on",
+						onHoverStop:"on",
+
+						swipe_velocity: 0.7,
+						swipe_min_touches: 1,
+						swipe_max_touches: 1,
+						drag_block_vertical: false,
+
+						parallax:"mouse",
+						parallaxBgFreeze:"on",
+						parallaxLevels:[7,4,3,2,5,4,3,2,1,0],
+
+						keyboardNavigation:"off",
+
+						navigationHAlign:"center",
+						navigationVAlign:"bottom",
+						navigationHOffset:0,
+						navigationVOffset:20,
+
+						soloArrowLeftHalign:"left",
+						soloArrowLeftValign:"center",
+						soloArrowLeftHOffset:20,
+						soloArrowLeftVOffset:0,
+
+						soloArrowRightHalign:"right",
+						soloArrowRightValign:"center",
+						soloArrowRightHOffset:20,
+						soloArrowRightVOffset:0,
+
+						shadow:0,
+						fullWidth:"off",
+						fullScreen:"on",
+
+						spinner:"",
+
+						stopLoop:"off",
+						stopAfterLoops:-1,
+						stopAtSlide:-1,
+
+						shuffle:"off",
+
+						autoHeight:"off",
+						forceFullWidth:"off",
+
+
+
+						hideThumbsOnMobile:"off",
+						hideNavDelayOnMobile:1500,
+						hideBulletsOnMobile:"off",
+						hideArrowsOnMobile:"off",
+						hideThumbsUnderResolution:0,
+
+						hideSliderAtLimit:0,
+						hideCaptionAtLimit:0,
+						hideAllCaptionAtLilmit:0,
+						startWithSlide:0,
+						fullScreenOffsetContainer: ".header .navbar-wd, .footer"
+					});
+
+				});	//ready
+
+			</script>
+
+
+             ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Intro Slide 1</title>
+             <identifier>wd_slider_intro_slide_1</identifier>
+             <content><![CDATA[
+<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+              <!-- MAIN IMAGE -->
+              <img src="{{media url=wysiwyg/welldone/slider/intro.jpg}}"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+              <!-- LAYERS -->
+
+              <!-- LAYER NR. 1 -->
+              <div class="tp-caption tp-caption--wd-1  lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="-100"
+			data-speed="600"
+			data-start="800"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 1;">Fashion</div>
+
+              <!-- LAYER NR. 2 -->
+              <div class="tp-caption tp-caption--wd-2 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="0"
+			data-speed="600"
+			data-start="900"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 2;">Special Occasion</div>
+
+              <!-- LAYER NR. 3 -->
+              <div class="tp-caption tp-caption--wd-3 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="70"
+			data-speed="600"
+			data-start="1000"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			data-captionhidden="on"
+
+			style="z-index: 3;">the New & Exiting 2016 Collection </div>
+
+              <!-- LAYER NR. 4 -->
+              <div class="tp-caption lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="160"
+			data-speed="600"
+			data-start="1100"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 4;"><a href="#" class="btn btn--wd btn--xl">SHOP NOW</a> </div>
+            </li>
+             ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Slider Intro Slide 2</title>
+             <identifier>wd_slider_intro_slide_2</identifier>
+             <content><![CDATA[
+<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+              <!-- MAIN IMAGE -->
+              <img src="{{media url=wysiwyg/welldone/slider/slide-2.jpg}}"  alt="slide2"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+              <!-- LAYERS -->
+
+              <!-- LAYER NR. 1 -->
+              <div class="tp-caption tp-caption--wd-4  lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="-150"
+			data-speed="600"
+			data-start="800"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">Welldone <span class="custom-color">:)</span></div>
+
+              <!-- LAYER NR. 2 -->
+              <div class="tp-caption tp-caption--wd-5 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="-70"
+			data-speed="600"
+			data-start="900"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 10;">The Most Popular Store</div>
+
+              <!-- LAYER NR. 3 -->
+              <div class="tp-caption tp-caption--wd-6 lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="0"
+			data-speed="600"
+			data-start="1000"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			data-captionhidden="on"
+
+			style="z-index: 10;">Fully Customizable Responsive Theme</div>
+
+              <!-- LAYER NR. 4 -->
+              <div class="tp-caption lfb ltt"
+			data-x="center"
+			data-y="center"
+            data-voffset="100"
+			data-speed="600"
+			data-start="1100"
+			data-easing="Power4.easeOut"
+			data-endeasing="Power4.easeIn"
+			style="z-index: 4;"><a href="#" class="btn btn--wd btn--xl">SHOP NOW</a> </div>
+              <!-- IMAGE NR. 1 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-1"
+			data-x="650"
+			data-y="0"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s7.png}}" alt="Image1"></div>
+
+              <!-- IMAGE NR. 2 -->
+              <div class="tp-caption  lfr ltr rs-parallaxlevel-3"
+			data-x="900"
+			data-y="130"
+			 data-speed="1000"
+			 data-start="1200"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s11.png}}" alt="Image2"></div>
+
+              <!-- IMAGE NR. 3 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="-100"
+			data-y="-10"
+			 data-speed="900"
+			 data-start="1400"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s1.png}}" alt="Image3"></div>
+
+              <!-- IMAGE NR. 4 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-2"
+			data-x="-100"
+			data-y="300"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s2.png}}" alt="Image4"></div>
+
+              <!-- IMAGE NR. 5 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-1"
+			data-x="690"
+			data-y="430"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 5;"			 ><img src="{{media url=wysiwyg/welldone/slider/s12.png}}" alt="Image5"></div>
+
+              <!-- IMAGE NR. 6 -->
+              <div class="tp-caption  fadeIn fadeOut rs-parallaxlevel-2"
+			data-x="100"
+			data-y="150"
+			 data-speed="900"
+			 data-start="1200"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s4.png}}" alt="Image6"></div>
+
+              <!-- IMAGE NR. 7 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-3"
+			data-x="330"
+			data-y="620"
+			 data-speed="900"
+			 data-start="2000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 6;"			 ><img src="{{media url=wysiwyg/welldone/slider/s9.png}}" alt="Image7"></div>
+
+              <!-- IMAGE NR. 8 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="350"
+			data-y="0"
+			 data-speed="900"
+			 data-start="600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s6.png}}" alt="Image8"></div>
+
+              <!-- IMAGE NR. 9 -->
+              <div class="tp-caption  lfr ltr rs-parallaxlevel-2"
+			data-x="950"
+			data-y="600"
+			 data-speed="900"
+			 data-start="2400"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s13.png}}" alt="Image9"></div>
+
+              <!-- IMAGE NR. 10 -->
+              <div class="tp-caption  lfb ltb rs-parallaxlevel-2"
+			data-x="120"
+			data-y="600"
+			 data-speed="900"
+			 data-start="1600"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s5.png}}" alt="Image10"></div>
+
+              <!-- IMAGE NR. 11 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="900"
+			data-y="-20"
+			 data-speed="900"
+			 data-start="1000"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s10.png}}" alt="Image11"></div>
+
+              <!-- IMAGE NR. 12 -->
+              <div class="tp-caption  lft ltt rs-parallaxlevel-2"
+			data-x="140"
+			data-y="-20"
+			 data-speed="900"
+			 data-start="800"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s3.png}}" alt="Image12"></div>
+
+              <!-- IMAGE NR. 13 -->
+              <div class="tp-caption  fadeIn fadeOut rs-parallaxlevel-2"
+			data-x="480"
+			data-y="500"
+			 data-speed="900"
+			 data-start="1800"
+			 data-easing="Power4.easeOut"
+			style="z-index: 7;"			 ><img src="{{media url=wysiwyg/welldone/slider/s8.png}}" alt="Image13"></div>
+            </li>
+             ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Products Categories</title>
+             <identifier>wd_products_categories</identifier>
+             <content>
+                 <![CDATA[
+<section class="content">
+      <div class="container">
+        <h2 class="text-center text-uppercase">products categories</h2>
+        <div class="product-category-carousel mobile-special-arrows slick">
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-01.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-02.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-03.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-04.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-05.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-01.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-02.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-03.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-04.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-05.jpg}}" alt="#"/></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Brands</title>
+             <identifier>wd_brands</identifier>
+             <content>
+                 <![CDATA[
+<h2 class="text-center text-uppercase">products brands</h2>
+
+        <div class="brands brands-carousel mobile-special-arrows  animated-arrows">
+          <div class="brands__item"><a href="#" title="gant"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-01.png}}" alt="gant"/></a></div>
+          <div class="brands__item"><a href="#" title="rvlt"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-02.png}}" alt="rvlt"/></a></div>
+          <div class="brands__item"><a href="#" title="mango"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-03.png}}" alt="mango"/></a></div>
+          <div class="brands__item"><a href="#" title="he"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-04.png}}" alt="he"/></a></div>
+          <div class="brands__item"><a href="#" title="aldo"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-05.png}}" alt="aldo"/></a></div>
+          <div class="brands__item"><a href="#" title="burton"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-06.png}}" alt="burton"/></a></div>
+          <div class="brands__item"><a href="#" title="vero moda"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-07.png}}" alt="vero moda"/></a></div>
+          <div class="brands__item"><a href="#" title="gant"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-01.png}}" alt="gant"/></a></div>
+          <div class="brands__item"><a href="#" title="rvlt"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-02.png}}" alt="rvlt"/></a></div>
+          <div class="brands__item"><a href="#" title="mango"><img src="{{media url=wysiwyg/welldone/brand-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/brand-03.png}}" alt="mango"/></a></div>
+        </div>
+
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Banners</title>
+             <identifier>wd_banners</identifier>
+             <content>
+                 <![CDATA[
+<div class="row hide-outer-animation">
+          <div class="col-md-6">
+            <div class="text-center">
+              <div class="banner banner--image hover-squared animation" data-animation="fadeInLeft" data-animation-delay="0s" onclick="location.href='#';"> <img src="{{media url=wysiwyg/welldone/banner-01.jpg}}" alt="" class="img-responsive" />
+                <div class="banner--image__text banner--image__text--left banner--image__text--light text-center">
+                  <h5>Get Contemporary</h5>
+                  <h3 id="responsive_headline"><strong>The High Halter</strong></h3>
+                  <h6>Frame your face and shoulders<br>
+                    with the silhouette of season<br>
+                    <strong>Up to 65% OFF</strong></h6>
+                </div>
+                <div class="product-category__hover caption"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="banner banner--icon hover-squared animation" data-animation="fadeInRight" data-animation-delay="0s" onclick="location.href='#';">
+              <div class="banner--icon__icon"> <span class="icon icon-sales"></span> </div>
+              <div class="banner--icon__text text-center">
+                <h4 class="text-uppercase">TOTAL SALE</h4>
+                <div class="banner--icon__text__divider"></div>
+                <div class="text-uppercase">UP TO 70% OFF YOUR FAVOURITE BRANDS</div>
+              </div>
+              <div class="product-category__hover caption"></div>
+            </div>
+            <div class="banner banner--icon banner--last banner--light hover-squared animation" data-animation="fadeInRight" data-animation-delay="0s" onclick="location.href='#';">
+              <div class="banner--icon__icon"> <span class="icon icon-box"></span> </div>
+              <div class="banner--icon__text text-center">
+                <h4 class="text-uppercase">Gift CERTIFICATES</h4>
+                <div class="banner--icon__text__divider"></div>
+                <div class="text-uppercase">Gift certificates are the simplest, speediest way to send something special! </div>
+              </div>
+              <div class="product-category__hover caption"></div>
+            </div>
+          </div>
+        </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone New Arrivals Banner (bottom)</title>
+             <identifier>wd_new_arrivals_banner</identifier>
+             <content>
+                 <![CDATA[
+<h4 class="text-uppercase">New Arrivals</h4>
+            <div class="text-center">
+              <div class="banner banner--image hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/banner-small-01.jpg}}" alt=""/></a>
+                <div class="product-category__hover caption"></div>
+              </div>
+            </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Testimonials (bottom)</title>
+             <identifier>wd_testimonials</identifier>
+             <content>
+                 <![CDATA[
+<h4 class="text-uppercase">Testimonials</h4>
+            <div class="testimonials">
+              <div class="testimonials-carousel nav-dot">
+                <div class="testimonials__item">
+                  <div class="testimonials__item__image-sell"><a href="#"><img src="{{media url=wysiwyg/welldone/testimonials-author-img-01.jpg}}" alt=""/></a>
+                    <div  class="testimonials__item__image-sell__author text-uppercase"><a href="#">Paul Grant</a></div>
+                  </div>
+                  <div class="testimonials__item__text"><em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu  nec, rhonc us eget, sollicitudin eu, vehicula venenatis, tem por vitae, est. Praesent vitae dui. Morbi id tellus. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pel lentesque, libero massa.</em></div>
+                </div>
+                <div class="testimonials__item">
+                  <div class="testimonials__item__image-sell"><a href="#"><img src="{{media url=wysiwyg/welldone/testimonials-author-img-01.jpg}}" alt=""/></a>
+                    <div  class="testimonials__item__image-sell__author text-uppercase"><a href="#">Paul Grant</a></div>
+                  </div>
+                  <div class="testimonials__item__text"><em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu  nec, rhonc us eget, sollicitudin eu, vehicula venenatis, tem por vitae, est. Praesent vitae dui. Morbi id tellus. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pel lentesque, libero massa.</em></div>
+                </div>
+              </div>
+            </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Bottom Products (banners, new, on sale)</title>
+             <identifier>wd_bottom_products</identifier>
+             <content>
+                 <![CDATA[
+<section class="content">
+  <div class="container">
+    <div class="row staggered-animation-container">
+      <div class="col-sm-6 col-md-3 animation" data-animation="fadeInUp" data-animation-delay="0.3s">
+        {{block type="cms/block" block_id="wd_new_arrivals_banner"}}
+      </div>
+
+      <div class="divider divider--sm visible-xs"></div>
+      <div class="col-sm-6 col-md-3 animation" data-animation="fadeInUp" data-animation-delay="0.6s">
+        {{block type="cms/block" block_id="wd_testimonials"}}
+      </div>
+      <div class="divider divider--sm visible-sm visible-xs"></div>
+      <div class="col-sm-6 col-md-3 animation" data-animation="fadeInUp" data-animation-delay="0.9s">
+          {{block type="catalog/product_new" cache_lifetime="1" products_count="10" template="carousel/products_new_vertical.phtml" block_name="New Arrivals"}}
+      </div>
+      <div class="divider divider--sm visible-xs"></div>
+      <div class="col-sm-6 col-md-3 animation" data-animation="fadeInUp" data-animation-delay="1.2s">
+       {{block type="catalog/product_list" category_id="18" block_name="Sale"  template="carousel/products_vertical.phtml"}}
+      </div>
+    </div>
+  </div>
+</section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone footer links</title>
+             <identifier>wd_footer_custom_links</identifier>
+             <content>
+                 <![CDATA[
+                        <ul>
+                            <li><a href="{{store direct_url='welldone_about'}}">About Us</a></li>
+                            <li><a href="#">Customer Service</a></li>
+                        </ul>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Column 1 Html (links)</title>
+             <identifier>wd_footer_column_1_html</identifier>
+             <content>
+                 <![CDATA[
+<h5 class="title text-uppercase mobile-collapse__title">Information </h5>
+                    <div class="v-links-list mobile-collapse__content">
+                        <ul>
+                            <li><a href="{{store direct_url='welldone_about'}}">About Us</a></li>
+                            <li><a href="#">Shipping &amp; Returns</a></li>
+                            <li><a href="#">Privacy Notice</a></li>
+                            <li><a href="#">Conditions of Use</a></li>
+                            <li><a href="#">RSS</a></li>
+                        </ul>
+                    </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Column 2 Html (links)</title>
+             <identifier>wd_footer_column_2_html</identifier>
+             <content>
+                 <![CDATA[
+<h5 class="title text-uppercase mobile-collapse__title">Service</h5>
+                    <div class="v-links-list mobile-collapse__content">
+                        <ul>
+                            <li><a href="#">Online support</a></li>
+                            <li><a href="#">Help & FAQs</a></li>
+                            <li><a href="#">Call Center</a></li>
+                            <li><a href="{{store direct_url='contacts'}}">Contact Us</a></li>
+                            <li><a href="#">Custom Link</a></li>
+                        </ul>
+                    </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Column 3 Html (links)</title>
+             <identifier>wd_footer_column_3_html</identifier>
+             <content>
+                 <![CDATA[
+<h5 class="title text-uppercase mobile-collapse__title">My account</h5>
+                    <div class="v-links-list mobile-collapse__content">
+                        <ul>
+                            <li><a href="{{store direct_url='customer/account'}}">My Account</a></li>
+                            <li><a href="{{store direct_url='wishlist'}}">Wish List</a> </li>
+                            <li><a href="{{store direct_url='catalog/seo_sitemap/category'}}">Site Map </a></li>
+                            <li><a href="#">Custom Link</a></li>
+                            <li><a href="#">Custom Link</a></li>
+                        </ul>
+                    </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone footer contacts</title>
+             <identifier>wd_footer_contacts</identifier>
+             <content>
+                 <![CDATA[
+<h5 class="title text-uppercase mobile-collapse__title">Company Info</h5>
+                    <div class="v-links-list mobile-collapse__content">
+                        <ul>
+                            <li class="icon icon-home">7563 St. Vincent Place, Glasgow</li>
+                            <li class="icon icon-telephone">321321321, 321321321</li>
+                            <li class="icon icon-mail"><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+                            <li class="icon icon-skype"><a href="#">shop.test</a></li>
+                        </ul>
+                    </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Landing Categories</title>
+             <identifier>wd_landing_categories</identifier>
+             <content>
+                 <![CDATA[
+<section class="content content--fill content--fill--light top-null">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 category-block category-block--left">
+            <div class="category-block__title"> WOMEN </div>
+            <div class="category-block__image">
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-01.png}}" alt="" class="first active"/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-02.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-03.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-04.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-05.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-06.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-07.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-08.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-09.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-10.png}}" alt="" />
+                <img src="{{media url=wysiwyg/welldone/categories/category-women-img-11.png}}" alt="" />
+              </div>
+            <ul class="category-block__list">
+              <li><a href="#" class="active">Coats</a></li>
+              <li><a href="#">Dresses</a></li>
+              <li><a href="#">Jackets</a></li>
+              <li><a href="#">Jeans</a></li>
+              <li><a href="#">Jumpsuits</a></li>
+              <li><a href="#">Lingerie</a></li>
+              <li><a href="#">Pants</a></li>
+              <li><a href="#">Shorts</a></li>
+              <li><a href="#">Skirts</a></li>
+              <li><a href="#">Sweaters</a></li>
+              <li><a href="#">Tops</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 category-block category-block--right">
+            <div class="category-block__title"> FOR MEN </div>
+            <div class="category-block__image">
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-01.png}}" alt="" class="first active"/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-02.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-03.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-04.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-05.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-06.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-07.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-08.png}}" alt=""/>
+                <img src="{{media url=wysiwyg/welldone/categories/category-men-img-09.png}}" alt=""/>
+              </div>
+            <ul class="category-block__list">
+              <li><a href="#" class="active">Coats</a></li>
+              <li><a href="#">Jackets</a></li>
+              <li><a href="#">Jeans</a></li>
+              <li><a href="#">Pants</a></li>
+              <li><a href="#">Shirts</a></li>
+              <li><a href="#">Shorts</a></li>
+              <li><a href="#">Suits</a></li>
+              <li><a href="#">Sweaters</a></li>
+              <li><a href="#">T-Shirts</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Footer Bottom Text</title>
+             <identifier>wd_footer_bottom_text</identifier>
+             <content>
+                 <![CDATA[
+with love <span class="icon-favorite color-heart"></span> from <a href="http://themeforest.net/user/etheme">etheme</a>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Landing Content Categories</title>
+             <identifier>wd_landing_content_categories</identifier>
+             <content>
+                 <![CDATA[
+<div class="chapter__title title--white text-center">
+        <div class="chapter__title__text">
+          <h2 class="text-uppercase">Category</h2>
+        </div>
+      </div>
+      <div class="chapter__content chapter__content--full">
+        <div class="category-big-banner">
+          <div class="category-big-banner__image" style="background-image: url({{media url=wysiwyg/welldone/landing-category.jpg}});"></div>
+          <div class="category-big-banner__text">
+            <h3 class="category-title text-uppercase">Romantic Collection</h3>
+            <p>32 products</p>
+            <a href="#" class="btn btn--wd">MORE</a> </div>
+        </div>
+        <div class="category-big-banner">
+          <div class="category-big-banner__image" style="background-image: url({{media url=wysiwyg/welldone/landing-category-02.jpg}});"></div>
+          <div class="category-big-banner__text">
+            <h3 class="category-title text-uppercase">Winter Wear</h3>
+            <p>32 products</p>
+            <a href="#" class="btn btn--wd">MORE</a> </div>
+        </div>
+        <div class="category-big-banner">
+          <div class="category-big-banner__image" style="background-image: url({{media url=wysiwyg/welldone/landing-category-03.jpg}});"></div>
+          <div class="category-big-banner__text">
+            <h3 class="category-title text-uppercase">Sexy Dresses</h3>
+            <p>32 products</p>
+            <a href="#" class="btn btn--wd">MORE</a> </div>
+        </div>
+        <div class="category-big-banner">
+          <div class="category-big-banner__image" style="background-image: url({{media url=wysiwyg/welldone/landing-category-04.jpg}});"></div>
+          <div class="category-big-banner__text">
+            <h3 class="category-title text-uppercase">Accessories</h3>
+            <p>32 products</p>
+            <a href="#" class="btn btn--wd">MORE</a> </div>
+        </div>
+      </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Landing Content Social Widjets</title>
+             <identifier>wd_landing_content_social_widgets</identifier>
+             <content>
+                 <![CDATA[
+<div class="chapter__title title--light text-center">
+        <div class="chapter__title__text">
+          <h2 class="text-uppercase">Social Widgets</h2>
+        </div>
+      </div>
+      <div class="chapter__content">
+        {{block type="cms/block" block_id="wd_landing_content_social_widgets_twitter"}}
+        {{block type="cms/block" block_id="wd_landing_content_social_widgets_facebook"}}
+        {{block type="cms/block" block_id="wd_landing_content_social_widgets_pinterest"}}
+      </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Landing Content Social Widjets - Twitter</title>
+             <identifier>wd_landing_content_social_widgets_twitter</identifier>
+             <content>
+                 <![CDATA[
+<div class="social-item">
+          <h3>Twitter</h3>
+		  <div class="twitter-widget">
+			  <a class="twitter-timeline" href="https://twitter.com/envato" data-widget-id="643126906846625793">Tweets by @envato</a>
+			  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		  </div>
+		</div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Landing Content Social Widjets - Facebook</title>
+             <identifier>wd_landing_content_social_widgets_facebook</identifier>
+             <content>
+                 <![CDATA[
+<div class="social-item">
+          <h3>Facebook</h3>
+ 		  <div class="facebook-widget">
+			 <div id="fb-root"></div>
+			  <script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.4&appId=653691078039193";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>
+			  <div class="fb-page" data-href="https://www.facebook.com/envatomarket" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="true">
+				<div class="fb-xfbml-parse-ignore">
+				  <blockquote cite="https://www.facebook.com/envatomarket"><a href="https://www.facebook.com/envatomarket">Envato Market</a></blockquote>
+				</div>
+			  </div>
+		  </div>
+        </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Landing Content Social Widjets - Pinterest</title>
+             <identifier>wd_landing_content_social_widgets_pinterest</identifier>
+             <content>
+                 <![CDATA[
+<div class="social-item">
+          <h3>Pinterest</h3>
+		  <div class="pinterest-widget">
+			  <a data-pin-do="embedUser" href="http://www.pinterest.com/envato/" data-pin-scale-width="80" data-pin-scale-height="320" data-pin-board-width="400"></a>
+			  <!-- Please call pinit.js only once per page -->
+			  <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+          </div>
+        </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Weldone Categories (Home Page)</title>
+             <identifier>wd_categories</identifier>
+             <content>
+                 <![CDATA[
+                    <section class="content">
+      <div class="container">
+        <h2 class="text-center text-uppercase">products categories</h2>
+        <div class="product-category-carousel mobile-special-arrows  animated-arrows  slick">
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-01.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-02.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-03.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-04.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-05.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-01.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-category hover-squared"> <a href="#"><img src="{{media url=wysiwyg/welldone/category-empty.png}}" data-lazy="{{media url=wysiwyg/welldone/category-img-02.jpg}}" alt="#"></a>
+            <div class="product-category__hover caption"></div>
+            <div class="product-category__info">
+              <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">men SUITS</h5>
+                <div class="product-category__info__ribbon__count">32 products</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone left column banner</title>
+             <identifier>wd_left_column_banner</identifier>
+             <content>
+                 <![CDATA[
+<div class="text-center">
+              <div class="banner banner--image"><a href="#"><img src="{{media url=wysiwyg/welldone/banner-small-01.jpg}}" class="img-responsive" alt=""/></a></div>
+            </div>
+            <div class="divider divider--sm"></div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Left Column Sale Products</title>
+             <identifier>wd_left_column_sale_products</identifier>
+             <content>
+                 <![CDATA[
+{{block type="catalog/product_list" category_id="18" block_name="Sale Products"  template="carousel/products_vertical.phtml"}}
+<div class="divider divider--sm"></div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Small Slider</title>
+             <identifier>wd_small_slider</identifier>
+             <content>
+                 <![CDATA[
+<div class="category-slider single-slider">
+                  <ul>
+                    {{block type="cms/block" block_id="wd_small_slider_slide_1"}}
+                    {{block type="cms/block" block_id="wd_small_slider_slide_2"}}
+                    {{block type="cms/block" block_id="wd_small_slider_slide_3"}}
+                  </ul>
+                </div>
+                <div class="divider divider--sm visible-xs visible-sm"></div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Small Slider Slide 1</title>
+             <identifier>wd_small_slider_slide_1</identifier>
+             <content>
+                 <![CDATA[
+<li><img src="{{media url=wysiwyg/welldone/slider-small-01.jpg}}" alt="" />
+                      <div class="single-slider__text">
+                        <h2><strong>Fashion</strong></h2>
+                        <h3>Special Occasion</h3>
+                        <h4>the New & Exiting 2016 Collection</h4>
+                        <a class="btn btn--wd btn--lg text-uppercase">Shop Now</a></div>
+                    </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Small Slider Slide 2</title>
+             <identifier>wd_small_slider_slide_2</identifier>
+             <content>
+                 <![CDATA[
+<li><img src="{{media url=wysiwyg/welldone/slider-small-02.jpg}}" alt="" />
+                      <div class="single-slider__text">
+                        <h2><strong>Fashion</strong></h2>
+                        <h3>Special Occasion</h3>
+                        <h4>the New & Exiting 2016 Collection</h4>
+                        <a class="btn btn--wd btn--lg text-uppercase">Shop Now</a></div>
+                    </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Small Slider Slide 3</title>
+             <identifier>wd_small_slider_slide_3</identifier>
+             <content>
+                 <![CDATA[
+<li><img src="{{media url=wysiwyg/welldone/slider-small-03.jpg}}" alt="" />
+                      <div class="single-slider__text">
+                        <h2><strong>Fashion</strong></h2>
+                        <h3>Special Occasion</h3>
+                        <h4>the New & Exiting 2016 Collection</h4>
+                        <a class="btn btn--wd btn--lg text-uppercase">Shop Now</a></div>
+                    </li>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Shipping &amp; Returns Links</title>
+             <identifier>wd_shipping_returns_links</identifier>
+             <content>
+                 <![CDATA[
+<div class="card">
+                    <a class="card__row card__row--icon card__row--big">
+                  <div class="card__row--icon__icon"> <span class="icon icon-truck"></span></div>
+                  <div class="card__row--icon__text">
+                    <div class="card__row__title">Free Shipping</div>
+                    on orders over $200</div>
+                  </a> <a class="card__row card__row--icon card__row--big">
+                  <div class="card__row--icon__icon"> <span class="icon icon-clock-arrow"></span></div>
+                  <div class="card__row--icon__text">
+                    <div class="card__row__title">30-day returns</div>
+                    moneyback guarantee</div>
+                  </a> </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Small Banners</title>
+             <identifier>wd_small_banners</identifier>
+             <content>
+                 <![CDATA[
+<div class="row">
+              <div class="col-sm-4 text-center">
+                <div  class="banner banner--image"><a href="#"><img src="{{media url=wysiwyg/welldone/banner-small-04.jpg}}" alt="" /></a></div>
+              </div>
+              <div class="col-sm-4 text-center">
+                <div  class="banner banner--image"><a href="#"><img src="{{media url=wysiwyg/welldone/banner-small-02.jpg}}" alt="" /></a></div>
+              </div>
+              <div class="col-sm-4 text-center">
+                <div  class="banner banner--image"><a href="#"><img src="{{media url=wysiwyg/welldone/banner-small-03.jpg}}" alt="" /></a></div>
+              </div>
+            </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+
+         <block>
+             <title>Welldone Header Topline Right Links</title>
+             <identifier>wd_header_topline_right_links</identifier>
+             <content>
+                 <![CDATA[
+                    <a href="{{store direct_url='welldone_about'}}" class="color-twitter">About</a> / <a href="{{store direct_url='contacts'}}" class="color-twitter">Contact Us</a>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Contact Information</title>
+             <identifier>wd_contact_information</identifier>
+             <content>
+                 <![CDATA[
+<div class="divider divider--lg visible-lg"></div>
+                    <h2 class="text-uppercase">Let’s Start Now!</h2>
+                    <p>In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero.</p>
+                    <p>Main Office: 7563 St. Vincent Place, Glasgow<br/>
+                        Phones: 321321321, 321321321<br/>
+                        Email: <a href="#">info@mydomain.com</a></p>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Contact Map</title>
+             <identifier>wd_contact_map</identifier>
+             <content>
+                 <![CDATA[
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+// When the window has finished loading create our google map below
+google.maps.event.addDomListener(window, 'load', init);
+
+function init() {
+	// Basic options for a simple Google Map
+	// For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+	var mapOptions = {
+		// How zoomed in you want the map to start at (always required)
+		zoom: 11,
+
+		// The latitude and longitude to center the map (always required)
+		center: new google.maps.LatLng(40.6700, -73.9400), // New York
+
+		// How you would like to style the map.
+		// This is where you would paste any style found on Snazzy Maps.
+		styles: [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}]
+	};
+
+	// Get the HTML DOM element that will contain your map
+	// We are using a div with id="map" seen below in the <body>
+	var mapElement = document.getElementById('map');
+
+	// Create the Google Map using our element and options defined above
+	var map = new google.maps.Map(mapElement, mapOptions);
+
+	// Let's also add a marker while we're at it
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(40.6700, -73.9400),
+		map: map,
+		title: 'Snazzy!'
+	});
+}
+</script>
+<section class="content fullwidth top-null bottom-null">
+    <div id="map"></div>
+    <!-- 		   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6115.684863819771!2d-82.9719195443651!3d39.96727545833253!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf3846176f3dff5ed!2sLa+Aurora!5e0!3m2!1sen!2sus!4v1416911994304" class="map"></iframe> -->
+</section>
+
+
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone Contact Parallax</title>
+             <identifier>wd_contact_parallax</identifier>
+             <content>
+                 <![CDATA[
+<section class="content content--parallax content--parallax--high top-null bottom-null" data-image="{{media url=wysiwyg/welldone/parallax-bg-03.jpg}}"></section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Product Right Column Custom Html</title>
+             <identifier>wd_product_right_column_custom_html</identifier>
+             <content>
+                 <![CDATA[
+<h4>CUSTOM HTML BLOCK</h4>
+                        <div class="card">
+                            <div class="card__row"> You can add your content here, like promotions or some additional info </div>
+                            <a href="#" class="card__row card__row--icon">
+                                <div class="card__row--icon__icon"> <span class="icon icon-shop-label"></span></div>
+                                <div class="card__row--icon__text">
+                                    <div class="card__row__title">Special offer: 1+1=3</div>
+                                    Get a gift!</div>
+                            </a> <a href="#" class="card__row card__row--icon">
+                                <div class="card__row--icon__icon"> <span class="icon icon-money"></span></div>
+                                <div class="card__row--icon__text">
+                                    <div class="card__row__title">Free Reward Card</div>
+                                    Worth $10, $50, $100. <br>
+                                </div>
+                            </a> <a href="#" class="card__row card__row--icon">
+                                <div class="card__row--icon__icon"> <span class="icon icon-identification-alt"></span></div>
+                                <div class="card__row--icon__text">
+                                    <div class="card__row__title">Join to our Club</div>
+                                </div>
+                            </a> <a class="card__row card__row--icon">
+                                <div class="card__row--icon__icon"> <span class="icon icon-truck"></span></div>
+                                <div class="card__row--icon__text">
+                                    <div class="card__row__title">Free shipping</div>
+                                </div>
+                            </a>
+                        </div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+         <block>
+             <title>Welldone Woman Static Block</title>
+             <identifier>wd_woman_static_block</identifier>
+             <content>
+                 <![CDATA[
+                    <div class="category-outer">
+                        <div class="category-slider single-slider">
+                            <ul>
+                                <li><img src="{{media url=wysiwyg/welldone/category-img-1.jpg}}" alt="" /></li>
+                                <li><img src="{{media url=wysiwyg/welldone/category-img-2.jpg}}" alt="" /></li>
+                            </ul>
+                        </div>
+                        <div class="category-outer__text">
+                            <h2 class="category-outer__text__title text-uppercase">Women</h2>
+                            <p>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam. Pellentesque a leo. Donec consequat lectus sed felis. Quisque vestibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem.</p>
+                        </div>
+                    </div>
+                    <div class="divider divider--md"></div>
+                    <div class="product-category-carousel mobile-special-arrows slick">
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-06.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">DRESSES</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-07.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">JACKETS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-08.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">SHIRTS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-09.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">COATS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-10.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">SHORTS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-11.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">JEANS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-12.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">SKIRTS</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-13.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">LINGERIE</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-14.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">BEACHWEAR</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-category hover-squared">
+                            <a href="#"><img src="images/category-empty-small.png" data-lazy="{{media url=wysiwyg/welldone/category-img-15.jpg}}" alt="#"></a>
+                            <div class="product-category__hover caption"></div>
+                            <div class="product-category__info">
+                                <div class="product-category__info__ribbon">
+                                    <h5 class="product-category__info__ribbon__title">SHOES</h5>
+                                    <div class="product-category__info__ribbon__count">32 products</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider divider--md"></div>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+
+         <block>
+             <title>Welldone category empty</title>
+             <identifier>wd_category_empty</identifier>
+             <content>
+                 <![CDATA[
+    <section class="content content--fill top-null top-pad-null">
+      <div class="container">
+        <div class="text-center"> <img src="{{media url=wysiwyg/welldone/category-empty-icon.png}}" alt="category empty" class="img-responsive img-center" />
+          <div class="divider divider--sm"></div>
+          <h2 class="text-uppercase">Sorry. This Category is Empty</h2>
+          <h5>You have no items in this category.</h5>
+          <div class="divider divider--sm"></div>
+          <a href="#" class="btn btn--wd">BACK TO PREVIOUS PAGE</a> </div>
+      </div>
+    </section>
+                  ]]>
+             </content>
+             <is_active>1</is_active>
+         </block>
+    </blocks>
+</dresscode>

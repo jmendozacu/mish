@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Nanowebgroup_HybridMobile>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Nanowebgroup_HybridMobile>
+    </modules>
+</config>

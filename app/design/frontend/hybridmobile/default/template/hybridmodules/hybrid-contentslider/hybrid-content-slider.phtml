@@ -1,0 +1,177 @@
+<?php
+/**
+ * Front Page - Slider
+ */
+// Get Slide Contents
+$configData = Mage::getStoreConfig('hybrid_mobile');
+// Enable Touch
+// $enabletouch = $configData['slider_settings']['enabletouch'];
+// Duration
+// $duration = $configData['slider_settings']['duration'] * 1000;
+// Slide One
+$slide_one_image = $configData['slider_settings']['slide_one_image'];
+$slide_one_url = $configData['slider_settings']['slide_one_url'];
+// Slide Two
+$slide_two_image = $configData['slider_settings']['slide_two_image'];
+$slide_two_url = $configData['slider_settings']['slide_two_url'];
+// Slide Three
+$slide_three_image = $configData['slider_settings']['slide_three_image'];
+$slide_three_url = $configData['slider_settings']['slide_three_url'];
+
+$sliderpowerhome = (int)$configData['slider_settings']['enable'];
+$feat_count = $configData['homepage_settings']['feat_count'];
+
+$ratingstars = $configData['catalog_settings']['ratingstars'];
+$_helper = $this->helper('catalog/output');
+?>
+
+<?php if ($sliderpowerhome): ?>
+    <div class="row">
+        <div id="home-slider" class="swiper-container swiper-main-device va-home small-12" data-snap-ignore="true">
+            <div class="swiper-wrapper">
+                <?php if ($slide_one_image): ?>
+                <div class="swiper-slide">
+                    <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK) . $slide_one_url; ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/hybridmobile-slider-images/' . $slide_one_image; ?>" alt="Slider Image" /></a>
+                </div>
+                <?php endif ?>
+                <?php if ($slide_two_image): ?>
+                <div class="swiper-slide">
+                    <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK) . $slide_two_url; ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/hybridmobile-slider-images/' . $slide_two_image; ?>" alt="Slider Image" /></a>
+                </div>
+                <?php endif ?>
+                <?php if ($slide_three_image): ?>
+                <div class="swiper-slide">
+                    <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK) . $slide_three_url; ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/hybridmobile-slider-images/' . $slide_three_image; ?>" alt="Slider Image" /></a>
+                </div>
+                <?php endif ?>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <script>
+    jQuery(function($) {
+        $('#home-slider').swiper({
+            pagination: '.swiper-pagination'
+        });
+    });
+    </script>
+<?php endif ?>
+
+<?php
+    $feat_prod = (int)$configData['homepage_settings']['feat_prod'];
+    $feat_cat = explode(',', Mage::getStoreConfig('hybrid_mobile/homepage_settings/feat_cat', Mage::app()->getStore()));
+?>
+
+<!-- Featured Categories -->
+<div class="row">
+    <div class="page-title category-title" role="banner">
+        <h1 role="heading" aria-level="1">Shop by categories <!-- <a href="#">See All</a> --></h1>
+    </div>
+</div>
+
+<div class="swiper-container" id="sbc">
+    <div class="swiper-wrapper">
+        <?php foreach($feat_cat as $catID): ?>
+            <?php $_category = Mage::getModel('catalog/category')->load($catID) ?>
+            <?php if ($_category->getId()): ?>
+                <?php $catImg = $_category->getThumbnail() ? Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/category/'.$_category->getThumbnail() : 'http://placehold.it/350x150'; ?>
+                <div class="swiper-slide">
+                    <a href="<?php echo $_category->getUrl() ?>" style="background-image:url(<?php echo $catImg ?>)" class="sbc-image"></a>
+                    <h4><?php echo $_category->getName() ?></h4>
+                </div>
+            <?php endif ?>
+        <?php endforeach ?>
+    </div>
+</div>
+<script>
+jQuery('#sbc').swiper({
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+    freeMode: true
+});
+</script>
+
+<!-- <div class="row">
+    <ul class="featured-categories small-12 columns">
+    <?php /* foreach($feat_cat as $catID): ?>
+        <?php $_category = Mage::getModel('catalog/category')->load($catID) ?>
+        <?php if ($_category->getId()): ?>
+            <li class="featured-category">
+                <a href="<?php echo  $_category->getUrl() ?>" style="background-image:url(<?php echo $_category->getImageUrl()?>)">
+                    <h1><?php echo  $_category->getName() ?><i class="fa fa-chevron-right f-right"></i></h1>
+                </a>
+            </li>
+        <?php endif ?>
+    <?php endforeach */ ?>
+    </ul>
+</div> -->
+
+<!-- Featured Products -->
+<!-- <div class="row"> -->
+    <div class="page-title category-title" role="banner">
+        <h1 role="heading" aria-level="1">Featured picks</h1>
+    </div>
+<!-- </div> -->
+<!-- Grid View -->
+<!-- <div class="row"> -->
+    <ul class="category-products-grid">
+        <?php
+        $cookie = Mage::getModel("core/cookie");
+        $iphone = $cookie->get("iphone");
+        $bg_colors = array('s1','s2','s3','s4','s5');
+        $featuredProducts = Mage::getModel('catalog/category')->load($feat_prod)
+                            ->setStoreId(Mage::app()->getStore()->getId())
+                            ->getProductCollection()
+                            ->addAttributeToSelect('*')
+                            ->addAttributeToFilter('visibility', 4)
+                            ->addAttributeToFilter('status', 1);
+        ?>
+        <?php if ($featuredProducts->getSize()): ?>
+            <?php $i=0; foreach($featuredProducts as $_product): ?>
+                <?php if ($i++ == $feat_count) break ?>
+                <?php $name = ucwords(strtolower($_product->getName())) ?>
+                <li class="small-6 columns product grid-block">
+            <div class="grid-block-image">
+                <?php if($iphone == 'true'): ?>
+                    <a class="product-link <?php echo $bg_colors[array_rand($bg_colors)]?>" href="<?php echo  $_product->getProductUrl() . "?ios_title=" . $_product->getName() . '&ios_action=hidemenu' ?>"> 
+                <?php else : ?>   
+                    <a class="a-center product-link <?php echo $bg_colors[array_rand($bg_colors)]?>" href="<?php echo  $_product->getProductUrl() ?>">
+                <?php endif; ?>
+                        <img class="thumb" src="<?php echo  $this->helper('catalog/image')->init($_product, 'small_image')->resize(600); ?>" alt="<?php echo $_product->getName()?>" />
+                    </a>
+             </div> 
+
+            <!-- Price Information -->
+            <div class="info-sec small-12 columns">
+                <?php $name = $_helper->productAttribute($_product, $_product->getName() , 'name'); ?>
+                <h2 class="product-name"><a href="<?php echo  $_product->getProductUrl() . "?ios_title=" . $_product->getName() . '&ios_action=hidemenu' ?>"><?php echo ucwords(strtolower($name))?></a></h2>
+                <div class="prices"><?php echo $this->getPriceHtml($_product, true); ?></div>
+                <?php if($ratingstars == 1): ?>
+                    <?php 
+                        $storeId    = Mage::app()->getStore()->getId();
+                        $summaryData = Mage::getModel('review/review_summary')
+                            ->setStoreId($storeId)
+                            ->load($_product->getId());
+                    ?>
+                    <?php if($summaryData->getRatingSummary()): ?>
+                        <div class="ratings">    
+                            <div class="rating-box" style="float:left;">
+                                <div class="rating" style="width: <?php echo $summaryData->getRatingSummary().'%'; ?>"></div>
+                           </div>
+                           <span class="amount"><a href="#" class="ui-link"><?php echo $summaryData->getReviewsCount() ." Review(s)"; ?></a></span>
+                       </div>
+                    <?php endif; ?> 
+                <?php endif; ?>  
+            </div>
+        </li>
+            <?php endforeach ?>
+        <?php endif ?>
+    </ul>
+<!-- </div> -->
+<!-- <div class="row">
+    <div class="small-12 columns">
+        <div class="call-to-action cta-home">
+       <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('home_page_call_to_action')->toHtml() ?>
+       </div>
+    </div>
+</div>  -->

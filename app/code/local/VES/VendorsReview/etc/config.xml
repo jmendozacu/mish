@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<config>
+    <frontend>
+        <routers>
+            <vendorsreview>
+                <use>standard</use>
+                <args>
+                    <module>VES_VendorsReview</module>
+                    <frontName>vendorsreview</frontName>
+                </args>
+            </vendorsreview>
+            <vendors>
+				<args>
+					<modules>
+						<vendorsreview before="VES_Vendors">VES_VendorsReview_Vendor</vendorsreview>
+					</modules>
+				</args>
+			</vendors>
+			<vendorspage>
+				<args>
+					<modules>
+						<vendorsreview before="VES_VendorsPage">VES_VendorsReview</vendorsreview>
+					</modules>
+				</args>
+			</vendorspage>
+        </routers>
+        <layout>
+            <updates>
+                <vendorsreview>
+                    <file>ves_vendors/review.xml</file>
+                </vendorsreview>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <VES_VendorsReview>
+                    <files>
+                        <default>ves_vendors/review.csv</default>
+                    </files>
+                </VES_VendorsReview>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+       <routers>
+		<adminhtml>
+			<args>
+				<modules>
+					<vendorsreview before="Mage_Adminhtml">VES_VendorsReview_Adminhtml</vendorsreview>
+				</modules>
+			</args>
+		</adminhtml>
+       </routers>
+   	</admin>
+	<adminhtml>
+		<translate>
+            <modules>
+                <VES_VendorsReview>
+                    <files>
+                        <default>ves_vendors/review.csv</default>
+                    </files>
+                </VES_VendorsReview>
+            </modules>
+        </translate>
+	    <menu>
+			<vendors>           
+				<children>
+					<reviews module="vendorsreview" translate="title">
+						<title>Reviews and Ratings</title>
+						<sort_order>100</sort_order>
+						<children>
+							<rating module="vendorsreview" translate="title">
+								<title>Manager Ratings</title>
+								<sort_order>0</sort_order>
+								<action>adminhtml/vendors_rating</action>
+							</rating>
+							<review module="vendorsreview" translate="title">
+								<title>Manager Reviews</title>
+								<sort_order>10</sort_order>
+								<action>adminhtml/vendors_review</action>
+							</review>
+						</children>
+					</reviews>
+				</children>
+			</vendors>
+		</menu>
+	    <acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<vendors>
+							<children>
+								<reviews module="vendorsreview">
+									<title>Reviews and Ratings</title>
+									<sort_order>10</sort_order>
+									<children>
+										<rating module="vendorsreview">
+											<title>Manager Ratings</title>
+											<sort_order>0</sort_order>
+											<action>adminhtml/vendors_rating</action>
+										</rating>
+										<review module="vendorsreview">
+											<title>Manager Reviews</title>
+											<sort_order>10</sort_order>
+											<action>adminhtml/vendors_review</action>
+										</review>
+									</children>
+								</reviews>
+							</children>
+						</vendors>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<vendorsreview>
+					<file>ves_vendors/review.xml</file>
+				</vendorsreview>
+			</updates>
+		</layout>
+	</adminhtml>
+	<vendors>
+    	<menu>
+    		<sales>
+    			<children>
+   			        <all_reviews>
+   			            <title>Reviews and Ratings</title>
+   			            <sort_order>90</sort_order>
+   			            <action>vendors/review/index</action>
+   			        </all_reviews>
+    			</children>
+    		</sales>
+		</menu>
+    </vendors> 
+    <global>
+        <template>
+            <email>
+                <vendors_vendorsreview_email_template translate="label" module="vendorsreview">
+                    <label>Vendor Customer Review Email</label>
+                    <file>ves_vendors/customer_review_new.html</file>
+                    <type>html</type>
+                </vendors_vendorsreview_email_template>
+            </email>
+        </template>
+        
+    	<events>
+			<vendorsreview_review_complete_after>
+			    <observers>
+					<vendorsreview>
+						<type>singleton</type>
+						<class>vendorsreview/observer</class>
+	                    <method>vendorsreview_review_complete_after</method>
+					</vendorsreview>
+				</observers>
+			</vendorsreview_review_complete_after>
+			<sales_order_invoice_save_after>
+			    <observers>
+					<vendorsreview>
+						<type>singleton</type>
+						<class>vendorsreview/observer</class>
+	                    <method>sales_order_invoice_save_after</method>
+					</vendorsreview>
+				</observers>
+			</sales_order_invoice_save_after>
+			<vendor_dashboard_grids_preparelayout>
+				<observers>
+					<vendorsreview>
+						<type>singleton</type>
+						<class>vendorsreview/observer</class>
+	                    <method>vendor_dashboard_grids_preparelayout</method>
+					</vendorsreview>
+				</observers>
+			</vendor_dashboard_grids_preparelayout>
+			
+			<ves_vendorspage_profile_prepare>
+				<observers>
+					<vendorsreview>
+						<type>singleton</type>
+						<class>vendorsreview/observer</class>
+	                    <method>ves_vendorspage_profile_prepare</method>
+					</vendorsreview>
+				</observers>
+			</ves_vendorspage_profile_prepare>
+			
+			<ves_vendor_pricecomparison_prepare_columns>
+				<observers>
+					<vendorsreview>
+						<type>singleton</type>
+						<class>vendorsreview/observer</class>
+	                    <method>ves_vendor_pricecomparison_prepare_columns</method>
+					</vendorsreview>
+				</observers>
+			</ves_vendor_pricecomparison_prepare_columns>
+    	</events>
+
+        <models>
+             <vendorsreview>
+                <class>VES_VendorsReview_Model</class>
+                <resourceModel>vendorsreview_mysql4</resourceModel>
+            </vendorsreview>
+            <vendorsreview_mysql4>
+                <class>VES_VendorsReview_Model_Mysql4</class>
+                <entities>
+                    <review>
+                        <table>ves_vendor_review</table>
+                    </review>
+                    <rating>
+                        <table>ves_vendor_rating</table>
+                    </rating>
+                    <vote>
+                        <table>ves_vendor_vote</table>
+                    </vote>
+                    <link>
+                        <table>ves_vendor_review_link</table>
+                    </link>
+                </entities>
+           	</vendorsreview_mysql4>
+        </models>
+
+        <resources>
+	        <vendorsreview_setup>
+                <setup>
+                    <module>VES_VendorsReview</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </vendorsreview_setup>
+            <vendorsreview_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </vendorsreview_write>
+            <vendorsreview_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </vendorsreview_read>
+	    </resources>
+
+        <blocks>
+            <vendorsreview>
+                <class>VES_VendorsReview_Block</class>
+            </vendorsreview>
+        </blocks>
+        <helpers>
+            <vendorsreview>
+                <class>VES_VendorsReview_Helper</class>
+            </vendorsreview>
+        </helpers>
+    </global>
+    
+    <default>
+    	<vendors>
+    		<vendorsreview>
+    		    <admin_functions>save</admin_functions>
+    		    <send_review_mail>1</send_review_mail>
+    		    <email_template>vendors_vendorsreview_email_template</email_template>
+    		    <email_identity>general</email_identity>
+    		</vendorsreview>
+    	</vendors>
+    </default>
+</config>

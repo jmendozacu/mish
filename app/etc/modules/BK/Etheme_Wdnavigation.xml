@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Etheme_Wdnavigation>
+            <active>true</active>
+            <codePool>local</codePool>
+                    </Etheme_Wdnavigation>
+    </modules>
+</config>

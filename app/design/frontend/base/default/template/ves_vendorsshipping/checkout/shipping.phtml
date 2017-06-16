@@ -1,0 +1,100 @@
+<?php $shippingMethod = $this->getQuote()->getShippingAddress()->getShippingMethod();?>
+<?php if(substr($shippingMethod, 0,16) == 'vendor_multirate'): ?>
+	<?php 
+		$shippingMethod 	= str_replace('vendor_multirate_','',$shippingMethod);
+		$shippingMethods 	= explode(VES_VendorsShipping_Model_Shipping::METHOD_DELEMITER, $shippingMethod);
+	?>
+	<?php foreach($shippingMethods as $method):?>
+		<?php $rate = $this->getQuote()->getShippingAddress()->getShippingRateByCode($method);?>
+		<?php 
+			$methodInfo = explode(VES_VendorsShipping_Model_Shipping::DELEMITER,$method);
+			$vendorId = isset($methodInfo[1])?$methodInfo[1]:0;
+			$vendor = Mage::getModel('vendors/vendor')->load($vendorId);
+		?>
+		<?php if($vendor->getId()):?>
+	    <tr class="vendor-summary-details-1 summary-details<?php echo ' summary-details-first'; ?>" style="display:none;">
+	        <td class="a-right" style="" colspan="<?php echo $this->getColspan(); ?>">
+	            <span style="font-weight: bold;"><?php echo $vendor->getTitle();?></span> (<?php echo $rate->getMethodTitle();?>)
+	            <br />
+	        </td>
+	        <td style="" class="a-right" rowspan="1">
+	            <?php echo $this->helper('checkout')->formatPrice($rate->getPrice()); ?>
+	        </td>
+	    </tr>
+	    <?php endif;?>
+	<?php endforeach;?>
+	
+	<?php if ($this->displayBoth()):?>
+	<tr class="summary-total">
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <div class="summary-collapse"><?php echo $this->getExcludeTaxLabel() ?></div>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+	    </td>
+	</tr>
+	<tr class="summary-total">
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <div class="summary-collapse"><?php echo $this->getIncludeTaxLabel() ?></div>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+	    </td>
+	</tr>
+	<?php elseif($this->displayIncludeTax()) : ?>
+	<tr class="summary-total">
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <div class="summary-collapse"><?php echo $this->getTotal()->getTitle() ?></div>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+	    </td>
+	</tr>
+	<?php else:?>
+	<tr class="summary-total" onclick="expandDetails(this, '.vendor-summary-details-1')">
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	         <div class="summary-collapse"><?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?></div>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+	    </td>
+	</tr>
+	<?php endif;?>
+<?php else:?>
+	<?php if ($this->displayBoth()):?>
+	<tr>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <?php echo $this->getExcludeTaxLabel() ?>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+	    </td>
+	</tr>
+	<tr>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <?php echo $this->getIncludeTaxLabel() ?>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+	    </td>
+	</tr>
+	<?php elseif($this->displayIncludeTax()) : ?>
+	<tr>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <?php echo $this->getTotal()->getTitle() ?>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+	    </td>
+	</tr>
+	<?php else:?>
+	<tr>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+	        <?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>
+	    </td>
+	    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+	        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+	    </td>
+	</tr>
+	<?php endif;?>
+<?php endif;?>

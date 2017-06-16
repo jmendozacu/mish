@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jtech_TierPrices>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jtech_TierPrices>
+    </modules>
+</config>

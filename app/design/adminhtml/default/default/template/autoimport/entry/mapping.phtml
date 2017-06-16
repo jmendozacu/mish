@@ -1,0 +1,65 @@
+<?php
+$_catalogType=Mage::getModel('core/cookie')->get('entry_catalogtype');
+//$this->getFileData();
+?>
+<div id="profile-generator" class="entry-edit profile-generator">
+    <div id="__fieldmapping">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__("Field Mapping") ?></h4>
+    </div>
+    <fieldset>
+    	<input type="hidden" id="profile_entity_type" name="entity_type" value="<?php echo $_catalogType; ?>" />
+        <legend><?php echo $this->__("Field Mapping") ?></legend>
+        <?php foreach (array($_catalogType) as $_entityType): ?>
+            <div class="profile_entity_type_<?php echo $_entityType ?>">
+                <div id="map_template_<?php echo $_entityType ?>" style="display:none">
+                    <span class="field-row">
+                        <?php echo $this->__("In Database:") ?> <select name="gui_data[map][<?php echo $_entityType ?>][db][]">
+                            <?php
+                                $fieldMappingInDatabase = $this->getAttributes($_entityType);
+                                asort($fieldMappingInDatabase);
+                                foreach ($fieldMappingInDatabase as $_value=>$_label): ?>
+                                <option value="<?php echo $_value ?>"><?php echo $_label ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        &lt;--&gt;
+                        <?php echo $this->__("In File:") ?> <!--<input class="input-text" name="gui_data[map][<?php //echo $_entityType ?>][file][]"/>-->
+                        
+                        <select name="gui_data[map][<?php echo $_entityType ?>][file][]">
+                            <?php
+                                $fieldMappingInDatabase = $this->getFileData();
+                                asort($fieldMappingInDatabase);
+                                foreach ($fieldMappingInDatabase as $_label): ?>
+                                <option value="<?php echo $_label ?>"><?php echo $_label ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        
+                        
+                        <?php echo $this->getRemoveMapButtonHtml() ?>
+                    </span>
+                </div>
+                <div id="map_container_<?php echo $_entityType ?>">
+                    <?php foreach ($this->getMappings($_entityType) as $_i=>$_dbField): ?>
+                        <span class="field-row">
+                            <?php echo $this->__("In Database:") ?> <select name="gui_data[map][<?php echo $_entityType ?>][db][]">
+                            <?php foreach ($this->getAttributes($_entityType) as $_value=>$_label): ?>
+                                <option value="<?php echo $_value ?>" <?php echo $this->getSelected('gui_data/map/'.$_entityType.'/db/'.$_i, $_value) ?>><?php echo $_label ?></option>
+                            <?php endforeach ?>
+                            </select>
+                            &lt;--&gt;
+                            <?php echo $this->__("In File:") ?> <input class="input-text" name="gui_data[map][<?php echo $_entityType ?>][file][]" value="<?php echo $this->getValue('gui_data/map/'.$_entityType.'/file/'.$_i) ?>"/>
+                            <?php echo $this->getRemoveMapButtonHtml() ?>
+                        </span>
+                    <?php endforeach ?>
+                </div>
+                
+            </div>
+        <?php endforeach ?>
+        <?php echo $this->getAddMapButtonHtml() ?>
+        
+        
+    </fieldset>
+    
+    </div>
+    
+</div>

@@ -1,0 +1,28 @@
+<div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<div>
+	   <h2><?php echo __("Home Page Slider"); ?></h2>
+	</div>
+
+
+	<div>
+		 <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/saveBanerimages') ?>" method="POST" enctype="multipart/form-data">
+		     <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+		     <b>Select images:</b>
+		      <input type="file" value="" name="fileToUpload" id="fileToUpload"><br>
+		     Image Label:<input type="text" name="imagelabel" id="vl" ><br>
+
+			  Title:<input type="text" name="title"  ><br>
+			  Know More url:<input type="text" name="url" ><br>
+			 <!--  Serial:<input type="text" name="serials" > -->
+			  <br><br><br>
+			  <button submit >update</button>
+		  </form>
+	</div>
+</div>
+
+
+<div>
+
+</div>
+

@@ -1,0 +1,37 @@
+<?php
+/**
+ * Request For Quote template
+ *
+ * @var $this VES_VendorsQuote_Block_Customer_Quote_Items
+ */
+?>
+<?php $_quote = $this->getQuote();?>
+<table style="width: 100%;font-size: 12px;" cellspacing="0" cellpadding="0" border="0">
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <thead style="background: #efefef; text-align: left;">
+        <tr>
+            <th width="80">&nbsp;</th>
+            <th width="250"><?php echo $this->__('Product') ?></th>
+            <th width="150"><?php echo $this->__('SKU') ?></th>
+            <th width="40"><?php echo $this->__('Qty') ?></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="50">
+                <?php if($this->getContinueShoppingUrl()): ?>
+                    <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button2 btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                <?php endif; ?>
+
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+    <?php foreach($_quote->getAllItems() as $_item): ?>
+        <?php echo $this->getItemHtml($_item) ?>
+    <?php endforeach ?>
+    </tbody>
+</table>

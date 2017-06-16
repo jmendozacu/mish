@@ -1,0 +1,109 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<div class="header1">
+<div id="topbar">
+	<div class="container">
+		<div class="pull-left setting">
+			<div class="pull-left">
+				<?php echo $this->getChildHtml('top_currency') ?> 
+			</div>
+			<div class="pull-left language">
+				<div class="dropdown">
+				    <div class="dropdown-toggle" data-toggle="dropdown">
+						<span><?php echo $this->__('Language ') ?></span>&nbsp;<i class="fa fa-caret-down"></i> 
+					</div>
+				    <div class="dropdown-menu" role="menu">
+				        <?php echo $this->getChildHtml('store_language') ?>
+				    </div> 
+				</div>
+			</div>
+		</div>
+		<div class="pull-right">
+			<div class="topLinks">
+			    <div class="dropdown">
+		            <div class="dropdown-toggle hidden-lg hidden-md" data-toggle="dropdown">
+		                <span><?php echo $this->__('Account') ?></span>&nbsp;<i class="fa fa-caret-down"></i>                                                     
+		            </div>
+		            <div class="dropdown-menu">
+		                <?php echo $this->getChildHtml('topLinks') ?>
+		            </div> 
+		         </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="headermainOuter">
+	<div class="container">
+	<div id="header-main">
+		<div class="header-top">
+	    	<div class="row">
+	    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+			            <?php if ($this->getIsHomePage()):?>
+			            <div id="logo-theme" class="logo-store"><strong class="logo-title"><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></div>
+			            <?php else:?>
+			            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong class="logo-title"><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+			            <?php endif?>      
+			    </div>
+			    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
+			    	<div class="ves-autosearch">
+					    <?php echo $this->getChildHtml('autoSearch') ?>
+					</div>
+			    </div>
+	    	 	<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 header-right">
+	    	 		<div class="cart-top pull-left">
+			            <?php echo $this->getChildHtml('venusMinicart'); ?>
+			     	</div>
+				</div>
+	        </div>
+	    </div>
+	  </div>
+	  </div>
+</div>
+<div class="headerbtmOuter"></div>
+<div class="container">
+    <div class="menu-top">
+    	<div class="container">
+	        <div class="row">
+	        	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-sm hidden-sx">
+					<?php echo $this->getChildHtml('verticalMenu') ?>
+				</div>
+
+	        	<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+			        <?php if($topmenu = $this->getChildHtml('topMenu')){ ?>
+						<div id="ves-mainnav">				    
+							<?php echo $topmenu; ?>  
+						</div>
+					<?php } ?>
+				</div>
+	        </div>
+	    </div>
+	</div>
+	</div>
+</div>

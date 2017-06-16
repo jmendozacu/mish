@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+	   		<action method="addItem" module="ves_autosearch" ifconfig="ves_autosearch/ves_autosearch/show"><type>skin_css</type><name>ves_autosearch/style.css</name></action>
+	   		<action method="addJs" module="ves_autosearch" ifconfig="ves_autosearch/ves_autosearch/enable_jquery_ui"><script>ves_autocomplete/noconflict.js</script></action>
+	   		<action method="addJs" module="ves_autosearch" ifconfig="ves_autosearch/ves_autosearch/enable_jquery_ui"><script>ves_autocomplete/ui/jquery-ui-1.8.16.custom.min.js</script></action>
+	   		<action method="addItem" module="ves_autosearch" ifconfig="ves_autosearch/ves_autosearch/enable_jquery_ui"><type>js_css</type><name>ves_autocomplete/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css</name></action>
+	
+	  	</reference>
+		<remove name="topSearch"/>
+        <reference name="header">
+            <block type="ves_autosearch/autosearch" name="top.search" as="topSearch" before="-"/>
+        </reference>
+    </default>
+</layout>

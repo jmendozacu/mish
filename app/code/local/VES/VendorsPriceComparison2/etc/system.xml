@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <vendors translate="label" module="vendors">
+            <groups>                
+                <pricecomparison2 translate="label">
+                    <label>Price Comparison 2</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <new_product_approval>
+                            <label>New Product Approval</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Require new products to be approved before they can be showing in frontend.</tooltip>
+                        </new_product_approval>
+						<product_update_approval>
+                            <label>Product Update Approval</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>When products are updated, they will need to be approved before they can be showing in frontend.</tooltip>
+                        </product_update_approval>
+                        <!-- 
+                        <vendor_filter>
+                            <label>Vendor Filter</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>pricecomparison2/source_vendor_attribute</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>There selected attributes will be used to filter vendors from the price comparison table.</tooltip>
+                        </vendor_filter>
+                         -->
+                        <showing_number>
+                            <label>Number Of Showing Products</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Leave zero or blank to show all products</comment>
+                            <tooltip>In the default, only this number of products in the price comparison table will be displayed</tooltip>
+                        </showing_number>
+                    </fields>
+                </pricecomparison2>
+            </groups>
+            
+        </vendors>
+    </sections>
+</config>

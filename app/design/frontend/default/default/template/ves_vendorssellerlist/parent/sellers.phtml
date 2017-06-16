@@ -1,0 +1,42 @@
+<?php
+$sellers = ($this->isViewAll())?$this->getAllSellers(false):$this->getAllSellers();
+?>
+<div class="ves_sellers_child">
+    <div class="label"><?php echo $this->__('Seller List')?></div>
+    <?php if($sellers->count()):?>
+        <?php if(!$this->isViewAll()):?>
+            <ul class="ves_sellers_child_list">
+                <?php foreach($sellers as $seller):?>
+                    <li class="ves_sellers_child_item">
+                        <a href="<?php echo $this->getSellerUrl($seller)?>">
+                            <img width="94" height="94" src="<?php echo $this->getSellerImageUrl($seller)?>" title="<?php echo $seller->getVendorId()?>" alt="<?php echo $seller->getVendorId()?>" />
+                            <div class="mp_landing_hover">
+                                <span><?php echo $seller->getVendorId() ?></span>
+                            </div>
+                        </a>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+        <?php else:?>
+        <div id="ves_sellers_grid_id"><?php echo $this->getGridHtml()?></div>
+        <?php endif;?>
+        <?php if($this->showViewAllButton() and !$this->isViewAll()):?>
+            <div class="ves_sellers_child_btn"><button class="button btn-cart" type="button" onclick="setLocation('<?php echo $this->getViewAllUrl() ?>')" name="view_all_button" id="ves_sellers_view_all_b"><span><span><?php echo $this->__('View All')?></span></span></button></div>
+        <?php endif;?>
+    <?php endif;?>
+</div>
+
+<script>
+    function pagingAjax(url) {
+        new Ajax.Request(url,{
+            parameters:{async:false},
+            onLoading: function(){
+                $('ves_sellers_grid_id').setStyle({opacity: '0.3'});
+            },
+            onSuccess:function(transport) {
+
+                $('ves_sellers_grid_id').setStyle({opacity: '1'});
+            }
+        });
+    }
+</script>
