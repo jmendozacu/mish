@@ -1,0 +1,33 @@
+.aw_prevnext {
+    padding-bottom: 2px;
+    width: 100%;
+}
+
+.aw_prevnext img {
+    display: inline;
+    height: 50px;
+    width: 50px;
+}
+
+.aw_prevnext a {
+    text-decoration: none;
+}
+
+.awpn_prev, .awpn_up, .awpn_next {
+    text-align: left;
+    width: 33%;
+}
+
+.awpn_up {
+    text-align: center;
+}
+#awpn_up_cat_img IMG {
+    margin: auto;
+}
+
+.awpn_next {
+    text-align: right;
+}
+#awpn_next_product_img {
+    float: right;
+}

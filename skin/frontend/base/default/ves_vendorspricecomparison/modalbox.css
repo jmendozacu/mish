@@ -1,0 +1,310 @@
+/*
+   modalbox.css
+   
+   Modalbox project
+   
+   Created by Andrew Okonetchnikov.
+   Copyright 2006-2010 okonet.ru. All rights reserved.
+   
+   Licensed under MIT license.
+*/
+
+#MB_overlay {
+	position: absolute;
+	margin: auto;
+	top: 0;	left: 0;
+	width: 100%; height: 100%;
+	z-index: 9999;
+	border: 0;
+	background-color: #FFF !important;
+}
+#MB_overlay[id] { position: fixed; }
+
+#MB_windowwrapper {
+	position:absolute;
+	top:0;
+	width:100%;
+}
+
+#MB_window {
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	top:0;
+	left:0;
+	border: 0 solid;
+	text-align: left;
+	z-index: 10000;
+}
+#MB_window[id] { position: relative; }
+
+#MB_frame {
+	position: relative;
+	background-color: #FFFFFF;
+	height: 100%;
+}
+
+#MB_header {
+	margin: 0;
+	padding: 0;
+}
+
+#MB_content {
+	position: relative;
+	padding: 6px .75em;
+	overflow: auto;
+}
+
+#MB_caption {
+	font: bold 100% "Lucida Grande", Arial, sans-serif;
+	text-shadow: #FFF 0 1px 0;
+	padding: .5em 2em .5em .75em;
+	margin: 0;
+	text-align: left;
+}
+
+#MB_close {
+	display: block;
+	position: absolute;
+	right: 5px; top: 4px;
+	padding: 2px 3px;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+}
+#MB_close:hover {
+	background: transparent;
+}
+
+#MB_loading {
+	padding: 1.5em;
+	text-indent: -10000px;
+	background: transparent url(spinner.gif) 50% 0 no-repeat;
+}
+
+/* Color scheme */
+#MB_window {
+	background-color: #EFEFEF;
+	color: #000;
+	
+	-webkit-box-shadow: 0 0 64px #000; 
+	-moz-box-shadow: #000 0 0 64px; 
+	box-shadow: 0 0 64px #000;
+}
+	#MB_frame {
+		padding-bottom: 4px;
+		
+		-webkit-border-bottom-left-radius: 4px;
+		-webkit-border-bottom-right-radius: 4px;
+
+		-moz-border-radius-bottomleft: 4px;
+		-moz-border-radius-bottomright: 4px;
+
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+	
+	#MB_content { border-top: 1px solid #F9F9F9; }
+
+	#MB_header {
+	  background-color: #DDD;
+	  border-bottom: 1px solid #CCC;
+	}
+		#MB_caption { color: #000 }
+		#MB_close { color: #777 }
+		#MB_close:hover { color: #000 }
+
+
+/* Alert message */
+.MB_alert {
+	margin: 10px 0;
+	text-align: center;
+}
+
+.product-vendor-table tr{cursor:pointer;}
+.product-vendor-table tr:hover{background-color:#FDF5DD!important;}
+.product-vendor-table th{height: 30px}
+.search-product {
+    background: #e1e1e1; /* Fallback color for non-css3 browsers */
+    width: 365px;
+
+    /* Gradients */
+    background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(243,243,243)), color-stop(1, rgb(225,225,225)));
+    background: -moz-linear-gradient( center top, rgb(243,243,243) 0%, rgb(225,225,225) 100%);
+
+    /* Rounded Corners */
+    border-radius: 17px;
+    -webkit-border-radius: 17px;
+    -moz-border-radius: 17px;
+
+    /* Shadows */
+    box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.3);
+    float: right;
+    margin-bottom: 10px;
+}
+
+/*** TEXT BOX ***/
+.search-product input[type="text"]{
+    background: #fafafa; /* Fallback color for non-css3 browsers */
+
+    /* Gradients */
+    background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(250,250,250)), color-stop(1, rgb(230,230,230)));
+    background: -moz-linear-gradient( center top, rgb(250,250,250) 0%, rgb(230,230,230) 100%);
+
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid rgba(255,255,255,.8);
+    font-size: 16px;
+    margin: 4px;
+    padding: 5px;
+    width: 250px;
+
+    /* Rounded Corners */
+    border-radius: 17px;
+    -webkit-border-radius: 17px;
+    -moz-border-radius: 17px;
+
+    /* Shadows */
+    box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+    -webkit-box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+    -moz-box-shadow: -1px -1px 2px rgba(0,0,0,.3), 0 0 1px rgba(0,0,0,.2);
+}
+
+/*** USER IS FOCUSED ON TEXT BOX ***/
+.search-product input[type="text"]:focus{
+    outline: none;
+    background: #fff; /* Fallback color for non-css3 browsers */
+
+    /* Gradients */
+    background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(255,255,255)), color-stop(1, rgb(235,235,235)));
+    background: -moz-linear-gradient( center top, rgb(255,255,255) 0%, rgb(235,235,235) 100%);
+}
+
+/*** SEARCH BUTTON ***/
+.search-product input[type="submit"]{
+    background: #44921f;/* Fallback color for non-css3 browsers */
+
+    /* Gradients */
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgb(79,188,32)), color-stop(0.15, rgb(73,157,34)), color-stop(0.88, rgb(62,135,28)), color-stop(1, rgb(49,114,21)));
+    background: -moz-linear-gradient( center top, rgb(79,188,32) 0%, rgb(73,157,34) 15%, rgb(62,135,28) 88%, rgb(49,114,21) 100%);
+
+    border: 0;
+    color: #eee;
+    cursor: pointer;
+    float: right;
+    font: 16px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    height: 30px;
+    margin: 4px 4px 0;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+    width: 84px;
+    outline: none;
+
+    /* Rounded Corners */
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+
+    /* Shadows */
+    box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.4);
+    -moz-box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: -1px -1px 1px rgba(255,255,255,.5), 1px 1px 0 rgba(0,0,0,.4);
+}
+/*** SEARCH BUTTON HOVER ***/
+.search-product input[type="submit"]:hover {
+    background: #4ea923; /* Fallback color for non-css3 browsers */
+
+    /* Gradients */
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgb(89,222,27)), color-stop(0.15, rgb(83,179,38)), color-stop(0.8, rgb(66,143,27)), color-stop(1, rgb(54,120,22)));
+    background: -moz-linear-gradient( center top, rgb(89,222,27) 0%, rgb(83,179,38) 15%, rgb(66,143,27) 80%, rgb(54,120,22) 100%);
+}
+.search-product input[type="submit"]:active {
+    background: #4ea923; /* Fallback color for non-css3 browsers */
+
+    /* Gradients */
+    background: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(89,222,27)), color-stop(0.15, rgb(83,179,38)), color-stop(0.8, rgb(66,143,27)), color-stop(1, rgb(54,120,22)));
+    background: -moz-linear-gradient( center bottom, rgb(89,222,27) 0%, rgb(83,179,38) 15%, rgb(66,143,27) 80%, rgb(54,120,22) 100%);
+}
+.box-top{margin-bottom: 10px;}
+.box-bottom{position: relative}
+#page-list-product-vendor-comparison .page-link{
+    margin: 20px;
+    text-align: right;
+}
+#page-list-product-vendor-comparison .page-link li{display: inline;}
+#page-list-product-vendor-comparison .page-link .page{
+    background: none repeat scroll 0 0 #E9E9E9;
+    border: 1px solid #C0C0C0;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #717171;
+    display: inline-block;
+    font-size: 0.875em;
+    font-weight: bold;
+    margin-right: 4px;
+    padding: 0 9px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+    height: 20px;
+    line-height: 20px;
+}
+
+
+#page-list-product-vendor-comparison .page:hover,#page-list-product-vendor-comparison .page.gradient:hover {
+    background: #fefefe;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+    background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+}
+
+#page-list-product-vendor-comparison .page.active {
+    border: none;
+    background: #616161;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+    color: #f0f0f0;
+    text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+}
+
+.ves_pricecomparison-loading-box{display: block; width: 250px; padding: 10px 0;  position: absolute; top: 25%; left: 50%; margin-left: -125px;text-align: center;z-index: 99999999;   background: none repeat scroll 0 0 #FEFEFE;border: 1px solid #CCCCCC;}
+.ves_pricecomparison-overlay{display: block; width: 100%; height: 100%; position: absolute;top: 0; left: 0; background: #fff;opacity: 0.7;z-index: 99999998;}
+.refesh-product{float: left}
+.refesh-product .refesh-product-button{
+    -moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+    box-shadow:inset 0px 1px 0px 0px #54a3f7;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+    background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+    background-color:#007dc1;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    border:1px solid #124d77;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:arial;
+    font-size:13px;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #154682;
+}
+.refesh-product .refesh-product-button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+    background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+    background-color:#0061a7;
+}
+.refesh-product .refesh-product-button:active {
+    position:relative;
+    top:1px;
+}

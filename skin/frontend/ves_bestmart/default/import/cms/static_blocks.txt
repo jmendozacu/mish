@@ -1,0 +1,463 @@
+----------------------------------------------------------
+Static Block 1
+----------------------------------------------------------
+Block Title:    Footer Links
+Identifier:     footer_links
+Store View:     All
+Status:         enabled
+Content: 
+
+<ul>
+    <li><a href="{{store direct_url="about-magento-demo-store"}}">About Us</a></li>
+    <li><a href="{{store direct_url="customer-service"}}">Customer Service</a></li>
+<li class="last privacy"><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+</ul>
+
+
+----------------------------------------------------------
+Static Block 2
+----------------------------------------------------------
+Block Title:    Footer Links Company
+Identifier:     footer_links_company
+Store View:     All
+Status:         enabled
+Content: 
+
+<div class="links">
+    <div class="block-title">
+        <strong><span>Company</span></strong>
+    </div>
+    <ul>
+        <li><a href="{{store url=""}}about-magento-demo-store/">About Us</a></li>
+        <li><a href="{{store url=""}}contacts/">Contact Us</a></li>
+        <li><a href="{{store url=""}}customer-service/">Customer Service</a></li>
+        <li><a href="{{store url=""}}privacy-policy-cookie-restriction-mode/">Privacy Policy</a></li>
+    </ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 3
+----------------------------------------------------------
+Block Title:    Cookie restriction notice
+Identifier:     cookie_restriction_notice_block
+Store View:     All
+Status:         enabled
+Content: 
+<p>This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.</p>
+
+
+----------------------------------------------------------
+Static Block 4
+----------------------------------------------------------
+Block Title:    Promotion Top
+Identifier:     promotion-top
+Store View:     All
+Status:         enabled
+Content: 
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><b>FREE SHIPPING, EVERY DAY, EVERY ORDER</b><br /> Use Code <b>judeCode | Details</b></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">ROCK THE NIGHT <b>Take 20% OFF</b><br /> Online &amp; In Stores Through <b>10/27 | Shop Now</b></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><b>Free Support (+01) - 123 456 789</b><br /> 24/24 lorem ipsum dolor</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 5
+----------------------------------------------------------
+Block Title:    Social
+Identifier:     social
+Store View:     All
+Status:         enabled
+Content: 
+<div class="social">
+<p class="f-left a-left"><span>SOCIAL</span><br /> NETWORK</p>
+<ul class="f-right">
+<li class="over social-facebook"><a title="Facebook" href="#"> <em class="rhb fa fa-facebook">&nbsp;</em> <span>Facebook</span> </a></li>
+<li class="over social-twitter"><a title="Twitter" href="#"> <em class="rhb fa fa-twitter">&nbsp;</em> <span>Twitter</span> </a></li>
+<li class="over social-google"><a title="Google" href="#"> <em class="rhb fa fa-google-plus">&nbsp;</em> <span>Google+</span> </a></li>
+<li class="over social-pin"><a title="Pinterest" href="#"> <em class="rhb fa fa-pinterest">&nbsp;</em> <span>Pinterest</span></a></li>
+<li class="over social-rss"><a title="Twitter" href="#"> <em class="rhb fa fa-rss">&nbsp;</em> <span>RSS</span> </a></li>
+</ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 6
+----------------------------------------------------------
+Block Title:    Newletter-footer
+Identifier:     newletter-footer
+Store View:     All
+Status:         enabled
+Content: 
+<div id="accordion-newletter" class="block-newletter block">
+<div class="block-title"><strong> <span> Join our mainling list </span> </strong> <a class="panel-title hidden-lg hidden-md hidden-sm" href="#collapseOne-newletter" data-toggle="collapse" data-parent="#accordion-newletter"> <i class="fa fa-chevron-down">&nbsp;</i> </a></div>
+<div id="collapseOne-newletter" class="block-content collapse in">{{block type="newsletter/subscribe" name="left.newsletter" template="newsletter/subscribe-custom.phtml"}}</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 7
+----------------------------------------------------------
+Block Title:    Contact-footer
+Identifier:     contact-footer
+Store View:     All
+Status:         enabled
+Content: 
+<div id="accordion-contact" class="block-contact block">
+<div class="block-title"><strong> <span> Contact info </span> </strong> <a class="panel-title hidden-lg hidden-md" href="#collapseOne-contact" data-toggle="collapse" data-parent="#accordion-contact"> <i class="fa fa-chevron-down">&nbsp;</i> </a></div>
+<div id="collapseOne-contact" class="block-content collapse in">
+<p>Duis sed odio sit amet nibh vulputate a Morbi accumsan ipsum velit.</p>
+<p>123 Sky Tower address name, Los Algeles, USA, Country, 01234</p>
+<p>(000) 123 456 789, <br /> <a href="mailto:contact@company.com">contact@company.com</a></p>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 8
+----------------------------------------------------------
+Block Title:    client logos
+Identifier:     client-logos
+Store View:     All
+Status:         enabled
+Content: 
+<div id="client_logos" class="block">
+<div class="block-title"><strong> <span> Out team </span> </strong></div>
+<div class="block-content">
+<ul>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo1.jpg"}}" /></li>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo2.jpg"}}" /></li>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo3.jpg"}}" /></li>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo4.jpg"}}" /></li>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo5.jpg"}}" /></li>
+<li><img alt="" src="{{media url="wysiwyg/aboutus/logo6.jpg"}}" /></li>
+</ul>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 9
+----------------------------------------------------------
+Block Title:    Indonectetus facilis
+Identifier:     indonectetus-facilis
+Store View:     All
+Status:         enabled
+Content: 
+<div id="skillset" class="block">
+<div class="block-title"><strong> <span> Indonectetus facilis </span> </strong></div>
+<div class="block-content">
+<div class="row">
+<div class="article col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/125x125-1.jpg"}}" /></div>
+<div>
+<h2>Indonectetus facilis</h2>
+<p>Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><a href="#">Read More &raquo;</a></p>
+</div>
+</div>
+<div class="article col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/125x125-2.jpg"}}" /></div>
+<div>
+<h2>Indonectetus facilis</h2>
+<p>Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><a href="#">Read More &raquo;</a></p>
+</div>
+</div>
+<div class="article col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/125x125-3.jpg"}}" /></div>
+<div>
+<h2>Indonectetus facilis</h2>
+<p>Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><a href="#">Read More &raquo;</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 10
+----------------------------------------------------------
+Block Title:    Vivamuslibero Auguer
+Identifier:     vivamuslibero-auguer
+Store View:     All
+Status:         enabled
+Content: 
+<div id="statements" class="block">
+<div class="block-title"><strong> <span> Indonectetus facilis </span> </strong></div>
+<div class="block-content">
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+<h2>Vivamuslibero Auguer</h2>
+<p>Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Et harumd und.</p>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+<h2>Vivamuslibero Auguer</h2>
+<ul class="skillset">
+<li class="clear">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/64x64-1.jpg"}}" /></div>
+<div>
+<p>Indonectetus facilis</p>
+<p>Inteligula congue id elis donec sce sag ittis intes id laoreet aenean.</p>
+</div>
+</li>
+<li class="clear">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/64x64-2.jpg"}}" /></div>
+<div>
+<p>Indonectetus facilis</p>
+<p>Inteligula congue id elis donec sce sag ittis intes id laoreet aenean.</p>
+</div>
+</li>
+<li class="clear">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/aboutus/64x64-3.jpg"}}" /></div>
+<div>
+<p>Indonectetus facilis</p>
+<p>Inteligula congue id elis donec sce sag ittis intes id laoreet aenean.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+<h2>Vivamuslibero Auguer</h2>
+<ul>
+<li>Aliquam venenatis leo et orci.</li>
+<li>Pellentesque eleifend vulputate massa.</li>
+<li>Vivamus eleifend sollicitudin eros.</li>
+<li>Maecenas vitae nunc.</li>
+<li>Ut pretium odio eu nisi.</li>
+<li>Nam condimentum mi id magna.</li>
+<li>Pellentesque consectetuer, felis vel rhoncus.</li>
+<li>Sed sollicitudin bibendum dui.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 11
+----------------------------------------------------------
+Block Title:    Our team
+Identifier:     our-team
+Store View:     All
+Status:         enabled
+Content: 
+<!-- Out team -->
+<div id="team" class="block">
+<div class="block-title"><strong> <span> Out team </span> </strong></div>
+<div class="block-content">
+<div class="row">
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+<div class="image"><img alt="" src="{{media url="wysiwyg/aboutus/team-member1.jpg"}}" /></div>
+<div>
+<p class="team_name">Name Goes Here</p>
+<p class="team_title">Job Title Here</p>
+<p class="team_description">Vestassapede et donec ut est liberos sus et eget sed eget. Quisqueta habitur augue magnisl magna phas ellus sagit titor ant curabi turpis.</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+<div class="image"><img alt="" src="{{media url="wysiwyg/aboutus/team-member2.jpg"}}" /></div>
+<div>
+<p class="team_name">Name Goes Here</p>
+<p class="team_title">Job Title Here</p>
+<p class="team_description">Vestassapede et donec ut est liberos sus et eget sed eget. Quisqueta habitur augue magnisl magna phas ellus sagit titor ant curabi turpis.</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+<div class="image"><img alt="" src="{{media url="wysiwyg/aboutus/team-member3.jpg"}}" /></div>
+<div>
+<p class="team_name">Name Goes Here</p>
+<p class="team_title">Job Title Here</p>
+<p class="team_description">Vestassapede et donec ut est liberos sus et eget sed eget. Quisqueta habitur augue magnisl magna phas ellus sagit titor ant curabi turpis.</p>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+<div class="image"><img alt="" src="{{media url="wysiwyg/aboutus/team-member4.jpg"}}" /></div>
+<div>
+<p class="team_name">Name Goes Here</p>
+<p class="team_title">Job Title Here</p>
+<p class="team_description">Vestassapede et donec ut est liberos sus et eget sed eget. Quisqueta habitur augue magnisl magna phas ellus sagit titor ant curabi turpis.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 12
+----------------------------------------------------------
+Block Title:    About us
+Identifier:     about-us
+Store View:     All
+Status:         enabled
+Content: 
+<div id="about-intro" class="block">
+<div class="block-title"><strong> <span> About us </span> </strong></div>
+<div class="block-content">
+<div class="row">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+<h2>Vivamuslibero Auguer</h2>
+<p>In odio. Mauris feugiat. Nunc posuere, felis sit amet faucibus convallis, tortor enim viverra quam, hendrerit interdum dui quam ut lacus. Ut dui dui, viverra ac, vulputate scelerisque, viverra molestie, tortor. Nullam quis odio id justo accumsan ullamcorper. Mauris lectus enim, luctus vitae, viverra a, pharetra mollis, diam. Donec sed lorem eget nibh sagittis dictum. Curabitur libero. Integer molestie mi sed tellus.</p>
+<p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque. Curabitur sodales semper arcu. Sed ullamcorper arcu eu ante. Vestibulum sed lacus. Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><img alt="" src="{{media url="wysiwyg/aboutus/470x250.jpg"}}" /></div>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 13
+----------------------------------------------------------
+Block Title:    contact-imformation
+Identifier:     contact-imformation
+Store View:     All
+Status:         enabled
+Content: 
+<div class="block">
+<div class="block-title"><strong> <span> Contact impormation </span> </strong></div>
+<div class="block-content">
+<div class="contact-add">
+<h2>Head office</h2>
+<ul class="info">
+<li><span class="fa fa-home">&nbsp;</span>No 1123, Sky Tower, New York, USA</li>
+<li><span class="fa fa-phone">&nbsp;</span>(+91) 0123 456 789</li>
+<li><span class="fa fa-envelope">&nbsp;</span>Email: info@venustheme.com</li>
+</ul>
+</div>
+<div class="contact-add">
+<h2>Branch office</h2>
+<ul class="info">
+<li><span class="fa fa-home">&nbsp;</span>No 1123, Sky Tower, New York, USA</li>
+<li><span class="fa fa-phone">&nbsp;</span>(+91) 0123 456 789</li>
+<li><span class="fa fa-envelope">&nbsp;</span>Email:  info@venustheme.com</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 14
+----------------------------------------------------------
+Block Title:    Topbar Link
+Identifier:     topbar-link
+Store View:     All
+Status:         enabled
+Content: 
+<ul>
+<li><a href="ves-blog">BLOG</a></li>
+<li><a href="https://www.facebook.com/venustheme">FANPAGE</a></li>
+<li><a href="venusfaq">FAQS</a></li>
+<li><a href="#">ORDER TRACKING</a></li>
+</ul>
+
+
+----------------------------------------------------------
+Static Block 15
+----------------------------------------------------------
+Block Title:    Showcase Top
+Identifier:     showcase-top
+Store View:     All
+Status:         enabled
+Content: 
+<div class="row">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="pull-left"><i class="md md-fw">ÃƒÆ’Ã‚Â¯ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°Ãƒâ€šÃ‚Â¥</i></div>
+<div class="a-left">
+<h4>FREE SHIPPING &amp; RETURN</h4>
+<span>On order over $ 399.0</span></div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="pull-left"><i class="md md-fw">ÃƒÆ’Ã‚Â¯ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦Ãƒâ€šÃ‚Â©</i></div>
+<div class="a-left">
+<h4>MEMBER SHIP</h4>
+<span>On order over $ 399.0</span></div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="pull-left"><i class="md md-fw">ÃƒÆ’Ã‚Â¯Ãƒâ€¦Ã‚Â Ãƒâ€šÃ‚Â¶</i></div>
+<div class="a-left">
+<h4>SUPPORT 24/7</h4>
+<span>(+1) - 222 555 000</span></div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 16
+----------------------------------------------------------
+Block Title:    productcarousel3
+Identifier:     productcarousel3
+Store View:     All
+Status:         enabled
+Content: 
+<p>{{block type="ves_productcarousel3/list" after="-" name="productcarousel3.list"/ }}</p>
+
+
+----------------------------------------------------------
+Static Block 17
+----------------------------------------------------------
+Block Title:    banner-detail
+Identifier:     banner-detail
+Store View:     All
+Status:         enabled
+Content: 
+<p><img alt="" src="{{media url="wysiwyg/fashion/banner_detail.jpg"}}" /></p>
+
+
+----------------------------------------------------------
+Static Block 18
+----------------------------------------------------------
+Block Title:    popup-newsletter
+Identifier:     popup-newsletter
+Store View:     All
+Status:         enabled
+Content: 
+{{block type="newsletter/subscribe" template="newsletter/newsletter.phtml"}}
+
+
+----------------------------------------------------------
+Static Block 19
+----------------------------------------------------------
+Block Title:    Social Footer
+Identifier:     social-footer
+Store View:     All
+Status:         enabled
+Content: 
+<div class="social-footer">
+<ul class="a-center">
+<li class="over social-facebook"><a title="Facebook" href="#"> <em class="rhb fa fa-facebook">&nbsp;</em> <span>Facebook</span> </a></li>
+<li class="over social-twitter"><a title="Twitter" href="#"> <em class="fa fa-twitter">&nbsp;</em> <span>Twitter</span> </a></li>
+<li class="over social-google"><a title="Google" href="#"> <em class=" fa fa-google-plus">&nbsp;</em> <span>Google+</span> </a></li>
+<li class="over social-link"><a title="Link" href="#"> <em class="fa fa-linkedin">&nbsp;</em> <span>LinkIn</span></a></li>
+<li class="over social-instag"><a title="Instagram" href="#"> <em class="fa fa-instagram">&nbsp;</em> <span>Instagram</span></a></li>
+<li class="over social-youtube"><a title="Youtube" href="#"> <em class="fa fa-youtube-play">&nbsp;</em> <span>Youtube</span></a></li>
+<li class="over social-pin"><a title="Pinterest" href="#"> <em class="fa fa-pinterest">&nbsp;</em> <span>Pinterest</span></a></li>
+</ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 20
+----------------------------------------------------------
+Block Title:    Call Us
+Identifier:     call-us
+Store View:     All
+Status:         enabled
+Content: 
+<div class="row">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/fashion/icon-call.png"}}" /></div>
+<p>CALL US</p>
+<span style="color: #000000;"><b>+844 0123 456 78</b></span></div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+<div class="pull-left"><img alt="" src="{{media url="wysiwyg/fashion/icon-email.png"}}" /></div>
+<p>EMAIL US</p>
+<span style="color: #000000;">contact@company.com</span></div>
+</div>

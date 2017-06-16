@@ -1,0 +1,6 @@
+.vendor_cp #nav li.livechat {
+    background-image: url("../images/livechat.png");
+    background-position: 5px 14px;
+    background-repeat: no-repeat;
+    padding-left: 15px;
+}

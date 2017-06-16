@@ -1,0 +1,8 @@
+.ves_sellers_child {border: 1px solid #cccccc;display: inline-block;margin-top: 10px;padding: 10px;width: 98%;}
+.ves_sellers_child .label {color: #666666;font-family: "Guardian-EgypTT",Georgia,serif;font-size: 16px;letter-spacing: 0.5px;}
+.ves_sellers_child_item {border: 1px solid #ccc;display: inline-block;margin: 0 11px 7px 0;background: white;}
+.ves_sellers_child_item_g {border: 1px solid #ccc;display: inline-block;margin: 0 11px 11px 0;width:161px;height:112px;background: white;}
+
+.ves_sellers_child_item a {position: relative;}
+.mp_landing_hover {width: 95px;}
+.mp_landing_hover {background: url('../images/sellers_background.png') repeat scroll 0 0 rgba(0, 0, 0, 0);color: #ffffff;display: none;font-weight: bold;height: 53px;left: 0px;opacity: 0.69;padding-top: 43px;position: absolute;text-align: center;text-transform: uppercase;top: -3px;width: 95px;}
