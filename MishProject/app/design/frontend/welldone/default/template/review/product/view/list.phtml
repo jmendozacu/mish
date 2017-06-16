@@ -1,0 +1,98 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <?php if (count($_items)):?>
+        <h3 class="text-uppercase"><?php echo $this->__('Customer Reviews') ?></h3>
+        <?php echo $this->getChildHtml('toolbar') ?>
+        <?php foreach ($_items as $_review):?>
+            <div class="row">
+                <?php if(count($_review->getRatingVotes())):?>
+                <div class="col-sm-5 col-md-4 col-lg-3">
+                    <div class="rating-extended row">
+                        <?php $_votes = $_review->getRatingVotes(); ?>
+                        <?php if (count($_votes)): ?>
+
+                            <?php $i=0;$sum=0;
+                            foreach ($_votes as $_vote): ?>
+                            <?php
+                                $i++;
+                                $sum+=$_vote->getPercent()/20;
+                            ?>
+                            <?php endforeach; ?>
+                            <?php $k=$sum/$i?>
+                            <div class="col-lg-12">
+                                <h1 class="rating-extended__num pull-left"> <?php echo round($k,2)?></h1>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12">
+                                <?php foreach ($_votes as $_vote): ?>
+                                    <?php
+                                        $val=$_vote->getPercent()/20;
+                                        switch($val)
+                                        {
+                                            case 1:$text='one';break;
+                                            case 2:$text='two';break;
+                                            case 3:$text='three';break;
+                                            case 4:$text='four';break;
+                                            default:$text='five';
+                                        }
+                                    ?>
+                                    <div class="progress">
+                                        <span class="rating-extended__label"><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th></span>
+                                        <div class="progress-bar progress-bar-<?php echo $text?>" role="progressbar"  aria-valuenow="20"  aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $_vote->getPercent()*0.7 ?>%"></div>
+                                        <span class="rating-extended__reviews-count"><?php echo $_vote->getPercent()/20 ?></span>
+                                     </div>
+                                    <div class="clearfix"></div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if(count($_review->getRatingVotes())):?>
+                <div class="col-sm-7 col-md-8 col-lg-9">
+                <?php endif; ?>
+                    <div class="review">
+                        <h5 class="review__title"><?php echo $this->escapeHtml($_review->getTitle()) ?></h5>
+                        <div class="review__content"><?php echo nl2br($this->escapeHtml($_review->getDetail())) ?></div>
+                        <div class="review__meta"><?php echo $this->__('Review by <span>%s</span>', $this->escapeHtml($_review->getNickname())) ?> <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></div>
+                    </div>
+                    <div class="divider divider--xs"></div>
+                <?php if(count($_review->getRatingVotes())):?>
+                </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+
+        <div class="clearfix"></div>
+        <a href="#" class="btn btn--wd btn-write-review"><?php echo $this->__('Write a review') ?></a>
+    <?php elseif($this->getParentBlock()): ?>
+        <?php echo $this->getParentBlock()->getReviewsSummaryHtml($this->getProduct(), 'short', true)?>
+    <?php endif;?>
+    <?php echo $this->getChildHtml('review_form') ?>
+</div>

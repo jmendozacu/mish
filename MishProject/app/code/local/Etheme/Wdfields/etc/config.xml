@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Etheme_Wdfields>
+            <version>0.1.0</version>
+        </Etheme_Wdfields>
+    </modules>
+    <global>
+        <models>
+            <Etheme_Wdfields>
+                <class>Etheme_Wdfields_Model</class>
+                <resourceModel>Etheme_Wdfields_resource</resourceModel>
+            </Etheme_Wdfields>
+            <Etheme_Wdfields_resource>
+                <class>Etheme_Wdfields_Model_Resource</class>
+            </Etheme_Wdfields_resource>
+        </models>
+        <blocks>
+            <Etheme_Wdfields>
+                <class>Etheme_Wdfields_Block</class>
+            </Etheme_Wdfields>
+        </blocks>
+        <helpers>
+            <Etheme_Wdfields>
+                <class>Etheme_Wdfields_Helper</class>
+            </Etheme_Wdfields>
+        </helpers>
+        <resources>
+            <Etheme_Wdfields_setup>
+                <setup>
+                    <module>Etheme_Wdfields</module>
+                </setup>
+            </Etheme_Wdfields_setup>
+        </resources>
+    </global>
+</config>

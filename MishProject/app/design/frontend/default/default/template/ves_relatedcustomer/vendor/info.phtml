@@ -1,0 +1,53 @@
+<div class="dashboard">
+    <div class="page-title">
+        <h1><?php echo $this->__('Vendor Dashboard') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div class="box-account box-info">
+        <div class="box-head">
+            <h2><?php echo $this->__('My Store Information') ?></h2>
+        </div>
+        
+        <div class="box">
+        	<?php if($this->hasVendorAccount()):?>
+        		<?php echo $this->getChildHtml('account_info')?>
+        	<?php else:?>
+        		<p><?php echo $this->__('You has not registered to vendor account yet.')?></p>
+        		<?php if($this->vendorCanRegister()):?>
+	        		<p><button class="button" onclick="$('vendor_register_form').show();$('vendor-register-form').show()"><span><span><?php echo $this->__('Create new Store')?></span></span></button>
+	        		<div id="vendor-register-form" style="display: none;">
+		        		<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data">
+		        			
+		        			<?php echo $this->getChildHtml('register_form')?>
+		        			<div class="fieldset">
+								<h2 class="legend"><?php echo $this->__('Your Password') ?></h2>
+								<ul class="form-list">
+									<li class="fields">
+										<div class="field">
+					                        <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+					                        <div class="input-box">
+					                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+					                            <div style="font-size: 10px;"><?php echo $this->__('Please re-type your password.')?></div>
+					                        </div>
+					                    </div>
+									</li>
+								</ul>
+							</div>
+						
+		        			<div class="buttons-set">
+					            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+					            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+					        </div>
+		        			<script type="text/javascript">
+		        			//<![CDATA[
+		        				var dataForm = new VarienForm('form-validate', true);
+		       				 //]]>
+		        			</script>
+		        		</form>
+	        		</div>
+	        	<?php endif;?>
+        	<?php endif;?>
+        </div>
+        
+    </div>
+</div>

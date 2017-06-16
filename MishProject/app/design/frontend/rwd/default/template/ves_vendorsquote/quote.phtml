@@ -1,0 +1,133 @@
+<?php
+/**
+ * Request For Quote template
+ *
+ * @var $this VES_VendorsQuote_Model_Quote
+ */
+?>
+<?php $_priceDisplay = ($this->helper('tax')->displayCartBothPrices()) ? 'display-both-prices' : 'display-single-price'; ?>
+<div class="cart <?php echo $_priceDisplay; ?>">
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Request for Quote') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <?php foreach($this->getQuotes() as $quote):?>
+        <?php if(!$quote->getItemsCount()) continue;?>
+        
+        <div class="quote-vendor-title">
+            <h3><?php echo $quote->getVendor()->getTitle(); ?></h3>
+            <button type="button" title="<?php echo $this->__('Submit Quote Request')?>" class="button submit-quote-btn" onclick="quoteForm<?php echo $quote->getId()?>.submit()">
+                <span><span><?php echo $this->__('Submit Quote Request')?></span></span>
+            </button>
+        </div>
+        <form action="<?php echo $this->getQuoteRequestUrl($quote) ?>" id="shopping-cart-form-<?php echo $quote->getId()?>" method="post">
+            <?php echo $this->getBlockHtml('formkey'); ?>
+            <table id="shopping-cart-table-<?php echo $quote->getId()?>" class="data-table cart-table quote-table">
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <thead>
+                    <tr>
+                        <th><span class="nobr"><?php echo $this->__('Product') ?></span></th>
+        
+                        <th>&nbsp;</th>
+                        
+                        <th><?php echo $this->__('Remarks')?></th>
+                        <th class="a-center cart-price-head">
+                            <span class="nobr"><?php echo $this->__('Price') ?></span>
+                        </th>
+        
+                        <th class="a-center">
+                            <?php echo $this->__('Qty') ?>
+                        </th>
+        
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="50" class="a-right cart-footer-actions">
+                            <?php if($this->getContinueShoppingUrl()): ?>
+                                <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button2 btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                            <?php endif; ?>
+        
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                <?php foreach($quote->getAllItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            
+            <div class="cart-totals-wrapper">
+                <div class="cart-totals">
+                    <div class="client-data box">
+                        <h2><?php echo $this->__('Remarks')?></h2>
+                        <?php echo $this->__('Do you have a general remark with this Quote Request?')?><br>
+                        <textarea class="input-text" rows="5" cols="10" id="customer:client_request" name="customer[client_request]"></textarea>
+                    </div>
+                </div>
+                <div class="cart-totals">
+                    <table id="vquote-address" class="vquote-address">
+                        <tr>
+                            <td colspan="2">
+                                <label><?php echo $this->__('Email Address')?><span class="required"></span><br></label>
+                                <input type="text" class="validate-email required-entry input-text" id="customer:email" name="customer[email]" value="<?php echo $quote->getEmail()?>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><?php echo $this->__('First Name')?><span class="required"></span><br></label>
+                                <input type="text" class="required-entry input-text" id="customer:firstname" name="customer[firstname]" value="<?php echo $quote->getFirstname()?>" />
+                            </td>
+                            <td>
+                                <label><?php echo $this->__('Last Name')?><span class="required"></span><br></label>
+                                <input type="text" class="required-entry input-text" id="customer:lastname" name="customer[lastname]" value="<?php echo $quote->getLastname()?>" />
+                            </td>
+                        </tr>
+                        <?php if($this->showTelephone() || $this->showCompany()):?>
+                        <tr>
+                            <?php if($this->showTelephone()):?>
+                            <td>
+                                <label><?php echo $this->__('Telephone')?><?php if($this->isRequiredField($this->showTelephone())):?><span class="required"></span><?php endif;?><br></label>
+                                <input type="text" class="<?php if($this->isRequiredField($this->showTelephone())):?>required-entry <?php endif;?>input-text" id="customer:telephone" name="customer[telephone]" value="<?php echo $quote->getTelephone()?>" />
+                            </td>
+                            <?php endif;?>
+                            <?php if($this->showCompany()):?>
+                            <td>
+                                <label><?php echo $this->__('Company')?><?php if($this->isRequiredField($this->showCompany())):?><span class="required"></span><?php endif;?><br></label>
+                                <input type="text" class="<?php if($this->isRequiredField($this->showCompany())):?>required-entry <?php endif;?>input-text" id="customer:company" name="customer[company]" value="<?php echo $quote->getCompany()?>" />
+                            </td>
+                            <?php endif;?>
+                        </tr>
+                        <?php endif;?>
+                         <?php if($this->showTaxvat()):?>
+                        <tr>
+                            <td>
+                                <label><?php echo $this->__('VAT/Tax Id')?><?php if($this->isRequiredField($this->showTaxvat())):?><span class="required"></span><?php endif;?><br></label>
+                                <input type="text" class="<?php if($this->isRequiredField($this->showTaxvat())):?>required-entry <?php endif;?>input-text" id="customer:taxvat" name="customer[taxvat]" value="<?php echo $quote->getTaxvat()?>" />
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <?php endif;?>
+                    </table>
+                </div>
+                <button type="button" title="<?php echo $this->__('Submit Quote Request')?>" class="button submit-quote-btn" onclick="quoteForm<?php echo $quote->getId()?>.submit()">
+                    <span><span><?php echo $this->__('Submit Quote Request')?></span></span>
+                </button>
+            </div>
+            <script type="text/javascript">
+                decorateTable('shopping-cart-table-<?php echo $quote->getId()?>');
+                var quoteForm<?php echo $quote->getId()?> = new VarienForm('shopping-cart-form-<?php echo $quote->getId()?>', '');
+            </script>
+        </form>
+        <div style="clear:both;display: block; width: 100%; height: 20px;"></div>
+    <?php endforeach;?>
+</div>

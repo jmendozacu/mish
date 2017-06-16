@@ -1,0 +1,109 @@
+
+<?php
+$id = rand().time();
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$questions = $this->getCollection();
+$show_author_date = $this->getConfig('show_author_date');
+$show_author = $this->getConfig('show_author');
+$show_pager = $this->getConfig('show_pager');
+?>
+
+<!-- Questions -->
+<?php if( !empty($questions) && $questions->getSize() > 0  ){ ?>
+<div id="faq-question-<?php echo $id ?>" class="faq-question-block">
+
+	<?php if($show_pager){ ?>
+	<div class="toolbar product-filter clearfix">
+		<?php echo $this->getPagerHtml() ?>
+	</div>
+	<?php } ?>
+
+	<?php foreach ($questions as $_question) { ?>
+	<?php
+	$default_answer = $processor->filter($_question->getDefaultAnswer());
+	$answers = $_question->getData('answers');
+	$description_question = $processor->filter($_question->getDescription());
+	?>
+	<div class="faq-question question-<?php echo $_question->getQuestionId(); ?> question-row">
+		<div class="faq-question-title">
+			<a data-toggle="collapse" data-parent="#faq-<?php echo $id; ?>"  href="#faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>">
+				<?php echo $_question->getTitle(); ?>
+			</a>
+			<?php if($default_answer == '' && ( $answers && $answers->getSize() > 0 ) == '' && $description_question == ''){ ?>
+			<span class="faq-noanswer"><?php echo $this->__('(Not Answerred)'); ?></span>
+			<?php } ?>
+		</div>
+		<?php if($default_answer != '' || ( $answers && $answers->getSize() > 0 )  || $description_question != ''){ ?>
+		<div id="faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>" class="panel-collapse collapse out">
+			<?php if( $description_question != '' ){ ?>
+			<div class="question-description">
+				<?php echo $description_question; ?>
+			</div>
+			<?php } ?>
+			<?php if(( $answers && $answers->getSize() > 0 ) || $default_answer != ''){ ?>
+			<div class="faq-answers">
+				<?php if( $default_answer != '' ){ ?>
+				<div id="answer-<?php echo $_question->getQuestionId().$id; ?>" class="faq-answer" >
+					<div class="faq-answer-content">
+						<?php echo $default_answer; ?>
+					</div>
+					<?php if( $show_author_date || $show_author){ ?>
+					<div class="faq-question-meta">
+						<?php if( $show_author ){ ?>
+						<?php echo $this->__('Poster by: ').$_question->getAuthorName(); ?>
+						<?php } ?>
+						<?php if( $show_author_date ){ ?>
+						&nbsp;<?php echo 'on'; ?>&nbsp;
+						<?php $_ct= new Zend_Date( $_question->getCreatedAt() ); ?>
+						<span class="day"><?php echo $_ct->toString('dd');?></span>
+						<span class="month"><?php echo $_ct->toString('MMM');?></span>
+						<span class="year"><?php echo $_ct->toString('YYY');?></span>
+						<?php } ?>
+					</div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<?php if( $answers && $answers->getSize()>0 ){ ?>
+				<?php foreach ($answers as $_answers){ $id = rand().time(); ?>
+				<div class="faq-answer" id="answer-<?php echo $_answers->getAnswerId().$id; ?>">
+					<?php $answer_content = $processor->filter($_answers->getAnswerContent()); ?>
+					<?php if( $answer_content != ''){ ?>
+					<div class="faq-answer-content">
+						<?php echo $answer_content; ?>
+					</div>
+					<?php } ?>
+					<?php if( $show_author_date || $show_author){ ?>
+					<div class="faq-question-meta">
+						<?php if( $show_author ){ ?>
+						<?php echo $this->__('Poster by: ').$_answers->getAuthorName(); ?>
+						<?php } ?>
+						<?php if( $show_author_date ){ ?>
+						&nbsp;<?php echo 'on'; ?>&nbsp;
+						<?php $_ct= new Zend_Date( $_answers->getCreatedAt() ); ?>
+						<span class="day"><?php echo $_ct->toString('dd');?></span>
+						<span class="month"><?php echo $_ct->toString('MMM');?></span>
+						<span class="year"><?php echo $_ct->toString('YYY');?></span>
+						<?php } ?>
+					</div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+				<?php } ?>
+			</div>
+			<?php } ?>
+		</div>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<?php if($show_pager){ ?>
+	<div class="toolbar product-filter clearfix">
+		<?php echo $this->getPagerHtml() ?>
+	</div>
+	<?php } ?>
+
+</div>
+<br class="clear clr" style="clear:both;"/>
+<?php } ?>
+<!-- Questions -->

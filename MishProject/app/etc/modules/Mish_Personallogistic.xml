@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mish_Personallogistic>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mish_Personallogistic>
+    </modules>
+</config> 

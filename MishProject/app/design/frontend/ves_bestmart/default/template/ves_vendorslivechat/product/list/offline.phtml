@@ -1,0 +1,99 @@
+<form onsubmit="" action="<?php echo $this->getContactUrl() ?>" method="post" id="ves-contact-chat-live">
+    <div>
+        <ul class="form-list">
+            <li><span><?php echo $this->__("Vendor is offline, but if you leave your message and contact details, we will try to get back to you") ?></span></li>
+            <li class="fields user-name" style="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getId() ? 'display:none'  : 'display:block' ?>">
+                    <label for="ves-livechat-contact-name" class="required"><em>*</em><?php echo $this->__('Name') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="name" id="ves-livechat-contact-name" value="<?php  echo  $this->getCustomerName() ?>" title="<?php echo $this->__('Name') ?>" class="input-text required-entry"/>
+                    </div>
+            </li>
+            <li class="fields user-email" style="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getId() ? 'display:none'  : 'display:block' ?>">
+                    <label for="ves-livechat-contact-email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="email" id="ves-livechat-contact-email" value="<?php  echo  $this->getCustomerEmail() ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry"/>
+                    </div>
+            </li>
+            <li class="fields user-info" style="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getId() ? 'display:block'  : 'display:none' ?>">
+                <div class="header-info">
+                    <?php echo $this->__("Hello there!") ?>
+                    <?php if(!Mage::getSingleton('customer/session')->getCustomer()->getId()):?>
+                        <div class="content-info-right"><a href="javascript:void(0)" onclick="ChatOption.showEditInfoContact()"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/edit_info.gif" ?>"></a></div>
+                    <?php endif ?>
+                </div>
+                <div class="content-info">
+                    <div class="content-info-left">
+                        <div class="left-info"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>"></div>
+                        <div class="right-info">
+                            <p><strong id="ves-livechat-contact-name-text"><?php  echo  $this->getCustomerName() ?></strong></p>
+                            <p id="ves-livechat-contact-email-text" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><?php  echo  $this->getCustomerEmail() ?></p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="content-info-bottom" style="display: none">
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </li>
+            <li class="fields user-message">
+                <label for="contact-question" class="required"><em>*</em><?php echo $this->__('Message') ?></label>
+                <div class="input-box">
+                    <textarea name="question" placeholder="This is the message" id="contact-question" class="input-text required-entry"></textarea>
+                </div>
+            </li>
+        </ul>
+        <input type="hidden" name="vendor_id" value="" id="ves_vendors_livechat_vendor_id_offline" />
+    </div>
+    <div class="button-set">
+        <button class="button ves-livechat-submit-chat" onclick="contactForm.submit()" type="button" title="Submit">
+                    <span>
+                    <span><?php echo $this->__("Submit") ?></span>
+                    </span>
+        </button>
+        <button class="button ves-livechat-submit-another" onclick="ChatOption.showSendAnother()" type="button" title="Submit" style="display: none" >
+                    <span>
+                    <span><?php echo $this->__("Send Another") ?></span>
+                    </span>
+        </button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var contactForm = new VarienForm('ves-contact-chat-live', true);
+    contactForm.submit = function() {
+        var form = contactForm.form;
+        if (contactForm.validator.validate()) {
+            try {
+                loadingBox.show();
+                contactForm.form.request({
+                    method: 'post',
+                    onSuccess: function(transport) {
+                        try {
+                            if (transport.responseText.isJSON()) {
+                                if(!$("ves_vendors_livechat_customer_id").value){
+                                    var email = $("ves-livechat-contact-email").value;
+                                    var name = $("ves-livechat-contact-name").value;
+                                    var message =  $("contact-question").value;
+                                    ChatOption.setCookie(name,email,message);
+                                }
+                                var response = transport.responseText.evalJSON();
+                                if(response.success){
+                                    form.reset();
+                                    ChatOption.hideEditInfoContact(true);
+                                    loadingBox.close();
+                                    alert(response.msg);
+                                }else{
+                                    alert(response.msg);
+                                    loadingBox.close();
+                                }
+                            }
+                        }catch(e){console.log(e);}
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }.bind(contactForm);
+</script>

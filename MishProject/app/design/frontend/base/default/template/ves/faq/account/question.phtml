@@ -1,0 +1,166 @@
+<div class="my-question">
+	<div class="page-title">
+		<h1><?php echo $this->__('My Questions'); ?></h1>
+	</div>
+	<div class="box-account box-question">
+
+
+		<?php if($this->getQuestionsApprove()->getSize()>0){ ?>
+		<div class="box-head">
+			<h2><?php echo $this->__('Approve questions'); ?></h2>
+		</div>
+		<div class="col2-set">
+			<?php $processor = Mage::helper('cms')->getPageTemplateProcessor(); ?>
+			<?php
+			foreach ($this->getQuestionsApprove() as $_question) {
+				$id = rand().time();
+				?>
+				<div class="faq-question question-<?php echo $_question->getQuestionId(); ?> question-row">
+					<div class="faq-question-title">
+						<a data-toggle="collapse" data-parent="#faq-<?php echo $id; ?>" href="#faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>">
+							<?php echo $_question->getTitle(); ?>
+						</a>
+					</div>
+					<div id="faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>" class="panel-collapse collapse out">
+
+						<div class="question-description">
+							<?php $description_question = $processor->filter($_question->getDescription());
+							if($description_question!=''){
+								echo $description_question;
+							}
+							?>
+						</div>
+
+						<?php
+						$product = Mage::getModel('catalog/product')->load($_question->getProductId());
+						?>
+						<?php if($product){ ?>
+						<div class="product-answer">
+							<?php echo $this->__('On Product: ') ?>
+							<a href="<?php echo $product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>"><?php echo $product->getName(); ?></a>
+						</div>
+						<?php } ?>
+
+						<div class="faq-answers">
+							<?php
+							$question_content = $processor->filter($_question->getDefaultAnswer());
+							?>
+							<?php if($question_content!=''){ ?>
+							<div class="faq-answer" id="answer-<?php echo $_question->getQuestionId().$id; ?>">
+								<div class="faq-answer-content">
+									<?php echo $question_content; ?>
+								</div>
+								<div class="answer-date">
+									<?php echo $this->__('Poster by: ').$_question->getAuthorName(); ?>
+									<?php echo 'on '.$_question->getCreatedAt(); ?>
+								</div>
+							</div>
+							<?php } ?>
+
+							<?php $answers = $_question->getData('answers'); ?>
+							<?php if( $answers && $answers->getSize()>0 ){ 
+								$id = rand().time();
+								?>
+								<?php foreach ($answers as $_answers): ?>
+									<div class="faq-answer" id="answer-<?php echo $_answers->getAnswerId().$id; ?>">
+										<div class="faq-answer-content">
+											<?php
+											$answer_content = $processor->filter($_answers->getAnswerContent());
+											echo $answer_content;
+											?>
+										</div>
+										<div class="answer-date">
+											<?php echo $this->__('Poster by: ').$_answers->getAuthorName(); ?>
+											<?php echo 'on '.$_answers->getCreatedAt(); ?>
+										</div>
+									</div>
+								<?php endforeach; ?>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<?php if($this->getQuestionsPendding()->getSize()>0){ ?>
+				<div class="box-account box-question">
+					<div class="box-head">
+						<h2><?php echo $this->__('Pendding questions'); ?></h2>
+					</div>
+					<div class="col2-set">
+						<?php $processor = Mage::helper('cms')->getPageTemplateProcessor(); ?>
+						<?php
+						foreach ($this->getQuestionsPendding() as $_question) {
+							$id = rand().time();
+							?>
+							<div class="faq-question question-<?php echo $_question->getQuestionId(); ?> question-row">
+								<div class="faq-question-title">
+									<a data-toggle="collapse" data-parent="#faq-<?php echo $id; ?>" href="#faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>">
+										<?php echo $_question->getTitle(); ?>
+									</a>
+								</div>
+								<div id="faq-collapseOne<?php echo $_question->getQuestionId().$id; ?>" class="panel-collapse collapse out">
+
+									<div class="question-description">
+										<?php $description_question = $processor->filter($_question->getDescription());
+										if($description_question!=''){
+											echo $description_question;
+										}
+										?>
+									</div>
+
+									<?php
+									$product = Mage::getModel('catalog/product')->load($_question->getProductId());
+									?>
+									<?php if($product){ ?>
+									<div class="product-answer">
+										<?php echo $this->__('On Product: ') ?>
+										<a href="<?php echo $product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>"><?php echo $product->getName(); ?></a>
+									</div>
+									<?php } ?>
+
+									<div class="faq-answers">
+										<?php
+										$question_content = $processor->filter($_question->getDefaultAnswer());
+										?>
+										<?php if($question_content!=''){ ?>
+										<div class="faq-answer" id="answer-<?php echo $_question->getQuestionId().$id; ?>">
+											<div class="faq-answer-content">
+												<?php echo $question_content; ?>
+											</div>
+											<div class="answer-date">
+												<?php echo $this->__('Poster by: ').$_question->getAuthorName(); ?>
+												<?php echo 'on '.$_question->getCreatedAt(); ?>
+											</div>
+										</div>
+										<?php } ?>
+
+										<?php $answers = $_question->getData('answers'); ?>
+										<?php if( $answers && $answers->getSize()>0 ){ 
+											$id = rand().time();
+											?>
+											<?php foreach ($answers as $_answers): ?>
+												<div class="faq-answer" id="answer-<?php echo $_answers->getAnswerId().$id; ?>">
+													<div class="faq-answer-content">
+														<?php
+														$answer_content = $processor->filter($_answers->getAnswerContent());
+														echo $answer_content;
+														?>
+													</div>
+													<div class="answer-date">
+														<?php echo $this->__('Poster by: ').$_answers->getAuthorName(); ?>
+														<?php echo 'on '.$_answers->getCreatedAt(); ?>
+													</div>
+												</div>
+											<?php endforeach; ?>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>

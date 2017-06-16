@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <vendors_logged_in>
+    	<reference name="head">
+       		<action method="addCss"><css>ves_vendors/css/subaccount.css</css></action>                
+		</reference>
+		<reference name="toplinks">
+			<action method="removeLinkByUrl"><url helper="vendors/getAccountUrl"/></action>
+			<block type="vendorssubaccount/vendor_links" name="vendors.subaccount.toplink" />
+			<action method="addLink" translate="label title" module="vendorssubaccount"><label>My Account</label><url helper="vendorssubaccount/getAccountUrl"/><title>My Account</title><prepare/><urlParams/><position>10</position><liParams>class="profile"</liParams></action>
+		</reference>
+	</vendors_logged_in>
+	
+	<vendors_subaccount_account_index>
+		<reference name="content">
+			<block type="vendorssubaccount/vendor_account" name="vendor.sub.accounts" />
+		</reference>
+	</vendors_subaccount_account_index>
+	
+	<vendors_subaccount_account_edit>
+		<reference name="content">
+			<block type="vendorssubaccount/vendor_account_edit" name="vendor.sub.account.edit" />
+		</reference>
+		<reference name="left">
+			<block type="vendorssubaccount/vendor_account_edit_tabs" name="vendor.sub.account.edit.tabs" />
+		</reference>
+	</vendors_subaccount_account_edit>
+	
+	<vendors_subaccount_role_index>
+		<reference name="content">
+			<block type="vendorssubaccount/vendor_role" name="vendor.role" />
+		</reference>
+	</vendors_subaccount_role_index>
+
+	<vendors_subaccount_role_edit>
+		<reference name="content">
+			<block type="vendorssubaccount/vendor_role_edit" name="vendor.role.edit" />
+		</reference>
+		<reference name="left">
+			<block type="vendorssubaccount/vendor_role_edit_tabs" name="vendor.role.edit.tabs" />
+		</reference>
+	</vendors_subaccount_role_edit>
+	
+	<vendors_subaccount_profile_index>
+		<reference name="content">
+			<block type="vendorssubaccount/vendor_profile_edit" name="vendor.sub.account.edit" />
+		</reference>
+		<reference name="left">
+			<block type="vendorssubaccount/vendor_profile_edit_tabs" name="vendor.sub.account.edit.tabs" />
+		</reference>
+	</vendors_subaccount_profile_index>
+	
+</layout>

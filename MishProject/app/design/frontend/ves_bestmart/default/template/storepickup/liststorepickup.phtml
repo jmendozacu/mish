@@ -1,0 +1,859 @@
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.17&key=<?php echo Mage::getModel('storepickup/shipping_storepickup')->getConfigData('gkey'); ?>&sensor=false"></script>
+<script src="//www.google.com/uds/api?file=uds.js&v=1.0" type="text/javascript"></script>
+<?php
+$stores = $this->getAllStores();
+$lat_center = 0;
+$lng_center = 0;
+if(count($stores)){
+	$lat_center = array_sum($stores->getColumnValues('store_latitude')) / count($stores);
+	$lng_center = array_sum($stores->getColumnValues('store_longitude')) / count($stores);
+}
+$searchconfig = $this->getSearchConfiguration();
+$customerAddress = $this->getLatLngCustomer();
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Our Stores') ?></h1>
+</div>
+<div class="search_store">
+    <form method="get" action="<?php echo(Mage::getBaseUrl() . "storepickup/index/index/"); ?>" name="storepickupsearch">
+        <div id="list-storepickup" class="part-left" style="float:left;overflow:hidden;width:100%;">
+            <!-- search by Store Name -->
+            <?php if ($searchconfig['name'] == 1) :
+                ?>
+                <ul class="form-list store-pickup-list-name">
+                    <li>
+                        <label for="name"><b><?php echo $this->__('Store Name') ?></b></label>
+                        <input class="input-text" id="search_name" name="name" type="text" value="<?php echo $this->getRequest()->getParam('name') ?>" style="width:290px" />
+                    </li>
+                </ul>
+            <?php endif ?>
+            <!-- end search Store Name -->
+            <!-- search by Country -->
+            <?php if ($searchconfig['country'] == 1) : ?>
+                <ul class="form-list store-pickup-list">
+                    <li>
+                        <label for="country"><b><?php echo $this->__('Country') ?></b></label>
+                        <select id="search_country" name="country" style="width:295px;">
+                            <option value=""><?php echo $this->__('Select country') ?></option>
+                            <?php
+                            $countries = Mage::helper('storepickup/location')->getOptionCountry();
+
+                            foreach ($countries as $country) {
+                                $selected = '';
+                                if ($country['value'] == $this->getRequest()->getParam('country')) {
+                                    $selected = 'selected';
+                                }
+                                ?>
+                                <option value="<?php echo $country['value']; ?>" <?php echo $selected; ?>><?php echo $country['label']; ?></option>
+                            <?php } ?>	
+                        </select>
+                    </li>
+
+                </ul>
+            <?php endif; ?>
+            <!-- end search by Store Name -->
+            <!-- search by State -->
+            <?php
+            if ($searchconfig['state'] == 1) :
+                ?>	
+                <ul class="form-list store-pickup-list">
+                    <li>
+                        <label for="state"><b><?php echo $this->__('State/Province') ?></b></label>
+                        <input class="input-text" id="search_state" name="state" type="text" value="<?php echo $this->getRequest()->getParam('state') ?>" style="width:290px"/>
+                        <select id="search_state_id" name="search_state_id" style="display:none; width: 295px;">
+                            <option value=""><?php echo $this->__('Please select region, state or province') ?></option>                            
+                        </select>
+                    </li>
+                </ul>
+            <?php endif; ?>
+            <!-- end search by State -->
+            <!-- search by City -->
+            <?php
+            if ($searchconfig['city'] == 1) :
+                ?>
+                <ul class="form-list store-pickup-list-city">
+                    <li>
+                        <label for="state"><b><?php echo $this->__('City') ?></b></label>
+                        <input class="input-text" id="search_city" name="city" type="text" value="<?php echo $this->getRequest()->getParam('city') ?>" style="width:290px" />
+                    </li>
+                </ul>
+            <?php endif; ?>
+            <!-- end search by City -->
+            <!-- search by Zip Code -->
+            <ul class="form-list store-pickup-list-city">
+                <li>
+                    <label for="zipcode"><b><?php echo $this->__('Zip Code') ?></b></label>
+                    <input class="input-text" id="search_zipcode" name="zipcode" type="text" value="<?php echo $this->getRequest()->getParam('zipcode') ?>" style="width:290px" />
+                </li>
+            </ul>
+            <!-- end search by Zip Code -->
+
+        </div>
+    </form>
+    <?php if (($searchconfig['country'] == 1) || ($searchconfig['state'] == 1) || ($searchconfig['city'] == 1) || ($searchconfig['name'] == 1)) {
+        ?>
+        <div class="part-right" style="width: 20%;float: right;">
+            <button onclick="setLocation('<?php echo $this->getUrl('storepickup/index/index') ?>');" class="button" title="reset" style="margin:20px"><span><span><?php echo $this->__('Reset') ?></span></span></button>
+            <button onclick="document.storepickupsearch.submit();" class="button" title="search"><span><span><?php echo $this->__('Search') ?></span></span></button>
+        </div>
+    <?php } ?>
+
+    <div>
+        <ul class="form-list">
+            <li>
+
+                <input type="hidden" name="store_id" id="store_id" value="" />
+
+            </li>
+        </ul>	
+    </div>
+</div>
+<?php if (!count($stores)): ?>
+    <div>
+        <div style="float: left; width: 100% !important;"><p class="note-msg">
+                <?php echo Mage::getStoreConfig('carriers/storepickup/store_not_found_nonce', Mage::app()->getStore()->getStoreId()) ?>    </p></div></div>
+<?php else: ?>
+    <div class="mapInfor">
+        <?php $store_id = $this->getRequest()->getParam('viewstore'); ?>
+
+        <?php if ($store_id): ?>
+            <!-- store view -->
+            <div class="store_info">
+                <?php $storeInfo = $this->getStoreById($store_id); ?>
+                <h1><?php echo $storeInfo->getStoreName() ?></h1>
+                <br/>
+                <table style="border-spacing: 5px;">
+                    <tr>
+                        <td class="label"><?php echo $this->__('Address:'); ?></td>
+                        <td><?php echo $storeInfo->getAddress(); ?> <?php if ($storeInfo->getState()) echo ', ' . $storeInfo->getState(); ?> <?php if ($storeInfo->getCity()) echo ', ' . $storeInfo->getCity(); ?>
+                            <br/>
+                            <?php echo $this->getCountryName($storeInfo->getCountry()); ?> <?php echo $storeInfo->getZipcode(); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Phone:'); ?></td>
+                        <td><?php echo $storeInfo->getStorePhone(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Email:'); ?></td>
+                        <td><?php echo $storeInfo->getStoreEmail(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Phone:'); ?></td>
+                        <td><?php echo $storeInfo->getStorePhone(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Fax:'); ?></td>
+                        <td><?php echo $storeInfo->getStoreFax(); ?></td>
+                    </tr>
+                    <?php if ($storeInfo->getState()): ?>
+                        <tr>
+                            <td class="label"><?php echo $this->__('State/Province:'); ?></td>
+                            <td><?php echo $storeInfo->getState(); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php if ($storeInfo->getDescription()): ?>
+                        <tr>
+                            <td class="label"><?php echo $this->__('Description:'); ?></td>
+                            <td><?php echo $storeInfo->getDescription(); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Working Time:'); ?></td>
+                        <td>
+                            <table>
+                                <?php if (Mage::helper('storepickup')->getTimeFormat() == '12'): ?>
+
+
+                                    <tr>
+                                        <td> <?php echo $this->__('Sun:') ?></td>
+                                        <?php if (($storeInfo->getSundayOpen() != $storeInfo->getSundayClose()) && $storeInfo->getSundayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getSundayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getSundayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Mon:') ?></td>
+                                        <?php if (($storeInfo->getMondayOpen() != $storeInfo->getMondayClose()) && $storeInfo->getMondayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getMondayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getMondayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Tue:') ?></td>
+                                        <?php if (($storeInfo->getTuesdayOpen() != $storeInfo->getTuesdayClose()) && $storeInfo->getTuesdayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getTuesdayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getTuesdayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Wed:') ?></td>
+                                        <?php if (($storeInfo->getWednesdayOpen() != $storeInfo->getWednesdayClose()) && $storeInfo->getWednesdayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getWednesdayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getWednesdayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Thu:') ?></td>
+                                        <?php if (($storeInfo->getThursdayOpen() != $storeInfo->getThursdayClose()) && $storeInfo->getThursdayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getThursdayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getThursdayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Fri:') ?></td>
+                                        <?php if (($storeInfo->getFridayOpen() != $storeInfo->getFridayClose()) && $storeInfo->getFridayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getFridayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getFridayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Sat:') ?></td>
+                                        <?php if (($storeInfo->getSaturdayOpen() != $storeInfo->getSaturdayClose()) && $storeInfo->getSaturdayStatus() == 1): ?>
+                                            <td><?php echo date("g:i A", strtotime($storeInfo->getSaturdayOpen())) . ' - ' . date("g:i A", strtotime($storeInfo->getSaturdayClose())) ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php else: ?>    
+                                    <tr>
+                                        <td> <?php echo $this->__('Sun:') ?></td>
+                                        <?php if (($storeInfo->getSundayOpen() != $storeInfo->getSundayClose()) && $storeInfo->getSundayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getSundayOpen() . $this->__(' - ') . $storeInfo->getSundayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Mon:') ?></td>
+                                        <?php if (($storeInfo->getMondayOpen() != $storeInfo->getMondayClose()) && $storeInfo->getMondayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getMondayOpen() . $this->__(' - ') . $storeInfo->getMondayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Tue:') ?></td>
+                                        <?php if (($storeInfo->getTuesdayOpen() != $storeInfo->getTuesdayClose()) && $storeInfo->getTuesdayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getTuesdayOpen() . $this->__(' - ') . $storeInfo->getTuesdayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Wed:') ?></td>
+                                        <?php if (($storeInfo->getWednesdayOpen() != $storeInfo->getWednesdayClose()) && $storeInfo->getWednesdayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getWednesdayOpen() . $this->__(' - ') . $storeInfo->getWednesdayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Thu:') ?></td>
+                                        <?php if (($storeInfo->getThursdayOpen() != $storeInfo->getThursdayClose()) && $storeInfo->getThursdayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getThursdayOpen() . $this->__(' - ') . $storeInfo->getThursdayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Fri:') ?></td>
+                                        <?php if (($storeInfo->getFridayOpen() != $storeInfo->getFridayClose()) && $storeInfo->getFridayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getFridayOpen() . $this->__(' - ') . $storeInfo->getFridayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <tr>
+                                        <td> <?php echo $this->__('Sat:') ?></td>
+                                        <?php if (($storeInfo->getSaturdayOpen() != $storeInfo->getSaturdayClose()) && $storeInfo->getSaturdayStatus() == 1): ?>
+                                            <td><?php echo $storeInfo->getSaturdayOpen() . $this->__(' - ') . $storeInfo->getSaturdayClose() ?></td>
+                                        <?php else: ?>
+                                            <td><?php echo $this->__('Closed') ?></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endif; ?>
+                            </table> 
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"><?php echo $this->__('Description:'); ?></td>
+                        <td><?php echo $storeInfo->getDescription(); ?></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- end store view -->
+        <?php else: ?>
+            <!-- store pickup list -->
+            <div class="storeList">
+                <div class="store-pickup-list-store-box">
+                    <div class="store-pickup-list-store-title"><?php echo $this->__('Store List'); ?></div>
+                    <div class="store-pickup-list-store" id="store-pickup-list-store">     
+                        <?php foreach ($stores as $store): ?>
+
+                            <?php
+                            $image = Mage::getModel('storepickup/image')->getCollection()
+                                    ->addFieldToFilter('store_id', $store->getId())
+                                    ->addFieldToFilter('statuses', 1);
+
+                            $coordinates['lat'] = $store->getStoreLatitude();
+                            $coordinates['lng'] = $store->getStoreLongitude();
+                            // $_distance = $this->getDistanceCustomer($coordinates);
+                            ?>
+
+                            <div id="store_<?php echo $store->getId() ?>" class="store-pickup-list-store-item" onclick="javascript:calculateDistances(<?php echo $coordinates['lat']; ?>, <?php echo $coordinates['lng'] ?>, '<?php echo Mage::helper('storepickup')->jsQuoteEscape($store->getStoreName()) ?><br/><?php echo str_replace("\n", "", str_replace("\r", "", Mage::helper('storepickup')->jsQuoteEscape($store->getFormatedAddressforMap()))); ?> <?php if ($customerAddress) echo $this->__('Distance: '); ?>')">
+                                <div id="store_info">
+                                    <div class="store-pickup-item-name"><?php echo $store->getStoreName() ?><br></div>
+                                    <div><?php echo $store->getAddress(); ?><br></div>
+                                    <div><?php echo $store->getCity(); ?><br></div>
+                                    <div><?php echo $store->getState(); ?><br></div>
+                                    <div><?php echo $this->getCountryName($store->getCountry()); ?> &nbsp; &nbsp;<?php echo $store->getZipcode(); ?><br></div>                        
+                                    <div> <a style="float:left" href="<?php echo Mage::helper('storepickup/url')->getStoreViewUrl($store->getUrlIdPath(), $store->getId()); ?>"><?php echo $this->__('View Details'); ?></a><a target="_blank" style="float:right" href=""><i></i></a></div>
+                                </div>
+                                <div class="store_image">
+                                    <?php if (count($image)): ?>
+                                        <?php $folderName = $image->getData() ?>
+                                        <?php $link = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'storepickup/image/' . $store->getId() . '/' . $folderName[0]['options']; ?>  
+                                        <img src="<?php echo $link . '/' . $folderName[0]['name'] ?>" width="100" height="130"/>
+                                    <?php endif; ?>
+                                </div>
+                            </div> 
+
+                            <div id="store_information_<?php echo $store->getId() ?>" style="display:none" class="tooltip">                       
+                                <table>
+                                    <tr>
+                                        <td colspan=""> <strong><?php echo $this->__('Working Time'); ?></strong></td>                                    
+                                    </tr>   
+                                    <?php if (Mage::helper('storepickup')->getTimeFormat() == '12'): ?>
+
+                                        <tr>
+                                            <td> <?php echo $this->__('Sunday') ?></td>
+                                            <?php if (($store->getSundayOpen() != $store->getSundayClose()) && $store->getSundayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getSundayOpen())) . ' - ' . date("g:i A", strtotime($store->getSundayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Monday') ?>                                    
+                                            </td>
+                                            <?php if (($store->getMondayOpen() != $store->getMondayClose()) && $store->getMondayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getMondayOpen())) . ' - ' . date("g:i A", strtotime($store->getMondayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Tuesday') ?></td>
+                                            <?php if (($store->getTuesdayOpen() != $store->getTuesdayClose()) && $store->getTuesdayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getTuesdayOpen())) . ' - ' . date("g:i A", strtotime($store->getTuesdayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Wednesday') ?></td>
+                                            <?php if (($store->getWednesdayOpen() != $store->getWednesdayClose()) && $store->getWebnesdayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getWednesdayOpen())) . ' - ' . date("g:i A", strtotime($store->getWednesdayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Thursday') ?></td>
+                                            <?php if (($store->getThursdayOpen() != $store->getThursdayClose()) && $store->getThursdayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getThursdayOpen())) . ' - ' . date("g:i A", strtotime($store->getThursdayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Friday') ?></td>
+                                            <?php if (($store->getFridayOpen() != $store->getFridayClose()) && $store->getFridayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getFridayOpen())) . ' - ' . date("g:i A", strtotime($store->getFridayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Saturday') ?></td>
+                                            <?php if (($store->getSaturdayOpen() != $store->getSaturdayClose()) && $store->getSaturdayStatus() == 1): ?>
+                                                <td><?php echo date("g:i A", strtotime($store->getSaturdayOpen())) . ' - ' . date("g:i A", strtotime($store->getSaturdayClose())) ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                    <?php else: ?>    
+                                        <tr>
+                                            <td> <?php echo $this->__('Sunday') ?></td>   
+                                            <?php if (($store->getSundayOpen() != $store->getSundayClose()) && $store->getSundayStatus() == 1): ?>
+                                                <td><?php echo $store->getSundayOpen() . $this->__(' - ') . $store->getSundayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Monday') ?>  
+                                                <?php if (($store->getMondayOpen() != $store->getMondayClose()) && $store->getMondayStatus() == 1): ?>
+                                                <td><?php echo $store->getMondayOpen() . $this->__(' - ') . $store->getMondayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Tuesday') ?></td>
+                                            <?php if (($store->getTuesdayOpen() != $store->getTuesdayClose()) && $store->getTuesdayStatus() == 1): ?>
+                                                <td><?php echo $store->getTuesdayOpen() . $this->__(' - ') . $store->getTuesdayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Wednesday') ?></td>
+                                            <?php if (($store->getWednesdayOpen() != $store->getWednesdayClose()) && $store->getWednesdayStatus() == 1): ?>
+                                                <td><?php echo $store->getWednesdayOpen() . $this->__(' - ') . $store->getWednesdayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Thursday') ?></td>
+                                            <?php if (($store->getThursdayOpen() != $store->getThursdayClose()) && $store->getThursdayStatus() == 1): ?>
+                                                <td><?php echo $store->getThursdayOpen() . $this->__(' - ') . $store->getThursdayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr>
+                                            <td> <?php echo $this->__('Friday') ?></td>
+                                            <?php if (($store->getFridayOpen() != $store->getFridayClose()) && $store->getFridayStatus() == 1): ?>
+                                                <td><?php echo $store->getFridayOpen() . $this->__(' - ') . $store->getFridayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <tr> 
+                                            <td> <?php echo $this->__('Saturday') ?></td>
+                                            <?php if (($store->getSaturdayOpen() != $store->getSaturdayClose()) && $store->getSaturdayStatus() == 1): ?>
+                                                <td><?php echo $store->getSaturdayOpen() . $this->__(' - ') . $store->getSaturdayClose() ?></td>
+                                            <?php else: ?>
+                                                <td><?php echo $this->__('Closed') ?></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                    <?php endif; ?>
+                                </table>  
+
+                            </div>
+                            <script type="text/javascript">
+                                        var store_<?php echo $store->getId() ?> = new Tooltip('store_<?php echo $store->getId() ?>', 'store_information_<?php echo $store->getId() ?>');</script>
+                        <?php endforeach; ?>
+                    </div>
+                </div>         
+            </div> 
+            <!-- end store pickup list -->
+        <?php endif; ?>
+
+        <div id="map" style="width:582px; height:450px; overflow:hidden; float:left; border: 1px solid #ccc;"></div>
+
+    </div>
+<?php endif; ?>
+
+<!-- contact form -->
+<?php
+if ($this->getRequest()->getParam('viewstore') != null):
+    $display = '';
+else:
+    $display = 'display:none';
+    ?>
+    <?php echo $this->getPagerHtml(); ?>
+<?php endif; ?>
+<?php if (isset($storeInfo)): ?>
+    <div class ="pickup_imco"  style ="<?php echo $display ?>">
+
+        <div class="list_image">
+            <?php
+            $main_image = Mage::getModel('storepickup/image')->getCollection()
+                            ->addFieldToFilter('store_id', $storeInfo->getId())->addFieldToFilter('statuses', 1)->getFirstItem();
+            if (!$main_image->getId()) {
+                $main_image = Mage::getModel('storepickup/image')->getCollection()
+                                ->addFieldToFilter('store_id', $storeInfo->getId())->getFirstItem();
+            }
+            ?>
+
+            <?php if ($main_image->getId()): ?>
+                <span style="color: #DE5400; display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;"><?php echo $this->__('Images of %s', $storeInfo->getStoreName()) ?></span>  
+                <?php $folder_name = $main_image->getData() ?>
+                <?php $_link = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'storepickup/image/' . $storeInfo->getId() . '/' . $folder_name['options']; ?>  
+
+                <div class="main_image">
+                    <img id="big_image" src="<?php echo $_link . '/' . $folder_name['name'] ?>" width="305" height="250"/>            
+                </div>
+				 <?php
+                    $tb_images = Mage::getModel('storepickup/image')->getCollection()
+                                    ->addFieldToFilter('store_id', $storeInfo->getId())->addFieldToFilter('statuses', 0);
+                    ?>
+				<?php if(count($tb_images)):?>
+                <h2 style="border-bottom:1px solid #CCCCCC; font-size:11px; font-weight:bold; margin:10px 5px 0 0; text-transform: uppercase"><?php echo $this->__('More Views') ?></h2>
+                <div class="thumbnail_image">
+                   
+                    <?php $c = 0; ?>
+                    <?php foreach ($tb_images as $tb_image): ?>          
+                        <?php $tb_folder_name = $tb_image->getData() ?>
+                        <?php $tb_link = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'storepickup/image/' . $storeInfo->getId() . '/' . $tb_image->getOptions(); ?>
+                        <img onclick="changeImage(this)" style="float:left; margin: 10px 10px 0 0;" src="<?php echo $tb_link . '/' . $tb_folder_name['name'] ?>" width="50" height="50"/>     
+                        <?php $c++; ?> 
+                    <?php endforeach; ?>
+                </div>
+				<?php endif; ?>
+            <?php endif; ?>
+            <br/>
+        </div>
+        <?php
+        $area_width = 495; // use for content width in Form 
+        $area_height = 157;  // use for content height in Form        
+        ?>
+		<?php $urlimage = Mage::helper('storepickup')->getImageUrl($storeInfo->getId()); ?>
+        <?php if (count($urlimage)): ?>
+            <div class ="pickup_image" id="pickup_image">
+                <div class="pickup-main-outer">
+                    <p class ="pickup-image-main">
+                        <?php $image_big = Mage::helper('storepickup')->getImageUrlBig($storeInfo->getId()); ?>
+                        <a title="" onclick="popWin('<?php echo $image_big; ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');
+                                            return false;" href="#">
+                            <img id="image" src="<?php echo $image_big ?>" width="350px" hieght="253px">
+                        </a>
+
+                    </p>
+                    <div class="more-views">
+                        <h2>More Views</h2>
+                        <ul>
+                            <?php foreach ($urlimage as $item): ?>
+                                <li>
+                                    <a class="pickup-image-small" title="" onclick="popWin('<?php echo $item; ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');
+                                                        return false;" href="#">
+                                        <img width="56" height="56" alt="" src="<?php echo $item; ?>">
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>        
+            </div>   
+            <div class = "pickup_contact" style="width:500px; float:right">
+                <?php
+            else: $area_width = 560;
+                $area_height = 112;
+                ?>
+                <div class = "pickup_contact" style="width:auto; float:none">
+                <?php endif; ?>
+                <h3><?php echo $this->__('Contact Store') ?></h3>
+                <form id="review-form" method="post" action="<?php echo $this->getUrl('*/*/savecontact', array('id' => $storeInfo->getId())); ?>">
+                    <fieldset>
+                        <ul class="form-list">
+                            <li>
+                                <label class="required" for="name_field">
+                                    <em>*</em>
+                                    <?php echo $this->__('Name') ?>			
+                                </label>
+                                <div class="input-box">
+                                    <input id="name_field" class="input-text required-entry" type="text" value="<?php echo $this->getFormData('name') ?>" name="name">
+                                </div>
+                            </li>
+                            <li>
+                                <label class="required" for="email_field">
+                                    <em>*</em>
+                                    <?php echo $this->__('Email') ?>			
+                                </label>
+                                <div class="input-box">
+                                    <input id="email_field" class="input-text required-entry" type="text" value="<?php echo $this->getFormData('email') ?>" name="email">
+                                </div>
+                            </li>
+                            <li>
+                                <label class="required" for="message_field">
+                                    <em>*</em>
+                                    <?php echo $this->__('Message') ?>			
+                                </label>
+                                <div class="input-box">
+                                    <textarea id="message_field" class="required-entry" rows="3" cols="5" name="message"style="width: <?php echo $area_width; ?>px; height: <?php echo $area_height ?>px;"><?php echo $this->getFormData('message') ?></textarea>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="field">
+                                    <label class="required" for="pickup-captcha"><em>*</em><?php echo $this->__('Verification'); ?></label>
+                                    <div class="input-box">
+                                        <img src="<?php echo $this->getUrl('*/*/imagecaptcha', array('id' => $storeInfo->getId())); ?>" id="pickup_captcha_image" />
+                                        <span id="pickup-please-wait-captcha" style="display:none;" class="opc-please-wait">
+                                            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Getting new captcha') ?>...
+                                        </span>
+                                        <a href="javascript:void(0);" onclick="refreshCaptchaImage();
+                                                            return false;" id="pickup-captcha-link"><?php echo $this->__("Refresh"); ?></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="field">
+                                    <div class="input-box">
+                                        <input id="pickup-captcha" class="input-text required-entry" type="text" title="<?php echo $this->__('Captcha code') ?>" name="captcha" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <div class="buttons-set button-pickup">
+                        <button class="button b-pickup" title="Submit" type="button" onclick="submitfeedback()">                      
+                            <span>   <span>                      
+                                    <canvas style="width: 0px; height: 5px; top: -2px;"></canvas>
+                                    <cufontext><?php echo $this->__('Submit') ?></cufontext>
+                                    </cufon>                        
+                                </span>     </span>                  
+                        </button>
+                    </div>
+                </form>       
+            </div>   
+
+        </div>
+    </div>
+<?php endif; ?>
+<!-- end contact form -->
+
+<script type="text/javascript">
+            function submitfeedback() {
+            var validator = new Validation('review-form');
+                    if (validator.validate()) {
+            $('review-form').submit();
+            }
+            }
+    //<![CDATA[
+    Event.observe(window, 'load', function() {
+    if ($('search_state_id'))
+            $('search_state_id').setValue(<?php echo $this->getRequest()->getParam('search_state_id') ?>);
+    });
+            var myLatlng = new google.maps.LatLng( - 34.397, 150.644);
+            var myOptions = {
+            zoom: 8,
+                    center: myLatlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+            var bounds = new google.maps.LatLngBounds();
+<?php
+foreach ($stores as $store) {
+
+    $coordinates['lat'] = $store->getStoreLatitude();
+    $coordinates['lng'] = $store->getStoreLongitude();
+    if ($coordinates['lat'] == '0.000' && $coordinates['lat'] == '0.000')
+        $coordinates = $this->getCoordinates($store);
+    // $distance = $this->getDistanceCustomer($coordinates);
+//$address = $store->getFormatedAddress();	
+    $address = $store->getFormatedAddressforMap();
+    ?>
+        var pinImage = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|<?php echo $store->getPinColor(); ?>';
+                var setLat = <?php echo $coordinates['lat'] ?>;
+                var setLon = <?php echo $coordinates['lng'] ?>;
+                var storeId = <?php echo $store->getId(); ?>;
+                var store_info = '<?php echo Mage::helper('storepickup')->jsQuoteEscape($store->getStoreName()) ?><br/><?php echo str_replace("\n", "", str_replace("\r", "", Mage::helper('storepickup')->jsQuoteEscape($address))); ?> <?php if ($customerAddress) echo $this->__('Distance: '); ?>';
+                            var marker_point = new google.maps.LatLng(setLat, setLon);
+                            bounds.extend(marker_point);
+                            var infoWindow = new google.maps.InfoWindow();
+                            placeMarker(setLat, setLon, store_info, storeId, pinImage);
+<?php } ?>
+                var marker_point = new google.maps.LatLng(<?php echo $lat_center ?>, <?php echo $lng_center ?>);
+                        // fix zoom max (06-02-2013)
+<?php if (count($stores) == 1) { ?>
+                    map.setZoom(<?php echo $this->getDefaultZoom(); ?>);
+                            map.setCenter(marker_point);
+<?php } else { ?>
+                    map.setZoom(2);
+                            map.setCenter(marker_point);
+<?php } ?>
+                //end fix
+
+                function placeMarker(setLat, setLon, store_info, storeId, pinImage) {
+                var message = "geotagged geo:lat=" + setLat + " geo:lon=" + setLon + " ";
+                        var messageRoboGEO = setLat + ";" + setLon + "";
+                        var point = new google.maps.LatLng(setLat, setLon);
+                        var marker = new google.maps.Marker({
+                        position: point,
+                                map: map,
+                                icon: pinImage
+                        });
+                        google.maps.event.addListener(marker, 'click', function(event) {
+                        calculateDistances(setLat, setLon, store_info)
+
+                        });
+                }
+
+                function changestorebyMap()
+                {
+                if ($('shipping_date'))
+                        $('shipping_date').value = '';
+                        var storeId;
+                        storeId = $('store_id').value;
+                        var url = '<?php echo $this->getUrl('storepickup/index/changestore'); ?>';
+                        url = url + 'store_id/' + storeId;
+                        var request = new Ajax.Request(checkHttps(url), {method: 'get', onFailure: ""});
+                        if ($('storepickup-box') != null)
+                        $('storepickup-box').style.display = 'block';
+                        if ($('date-box') != null)
+                        $('date-box').style.display = 'block';
+                        if ($('time-box') != null)
+                        $('time-box').style.display = 'block';
+                        //end all store mode
+                        if ($('curr-store') != null)
+                {
+                var curr_store_id = $('curr-store').value;
+                        if ($('store-info-' + curr_store_id) != null)
+                {
+                $('store-info-' + curr_store_id).style.display = 'none';
+                }
+
+                if ($('store-info-' + storeId) != null)
+                {
+                $('store-info-' + storeId).style.display = 'block';
+                        $('curr-store').value = storeId;
+                }
+                }
+                }
+                //]]>
+</script> 
+
+
+<div>&nbsp;</div>
+
+<script type="text/javascript">
+    if ($('search_state')) {
+    var countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?>;
+            var search_country = null;
+            if ($('search_country'))
+            search_country = 'search_country';
+            var search_state = null;
+            if ($('search_state'))
+            search_state = 'search_state';
+            var search_state_id = null;
+            if ($('search_state_id'))
+            search_state_id = 'search_state_id';
+            var storepickupRegionUpdater = new RegionUpdater(search_country, search_state, search_state_id, countryRegions);
+    }
+</script>
+
+
+<script type="text/javascript">
+    //<![CDATA[   
+    function viewStore(id, store_info, lat, lng) {
+    var marker_point = new google.maps.LatLng(lat, lng);
+            map.setCenter(marker_point);
+            map.setZoom(<?php echo $this->getDefaultZoom(); ?>);
+            infoWindow.setContent('<div style="width:200px">' + store_info + '</div>');
+            infoWindow.setPosition(marker_point);
+            infoWindow.open(map);
+    }
+
+    function changeImage(element) {
+    var url_big_image = $('big_image').src;
+            $('big_image').src = element.src;
+            element.src = url_big_image;
+    }
+    //]]>
+</script>   
+
+
+
+<script type="text/javascript">
+    //<![CDATA[   
+    var map;
+            var geocoder;
+            var bounds = new google.maps.LatLngBounds();
+            var markersArray = [];
+//var origin1 = new google.maps.LatLng(55.930, -3.118);
+<?php if ($customerAddress): ?>
+        var origin = new google.maps.LatLng(<?php echo $customerAddress['lat'] ?>, <?php echo $customerAddress['lng'] ?>);
+<?php endif; ?>
+
+
+
+    function calculateDistances(lat, lng, store_info) {
+<?php if (!$customerAddress): ?>
+        var marker_point = new google.maps.LatLng(lat, lng);
+                map.setCenter(marker_point);
+                map.setZoom(<?php echo $this->getDefaultZoom(); ?>);
+                infoWindow.setContent('<div style="width:200px">' + store_info + '</div>');
+                infoWindow.setPosition(marker_point);
+                infoWindow.open(map);
+                return;
+<?php endif; ?>
+    var destination = new google.maps.LatLng(lat, lng);
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+            {
+            origins: [origin],
+                    destinations: [destination],
+                    travelMode: google.maps.TravelMode.DRIVING,
+<?php if (Mage::getStoreConfig('carriers/storepickup/unit_measurement', Mage::app()->getStore()->getStoreId()) == 'metric'): ?>
+                unitSystem: google.maps.UnitSystem.METRIC,
+<?php else: ?>
+                unitSystem: google.maps.UnitSystem.IMPERIAL,
+<?php endif; ?>
+            avoidHighways: false,
+                    avoidTolls: false
+            }, function callback(response, status) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {
+           // alert('Error was: ' + status);
+            } else {
+            var origins = response.originAddresses;
+                    var destinations = response.destinationAddresses;
+                    var results = response.rows[0].elements;
+                    if (results[0].status == 'OK'){
+                        var marker_point = new google.maps.LatLng(lat, lng);
+                                map.setCenter(marker_point);
+                                map.setZoom(<?php echo $this->getDefaultZoom(); ?>);
+                                infoWindow.setContent('<div style="width:200px">' + store_info + results[0].distance.text + '</div>');
+                                infoWindow.setPosition(marker_point);
+                                infoWindow.open(map);
+                    }else{
+                        var marker_point = new google.maps.LatLng(lat, lng);
+                                map.setCenter(marker_point);
+                                map.setZoom(<?php echo $this->getDefaultZoom(); ?>);
+                                infoWindow.setContent('<div style="width:200px">' + store_info + '</div>');
+                                infoWindow.setPosition(marker_point);
+                                infoWindow.open(map);
+                    }
+
+            }
+            });
+    }
+	var dataForm = new VarienForm('review-form');
+    function refreshCaptchaImage(){
+		url = '<?php echo $this->getUrl('*/*/refreshcaptcha',array('id'=>$store->getId())) ?>';
+		$('pickup_captcha_image').hide();
+		$('pickup-captcha-link').hide();
+		$('pickup-please-wait-captcha').show();
+		refreshCaptcha = new Ajax.Request(checkHttps(url),{
+			method: 'get',
+			onSuccess: function(transport){
+				imageCapcha = new Image();
+				imageCapcha.src = transport.responseText;
+				$('pickup_captcha_image').src = imageCapcha.src;
+				$('pickup-please-wait-captcha').hide();
+				$('pickup_captcha_image').show();
+				$('pickup-captcha-link').show();
+			},
+			onException: function (xhr, e){
+                                $('pickup-please-wait-captcha').hide();
+				$('pickup_captcha_image').show();
+				$('pickup-captcha-link').show();
+				 alert('Exception: ' + e);
+                }
+		});
+	}
+    //]]>
+</script>  
+

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <vendors>
+            <tab>ves</tab>
+            <groups>
+                <sellers_list translate="label">
+                    <label>Seller list</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!--<enabled>
+                            <label>Module Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>-->
+                        <layout>
+                            <label>Layout of page</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>vendorssellerlist/source_columns</source_model>
+                        </layout>
+                        <!--<products_limit>
+                            <label>Products limit number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </products_limit>
+                        <sellers_limit>
+                            <label>Sellers limit number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sellers_limit>-->
+                        <header_static_block>
+                            <label>Header static block</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>vendorssellerlist/source_staticblock</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default header static block in seller list page.</comment>
+                        </header_static_block>
+                        <footer_static_block>
+                            <label>Footer static block</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>vendorssellerlist/source_staticblock</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default footer static block in seller list page.</comment>
+                        </footer_static_block>
+                        <grid_per_page_values translate="label comment">
+                            <label>Sellers per Page on Grid Allowed Values</label>
+                            <comment>Comma-separated.</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-per-page-value-list</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_per_page_values>
+                    </fields>
+                </sellers_list>
+            </groups>
+        </vendors>
+    </sections>
+</config>

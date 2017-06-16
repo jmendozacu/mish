@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+  *
+  */
+-->
+<config>
+
+    <modules>
+        <Nanowebgroup_GoogleEcommerce>
+            <version>1.0.0</version>
+        </Nanowebgroup_GoogleEcommerce>
+    </modules>
+    <global>
+    <helpers>
+        <GoogleEcommerce>
+            <class>Nanowebgroup_GoogleEcommerce_Helper</class>
+        </GoogleEcommerce>
+    </helpers>
+</global>
+    <global>
+        <blocks>
+            <checkout>
+                <rewrite>
+                    <onepage_success>Nanowebgroup_GoogleEcommerce_Block_Onepage_Success</onepage_success>
+                </rewrite>
+            </checkout>
+        </blocks>
+    </global>
+	<adminhtml>
+        <acl>
+            <resources>
+				<all>
+	            	<title>Allow everything</title>
+	            </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <googleecommerce translate="title" module="GoogleEcommerce">
+                                            <title>GoogleEcommerce Section</title>
+                                            <sort_order>60</sort_order>
+                                        </googleecommerce>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

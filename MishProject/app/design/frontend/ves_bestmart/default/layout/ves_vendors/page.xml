@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<vendor_page>
+		<remove name="store_language" />
+		<remove name="top.search" />
+		<block type="vendorspage/vendor" name="vendor.profile.handler" />
+	</vendor_page>
+	<vendorspage_index_index>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+	    <reference name="content">
+	    	<block type="core/template" name="vendors.homepage" template="ves_vendorspage/home.phtml">
+		         <block type="vendorspage/catalog_product_list" name="vendors.homepage.list" template="catalog/product/list.phtml">
+		         	<block type="vendorspage/catalog_product_list_toolbar" name="vendor_product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="vendorspage/html_pager" name="product_list_toolbar_pager" />
+                    </block>
+                    <action method="setToolbarBlockName"><name>vendor_product_list_toolbar</name></action>
+		         </block>
+	     	</block>
+	    </reference>
+	</vendorspage_index_index>
+	
+	<vendorspage_product_view>
+		<update handle="catalog_product_view" />
+		<remove name="breadcrumbs" />
+		<reference name="root">
+			<block type="page/html_breadcrumbs" name="vendor.product.breadcrumbs" as="breadcrumbs"/>
+			<block type="vendorspage/catalog_product_breadcrumbs" name="vendors.product.breadcrumbs" />
+		</reference>		
+	</vendorspage_product_view>
+	
+</layout> 

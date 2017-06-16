@@ -1,0 +1,44 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_quotes = $this->getQuotes(); ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Quotes') ?></h1>
+</div>
+<?php echo $this->getChildHtml('info');?>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_quotes->getSize()): ?>
+<table class="data-table orders" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th class="number"><?php echo $this->__('Quote #') ?></th>
+            <th class="date"><?php echo $this->__('Date') ?></th>
+            <th class="ship"><?php echo $this->__('Your Remarks') ?></th>
+            <th class="status"><span class="nobr"><?php echo $this->__('Quote Status') ?></span></th>
+            <th class="view">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_quotes as $_quote): ?>
+        <tr>
+            <td class="number"><?php echo $_quote->getIncrementId() ?></td>
+            <td class="date"><span class="nobr"><?php echo $this->formatDate($_quote->getCreatedAtStoreDate()) ?></span></td>
+            <td class="ship"><?php echo $_quote->getClientComment() ?></td>
+            <td class="status"><em><?php echo $_quote->getStatusLabel() ?></em></td>
+            <td class="a-center view">
+                <span class="nobr"><a href="<?php echo $this->getViewUrl($_quote) ?>"><?php echo $this->__('View Quote') ?></a></span>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif ?>

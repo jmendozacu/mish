@@ -1,0 +1,44 @@
+<?php
+?>
+<?php $_items = $this->getCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+	<h2><?php echo $this->__('Customer Reviews') ?></h2>
+    <?php if (count($_items)):?>
+        <?php echo $this->getPagerHtml() ?>
+        <dl>
+        <?php foreach ($_items as $_review):?>
+        	<dt>
+        		<strong><?php echo $_review->getTitle();?></strong><br />
+                <?php echo $this->__('Review by <span class="reviewer">%s</span>', $this->htmlEscape($_review->getNickName())) ?>
+                <small class="date"><?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedTime()), 'long') ?></small>
+            </dt>
+            <dd>
+                <?php $_votes = $_review->getRatingVotes(); ?>
+                <?php if (count($_votes)): ?>
+                <table class="ratings-table">
+                    <col width="1" />
+                    <col />
+                    <tbody>
+                    	<tr>
+                        <?php foreach ($_votes as $_vote): ?>
+                            <th><?php echo $this->escapeHtml($this->getRatingTitle($_vote['rating_id'])) ?></th>
+                            <td>
+                                <div class="rating-box">
+                                    <div class="rating" style="width:<?php echo $_vote['rate_percents'] ?>%;"></div>
+                                </div>
+                            </td>
+                        <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+                <?php echo nl2br($this->htmlEscape($_review->getDetail())) ?>
+            </dd>
+        <?php endforeach; ?>
+        </dl>
+        <?php echo $this->getPagerHtml() ?>
+    <?php else:?>
+		<p class="note-msg"><?php echo $this->__('There are no reviews.');?></p>
+    <?php endif;?>
+    <?php echo $this->getChildHtml('review_form') ?>
+</div>

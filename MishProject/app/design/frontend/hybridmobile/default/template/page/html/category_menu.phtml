@@ -1,0 +1,25 @@
+<?php $_menu = $this->getHtml('level-top') ?>
+<?php if($_menu): ?>
+<?php $mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>
+<div class="category-menu">
+    <div class="swiper-container swiper-root">
+        <div class="swiper-wrapper">
+            <div class="menu-overlay"></div>
+                <?php echo $_menu ?>
+                <div class="swiper-slide">
+                	<a href="<?php echo $this->geturl('customer/account/index')?>" class="menu-item with-image">
+                		<div class="menu-item-image" style="background-image:url(<?php echo $mediaUrl.'hybridmobile-icons/myaccount.png'; ?>)"></div>
+                		My Account <i class="fa fa-angle-right"></i>
+                	</a>
+                </div>
+                <div class="swiper-slide">
+                	<a href="<?php echo $this->geturl('contacts')?>" class="menu-item with-image">
+                		<div class="menu-item-image" style="background-image:url(<?php echo $mediaUrl.'hybridmobile-icons/contactus.png'; ?>)"></div>
+                		Contact
+                	</a>
+                </div>                             
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif ?>

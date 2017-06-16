@@ -1,0 +1,48 @@
+<?php
+/**
+ * Request For Quote template
+ *
+ * @var $this VES_VendorsQuote_Block_Customer_Quote_Items
+ */
+?>
+<?php $_quote = $this->getQuote();?>
+<table id="quote-table-<?php echo $_quote->getId()?>" class="data-table quote-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><span class="nobr">&nbsp;</span></th>
+            <th class="quote-item-product"><span class="nobr"><?php echo $this->__('Product') ?></span></th>
+            
+            <th class="quote-item-comment"><?php echo $this->__('Remarks')?></th>
+            <th class="a-center cart-price-head">
+                <span class="nobr"><?php echo $this->__('Original Price') ?></span>
+            </th>
+            <th class="a-center">
+                <?php echo $this->__('Qty') ?>
+            </th>
+            <th class="a-center proposals">
+                <?php echo $this->__('Proposal') ?>
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="50" class="a-right cart-footer-actions">
+                <?php if($this->getContinueShoppingUrl()): ?>
+                    <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button2 btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                <?php endif; ?>
+
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+    <?php foreach($_quote->getAllItems() as $_item): ?>
+        <?php echo $this->getItemHtml($_item) ?>
+    <?php endforeach ?>
+    </tbody>
+</table>

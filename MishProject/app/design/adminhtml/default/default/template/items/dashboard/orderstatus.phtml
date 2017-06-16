@@ -1,0 +1,25 @@
+<div class="box" id="dashboard_diagram_totals">
+    <div class="entry-edit">
+        <table cellspacing="0" width="100%">
+            <tr>
+				<td class="a-center bold">
+                    <span>Total Paid Orders</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_itemorders/'); ?>'><?php echo $this->getData('totalPaidOrder'); ?></a></span>
+                </td>
+             	<td class="a-center bold">
+                    <span>Total UnPaid Orders</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_itemorders/'); ?>'><?php echo $this->getData('totalUnPaidOrder'); ?></a></span>
+                </td>
+				 <td class="a-center bold">
+                    <span>Total Shipped Orders</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_itemorders/'); ?>'><?php echo $this->getData('totalshippedOrder'); ?></a></span>
+                </td>
+				<td class="a-center bold">
+                    <span>Total UnShipped Orders</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_itemorders/'); ?>'><?php echo $this->getData('totalUnShippedOrder'); ?></a></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

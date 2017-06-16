@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+   	<frontend>
+        <layout>
+            <updates>
+                <vendorspaypal>
+                    <file>ves_vendors/paypal.xml</file>
+                </vendorspaypal>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <global>
+    	<events>
+    		<controller_action_predispatch_paypal_standard_redirect>
+                <observers>
+                    <vendorspaypal>
+                        <type>singleton</type>
+                        <class>vendorspaypal/observer</class>
+                        <method>predispatch_paypal_standard_redirect</method>
+                    </vendorspaypal>
+                </observers>
+            </controller_action_predispatch_paypal_standard_redirect>
+			
+			<controller_action_predispatch_paypal_standard_cancel>
+                <observers>
+                    <vendorspaypal>
+                        <type>singleton</type>
+                        <class>vendorspaypal/observer</class>
+                        <method>predispatch_paypal_standard_cancel</method>
+                    </vendorspaypal>
+                </observers>
+            </controller_action_predispatch_paypal_standard_cancel>
+			
+			<controller_action_predispatch_paypal_ipn_index>
+                <observers>
+                    <vendorspaypal>
+                        <type>singleton</type>
+                        <class>vendorspaypal/observer</class>
+                        <method>predispatch_paypal_ipn_index</method>
+                    </vendorspaypal>
+                </observers>
+            </controller_action_predispatch_paypal_ipn_index>
+    	</events>
+        <models>
+            <vendorspaypal>
+                <class>VES_VendorsPaypal_Model</class>
+            </vendorspaypal>
+			
+			<paypal>
+            	<rewrite>
+            		<express_checkout>VES_VendorsPaypal_Model_Express_Checkout</express_checkout>
+            	</rewrite>
+            </paypal>
+        </models>
+        <blocks>
+            <vendorspaypal>
+                <class>VES_VendorsPaypal_Block</class>
+            </vendorspaypal>
+        </blocks>
+        <helpers>
+            <vendorspaypal>
+                <class>VES_VendorsPaypal_Helper</class>
+            </vendorspaypal>
+        </helpers>
+    </global>    
+</config>

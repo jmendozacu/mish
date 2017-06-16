@@ -1,0 +1,115 @@
+<?php
+    $moduleId = rand().time();
+    $cols =  (int)$this->getConfig( "columns" );
+    $cols = !empty($cols)?$cols:1;
+    $span = 12/$cols;
+    $itemsperpage = $cols;
+
+    $c = $this->getGeneralConfig( 'small_imagesize', "" );
+	$tmp = explode( "x", $c );
+
+	$thumb_width = $thumb_height = "";
+	if( count($tmp) > 0 && (int)$tmp[0] ){
+		$thumb_width = (int)$tmp[0];
+		$thumb_height = (int)$tmp[1];
+	}
+
+?>
+<div class="block venus-latest-block" id="module<?php echo $moduleId; ?>">
+	<?php if( $this->getConfig("latestmod_title") ) : ?>
+	<div class="block-title">
+        <strong> <span><?php echo $this->getConfig( "latestmod_title" ); ?> </span> </strong>
+	</div>	
+	<?php endif; ?>
+	
+		<div class="block-content">
+			<div class="box-vesblog carousel slide" id="vesblogcarousel<?php echo $moduleId;?>">
+
+				<?php if( count($posts) > $itemsperpage) { ?>
+
+				<div class="carousel-controls">
+					<a class="carousel-control left fa fa-angle-left" href="#vesblogcarousel<?php echo $moduleId;?>"   data-slide="prev"> </a>
+					<a class="carousel-control right fa fa-angle-right" href="#vesblogcarousel<?php echo $moduleId;?>"  data-slide="next"> </a>
+				</div>
+				<?php } ?>
+				<div class="carousel-inner no-margin">
+					<?php if( $this->getConfig("latestmod_desc") ) :?>
+					<div class="block-description">
+						<p><?php echo $this->getConfig("latestmod_desc"); ?></p>
+					</div>
+					<?php endif; ?>
+					<?php $i =0;?>
+					
+					<?php foreach( $posts as $post ): ?>
+				
+					<?php if( $i % $cols == 0 ) { ?>
+						<div class="item row clearfix <?php echo ($i == 0)?' active':'';?>">
+					<?php } ?>
+						<div class="col-lg-<?php echo $span;?> col-sm-<?php echo $span;?> col-xs-12">
+							<div class="post-block">
+								<?php
+									 $image = "";
+									 if($thumb_width && $thumb_height) {
+									 	$image = Mage::helper('ves_blog')->resizeImage($post->getFile(), "m", $thumb_width, $thumb_height);
+									 } else {
+									 	$image = $post->getImageURL( "s" );
+									 }
+								?>
+								<div class="post-image">
+									<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+										<img  src="<?php echo $image;?>" class="post-image img-responsive" title="<?php echo $post->getTitle();?>" alt=""/>
+									</a>
+								</div>
+
+								<div class="post-last-description">
+									<h4><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h4>
+
+									<?php if($this->getConfig("latest_showcreated")) { ?>
+										<div class="blog-updated">
+												<span><?php echo $this->__("Last Update");?></span>
+												<?php echo $post->getUpdated(); ?>
+										</div>
+									<?php } ?>
+
+									<div class="latest-description">
+
+										<?php 
+											if (strlen($post->getDescription()) > 100) :
+												echo substr($post->getDescription(),0, 80).'...';
+											else : 
+												echo $post->getDescription();
+											endif;
+										?>
+
+									</div>
+
+									<?php if( $this->getConfig("latest_show_commentcouter") || $this->getConfig("latest_showcreated") || $this->getConfig("latest_show_hits")) :?>
+									<div class="blog-meta">
+
+										<?php if($this->getConfig("latest_show_hits")) { ?>
+											<div class="blog-hits"><span><?php echo $this->__("Read");?></span> <strong><?php echo $post->getHits(); ?></strong> <?php echo $this->__("Times"); ?></div>
+										<?php } ?>
+
+										<?php if($this->getConfig("latest_show_commentcouter")) { ?>
+											<div class="blog-comment-count"><?php echo $this->getCountingComment($post->getId());?> <?php  echo $this->__("Comment");?></div>
+										<?php } ?>
+
+									</div>
+
+									<?php endif; ?>
+								</div>	
+							</div>		
+						</div>
+					<?php $i++; ?>	
+					<?php if( $i%$cols == 0 || $i==count($posts) ) { ?>
+						</div>
+					<?php } ?>
+					
+					<?php endforeach; ?>
+			</div>
+		</div>	
+	</div>
+</div>
+<script type="text/javascript">
+jQuery('#vesblogcarousel<?php echo $moduleId;?>').carousel({interval:false,auto:false,pause:'hover', cycle: true});
+</script>

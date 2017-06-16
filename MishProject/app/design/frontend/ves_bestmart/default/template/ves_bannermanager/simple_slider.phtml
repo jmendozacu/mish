@@ -1,0 +1,40 @@
+<?php $banner = $this->getBanner();?>
+<?php if(!$banner):?>
+	<?php echo $this->__("Banner Not Found!")?>
+<?php else:?>
+	<?php if(!$this->getItems()) :?>
+		<?php echo $this->__('Item not fould!');?>
+	<?php else:?>
+	<?php $random = rand(1111,9999)?>
+		<script language="javascript" type="text/javascript" src="<?php echo $this->getSkinUrl('ves_bannermanager/js/jquery.js')?>"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $this->getSkinUrl('ves_bannermanager/js/easy_slider.js')?>"></script>
+		<script type="text/javascript">
+		$ves_banner_<?php echo $random?> = jQuery.noConflict();
+		$ves_banner_<?php echo $random?>(document).ready( function(){	
+			$ves_banner_<?php echo $random?>("#slider_<?php echo $random?>").easySlider({
+				auto: true, 
+				continuous: true,
+				numeric: true,
+				speed: <?php echo $banner->getDelay()?>,
+				nextId: 'nextBtn_<?php echo $random?>',
+				prevId: 'prevBtn_<?php echo $random?>',
+				numericId:'controls_<?php echo $random?>'
+			});
+			$ves_banner_<?php echo $random?>("#nextBtn_<?php echo $random?>").css('left',<?php echo $banner->getWidth()?>);
+			$ves_banner_<?php echo $random?>("#nextBtn_<?php echo $random?>").css('top',<?php echo (($banner->getHeight()-77)/2)?>);
+			$ves_banner_<?php echo $random?>("#prevBtn_<?php echo $random?>").css('top',<?php echo (($banner->getHeight()-77)/2)?>);
+		});
+		</script>
+		<?php $now = Mage::getModel('core/date')->date('Y-m-d');?>
+		<div class="slider_container">
+			<div id="slider_<?php echo $random?>" style="width: <?php echo $banner->getWidth()?>px; height: <?php echo $banner->getHeight()?>px;">
+				<ul>
+					<?php foreach($this->getItems() as $item):?>
+			  			<?php if( ($item->getFromDate() && ($item->getFromDate() > $now)) || ($item->getToDate() && ($item->getToDate() < $now))) continue;?>
+						<li><a href="<?php echo $this->getItemUrl($item)?$this->getItemUrl($item):"#".$item->getTitle()?>"><img src="<?php echo Mage::helper('bannermanager/image')->init($item->getFilename())->resize($banner->getWidth(),$banner->getHeight())?>" alt="<?php echo $item->getTitle()?>" /></a></li>
+					<?php endforeach;?>		
+				</ul>
+			</div>
+		</div>
+	 <?php endif;?>
+<?php endif;?>

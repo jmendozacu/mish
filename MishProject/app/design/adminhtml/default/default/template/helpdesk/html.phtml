@@ -1,0 +1,45 @@
+
+<?php $currentTicket = Mage::registry("ticket_data");?>
+<?php $comments = Mage::getModel("helpdesk/comment")->getCollection()->addFieldToFilter('ticket_id',$currentTicket->getData('ticket_id'));
+$comments->setOrder('created_date','DESC');
+$loggedInCustomer = Mage::getModel('customer/customer')->load($currentTicket->getData('customer_id'));
+$loggedIn= $loggedInCustomer->getData();
+//print_r($loggedIn);exit;
+?>
+<?php /*
+	
+<ul class="form-list">
+<li class="wide">
+	<label for="comment" class="required"><em>*</em><?php echo $this->__('Post a Reply')?></label>
+	<div class="input-box" style="width:100%">
+		<textarea class="required-entry" name="comment" id="comment" style="width:80%"></textarea>
+	</div>
+</li>
+</ul>
+*/ ?>		
+	
+<br/>	
+<div class="ticket-view-thread">
+	<?php foreach($comments as $comment):?>
+		<div  class="ticket-view-thread-message-box <?php if($comment->getData('is_customer_comment') == 1):?>  customer-comment <?php endif;?>"  >
+			<div class="ticket-view-thread-message-box-header">
+				<span class="ticket-view-thread-message-box-header-author"><?php echo $comment->getData('comment_by');?></span>
+				<span class="separator">|</span>
+				<span class="ticket-view-thread-message-box-header-date"><?php echo $comment->getData('created_date');?></span>
+			</div>
+			<div class="ticket-view-thread-message-box-body">
+				<p><?php echo $comment->getData('comment'); ?></p>
+			</div>				
+		</div>
+	<?php endforeach; ?>
+	<div class="ticket-view-thread-message-box customer-comment">
+				<div class="ticket-view-thread-message-box-header">
+					<span class="ticket-view-thread-message-box-header-author"><?php echo $loggedInCustomer->getData('firstname'). " ".$loggedInCustomer->getData('lastname');?></span>
+					<span class="separator">|</span>
+					<span class="ticket-view-thread-message-box-header-date"><?php echo $currentTicket->getData('created_date');?></span>
+				</div>
+				<div class="ticket-view-thread-message-box-body">
+					<p><?php echo $currentTicket->getData('message'); ?></p>
+				</div>
+			</div>
+	</div>

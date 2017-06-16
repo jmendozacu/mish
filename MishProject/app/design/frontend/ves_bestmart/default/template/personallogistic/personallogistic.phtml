@@ -1,0 +1,94 @@
+<div>
+	<!-- <div>
+		<h3><?php //echo $this->__('Personal Logistics Registration'); ?></h3>
+	</div> -->
+	<form action="<?php echo $this->getUrl('personallogistic/index/personalLogisticDetails') ?>" method="POST" enctype="multipart/form-data">
+				<div>
+						<label for="firstname"><?php echo __('First Name:'); ?></label>
+						<input type="text" name="firstname" id="firstname" />
+				</div>
+
+				<div>
+						<label for="lastname"><?php echo __('Last Name:'); ?></label>
+						<input type="text" name="lastname" id="lastname" />
+				</div>
+
+				<div>
+						<label for="profilepic"><?php echo __('Picture Personal:'); ?></label>
+						<input type="file" name="profilepic" id="profilepic" />
+				</div>
+
+				<div>
+						<label for="dob"><?php echo __('Date of Birth:'); ?></label>
+						<input type="date" name="dob" id="dob" />
+				</div>
+
+				<div>
+						<label for="rut"><?php echo __('RUT/Personal Id:'); ?></label>
+						<input type="text" name="rut" id="rut" />
+				</div>
+
+				<div>
+						<label for="mail"><?php echo __('Mail:'); ?></label>
+						<input type="email" name="mail" id="mail" required="required"/>
+				</div>
+
+				<div>
+			<label><?php echo __('Types of Transportation:'); ?></label>
+						<ul>
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/10kg.png'); ?>" alt="10 kg" /><label for="transport1"><?php echo __('Bicycle') ?> <input type="radio" name="transport" id="transport1" value="Bicycle"/></label></li>
+							
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/20kg.png'); ?>" alt="20 kg" /><label for="transport2"><?php echo __('Small Car') ?> <input type="radio" name="transport" id="transport2" value="Small Car" /></label></li>
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/20kg.png'); ?>" alt="20 kg" /><label for="transport3"><?php echo __('Medium Auto') ?> <input type="radio" name="transport" id="transport3" value="Medium Auto"/></label></li>
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/more than 20kg.png'); ?>" alt="more than 20 kg" /><label for="transport4"><?php echo __('Big Car') ?> <input type="radio" name="transport" id="transport4" value="Big Car"/></label></li>
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/more than 20kg.png'); ?>" alt="more than 20 kg" /><label for="transport5"><?php echo __('Heavy Duty Truck') ?> <input type="radio" name="transport" id="transport5" value="Heavy Duty Truck"/></label></li>
+							<li><img src="<?php echo $this->getSkinUrl('personallogistic/4kg.png'); ?>" alt="10 kg" /><label for="transport6"><?php echo __('Walking') ?> <input type="radio" name="transport" id="transport6" value="Walking" /></label></li>
+					   </ul>			
+
+				</div>
+
+				<div>
+						<label for="region"><?php echo __('Region:'); ?></label>
+						   <select name="region[]" multiple="" aria-required="true">
+								<option value="" disabled="" selected="">Select Region</option>
+								<option value="Aisén del General Carlos Ibáñez del Campo">Aisén del General Carlos Ibáñez del Campo</option>
+								<option value="Antofagasta">Antofagasta</option>
+								<option value="Araucanía">Araucanía</option>
+								<option value="Arica and Parinacota">Arica and Parinacota</option>
+								<option value="Atacama">Atacama</option>
+                            </select>
+				</div>
+
+				<div>
+						<label for="personalid"><?php echo __('Personal Id Card/Rut (1):'); ?></label>
+						<input type="file" name="personalid" id="personalid" />
+				</div>
+
+				<div>
+						<label for="personalid"><?php echo __('Driving License:'); ?></label>
+						<input type="file" name="personalid2" id="personalid2" />
+				</div>
+
+				<div>
+						<label for="price"><?php echo __('Price Per KM:'); ?></label> 
+						<input type="text" name="price" id="price" />
+			   </div>
+
+			   <div>
+						<label for="password"><?php echo __('Password:'); ?></label> 
+						<input type="password" name="password" id="password" />
+			   </div>
+
+			   <div>
+						<label for="confirmpassword"><?php echo __('Confirm Password:'); ?></label> 
+						<input type="password" name="confirmpassword" id="confirmpassword" />
+			   </div>
+
+			   <div>
+						<label for="termscondition"><?php echo __('Terms & Conditions'); ?></label> 
+						<input type="checkbox" name="termscondition" id="termscondition" required="required" />
+			   </div>
+
+			   <button name="submit" class="btn btn-small pull-right" type="submit">Register</button>
+    </form>
+</div>

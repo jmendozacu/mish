@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/AW_Deliverydate/active')) {
+                class Magestore_Storepickup_Model_Order_Pdf_Abstract_Amasty_Pure extends AW_Deliverydate_Model_Order_Pdf_Creditmemo {}
+            } else { class Magestore_Storepickup_Model_Order_Pdf_Abstract_Amasty_Pure extends Magestore_Storepickup_Model_Order_Pdf_Abstract_Amasty_Pure {} } ?>

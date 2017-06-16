@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsFeaturedProduct>
+            <version>0.1.0</version>
+        </VES_VendorsFeaturedProduct>
+    </modules>
+    <frontend>
+        <routers>
+            <vendorsfeaturedproduct>
+                <use>standard</use>
+                <args>
+                    <module>VES_VendorsFeaturedProduct</module>
+                    <frontName>vendorsfeaturedproduct</frontName>
+                </args>
+            </vendorsfeaturedproduct>
+        </routers>
+        <layout>
+            <updates>
+                <vendorsfeaturedproduct>
+                     <file>ves_vendors/featuredproduct.xml</file>
+                </vendorsfeaturedproduct>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<vendorsfeaturedproduct>
+				<use>admin</use>
+				<args>
+					<module>VES_VendorsFeaturedProduct</module>
+					<frontName>vendorsfeaturedproduct</frontName>
+				</args>
+			</vendorsfeaturedproduct>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<vendorsfeaturedproduct>
+					<file>vendorsfeaturedproduct.xml</file>
+				</vendorsfeaturedproduct>
+			</updates>
+		</layout>
+    </adminhtml>   
+     <vendors>
+		<!-- Add  Frontend App Type-->
+    	<ves_frontend_app>
+    		<featuredproduct module="vendorsfeaturedproduct">
+    			<title>Featured Product</title>
+    			<class>vendorsfeaturedproduct/app_feature</class>
+    		</featuredproduct>
+    	</ves_frontend_app>
+    </vendors>
+    <global>
+    	<ves_filter>
+    		<featured module="vendorsfeaturedproduct">
+    			<title>Featured Product</title>
+    			<class>vendorsfeaturedproduct/template_filter_featured</class>
+    			<note><![CDATA[
+    			Use <strong>{{featured category_id=10 columns=3 template="grid"}}</strong> to add featured products.
+    			<span style="font-size: 9px;display: block;margin-left: 15px;">
+    				<strong>category_id=10</strong> is used to filter by the category has id is 10. You can remove this code if you don't want to filter featured products by a categorie.<br />
+    				<strong>template="grid"</strong> this code is used to select the template. templace may be "grid" or "list"
+    			</span>]]></note>
+    		</featured>
+    	</ves_filter>
+        <models>
+            <vendorsfeaturedproduct>
+                <class>VES_VendorsFeaturedProduct_Model</class>
+                <resourceModel>vendorsfeaturedproduct_mysql4</resourceModel>
+            </vendorsfeaturedproduct>
+            <vendorsfeaturedproduct_mysql4>
+                <class>VES_VendorsFeaturedProduct_Model_Mysql4</class>
+                <entities>
+                    <vendorsfeaturedproduct>
+                        <table>vendorsfeaturedproduct</table>
+                    </vendorsfeaturedproduct>
+                </entities>
+            </vendorsfeaturedproduct_mysql4>
+        </models>
+    	<events>
+    		<ves_vendorscms_cms_app_add_tab_featuredproduct>
+    			<observers>
+					<featuredproduct>
+						<type>singleton</type>
+						<class>vendorsfeaturedproduct/observer</class>
+	                    <method>ves_vendorscms_cms_app_add_tab_feature</method>
+					</featuredproduct>
+				</observers>
+    		</ves_vendorscms_cms_app_add_tab_featuredproduct>
+    		<vendorscms_app_save_after>
+    			<observers>
+					<featuredproduct>
+						<type>singleton</type>
+						<class>vendorsfeaturedproduct/observer</class>
+	                    <method>vendorscms_app_save_after</method>
+					</featuredproduct>
+				</observers>
+    		</vendorscms_app_save_after>
+    	</events>
+        <resources>
+            <vendorsfeaturedproduct_setup>
+                <setup>
+                    <module>VES_VendorsFeaturedProduct</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </vendorsfeaturedproduct_setup>
+            <vendorsfeaturedproduct_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </vendorsfeaturedproduct_write>
+            <vendorsfeaturedproduct_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </vendorsfeaturedproduct_read>
+        </resources>
+      
+        <blocks>
+            <vendorsfeaturedproduct>
+                <class>VES_VendorsFeaturedProduct_Block</class>
+            </vendorsfeaturedproduct>
+        </blocks>
+        <helpers>
+            <vendorsfeaturedproduct>
+                <class>VES_VendorsFeaturedProduct_Helper</class>
+            </vendorsfeaturedproduct>
+        </helpers>
+        
+    </global>
+</config>

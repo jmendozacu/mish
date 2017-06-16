@@ -1,0 +1,439 @@
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.17&key=<?php echo Mage::getModel('storepickup/shipping_storepickup')->getConfigData('gkey'); ?>&sensor=false"></script>
+<script src="//www.google.com/uds/api?file=uds.js&v=1.0" type="text/javascript"></script>
+<?php
+$id_default = Mage::getStoreConfig("carriers/storepickup/storedefault", Mage::app()->getStore()->getStoreId());
+$num_store_views = Mage::getStoreConfig("carriers/storepickup/num_top_store"); //add 
+$object = $this->getAllid();
+$stores = $this->getStoreByLocation();
+if(!$num_store_views) $num_store_views=count($stores);
+$listStore = $this->getStoreByLocation();
+?>
+<?php //$stores = $this->getStoreByDefault();//->addFieldToFilter('store_id',$id_default);  ?>
+<?php $size = $this->getMapSize(); ?>
+<br>
+
+<div style="width:100%; float:left; margin:10px 0 0;">
+    <div id="date-time" class="date-time">
+        <div class="input-box storepickup-box">
+            <label class="required" for="date"><em>*</em><?php echo $this->__('Store') ?> </label>				
+            <!-- hidden tag -->
+            <?php foreach ($listStore as $storeData): ?>  
+
+                <?php $store = $storeData['info'] ?>        
+                <?php $addressInfo = $store->getFormatedAddressforMap(); ?>
+                <input type="hidden" id="lat-<?php echo $store->getId(); ?>" value="<?php echo $store->getStoreLatitude() ?>"/>
+                <input type="hidden" id="lng-<?php echo $store->getId(); ?>" value="<?php echo $store->getStoreLongitude() ?>"/>        
+                <input type="hidden" id="infor-<?php echo $store->getId(); ?>" value="<?php echo Mage::helper('storepickup')->jsQuoteEscape($store->getStoreName()) ?><br/><?php echo str_replace("\n", "", str_replace("\r", "", Mage::helper('storepickup')->jsQuoteEscape($addressInfo))); ?><?php if ($store->getDistance()) echo '<br/>Distance: ' . $store->getDistance(); ?>"/>
+
+            <?php endforeach; ?>
+            <!-- end hidden -->
+            <div style="float: left;margin-left:7px">
+                <select name="store_id" id="store_id" class="required-entry validate-select" >
+					<option value="" selected ><?php echo $this->__('Select Store') ?></option>
+                    <?php if (count($listStore) != 1): ?>
+                        <?php foreach ($listStore as $storeData): ?>
+                            <?php $store = $storeData['info'] ?>
+                           <option value="<?php echo $store->getId() ?>" <?php if($store->getId()==$id_default) echo 'selected="selected"';?>><?php echo $storeData['label'] ?></option>                                        
+                        <?php endforeach; ?>
+                    <?php elseif (is_array($object) && in_array($id_default, $object)): ?>                
+                        <?php foreach ($listStore as $storeData): ?>                            
+                            <?php $store = $storeData['info'] ?>                            
+                            <?php if ($store->getId() == $id_default): ?>
+                                <option value="<?php echo $store->getId() ?>" selected><?php echo $storeData['label'] ?></option>                           
+                            <?php else: ?>
+                                <option value="<?php echo $store->getId() ?>" ><?php echo $storeData['label'] ?></option>                           
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        
+                        <?php foreach ($listStore as $storeData): ?> 
+                            <?php
+                            $num_store++;
+                            if ($num_store <= $num_store_views):
+                                ?>
+                                <?php $store = $storeData['info'] ?>                                                                                                                
+                                <option value="<?php echo $store->getId() ?>" ><?php echo $storeData['label'] ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+            <div class="clear" ></div>					
+        </div>
+        <div class="date_time">
+
+            <?php
+            $storeID = Mage::app()->getStore()->getId();
+            if (Mage::getStoreConfig('carriers/storepickup/display_timedate') == 1) {
+                ?>	
+                <div class="input-box storepickup-box" id="date-box" style="display:none">
+                    <label for="date" class="required " style="margin-right:20px !important;"><?php echo $this->__('Shipping Date') ?><em>*</em> </label>
+                    <div style="float: left;">
+                        <input type="hidden" id="changedate_url" value="<?php echo Mage::helper('storepickup')->getChangDateUrl(); ?>"/>
+                        <input type="hidden" id="changedate_format" value="<?php echo Mage::helper('storepickup')->getDateFormat() ?>"/>
+                        <input name="shipping_date" id="shipping_date" value="" class="required-entry input-text " readonly/>
+                    </div>
+                    <span id="date-please-wait" style="display:none;" class="opc-please-wait">
+                        <img style="float:left" src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" />  </span>
+                    <img src="<?php echo Mage::getBaseUrl('skin') ?>/adminhtml/default/default/images/grid-cal.gif" alt="dateinput" class="v-middle" id="shipping_date_trig" title="dateinput"  />
+                </div>
+                <div id="date-notation"></div>
+                <div class="input-box storepickup-box" id="time-box" style="display:none">
+                    <label for="date" class="required" style="margin-right: 18px;"><?php echo $this->__('Shipping Time') ?><em>*</em></label>		
+                    <div id="shipping_time_div" style="float: left;">
+                        <select id="shipping_time" name="shipping_time" class="required-entry validate-select">     
+
+                            <option value="" selected><?php echo $this->__('Shipping Time') ?></option>
+                        </select>
+                    </div>
+                    <span id="time-please-wait" style="display:none;" class="opc-please-wait">
+                        <img style="float:left" src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" />  </span>							
+                </div>
+            <?php } ?>
+            <br/>
+            <div id="store-info">
+                <?php if (count($stores)): ?>
+                    <?php foreach ($stores as $store) : ?>
+                        <?php $store = $store['info']; ?>
+                        <?php $address = $store->getFormatedAddressforMap(); ?>
+                        <div id="store-info-<?php echo $store->getId() ?>" style="display:none;" >
+                            <div class="st_info left">
+                                <span class="title store-address"><?php echo $store->getStoreName() ?></span>
+                                <span class="store-address"><?php echo $address ?><?php if($store->getDistance()){?><br/><?php echo $this->__('Distance:'); ?> <?php echo $store->getDistance() ?><?php }?></span>
+                                <?php if ($store->getDescription() != null) { ?>
+                                    <div>
+                                        <span class="title store-address"><?php echo $this->__('Description') ?></span>
+                                        <span class="store-address"><?php echo $store->getDescription() ?></span>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <input type="hidden" id="curr-store" value="" />
+            </div>
+        </div>
+    </div>
+    <div id="map" style="width: 320px; height: 240px"></div>
+</div>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    //var map = new GMap(document.getElementById("map"));
+    //map.addControl(new GLargeMapControl3D()); // added
+    //map.addControl(new GMapTypeControl()); // added
+    //var latlngbounds = new GLatLngBounds();
+    //var myLatlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+        zoom: 8,
+        //center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map"), myOptions);//modify
+    var bounds = new google.maps.LatLngBounds();
+    var default_id = <?php echo $id_default; ?>;
+    var countstore = <?php echo count($stores); ?>;
+<?php
+$num_store = 0; //add
+foreach ($stores as $store) {
+    $num_store++; //add
+    $store = $store['info'];
+    $coordinates['lat'] = $store->getStoreLatitude();
+    $coordinates['lng'] = $store->getStoreLongitude();
+    if ($coordinates['lat'] == '0.000' && $coordinates['lng'] == '0.000') {
+        $coordinates = $this->getCoordinates();
+    }
+    //$address = $store->getFormatedAddress();	
+    $address = $store->getFormatedAddressforMap();
+    if ($num_store <= $num_store_views && isset($coordinates['lat'])  && isset($coordinates['lng']))://add
+        ?>
+                    var setLat = <?php echo $coordinates['lat'] ?>;
+                    var setLon = <?php echo $coordinates['lng'] ?>;
+                    var storeId = <?php echo $store->getId(); ?>;
+                    var pinImage = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|<?php echo $store->getPinColor(); ?>';
+                    var store_info = '<?php echo Mage::helper('storepickup')->jsQuoteEscape($store->getStoreName()) ?><br/><?php echo str_replace("\n", "", str_replace("\r", "", Mage::helper('storepickup')->jsQuoteEscape($address))); ?><br/>Distance : <?php echo $store->getDistance() ?>';
+                    var marker_point = new google.maps.LatLng(setLat, setLon);//modify
+                    bounds.extend(marker_point);
+                    var infoWindow = new google.maps.InfoWindow();
+                    placeMarker(setLat, setLon, store_info, storeId, pinImage);
+    <?php endif; ?>//add		
+<?php } ?>
+    var storezoom = '<?php echo Mage::getStoreConfig('carriers/storepickup/storezoom', Mage::app()->getStore()->getStoreId()); ?>';
+    storezoom = Number(storezoom);
+    map.fitBounds(bounds);
+    var listener = google.maps.event.addListener(map, "idle", function() {
+        if (map.getZoom() > storezoom)
+            map.setZoom(storezoom);
+        google.maps.event.removeListener(listener);
+    });
+    map.fitBounds(bounds);
+    map.setCenter(bounds.getCenter());
+
+    function placeMarker(setLat, setLon, store_info, storeId, pinImage) {
+        var message = "geotagged geo:lat=" + setLat + " geo:lon=" + setLon + " ";
+        var messageRoboGEO = setLat + ";" + setLon + "";
+
+        var point = new google.maps.LatLng(setLat, setLon);
+        var marker = new google.maps.Marker({
+            position: point,
+            map: map,
+            icon: pinImage
+        });
+
+        if (default_id == storeId | countstore == 1) {
+            infoWindow.setContent('<div style="width:200px">'+store_info+'</div>');
+            infoWindow.setPosition(point);
+            infoWindow.open(map);
+            $('store_id').value = storeId;
+            changestorebyMap();
+        }
+        google.maps.event.addListener(marker, 'click', function(event) {
+            infoWindow.setContent('<div style="width:200px">'+store_info+'</div>');
+            infoWindow.setPosition(event.latLng);
+            infoWindow.open(map);
+            map.setCenter(marker_point);
+            map.setZoom(15);
+            $('store_id').value = storeId;
+            changestorebyMap();
+        });
+
+    }
+    var url = '<?php echo $this->getUrl('storepickup/index/disableDate'); ?>';
+    var storepickupMap = new Storepickup('<?php echo Mage::helper('storepickup')->getChangeStoreUrl(); ?>');
+    getInfoStore(url, '<?php echo Mage::helper('storepickup')->getDateFormat() ?>');
+    Event.observe('store_id', 'change', function() {
+        var storeId = $('store_id').value;
+        if(!storeId){
+			if($('date-box'))
+            $('date-box').hide();
+			if($('shipping_date'))
+            $('shipping_date').style.display = 'none';
+			if($('time-box'))
+            $('time-box').style.display = 'none';
+			if($('store-info'))
+            $('store-info').hide();
+            return;
+        }
+		if($('date-please-wait'))
+        $('date-please-wait').style.display = 'block';
+		if($('shipping_date'))
+        $('shipping_date').style.display = 'none';
+		if($('shipping_date_trig'))
+        $('shipping_date_trig').style.display = 'none';
+		if($('date-box'))
+        $('date-box').show();
+            
+        if (!storeId) {
+            $('time-box').hide();                
+            $('store-info').hide();
+            return;
+        }
+
+        if ($('lng-' + storeId) && $('lat-' + storeId)) {
+            var lng = $('lng-' + storeId).value;
+
+            var lat = $('lat-' + storeId).value;
+            var info = $('infor-' + storeId).value;
+
+            var marker_point = new google.maps.LatLng(lat, lng);
+
+            infoWindow.setContent('<div style="width:200px">'+info+'</div>');
+            infoWindow.setPosition(marker_point);
+            infoWindow.open(map);
+            map.setCenter(marker_point);
+            map.setZoom(15);
+                
+            storepickupMap.changeStore();
+            $('store-info').show();
+            getInfoStore(url, '<?php echo Mage::helper('storepickup')->getDateFormat() ?>');
+        }
+
+
+    });
+
+    function changestorebyMap()
+    {
+        if ($('shipping_date'))
+            $('shipping_date').value = '';
+
+        var storeId;
+
+        storeId = $('store_id').value;
+
+        var url = '<?php echo $this->getUrl('storepickup/index/changestore'); ?>';
+
+        url = url + 'store_id/' + storeId;
+
+        var request = new Ajax.Request(checkHttps(url), {method: 'get', onFailure: ""});
+
+        if ($('storepickup-box') && $('storepickup-box') != null)
+            $('storepickup-box').style.display = 'block';
+        //$('date-box').hide();
+        if ($('date-box') && !$('date-box').value)
+            $('time-box').hide();
+
+
+        //end all store mode
+        if ($('curr-store') != null)
+        {
+            var curr_store_id = $('curr-store').value;
+
+            if ($('store-info-' + curr_store_id) != null)
+            {
+                $('store-info-' + curr_store_id).style.display = 'none';
+            }
+
+            if ($('store-info-' + storeId) != null)
+            {
+                $('store-info-' + storeId).style.display = 'block';
+                $('curr-store').value = storeId;
+            }
+        }
+        getInfoStore(url, '<?php echo Mage::helper('storepickup')->getDateFormat() ?>');
+    }
+    //]]>
+</script> 
+
+<a href="<?php echo $this->getUrl('storepickup/index/index') ?>" target="_blank"><?php echo $this->__('View the list of all stores') ?></a>
+
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl('js') ?>calendar/calendar-win2k-1.css"  /> 
+<script type="text/javascript">var Translator = new Translate([]);</script> 
+<script type="text/javascript">
+    //<![CDATA[
+    enUS = {"m": {"wide": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "abbr": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]}}; // en_US locale reference
+    Calendar._DN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; // full day names
+    Calendar._SDN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // short day names
+    Calendar._FD = 0; // First day of the week. "0" means display Sunday first, "1" means display Monday first, etc.
+    Calendar._MN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // full month names
+    Calendar._SMN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; // short month names
+    Calendar._am = "AM"; // am/pm
+    Calendar._pm = "PM";
+
+    // tooltips
+    Calendar._TT = {};
+    Calendar._TT["INFO"] = "About the calendar";
+
+    Calendar._TT["ABOUT"] =
+        "DHTML Date/Time Selector\n" +
+        "(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
+        "For latest version visit: http://www.dynarch.com/projects/calendar/\n" +
+        "Distributed under GNU LGPL. See http://gnu.org/licenses/lgpl.html for details." +
+        "\n\n" +
+        "Date selection:\n" +
+        "- Use the \xab, \xbb buttons to select year\n" +
+        "- Use the " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " buttons to select month\n" +
+        "- Hold mouse button on any of the above buttons for faster selection.";
+    Calendar._TT["ABOUT_TIME"] = "\n\n" +
+        "Time selection:\n" +
+        "- Click on any of the time parts to increase it\n" +
+        "- or Shift-click to decrease it\n" +
+        "- or click and drag for faster selection.";
+
+    Calendar._TT["PREV_YEAR"] = "Prev. year (hold for menu)";
+    Calendar._TT["PREV_MONTH"] = "Prev. month (hold for menu)";
+    Calendar._TT["GO_TODAY"] = "Go Today";
+    Calendar._TT["NEXT_MONTH"] = "Next month (hold for menu)";
+    Calendar._TT["NEXT_YEAR"] = "Next year (hold for menu)";
+    Calendar._TT["SEL_DATE"] = "Select date";
+    Calendar._TT["DRAG_TO_MOVE"] = "Drag to move";
+    Calendar._TT["PART_TODAY"] = ' (' + "Today" + ')';
+
+    // the following is to inform that "%s" is to be the first day of week
+    Calendar._TT["DAY_FIRST"] = "Display %s first";
+
+    // This may be locale-dependent. It specifies the week-end days, as an array
+    // of comma-separated numbers. The numbers are from 0 to 6: 0 means Sunday, 1
+    // means Monday, etc.
+    Calendar._TT["WEEKEND"] = "0,6";
+
+    Calendar._TT["CLOSE"] = "Close";
+    Calendar._TT["TODAY"] = "Today";
+    Calendar._TT["TIME_PART"] = "(Shift-)Click or drag to change value";
+
+    // date formats
+    Calendar._TT["DEF_DATE_FORMAT"] = "%b %e, %Y";
+    Calendar._TT["TT_DATE_FORMAT"] = "%B %e, %Y";
+
+    Calendar._TT["WK"] = "Week";
+    Calendar._TT["TIME"] = "Time:";
+
+    CalendarDateObject._LOCAL_TIMZEONE_OFFSET_SECONDS = -28800;
+
+    //]]>
+</script>
+<?php if (count($stores)): ?>
+    <?php $modelshipping = Mage::getModel('storepickup/shipping_storepickup') ?>
+    <?php $early_date_nonce = $modelshipping->getConfigData('early_date_nonce') ?>
+    <?php $store_not_found_nonce = $modelshipping->getConfigData('store_not_found_nonce') ?>
+    <div>	
+        <input type="hidden" name="early_date_nonce" id="early_date_nonce" value="<?php echo $early_date_nonce ?>">
+        <input type="hidden" name="store_not_found_nonce" id="store_not_found_nonce" value="<?php echo $store_not_found_nonce ?>">
+        <div id="select-store" >
+
+
+        </div>
+        <div id="store-info">
+            <?php if (count($stores)): ?>
+                <?php foreach ($stores as $store) : ?>
+                    <?php $store = $store['info']; ?>
+                    <?php $address = $store->getFormatedAddressforMap(); ?>
+                    <div id="store-info-<?php echo $store->getId() ?>" style="display:none;" >
+                        <div class="st_info left">
+                            <span class="title store-address"><?php echo $store->getStoreName() ?></span>
+                            <span class="store-address"><?php echo $address ?></span>
+                            <?php if ($store->getDescription() != null) { ?>
+                                <div>
+                                    <span class="title store-address"><?php echo $this->__('Description') ?></span>
+                                    <span class="store-address"><?php echo $store->getDescription() ?><br/><?php echo $this->__('Distance:'); ?> <?php echo $store->getDistance() ?></span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <input type="hidden" id="curr-store" value="" />
+        </div>
+    </div>
+    <div class="clear fix">&nbsp;</div>
+
+<?php else : ?>
+    <?php echo $this->__('Not found stores') ?>
+<?php endif; ?>		
+
+<script type="text/javascript">
+    //<![CDATA[
+    
+    var storepickup = new Storepickup('<?php echo Mage::helper('storepickup')->getChangeStoreUrl(); ?>');
+    
+    //    function changetimeUpdate() {
+    //        storepickup.changeTime('<?php echo Mage::helper('storepickup')->getChangTimeUrl(); ?>');
+    //    }
+
+    if ($('shipping_time')) {
+        Event.observe('shipping_time', 'change', function(event) {           
+            storepickup.changeTime('<?php echo Mage::helper('storepickup')->getChangTimeUrl(); ?>');
+        });
+    }
+    if ($('shipping_date_trig')) {
+
+        Event.observe('shipping_date_trig', 'click', function(event) {
+            $('shipping_time').selectedIndex = 0;
+        });
+
+
+
+
+        Calendar.setup({
+            inputField: "shipping_date",
+            ifFormat: "<?php echo Mage::helper('storepickup')->getDateFormat() ?>",
+            showsTime: false,
+            button: "shipping_date_trig",
+            electric: false,
+            singleClick: true,
+        });
+    }
+
+
+    //]]>
+</script>

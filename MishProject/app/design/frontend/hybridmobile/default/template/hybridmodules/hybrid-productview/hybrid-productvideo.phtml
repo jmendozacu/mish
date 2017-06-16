@@ -1,0 +1,134 @@
+<?php
+/**
+ * 
+ */
+?>
+
+<?php
+    $route = Mage::app()->getFrontController()->getRequest()->getRouteName(); // Get route (either CMS or catalog)
+?>
+
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+    // Check if CMS page or not  
+    if($route != 'cms') { $vidlink = $_product->getVideoLink(); }
+    else { $vidlink = $this->getData('video_link'); };
+?>
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j(document).ready( function() {
+		// Move modal video window to end of page
+		$video = $j("#video").clone();
+		$j("#video").remove();
+		$j("body").append($video);
+		// Add video thumbnail overlay
+		$j(".video_container a:first").append('<span class="round-l"></span>'),
+		$j(".video_container a:first").addClass("rounded_l");
+		// Set up link
+        $j('.video_container a:eq(0)').hybridmodal({ hybridmodalcontainer: "#video<?php if ($route != 'cms' && $_product->getVideoLink() && (stristr($vidlink, '.flv'))) : // If video link is from Flowplayer   ?>-flow<?php endif; ?>" });  
+});
+</script>
+
+<div class="video_container">
+
+    <?php if(stristr($vidlink, 'youtu.be')) : // If video link is from Youtube ?>
+		<?php $newvidlink = explode("be/", $vidlink); $newvidlink2 = $newvidlink[1]; ?>
+		<a href="<?php echo $vidlink ?>" class="videolink"><img src="http://img.youtube.com/vi/<?php echo $newvidlink2 ?>/0.jpg" alt="" /></a>
+    <script type="text/javascript">
+             var $j = jQuery.noConflict();
+        $j('.video_container a:eq(0)').click(function () {
+            $j('#video-holder').flash({
+                "src":"http://www.youtube.com/v/<?php echo $newvidlink2 ?>&hl=en_GB&fs=1&",
+                "width":425,
+                "height":344,
+                "vars":{"name":"value"},
+                "color":"#fff",
+                "quality":"high",
+                "wmode":"transparent",
+                "access":"domain"
+            });
+        });
+        </script>
+<div id="video">
+    <div id="video-holder">
+        <h2>Flash is required</h2><h3>You have no flash plugin installed</h3>Download the latest version from <a href="javascript:void(0)" onclick="window.open('http://www.adobe.com/go/getflashplayer')">here</a>
+    </div>
+</div>
+    <?php endif; ?>
+
+    <?php if(stristr($vidlink, 'video.google')) : // If video link is from Google Video ?>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            $j(document).ready(function(){
+            $j("div.video_container b, div.video_container p, div.video_container div:first").remove();
+            });
+        </script>
+        <?php
+$newvidlink = explode("docid=", $vidlink); $newvidlink2 = $newvidlink[1];
+$newvidlink3 = explode("&", $newvidlink2); $newvidlink4 = $newvidlink3[0];
+$rss = new SimpleXMLElement('http://video.google.com/videofeed?docid=' . $newvidlink4, null, true);
+foreach($rss->xpath('channel/item') as $item)
+{ echo
+$item->description;
+         } ?>
+    <script type="text/javascript">
+             var $j = jQuery.noConflict();
+        $j('.video_container a:eq(0)').click(function () {
+            $j('#video-holder').flash({
+                "src":"http://video.google.com/googleplayer.swf?docid=<?php echo $newvidlink4 ?>&hl=en&fs=true",
+                "width":425,
+                "height":344,
+                "vars":{"name":"value"},
+                "color":"#fff",
+                "quality":"high",
+                "wmode":"transparent",
+                "access":"domain"
+            });
+        });
+        </script>
+    <div id="video">
+        <div id="video-holder">
+        <h2>Flash is required</h2><h3>You have no flash plugin installed</h3>Download the latest version from <a href="javascript:void(0)" onclick="window.open('http://www.adobe.com/go/getflashplayer')">here</a>
+        </div>
+    </div>
+        <?php endif; ?>
+
+
+        <?php if(stristr($vidlink, '.flv')) : // If video link is from Flowplayer ?>
+        	<?php // Find the flowplayer js and swf files - this saves hardcoding the version numbers
+			foreach (new DirectoryIterator('flowplayer') as $fileInfo) {
+				if(stristr($fileInfo, 'js'))
+				{ $flowjs = $fileInfo->getFilename();};
+				if(stristr($fileInfo, 'swf') && strstr($fileInfo, 'controls') === false)
+				{$flowswf = $fileInfo->getFilename();};								
+			}								
+			?>
+
+        <?php $thumblink = str_replace(".flv", ".jpg", $vidlink);
+        $filename = $_SERVER['DOCUMENT_ROOT'].substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1). '/flowplayer/videos/' . $thumblink;
+        if(file_exists($filename)) { $thumblink2 = str_replace(".flv", ".jpg", $vidlink); } else { $thumblink2 = str_replace(".flv", ".gif", $vidlink);};
+        ?>                                                      
+        <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>flowplayer/<?php echo $flowjs ?>"></script>
+        <a href="<?php echo $vidlink ?>" class="videolink">
+            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>flowplayer/videos/<?php echo $thumblink2 ?>"  alt="" />
+        </a>                        
+        <div id="video-flow">
+                <div id="player" style="width:425px;height:344px;"></div>
+                <script type="text/javascript">
+                    flowplayer(
+                    "player",
+                    "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>flowplayer/<?php echo $flowswf ?>",
+                    { clip: { url: "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>flowplayer/videos/<?php echo $vidlink ?>", scaling: "fit" }}
+                    ); // Additional customization options detailed at http://flowplayer.org/plugins/flash/controlbar.html
+                </script>
+        </div>
+        <script type="text/javascript">/* <![CDATA[ */
+            var $j = jQuery.noConflict();
+            $j(document).ready( function() {
+                $j('.video_container a:eq(1)').replaceWith('<a href="javascript:void(0)" onClick="window.open(\'http://www.adobe.com/go/getflashplayer\')">here</a>');
+        });/* ]]> */
+        </script>
+        <?php endif; ?>
+
+        <div class="clearfloat"></div></div>

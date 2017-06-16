@@ -1,0 +1,95 @@
+.block-content .ves-livechat-status{
+    margin-top: 10px;
+    height: 30px;
+}
+.block-content .ves-livechat-status a{
+    padding: 6px 30px;
+    display: block;
+    font-size: 13px;
+    text-decoration: none;
+}
+.block-content .ves-livechat-offline{
+     background: url("../../images/livechat/offline.jpg") no-repeat scroll center left;
+}
+
+.block-content .ves-livechat-online{
+    background: url("../../images/livechat/online.jpg") no-repeat scroll center left;
+}
+
+.block-content .ves-livechat-invisible{
+    background: url("../../images/livechat/invisible.png") no-repeat scroll center left;
+}
+
+
+.ves_livechat-loading-box{display: block; width: 250px; padding: 20px 0;  position: fixed; top: 40%; left: 50%; margin-left: -125px;text-align: center;z-index: 99999999;}
+.ves_livechat-overlay{display: block; width: 100%; height: 100%; position: fixed;top: 0; left: 0; background: #222;opacity: 0.2;z-index: 99999998;}
+
+.form-livechat-box-create-box-content .header-box {
+    background: none repeat scroll 0 0 #4C66A4;
+}
+
+.form-livechat-box-create-box-content .header-box h2 {
+    color: #FFFFFF;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+}
+
+.form-livechat-box-create-box-content .content-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 30px 30px 0;
+    z-index: 100000;
+}
+.form-livechat-box-create-box-content .content-box textarea{height:40px;width: 97%;padding: 4px;}
+.form-livechat-box-create-box-content .content-box .input-box{width: 100%}
+.form-livechat-box-create-box-content .content-box .input-box input{height: 22px;width: 97%;padding: 4px;}
+.form-livechat-box-create-box-content .content-box .button-set{margin-top:20px;}
+.form-livechat-box-create-box-content .content-box .button-set button{
+    border:none;
+    width: 100%;
+    background: none repeat scroll 0 0 #3B5998;
+}
+.form-livechat-box-create-box-content .content-box .button-set button > span{
+    padding:5px;
+}
+.form-livechat-box-create-box-content .content-box .button-set button  span{
+    background: none repeat scroll 0 0 #3B5998;
+    border:none;
+}
+@-webkit-keyframes blink {
+    50% { background: rgba(207, 54, 44, 1); }
+}
+
+@-moz-keyframes blink {
+    50% { background: rgba(207, 54, 44, 1); }
+}
+
+@keyframes blink {
+    50% { background: rgba(207, 54, 44, 1); }
+}
+
+#ves-livechat-support .ves-tabs-chatlive .blink {
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-direction: normal;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: blink;
+    -moz-animation-timing-function: linear;
+
+    animation-direction: normal;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-name: blink;
+    animation-timing-function: linear;
+    /*
+    background-image: url("../../../images/livechat/blink.png");
+    background-repeat: no-repeat;
+    background-position: 5px 5px!important;
+    padding-left: 40px;
+    */
+}

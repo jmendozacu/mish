@@ -1,0 +1,316 @@
+<?php
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+<?php
+    // Get Quick Info attribute and content
+    $configData = Mage::getStoreConfig('product_view');
+    $quick_info_slot = $configData['info_settings']['quick_info_slot'];
+    $quick_info_content = $configData['info_settings']['quick_info_content'];
+    if ($quick_info_slot == 'disabled') {
+    $quick_info_title = 'disabled';
+    $quick_info_content = 'disabled';
+    } elseif (substr($quick_info_slot, 0, 4) == 'ATT_') {
+    $quick_info_slot = substr($quick_info_slot, 4);
+    $quick_info_title = $_product->getResource()->getAttribute($quick_info_slot)->getFrontendLabel();
+    $quick_value = $_product->getResource()->getAttribute($quick_info_slot)->getFrontend()->getValue($_product);
+    $quick_info_content = str_replace('{{value}}', $quick_value, $quick_info_content);
+    } elseif (substr($quick_info_slot, 0, 4) != 'ATT_') {
+    $staticBlock = Mage::getModel('cms/block')->load($quick_info_slot);
+    $quick_info_title = $staticBlock->getTitle();
+    $quick_value = $staticBlock->getContent();
+    $quick_info_content = str_replace('{{value}}', $quick_value, $quick_info_content);
+    };
+    // Get tab#1 attribute and content
+    $first_attribute_slot = $configData['info_settings']['first_attribute_slot'];
+    $first_attribute_content = $configData['info_settings']['first_attribute_content'];
+    // Get tab#2 attribute and content
+    $second_attribute_slot = $configData['info_settings']['second_attribute_slot'];
+    $second_attribute_content = $configData['info_settings']['second_attribute_content'];
+    // Get tab#3 attribute and content
+    $third_attribute_slot = $configData['info_settings']['third_attribute_slot'];
+    $third_attribute_content = $configData['info_settings']['third_attribute_content'];
+    // Get tab#4 attribute and content
+    $fourth_attribute_slot = $configData['info_settings']['fourth_attribute_slot'];
+    $fourth_attribute_content = $configData['info_settings']['fourth_attribute_content'];
+    // Get tab#5 attribute and content
+    $fifth_attribute_slot = $configData['info_settings']['fifth_attribute_slot'];
+    $fifth_attribute_content = $configData['info_settings']['fifth_attribute_content'];
+    // Check if reviews globally enabled
+    $configData = Mage::getStoreConfig('advanced');
+    $reviewsenabled = $configData['modules_disable_output']['Mage_Review'];
+    // Check if reviews enabled in extension
+    $configData = Mage::getStoreConfig('product_view');
+    $reviews = $configData['info_settings']['reviews'];
+    // Check if Hybrid ProductView extension installed, if not add tab default values
+    $productviewinstalled = 'No'; // Set to NO until we check
+    $modules = Mage::getConfig()->getNode('modules')->children();
+    $modulesArray = (array)$modules;
+    if(!isset($modulesArray['Rockettheme_ProductView'])) {
+    $quick_info_slot = 'short_description';
+    $quick_info_title = $_product->getResource()->getAttribute($quick_info_slot)->getFrontendLabel();
+    $quick_value = $_product->getResource()->getAttribute($quick_info_slot)->getFrontend()->getValue($_product);
+    $quick_info_content = $quick_value;
+    $first_attribute_slot = 'disabled';
+    $second_attribute_slot = 'additional';
+    $second_attribute_content = '{{value}}';
+    $third_attribute_slot = 'disabled';
+    $fourth_attribute_slot = 'disabled';
+    $fifth_attribute_slot = 'disabled';
+    $reviews = 1;
+    };
+    // Put tabs in array
+    $tabs_array = array($first_attribute_slot, $second_attribute_slot, $third_attribute_slot, $fourth_attribute_slot, $fifth_attribute_slot);
+    $tabs_content = array($first_attribute_content, $second_attribute_content, $third_attribute_content, $fourth_attribute_content, $fifth_attribute_content);
+    ?>
+<script>var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);</script>
+
+<div id="mobileproductview">
+<?php
+    $cookie = Mage::getModel("core/cookie");
+    $iphone = $cookie->get("iphone");
+    if($iphone == 'true') : ?>
+    <form action="<?php echo $this->getSubmitUrl($_product) ."?ios_action=addtocart" ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <?php else : ?>
+
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <?php endif; ?>
+    <div class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+    </div>
+
+    <div class="single-product-page">
+        <div class="row product-shop">
+
+            <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+            <div class="product-img-box">
+                <?php echo $this->getChildHtml('media') ?>
+            </div>
+
+            <?php if($iphone != 'true') : ?>
+                <div class="product small-12 columns">
+                    <?php $pname = $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                    <?php $subname = $_helper->productAttribute($_product, $_product->getSubName(), 'subname'); ?>
+                    <h5 class="product-subname"><?php echo ucwords(strtolower($subname))?></h5>
+                    <h1 class="product product-name"><?php echo  ucwords(strtolower($pname)); ?></h1>
+                </div>
+            <?php endif; ?>
+
+            <div class="small-12 columns">
+                <div class="small-12 columns">
+                    <?php if ($this->canEmailToFriend()): ?>
+                        <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+                    <?php endif; ?>
+                </div>
+
+                <div class="product">
+                    <?php echo $this->getChildHtml('alert_urls') ?>
+                    <?php echo $this->getChildHtml('product_type_data') ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
+                    <?php echo $this->getTierPriceHtml() ?>
+                    <?php echo $this->getChildHtml('extrahint') ?>
+                </div>
+
+                <?php if (!$this->hasOptions()): ?>
+                    <div class="add-to-box">
+                        <?php if ($_product->isSaleable()): ?>
+                            <?php echo $this->getChildHtml('addtocart') ?>
+                            <?php if ($this->helper('wishlist')->isAllow() || $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                <span class="or"><?php echo $this->__('OR') ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php echo $this->getChildHtml('addto') ?>
+                    </div>
+                    <?php echo $this->getChildHtml('extra_buttons') ?>
+                <?php elseif (!$_product->isSaleable()): ?>
+                    <div class="add-to-box">
+                        <?php echo $this->getChildHtml('addto') ?>
+                    </div>
+                <?php endif; ?>
+
+                <div id="va-addtocart">
+                    <div id="va-qty">
+                        Qty: <span>1</span> <i class="fa fa-angle-up"></i>
+                        <ul class="va-qty-drop-down">
+                            <li class="active">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li class="va-more"><input type="tel" placeholder="more"></li>
+                        </ul>
+                    </div>
+                    <?php if ($_product->isSaleable()): ?>
+                        <a class="va-add-to-cart" href="#_" onclick="productAddToCartForm.submit(this)">
+                            <span>Add to Bag </span>
+                            <i>
+                                <?php echo  Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol() ?>
+                            </i>
+                            <span class="va-price" data-original="<?php echo number_format($_product->getFinalPrice(), 2, '.', '')?>">
+                                <?php echo number_format($_product->getFinalPrice(), 2, '.', '')?>
+                            </span>
+                        </a>
+                    <?php else: ?>
+                        <a class="va-add-to-cart" href="#">
+                            <span>Out of Stock </span>
+                        </a>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ui-btn-inline ui-mini -->
+                <?php echo $this->getChildHtml('other'); ?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php endif; ?>
+
+                <div class="clearer"></div>
+                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                <?php endif; ?>
+            </div>
+        </div><!--product shop-->
+    </div><!--row-->
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+    //]]>
+</script>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Product Information') ?></h1>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+
+        <?php if ($quick_info_title != 'disabled' && $quick_value != ''): ?>
+            <div id="quick-info">
+                <h2><?php echo $this->__($quick_info_title) ?></h2>
+                <p><?php echo Mage::helper('cms')->getBlockTemplateProcessor()->filter($quick_info_content)?></p>
+            </div>
+        <?php endif; ?>
+
+        <div class="product-view">
+            <div id="product-tabs" data-role="collapsible-set" data-inset="false" data-content-theme="c">
+                <div class="product-tab ui-nodisc-icon ui-alt-icon" data-role="collapsible" data-collapsed="false" data-iconpos="right" data-collapsed-icon="carat-r" and data-expanded-icon="carat-d">
+                    <h2 class="ui-collapsible-heading">Description</h2>
+                    <?php $_description = $this->getProduct()->getDescription(); ?>
+                    <div class="std">
+                        <?php echo $this->getChildHtml('description') ?>
+                        <?php // echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
+                    </div>
+                </div>
+                <div class="product-tab ui-nodisc-icon ui-alt-icon" data-role="collapsible" data-iconpos="right" data-collapsed-icon="carat-r" and data-expanded-icon="carat-d">
+                    <h2 class="ui-collapsible-heading">Detail</h2>
+                    <div class="std">
+                        <?php echo $this->getChildHtml('additional') ?>
+                    </div>
+                </div>
+                <div class="product-tab ui-nodisc-icon ui-alt-icon" data-role="collapsible" data-iconpos="right" data-collapsed-icon="carat-r" and data-expanded-icon="carat-d">
+                    <h2 class="ui-collapsible-heading">Customer Reviews</h2>
+                    <div class="std">
+                        <?php echo $this->getLayout()->getBlock('product.info.product_additional_data')->toHtml() ?>
+                        <?php echo $this->getLayout()->getBlock('product.review.form')->toHtml() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $related_prods = $_product->getRelatedProductIds() ?>
+<?php if(count($related_prods)): ?>
+<div class="row page-divider">
+    <div class="small-12 columns ">
+        <h1><?php echo $this->__('You may also like') ?></h1>
+    </div>
+</div>
+
+<!-- Related Product Grid View -->
+<div class="row">
+    <ul class="ui-grid-a category-products-grid upsell-products">
+        <?php
+        $cookie = Mage::getModel("core/cookie");
+        $iphone = $cookie->get("iphone");
+        $bg_colors = array('s1','s2','s3','s4','s5');
+        $_productCollection = $related_prods;
+        $i=0; foreach ($_productCollection as $_prod):
+        $_prod = Mage::getModel('catalog/product')->load($_prod);
+        $_productNameStripped = $this->stripTags($_prod->getName(), null, true);?>
+
+        <li class="small-6 columns  ui-block-<?php echo  $i%2==0?'a':'b'?> grid-block">
+            <?php if($iphone == 'true'): ?>
+                <a class="product-link s <?php echo $bg_colors[array_rand($bg_colors)]?>" href="<?php echo  $_prod->getProductUrl() . '?ios_title=' . $_prod->getName() . '&ios_action=hidemenu' ?>">
+            <?php else: ?>
+                <a class="product-link d <?php echo $bg_colors[array_rand($bg_colors)]?>" href="<?php echo  $_prod->getProductUrl() ?>">
+            <?php endif; ?>
+                <img class="thumb" src="<?php echo  $this->helper('catalog/image')->init($_prod, 'small_image')->resize(223,319); ?>" alt="" />
+            </a>
+            <div class="info-sec small-12 columns">
+                <h2 class="product-name"><?php echo ucwords(strtolower($_productNameStripped))?></h2>
+                <div class="prices"><?php echo  $this->getPriceHtml($_prod, true); ?></div>
+            </div>
+        </li>
+        <?php $i++;endforeach; ?>
+    </ul>
+</div>
+<?php endif ?>
+
+<?php echo $this->getChildHtml('upsell_products') ?>
+
+<div class="row">
+    <div class="small-12 columns">
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+</div>
+
+</div>

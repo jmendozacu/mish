@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/magento_core.css</name><params/></action>
+            <!-- Icon Fonts  -->
+            <action method="addItem"><type>skin_css</type><name>font/style.css</name><params/></action>
+            <!-- Vendor CSS -->
+            <action method="addItem"><type>skin_css</type><name>vendor/waves/waves.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>vendor/slick/slick.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>vendor/slick/slick-theme.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>vendor/bootstrap-select/bootstrap-select.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>vendor/magnific-popup/magnific-popup.css</name><params/></action>
+            <!-- Custom CSS -->
+            <action method="addItem"><type>skin_css</type><name>css/style.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/style-colors.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/correction.css</name><params/></action>
+            <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+            <action method="addItem"><type>skin_css</type><name>vendor/rs-plugin/css/settings.css</name><params/></action>
+            <action method="addCss"><stylesheet helper="welldone/csscolors/getCss_Colors"/></action>
+            <action method="addItem" ifconfig="welldonecolors/general/custom_css"><type>skin_css</type><name>css/custom_changes.css</name><params/></action>
+            <!-- Vendor -->
+            <action method="addItem"><type>skin_js</type><name>vendor/modernizr/modernizr.js</name></action>
+
+            <!-- jQuery 1.10.1-->
+            <action method="addItem"><type>skin_js</type><name>vendor/jquery/jquery.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/favico-0.3.6.min.js</name></action>
+            <!-- RWD ColorSwatches -->
+            <action method="addItem"><type>skin_js</type><name>js/app.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/lib/imagesloaded.js</name></action>
+            <!-- Bootstrap 3-->
+            <action method="addItem"><type>skin_js</type><name>vendor/bootstrap/bootstrap.min.js</name></action>
+            <!-- Specific Page Vendor -->
+            <action method="addItem"><type>skin_js</type><name>vendor/waves/waves.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/slick/slick.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/bootstrap-select/bootstrap-select.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/parallax/jquery.parallax-1.1.3.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/waypoints/jquery.waypoints.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/waypoints/sticky.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/doubletaptogo/doubletaptogo.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/imagesloaded/imagesloaded.pkgd.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/countdown/jquery.plugin.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/countdown/jquery.countdown.min.js</name></action>
+            <!-- Custom -->
+            <action method="addItem"><type>skin_js</type><name>js/custom.js</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <action method="addBodyClass" ifconfig="welldone/general/favicon_with_count"><classname>favicon-countable</classname></action>
+            <action method="addBodyClass" ifconfig="welldone/general/site_width"  condition="1"><classname>boxed</classname></action>
+            <action method="addBodyClass" ifconfig="welldone/general/site_width"  condition="2"><classname>fullwidth</classname></action>
+            <action method="addBodyClass" ifconfig="welldone/general/site_width"  condition="3"><classname>wide</classname></action>
+
+            <reference name="before_body_end">
+                <!--<block type="core/template" name="loader_ajax" as="loader_ajax" template="welldone/loaders/loader_ajax.phtml" />-->
+                <block type="catalog/product_compare_sidebar"  name="catalog.compare.modal"  template="catalog/product/compare/sidebar.phtml"/>
+                <block type="core/template" name="modal_add_to_cart" as="modal_add_to_cart" template="before_body_end/modal_add_to_cart.phtml" />
+                <block type="core/template" name="modal_add_to_wishlist" as="modal_add_to_wishlist" template="before_body_end/modal_add_to_wishlist.phtml" />
+                <block type="core/template" name="wd_slider_init" as="wd_slider_init" template="slider/revolution_init.phtml" />
+                <block type="core/template" name="wd_slider_init"  template="quick_view/popup_modal.phtml" />
+
+            </reference>
+            <reference name="after_body_start">
+                <block type="core/template" name="ajax_loader" as="loader_body" template="after_body_start/body_loader.phtml" />
+                <block type="core/template" name="body_loader" as="loader_body" template="after_body_start/ajax_loader.phtml" />
+            </reference>
+        </reference>
+
+        <reference name="header">
+            <action method="setTemplate" ifconfig="welldonelayout/general/header" condition="1"><template>page/html/header.phtml</template></action>
+            <action method="setTemplate" ifconfig="welldonelayout/general/header" condition="2"><template>page/html/header_type_2.phtml</template></action>
+            <action method="setTemplate" ifconfig="welldonelayout/general/header" condition="3"><template>page/html/header.phtml</template></action>
+            <action method="setTemplate" ifconfig="welldonelayout/general/header" condition="4"><template>page/html/header_type_4.phtml</template></action>
+
+            <block type="directory/currency" name="currency" template="page/switch/currency.phtml" />
+            <action method="unsetChild" ifconfig="welldonelayout/sidebar/currency"><name>currency</name></action>
+
+            <action method="unsetChild" ifconfig="welldone/general/catalog_mode"><name>currency</name></action>
+            <block type="checkout/cart_sidebar" name="topcart" as="topcart" template="checkout/cart/topcart.phtml">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+            <action ifconfig="welldonelayout/sidebar/my_cart" method="unsetChild"><name>topcart</name></action>
+            <action ifconfig="welldone/general/catalog_mode" method="unsetChild" ><name>topcart</name></action>
+            <action ifconfig="welldonelayout/sidebar/language" method="unsetChild"><name>store_language</name></action>
+            <action ifconfig="welldonelayout/sidebar/search" method="unsetChild"><name>topSearch</name></action>
+            <action ifconfig="welldonelayout/sidebar/toplinks" method="unsetChild"><name>topLinks</name></action>
+            <action method="unsetChild" ifconfig="welldone/general/catalog_mode"><name>topLinks</name></action>
+            <block type="cms/block" name="wd_header_topline_right_links">
+                <action method="setBlockId"><block_id>wd_header_topline_right_links</block_id></action>
+            </block>
+
+            <block type="wdnavigation/megamenu" name="wd_megamenu" template="page/html/megamenu.phtml">
+                <block type="cms/block" name="wd_megamenu_html_right">
+                    <action method="setBlockId"><block_id>wd_megamenu_html_right</block_id></action>
+                </block>
+                <block type="cms/block" name="wd_megamenu_html_top">
+                    <action method="setBlockId"><block_id>wd_megamenu_html_top</block_id></action>
+                </block>
+                <block type="cms/block" name="wd_megamenu_html_btm">
+                    <action method="setBlockId"><block_id>wd_megamenu_html_btm</block_id></action>
+                </block>
+                <block type="cms/block" name="wd_megamenu_links_left">
+                    <action method="setBlockId"><block_id>wd_megamenu_links_left</block_id></action>
+                </block>
+                <block type="cms/block" name="wd_megamenu_links_right">
+                    <action method="setBlockId"><block_id>wd_megamenu_links_right</block_id></action>
+                </block>
+                <block type="cms/block" name="wd_megamenu_title">
+                    <action method="setBlockId"><block_id>wd_megamenu_title</block_id></action>
+                </block>
+                <action ifconfig="welldone/megamenu/right_html" method="unsetChild"><name>wd_megamenu_html_right</name></action>
+                <action ifconfig="welldone/megamenu/top_html" method="unsetChild"><name>wd_megamenu_html_top</name></action>
+                <action ifconfig="welldone/megamenu/btm_html" method="unsetChild"><name>wd_megamenu_html_btm</name></action>
+                <action ifconfig="welldone/megamenu/left_part" method="unsetChild"><name>wd_megamenu_links_left</name></action>
+                <action ifconfig="welldone/megamenu/right_part" method="unsetChild"><name>wd_megamenu_links_right</name></action>
+            </block>
+            <action ifconfig="welldonelayout/sidebar/topmenu" method="unsetChild"><name>wd_megamenu</name></action>
+            <block type="core/template" name="topSearch_inline" as="topSearch_inline" template="catalogsearch/form.mini_inline.phtml"/>
+            <!--header type 4-->
+            <block type="directory/currency" name="currency_header_type_4" template="page/switch/header_type_4/currency.phtml" />
+            <block type="page/switch" name="store_language_header_type_4" as="store_language_header_type_4" template="page/switch/header_type_4/languages.phtml"/>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild"><name>footer_newsletter</name></action>
+            <action method="unsetChild"><name>left.permanent.callout</name></action>
+            <action method="unsetChild"><name>left.newsletter</name></action>
+            <!--<block type="reports/product_viewed" after="-"  name="right.reports.product.viewed" template="reports/product_viewed.phtml" />-->
+            <block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist"  template="wishlist/sidebar.phtml" />
+            <block type="cms/block" name="wd_custom_block_left_sidebar">
+                <action method="setBlockId"><block_id>wd_custom_block_left_sidebar</block_id></action>
+            </block>
+            <action ifconfig="welldonelayout/sidebar/custom_block" method="unsetChild"><name>wd_custom_block_left_sidebar</name></action>
+            <action method="unsetChild" ifconfig="welldonelayout/sidebar/popular_tags"><name>tags_popular</name></action>
+            <action method="unsetChild" ifconfig="welldonelayout/sidebar/viewed"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild" ifconfig="welldonelayout/sidebar/wishlist"><name>wishlist</name></action>
+            <!--Vertical Menu-->
+            <block type="wdnavigation/vertical" name="wd_megamenu_vertical" template="page/html/megamenu_vertical.phtml"/>
+            <block type="cms/block" name="wd_left_column_banner">
+                <action method="setBlockId"><block_id>wd_left_column_banner</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_left_column_sale_products">
+                <action method="setBlockId"><block_id>wd_left_column_sale_products</block_id></action>
+            </block>
+        </reference>
+        <reference name="right">
+            <action method="unsetChild"><name>right.poll</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild"><name>wishlist</name></action>
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>right.permanent.callout</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+        <reference name="footer">
+            <action method="insert"><!-- this PHP class method sets the relationship -->
+                <block_name_to_insert>top.links</block_name_to_insert><!--use the block name in the layout, not the alias. See Mage_Core_Block_Abstract::insert() -->
+                <sort_relative_to_other_childname/><!-- empty val is fine here -->
+                <sort_before_or_after/><!-- not relevant -->
+                <alias>topLinks</alias><!-- because you are using the original alias, need to re-specify that here -->
+            </action>
+            <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml"/>
+            <action ifconfig="welldonelayout/sidebar/store" method="unsetChild"><name>store_switcher</name></action>
+            <block type="newsletter/subscribe" name="footer.newsletter" as="footer_newsletter" template="newsletter/subscribe.phtml"/>
+            <block type="cms/block" name="wd_footer_links">
+                <action method="setBlockId"><block_id>wd_footer_links</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_footer_custom_links">
+                <action method="setBlockId"><block_id>wd_footer_custom_links</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_footer_column_1_html">
+                <action method="setBlockId"><block_id>wd_footer_column_1_html</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_footer_column_2_html">
+                <action method="setBlockId"><block_id>wd_footer_column_2_html</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_footer_column_3_html">
+                <action method="setBlockId"><block_id>wd_footer_column_3_html</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_footer_contacts">
+                <action method="setBlockId"><block_id>wd_footer_contacts</block_id></action>
+            </block>
+            <action ifconfig="welldonelayout/sidebar/newsletter" method="unsetChild"><name>footer_newsletter</name></action>
+
+            <block type="directory/currency" name="currency_footer_mobile" template="page/switch/header_type_4/currency.phtml" />
+            <block type="page/switch" name="languages_footer_mobile"  template="page/switch/header_type_4/languages.phtml"/>
+        </reference>
+    </default>
+
+    <cms_index_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/jquery.cookie.js</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate" ifconfig="welldonelayout/general/header" condition="3"><template>page/html/header_type_3.phtml</template></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="newsletter/subscribe" name="newsletter_popup">
+                <action method="setTemplate" ifconfig="welldonelayout/newsletter/popup"><template>newsletter/popup.phtml</template></action>
+            </block>
+        </reference>
+    </cms_index_index>
+
+    <catalogsearch_advanced_index translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>right_currency</name></action>
+        </reference>
+    </catalogsearch_advanced_index>
+    <catalogsearch_result_index translate="label">
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild">
+                <alias>catalogsearch.leftnav</alias>
+            </action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="insert"><blockName>catalogsearch.leftnav</blockName></action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+        <reference name="search_result_list">
+            <action method="insert"><blockName>catalogsearch.leftnav</blockName></action>
+        </reference>
+        <reference name="search_result_list">
+            <block type="core/text_list" name="product_list.name.after" as="name.after">
+                <block type="core/template" name="product_list.swatches" template="configurableswatches/catalog/product/list/swatches.phtml" />
+            </block>
+            <block type="core/text_list" name="product_list.after" as="after">
+                <block type="configurableswatches/catalog_media_js_list" name="configurableswatches.media.js.list" />
+            </block>
+        </reference>
+    </catalogsearch_advanced_result>
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/elevatezoom/jquery.elevatezoom.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>vendor/magnific-popup/jquery.magnific-popup.min.js</name></action>
+            <action method="addItem" ifconfig="welldonelayout/product/media" condition="scroll"><type>skin_js</type><name>vendor/mousewheel/jquery.mousewheel.min.js</name></action>
+        </reference>
+        <reference name="alert.urls">
+            <remove name="addthis_sharetool"/>
+        </reference>
+        <reference name="product.info">
+            <block type="catalog/product_list_related" name="catalog.product.related" as="related_products" template="catalog/product/list/related.phtml" />
+            <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml">
+                <action method="setColumnCount"><columns>6</columns></action>
+                <action method="setItemLimit"><type>upsell</type><limit>6</limit></action>
+            </block>
+            <block type="review/product_view_list" name="reviews" as="reviews" template="review/product/view/list.phtml"  after="additional">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value"><value>Reviews</value></action>
+                <block type="review/form" name="product.review.form" as="review_form">
+                    <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                        <label>Review Form Fields Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                    </block>
+                </block>
+            </block>
+            <block type="sharingtool/share" name="addthis">
+                <action method="setTemplate"><template>addthis/sharingtool/share.phtml</template></action>
+            </block>
+            <block type="catalog/product_view_media" name="product.info.media.mobile" as="media_mobile" template="catalog/product/view/media_mobile.phtml"/>
+
+            <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value"><value>Description</value></action>
+            </block>
+            <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value"><value>Additional Information</value></action>
+            </block>
+        </reference>
+        <reference name="breadcrumbs">
+            <block type="inchoo_prevnext/links" name="inchoo.prevnext.links"  as="prev_next" template="inchoo/prevnext/links.phtml" />
+        </reference>
+        <reference name="product.info.media">
+            <block type="core/text_list" name="product.info.media.after" as="after" />
+        </reference>
+    </catalog_product_view>
+    <PRODUCT_TYPE_configurable>
+        <reference name="product.info.options.configurable">
+            <block type="core/text_list" name="product.info.options.configurable.renderers" as="attr_renderers">
+                <block type="configurableswatches/catalog_product_view_type_configurable_swatches" template="configurableswatches/catalog/product/view/type/options/configurable/swatches.phtml" />
+            </block>
+            <block type="core/text_list" name="product.info.options.configurable.after" as="after">
+                <block type="core/template" template="configurableswatches/catalog/product/view/type/configurable/swatch-js.phtml" />
+            </block>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <customer_account>
+        <reference name="left">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+        </reference>
+    </customer_account>
+    <checkout_onepage_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </checkout_onepage_success>
+    <contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="contactForm">
+            <block type="cms/block" name="wd_contact_information">
+                <action method="setBlockId"><block_id>wd_contact_information</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_contact_map">
+                <action method="setBlockId"><block_id>wd_contact_map</block_id></action>
+            </block>
+            <block type="cms/block" name="wd_contact_parallax">
+                <action method="setBlockId"><block_id>wd_contact_parallax</block_id></action>
+            </block>
+        </reference>
+    </contacts_index_index>
+    <customer_account_login>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+    </customer_account_login>
+    <customer_account_create>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+    </customer_account_create>
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/isotope/isotope.pkgd.min.js</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/isotope/isotope.pkgd.min.js</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_index>
+    <customer_account>
+        <reference name="left">
+            <remove name="catalog.compare.sidebar" />
+            <remove name="wd_custom_block_left_sidebar" />
+        </reference>
+    </customer_account>
+    <catalog_product_compare_index>
+        <reference name="before_body_end">
+            <remove name="loader_body" />
+        </reference>
+    </catalog_product_compare_index>
+    <wordpress_default>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/isotope/isotope.pkgd.min.js</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/layout" condition="left"><template>page/2columns-left.phtml</template></action>
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/layout" condition="right"><template>page/2columns-right.phtml</template></action>
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/grid" condition="1"><template>page/1column.phtml</template></action>
+        </reference>
+    </wordpress_default>
+    <wordpress_post_view>
+        <reference name="root">
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/layout_post" condition="content"><template>page/1column.phtml</template></action>
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/layout_post" condition="left"><template>page/2columns-left.phtml</template></action>
+            <action method="setTemplate"  ifconfig="welldonelayout/blog/layout_post" condition="right"><template>page/2columns-right.phtml</template></action>
+        </reference>
+    </wordpress_post_view>
+    <catalog_category_default>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/isotope/isotope.pkgd.min.js</name></action>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild">
+                <alias>catalog.leftnav</alias>
+            </action>
+        </reference>
+        <reference name="product_list">
+            <action method="insert"><blockName>catalog.leftnav</blockName></action>
+            <block type="core/text_list" name="product_list.name.after" as="name.after">
+                <block type="core/template" name="product_list.swatches" template="configurableswatches/catalog/product/list/swatches.phtml" />
+            </block>
+            <block type="core/text_list" name="product_list.after" as="after">
+                <block type="configurableswatches/catalog_media_js_list" name="configurableswatches.media.js.list" />
+            </block>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>vendor/isotope/isotope.pkgd.min.js</name></action>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild">
+                <alias>catalog.leftnav</alias>
+            </action>
+        </reference>
+        <reference name="product_list">
+            <action method="insert"><blockName>catalog.leftnav</blockName></action>
+            <block type="core/text_list" name="product_list.name.after" as="name.after">
+                <block type="core/template" name="product_list.swatches" template="configurableswatches/catalog/product/list/swatches.phtml" />
+            </block>
+            <block type="core/text_list" name="product_list.after" as="after">
+                <block type="configurableswatches/catalog_media_js_list" name="configurableswatches.media.js.list" />
+            </block>
+        </reference>
+    </catalog_category_layered>
+    <customer_account_logoutsuccess>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_logoutsuccess>
+    <customer_account_forgotpassword>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </customer_account_forgotpassword>
+    <catalog_seo_sitemap_category>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </catalog_seo_sitemap_category>
+    <catalog_seo_sitemap_product>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </catalog_seo_sitemap_product>
+    <checkout_onepage_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_onepage_success>
+    <checkout_multishipping>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping>
+    <checkout_multishipping_addresses>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_addresses>
+    <checkout_multishipping_shipping>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_shipping>
+    <sales_guest_form>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </sales_guest_form>
+    <checkout_multishipping_billing>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_billing>
+    <checkout_multishipping_address_selectbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_selectbilling>
+    <checkout_multishipping_address_newbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_newbilling>
+    <checkout_multishipping_overview>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_overview>
+    <checkout_multishipping_address_editshipping>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_editshipping>
+    <checkout_multishipping_address_editbilling>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_address_editbilling>
+    <checkout_multishipping_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </checkout_multishipping_success>
+    <opc_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </opc_index_index>
+    <opc_paypal_asklink>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column_boxed_content.phtml</template></action>
+        </reference>
+    </opc_paypal_asklink>
+    <cms_page>
+        <reference name="content">
+            <action method="unsetChild">
+                <alias>cms.wrapper</alias>
+            </action>
+            <block type="cms/page" name="cms_page"/>
+        </reference>
+    </cms_page>
+</layout>

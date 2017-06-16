@@ -1,0 +1,52 @@
+<?php
+$config = $this->getConfig();
+$customer = $this->getCustomer();
+?>
+<form action="<?php echo $this->getPostUrl()?>" method="POST" id="helpdesk-contact-form" class="helpdesk-contact-form">
+<div class="close" onclick="window.parent.helpdeskFormHide();">&times;</div>
+<div class="dropbox">
+    <h2 class="legend"><?php echo $config->getFormTitle() ?></h2>
+    <div class="inside-form">
+        <ul class="form-list">
+            <li class="email">
+                <label for="email" class="required"><?php echo $this->__("Email") ?><em>*</em></label>
+                <div class="input-box">
+                    <input name='email' id='email' class="input-text">
+                </div>
+            </li>
+            <li>
+                <label for="name" class="required"><?php echo $config->getSubjectTitle() ?><em>*</em></label>
+                <div class="input-box">
+                    <input name='name' id='name' class="input-text required-entry" placeholder="<?php echo $config->getSubjectPlaceholder() ?>" value='<?php echo $this->getSearchQuery()?>'>
+                </div>
+            </li>
+            <li>
+                <label for="message" class="required"><?php echo $config->getDescriptionTitle() ?><em>*</em></label>
+                <div class="input-box">
+                    <textarea name='message' id='message'  class="input-text required-entry" placeholder="<?php echo $config->getDescriptionPlaceholder() ?>"></textarea>
+                </div>
+            </li>
+            <?php if (!$customer): ?>
+            <li class="customer-name">
+                <label for="customer_name" class="required"><?php echo $this->__("Name") ?><em>*</em></label>
+                <div class="input-box">
+                    <input name='customer_name' id='customer_name' class="input-text required-entry">
+                </div>
+            </li>
+            <li class="customer-email">
+                <label for="customer_email" class="required"><?php echo $this->__("Your Email") ?><em>*</em></label>
+                <div class="input-box">
+                    <input name='customer_email' id='customer_email' class="input-text required-entry  validate-email">
+                </div>
+            </li>
+        	<?php endif; ?>
+        </ul>
+    </div>
+    <button type="submit" title="<?php echo $this->__("Submit") ?>" class="post-button"><?php echo $this->__("Submit") ?></button>
+</div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+var dataForm = new VarienForm('helpdesk-contact-form', true);
+//]]>
+</script>

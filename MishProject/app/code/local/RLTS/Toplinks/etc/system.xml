@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <rltsquare translate="label" module="toplinks">
+            <label>RLT-Square</label>
+            <sort_order>200</sort_order>
+        </rltsquare>
+    </tabs>
+    <sections>
+        <toplinks module="toplinks" translate="label">
+            <label>Manage Top Links</label>
+            <tab>rltsquare</tab>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <toplink_config>
+                    <label>Top Links Managment</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <myaccount translate="label">
+                            <label>Hide My Account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </myaccount>
+                        <mywishlist translate="label">
+                            <label>Hide My Wishlist</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </mywishlist>
+                        <mycart translate="label">
+                            <label>Hide My Cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </mycart>
+                        <checkout translate="label">
+                            <label>Hide Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </checkout>
+                        <loggedin translate="label">
+                            <label>Hide Log In</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </loggedin>
+                        <loggedout translate="label">
+                            <label>Hide Log Out</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If-yes hide links on toplinks section</comment>
+                        </loggedout>
+                    </fields>
+                </toplink_config>
+                <newlink_config>
+                    <label>New Custom Links on Top</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <new1 translate="label">
+                            <label>Add Top Link Label 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on Toplinks section.</comment>
+                        </new1>
+                        <newlink1 translate="label">
+                            <label>Link 1 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink1>
+                        <new2 translate="label">
+                            <label>Add Top Link Lable 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on Toplinks section.</comment>
+                        </new2>
+                        <newlink2 tarnslate="label">
+                            <label>Link 2 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink2>
+                        <new3 translate="label">
+                            <label>Add Top Link Lable 3</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on Toplinks section.</comment>
+                        </new3>
+                        <newlink3 tarnslate="label">
+                            <label>Link 3 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink3>
+                        <new4 translate="label">
+                            <label>Add Top Link Lable 4</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on Toplinks section.</comment>
+                        </new4>
+                        <newlink4 tarnslate="label">
+                            <label>Link 4 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink4>
+                        <new5 translate="label">
+                            <label>Add Top Link Lable 5</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on Toplinks section.</comment>
+                        </new5>
+                        <newlink5 tarnslate="label">
+                            <label>Link 5 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink5>
+                    </fields>
+                </newlink_config>
+                <footer_links>
+                    <label>Manage Footer Links</label>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>4</sort_order>
+                    <fields>
+                        <sitemap>
+                            <label>Hide Sitemap</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </sitemap>
+                        <searchterms>
+                            <label>Hide Search Terms</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </searchterms>
+                        <advancesearch>
+                            <label>Hide Advanced Search</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </advancesearch>
+                        <order_and_return>
+                            <label>Hide Order and Return</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </order_and_return>
+                        <contact_us>
+                            <label>Hide Contact Us</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </contact_us>
+                        <rss>
+                            <label>Hide RSS</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </rss>
+                    </fields>
+                </footer_links>
+                <newfooterlink>
+                    <label>New Custom Links on Footer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <new1 translate="label">
+                            <label>Add Footer Link Label 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on footer section.</comment>
+                        </new1>
+                        <newlink1 translate="label">
+                            <label>Link 1 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink1>
+                        <new2 translate="label">
+                            <label>Add Footer Link Lable 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on footer section.</comment>
+                        </new2>
+                        <newlink2 tarnslate="label">
+                            <label>Link 2 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink2>
+                        <new3 translate="label">
+                            <label>Add Footer Link Lable 3</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on footer section.</comment>
+                        </new3>
+                        <newlink3 tarnslate="label">
+                            <label>Link 3 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink3>
+                        <new4 translate="label">
+                            <label>Add Footer Link Lable 4</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on footer section.</comment>
+                        </new4>
+                        <newlink4 tarnslate="label">
+                            <label>Link 4 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink4>
+                        <new5 translate="label">
+                            <label>Add Footer Link Lable 5</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on footer section.</comment>
+                        </new5>
+                        <newlink5 tarnslate="label">
+                            <label>Link 5 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink5>
+                    </fields>
+                </newfooterlink>
+                <customer_links>
+                    <label>Customer Account Links</label>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>6</sort_order>
+                    <fields>
+                        <dashboard>
+                            <label>Hide Account Dashboard</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </dashboard>
+                        <account_info>
+                            <label>Hide Acount Information</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </account_info>
+                        <address_book>
+                            <label>Hide Address Book</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </address_book>
+                        <myorders>
+                            <label>Hide My Orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </myorders>
+                        <billing_agreement>
+                            <label>Hide Billing Agreement</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </billing_agreement>
+                        <recurring_profile>
+                            <label>Hide Recurring Profile</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </recurring_profile>
+                        <product_review>
+                            <label>Hide My Product Review</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </product_review>
+                        <mywishlist>
+                            <label>Hide My Wishlist</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </mywishlist>
+                        <myapplication>
+                            <label>Hide My Application</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </myapplication>
+                        <newsletter>
+                            <label>Hide Newsletter Subscription</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </newsletter>
+                        <mytags>
+                            <label>Hide My Tags</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </mytags>
+                        <mydownloadable_products>
+                            <label>Hide My Downloadable Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If- Yes hide link from footer.</comment>
+                        </mydownloadable_products>
+                    </fields>
+                </customer_links>
+                <customer_newlink_config>
+                    <label>New Custom Links on Customer Account Navigation</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>7</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <new1 translate="label">
+                            <label>Add New Link Label 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on account navigation section.</comment>
+                        </new1>
+                        <newlink1 translate="label">
+                            <label>Link 1 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink1>
+                        <new2 translate="label">
+                            <label>Add New Link Lable 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on account navigation section.</comment>
+                        </new2>
+                        <newlink2 tarnslate="label">
+                            <label>Link 2 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink2>
+                        <new3 translate="label">
+                            <label>Add New Link Lable 3</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on account navigation section.</comment>
+                        </new3>
+                        <newlink3 tarnslate="label">
+                            <label>Link 3 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink3>
+                        <new4 translate="label">
+                            <label>Add New Link Lable 4</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on account navigation section.</comment>
+                        </new4>
+                        <newlink4 tarnslate="label">
+                            <label>Link 4 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink4>
+                        <new5 translate="label">
+                            <label>Add New Link Lable 5</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Label will be showing on account navigation section.</comment>
+                        </new5>
+                        <newlink5 tarnslate="label">
+                            <label>Link 5 URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Use CMS page url key here.</comment>
+                        </newlink5>
+                    </fields>
+                </customer_newlink_config>
+            </groups>
+        </toplinks>
+    </sections>
+</config>

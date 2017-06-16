@@ -1,0 +1,25 @@
+<?php
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+
+-- DROP TABLE IF EXISTS {$this->getTable('vendorsvacation/vacation')};
+CREATE TABLE IF NOT EXISTS {$this->getTable('vendorsvacation/vacation')} (
+  `vacation_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vendor_id` int(11) unsigned NOT NULL,
+  `message` TEXT NOT NULL,
+  `date_from` DATE NOT NULL,
+  `date_to` DATE NOT NULL,
+  `vacation_status` SMALLINT(6) NOT NULL DEFAULT 1,
+  `product_status` SMALLINT(6) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`vacation_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+    ");
+
+
+
+$installer->endSetup(); 

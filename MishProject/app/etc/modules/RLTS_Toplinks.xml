@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <RLTS_Toplinks>
+            <active>true</active>
+            <codePool>local</codePool>
+        </RLTS_Toplinks>
+    </modules>
+</config>

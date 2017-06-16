@@ -1,0 +1,29 @@
+<?php
+$collection = $this->getCategoryCollection();
+?>
+<div class="box-account">
+    <div class="box-head">
+        <h2><?php echo $this->__("Categorys") ?></h2>
+    </div>
+<?php if ($collection->count()):?>
+    <table class="data-table" id="category-table">
+        <thead>
+            <tr class="first last">
+                <th><?php echo $this->__("ID") ?></th>
+                <th><?php echo $this->__("Title") ?></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php foreach($collection as $category):?>
+			<tr>
+				<td><?php echo $category->getId() ?></td>
+			    <td><a href="<?php echo $category->getUrl()?>"><?php echo $category->getName() ?></a></td>
+			</tr>
+<?php endforeach?>
+		</tbody>
+	</table>
+    <script type="text/javascript">decorateTable('category-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__("There are no Categorys") ?></p>
+<?php endif;?>
+</div>

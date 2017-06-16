@@ -1,0 +1,9 @@
+<?php if($this->isEnable()):?>
+<ul>
+	<li>
+		<div class="left ves-livechat-status <?php echo $this->getClassStatus() ?>">
+            <a href="javascript:void(0)" id="ves_vendor_livechat_status_sidebar_<?php echo $this->getVendorId() ?>" onclick="<?php echo $this->getOnClickLink() ?>"><?php echo $this->__("Chat Now!");?></a>
+        </div>
+	</li>
+</ul>
+<?php endif ?>

@@ -1,0 +1,180 @@
+<form id="new-map-address-form" method="post" action="<?php echo $this->getUrlNew()  ?>">
+    <div class="field" >
+        <label for = "map_title"><?php echo $this->__("Title : ") ?></label>
+        <input type="text" name="title" id="map_title" class="input-text required-entry local-validation"/>
+    </div>
+    <div class="field">
+        <label for = "map_telephone"><?php echo $this->__("Telephone : ") ?></label>
+        <input type="text" name="telephone" id="map_telephone" class="input-text required-entry local-validation"/>
+    </div>
+    <div class="field">
+        <label for="map_city"><?php echo $this->__('City')?></label>
+        <input type="text" name="city"  title="<?php echo $this->__('City') ?>"  class="input-text required-entry local-validation" id="map_city" />
+    </div>
+    <div class="field">
+        <label for="map_region_id"><?php echo $this->__('State/Province')?></label>
+        <select id="map_region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="local-validation validate-select" style="display:none;">
+                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+        </select>
+        <input type="text" id="map_region" name="region"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+    </div>
+    <div class="field">
+        <label for="map_country_id"><?php echo $this->__('Country')?> :</label>
+        <select id="map_country_id" name="country_id" title="<?php echo $this->__('Country') ?>" class="local-validation validate-select">
+            <option value=""><?php echo $this->__('Please select') ?></option>
+            <?php foreach($this->getCountryCollection() as $country ) : ?>
+                <option value="<?php echo $country->getId() ?>"><?php echo $country->getName() ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="field">
+        <label for="map_postcode"><?php echo $this->__('Zip')?></label>
+        <input type="text" name="postcode"  title="<?php echo $this->__('Postcode') ?>" class="input-text required-entry validate-zip-international local-validation" id="map_postcode" />
+    </div>
+    <div class="field">
+        <label for = "map_address"><?php echo $this->__("Address : ") ?></label>
+        <textarea  name="address" id="map_address" class="input-text required-entry local-validation" /></textarea>
+    </div>
+    <div class="field">
+        <label for="map_attribute"><?php echo $this->__('Select Attributes')?></label>
+        <select id="map_attribute" name="attribute[]" title="<?php echo $this->__('Attribute') ?>" class="local-validation validate-select" multiple>
+            <?php foreach($this->getOptionTypeMap() as $key => $option) : ?>
+                <option value="<?php echo $key ?>"><?php echo $option ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="field">
+        <label for = "qqfile"><?php echo $this->__("Logo : ") ?></label>
+         <div class="input-box" id="qqfile" >
+        </div>
+    </div>
+    <input type="hidden" name="position" id="map_position" class="input-text"/><br />
+    <input type="hidden" name="logo" id="map_logo" class="input-text"/><br />
+    <button class="scalable save" onclick="newMap.submit()" type="button" title="Reset"><span><span><?php echo Mage::helper("vendorsmap")->__("Save") ?></span></span></button>
+    <button class="scalable" onclick="cancelForm()" type="button" title="Cancel"><span><span><?php echo Mage::helper("vendorsmap")->__("Cancel") ?></span></span></button>
+</form>
+<script type="text/javascript">
+    new RegionUpdater('map_country_id', 'map_region', 'map_region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+    var newMap = new varienForm('new-map-address-form', true);
+    newMap.submit = function() {
+        var form = this.form;
+        if (this.validator.validate()) {
+            try {
+                $("new-map-address-form").request({
+                    method: 'post',
+                    onSuccess: function(transport) {
+                        try {
+                            if (transport.responseText.isJSON()) {
+                                var response = transport.responseText.evalJSON();
+                                if(response.redirect) {window.location = (response.redirect);return;}
+                                if(response.success){
+                                    if(response.logo != null && response.logo != "") deleteLogo(response.logo,true);
+                                    $('address_list').update(response.list);
+                                    var latlng = new google.maps.LatLng(response.position_lat,response.position_lng);
+                                    var marker = new google.maps.Marker({
+                                            position: latlng,
+                                            map: map,
+                                            draggable:false,
+                                         });
+                                    markers.push(marker);
+                                    messages.push(new Array(response.title,response.address,response.city,response.region,response.country,response.telephone,response.postcode));
+                                    new_markers.setMap(null);
+                                    attachSecretMessage(marker, messages.length -1)
+                                    $('new-map-address').hide();
+                                    $('new-map-address-form').reset();
+                                    findMapAddress(response.position_lat,response.position_lng,messages.length - 1);
+                                    $$('#address_list input[type="radio"]').each(function(c){
+                                              if($(c).value == messages.length - 1) $(c).checked = true ;
+                                    });
+                                }else{
+                                    alert(response.msg);
+                                }
+                            }else{
+                                alert(transport.responseText);
+                            }
+                        }catch(e){console.log(e);}
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }.bind(newMap);
+
+    $('map_address').observe('keyup', addresstoKeyup);
+    function addresstoKeyup(event){
+        var title  =  $('map_address').value;
+        $('map-marker-address').update(title);
+    }
+
+    $('map_title').observe('keyup', titletoKeyup);
+    function titletoKeyup(event){
+        var title  =  $('map_title').value;
+        $('map-marker-title').update(title);
+    }
+
+    $('map_telephone').observe('keyup', telephonetoKeyup);
+    function telephonetoKeyup(event){
+        var title  =  $('map_telephone').value;
+        $('map-marker-telephone').update(title);
+    }
+
+
+    $('map_postcode').observe('keyup', postcodetoKeyup);
+    function postcodetoKeyup(event){
+        var title  =  $('map_postcode').value;
+        $('map-marker-postcode').update(title);
+    }
+
+    $('map_city').observe('keyup', citytoKeyup);
+    function citytoKeyup(event){
+        var title  =  $('map_city').value;
+        $('map-marker-city').update(title);
+    }
+
+    $('map_region').observe('keyup', regiontoKeyup);
+    function regiontoKeyup(event){
+        var title  =  $('map_region').value;
+        $('map-marker-region').update(title);
+    }
+
+    $('map_region_id').observe('change', regionidtoKeyup);
+    function regionidtoKeyup(event){
+        var option = this.select('option:selected').first();
+        var title  = option.readAttribute("title");
+        $('map-marker-region').update(title);
+    }
+
+    $('map_country_id').observe('change', countrytoKeyup);
+    function countrytoKeyup(event){
+        var option = this.select('option:selected').first();
+        var title  = option.innerHTML;
+        $('map-marker-country').update(title);
+    }
+
+    $j(document).ready(function() {
+        var thumbnailuploader = new qq.FileUploader({
+            element: $j('#qqfile')[0],
+            action: '<?php echo $this->getUrlUpload() ?>',
+            debug: true,
+            multiple: false,
+            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+            sizeLimit: 300000,
+            uploadButtonText: '<i class="icon-plus icon-white"></i> Select Files',
+            onComplete: function(id, fileName, responseJSON) {
+                if (responseJSON.success) {
+                    $j(".qq-upload-button").hide();
+                    $j(".qq-upload-file").hide();
+                    $j(".qq-upload-size").hide();
+                    var image_url=responseJSON["image_url"];
+                    var filename=responseJSON["filename"];
+                    $j('#qqfile').append(responseJSON["html"]);
+                    $j('.qq-upload-failed-text').hide();
+                    $j("#map-marker-logo").html('<img src="'+image_url+'" width="100" />');
+                    document.getElementById('map_logo').value = filename;
+                }
+            }
+        });
+        //alert(data);
+    });
+</script>

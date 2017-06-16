@@ -1,0 +1,77 @@
+<?php
+/**
+ *
+ * Overrides template/catalog/category/view.phtml
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<!-- <div class="page-title category-title" data-role="header">
+    <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+        <a href="<?php //echo $this->getRssLink() ?>" class="link-rss"><?php //echo $this->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+        <h1><?php //echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+</div> -->
+
+<!-- <div class="crumbcontainer">
+    <?php //echo $this->getLayout()->getBlock('breadcrumbs')->toHtml() ?>
+</div> -->
+<div class="clear"></div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if($_imgUrl): ?>
+    <?php echo $_imgHtml ?>
+<?php endif; ?>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <!-- <div class="category-description std">
+        <?php // echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div> -->
+<?php endif; ?>
+
+
+<?php
+$subCategories = Mage::registry('current_category')->getChildrenCategories();
+$configData = Mage::getStoreConfig('hybrid_mobile');
+$catLevels = (int) $configData['menu_settings']['cat_depth'];
+?>
+<?php if($catLevels == 3 && count($subCategories)): ?>
+    <ul>
+    <?php foreach($subCategories as $subCategory): ?>
+        <li>
+            <div class="page-title">
+                <h1><?php echo  $subCategory->getName() ?></h1>
+            </div>
+            <?php $subSubCategories= $subCategory->getChildrenCategories(); ?>
+            <?php if (count($subSubCategories)): ?>
+                <ul id="mobile-menu" data-role="listview">
+                    <?php foreach($subSubCategories as $subSubCategory): ?>
+                        <li><a href="<?php echo  $subSubCategory->getUrl() ?>"><?php echo  $subSubCategory->getName() ?></a></li>
+                    <?php endforeach ?>
+                </ul>
+            <?php endif ?>
+        </li>
+    <?php endforeach ?>
+    </ul>
+<?php elseif($this->isContentMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+<?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>

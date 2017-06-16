@@ -1,0 +1,402 @@
+<?php
+
+$request=$this->getRequestData();
+$status=$this->getStatus();
+$state =$this->getState();
+$types=$this->getType();
+$stores=$this->getStore();
+$reason=$this->getReason();
+$pack = $this->getPack();
+?>
+<div class="request_customer_tabs">
+    <?php if($this->getTitleCustomerTab()): ?>
+        <h3><?php echo $this->getTitleCustomerTab() ?></h3>
+    <?php endif ?>
+    <ul id="request_customer_tabs" class="request_tabs">
+        <li>
+            <div class="label"><span><?php echo $this->__('Name');?></span></div>
+            <div class="value" id="value_name" ><span><?php echo $this->getCustomerLink() ?></span></div>
+        </li>
+        <li>
+            <div class="label"><span><?php echo $this->__('Email');?><span class="required"><?php echo $this->__('*') ;?></span></span></div>
+            <div class="value" id="value-email" ><span><?php echo $request->getData('customer_email');?></span></div>
+        </li>
+        <?php echo $this->getChildHtml('request_customer_tabs_before')?>
+    </ul>
+</div>
+
+<?php if($this->displayVendorTab()): ?>
+    <?php if($this->getTitleVendorTab()): ?>
+        <h3><?php echo $this->getTitleVendorTab() ?></h3>
+    <?php endif ?>
+    <ul id="request_customer_tabs" class="request_tabs">
+        <li>
+            <div class="label"><span><?php echo $this->__('Title');?></span></div>
+            <div class="value" id="value_name" ><span><?php echo $this->getVendorLink() ?></span></div>
+        </li>
+        <li>
+            <div class="label"><span><?php echo $this->__('Email');?><span class="required"><?php echo $this->__('*') ;?></span></span></div>
+            <div class="value" id="value-email" ><span><?php echo $this->getVendorEmail();?></span></div>
+        </li>
+        <?php echo $this->getChildHtml('request_vendor_tabs_before')?>
+    </ul>
+<?php endif ;?>
+
+<div class="request_infomation_tabs">
+    <?php if($this->getTitleRequestTab()): ?>
+        <h3><?php echo $this->getTitleRequestTab() ?></h3>
+    <?php endif ?>
+    <ul id="request_information_tabs" class="request_tabs">
+        <?php /*
+        <li <?php if($this->isEnableEditStatus()): ?>class="apply-update"<?php endif?>>
+            <div class="label"><span><?php echo $this->__('Status');?></span></div>
+            <div class="value" id="value-status" ><span><?php echo Mage::getModel('vendorsrma/source_status')->getTitleById($request->getData('status')); ?></span></div>
+            <div class="value edit-box" id="edit-box-status" style="display:none">
+                <select name="status" id="status" style="width: 190px;" default="<?php echo $request->getData('status')?>">
+                    <?php foreach($status as $key=>$value):?>
+                        <option value="<?php echo $key ?>" <?php if($request->getData('status')==$key) echo "selected"?>><?php echo $value?></option>
+                    <?php endforeach;?>
+                </select>
+                <a class="rule-chooser-trigger" href="javascript:void(0)" rel="status">
+                    <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                </a>
+                <a class="rule-param-apply" href="javascript:void(0)" rel="status">
+                    <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                </a>
+            </div>
+            <?php if($this->isEnableEditStatus()): ?>
+                <div class="edit-field">
+                    <a class="rule-param-edit" href="javascript:void(0)">
+                        <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                    </a>
+                </div>
+            <?php endif?>
+        </li>
+        */ ?>
+        <li <?php if($this->isEnableEditState()): ?>class="apply-update"<?php endif?>>
+            <div class="label"><span><?php echo $this->__('State');?></span></div>
+            <div class="value" id="value-state" ><span><?php echo Mage::getModel('vendorsrma/option_state')->getTitleByKey($request->getData('state'),$request->getData('flag_state')); ?></span></div>
+            <div class="value edit-box" id="edit-box-state" style="display:none">
+                <select name="state" id="state" style="width: 190px;" default="<?php echo $request->getData('state')?>">
+                
+                    <?php foreach($state as $key=>$value):?>
+                        <option value="<?php echo $key ?>" <?php if($request->getData('state')==$key) echo "selected"?>><?php echo $value?></option>
+                    <?php endforeach;?>
+                    
+                </select>
+                <a class="rule-chooser-trigger" href="javascript:void(0)" rel="state">
+                    <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                </a>
+                <a class="rule-param-apply" href="javascript:void(0)" rel="state">
+                    <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                </a>
+            </div>
+            <?php if($this->isEnableEditState()): ?>
+                <div class="edit-field">
+                    <a class="rule-param-edit" href="javascript:void(0)">
+                        <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                    </a>
+                </div>
+            <?php endif?>
+        </li>
+        
+        <li <?php if($this->isEnableEditType()): ?>class="apply-update"<?php endif?>>
+            <div class="label"><span><?php echo $this->__('Type');?></span></div>
+            <div class="value" id="value-priority" ><span><?php echo Mage::getModel('vendorsrma/source_type')->getTitleById($request->getData('type'))?></span></div>
+            <div class="value edit-box" id="edit-box-type" style="display:none">
+                <select name="type" id="type" style="width: 190px;" default="<?php echo $request->getData('type')?>">
+                    <?php foreach($types as $key=>$value):?>
+                        <option value="<?php echo $key ?>" <?php if($request->getData('type')==$key) echo "selected"?>><?php echo $value?></option>
+                    <?php endforeach;?>
+                </select>
+                <a class="rule-chooser-trigger" href="javascript:void(0)" rel="type">
+                    <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt=<?php echo $this->__('Apply') ?> src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                </a>
+                <a class="rule-param-apply" href="javascript:void(0)" rel="type">
+                    <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                </a>
+            </div>
+            <?php if($this->isEnableEditType()): ?>
+                <div class="edit-field">
+                    <a class="rule-param-edit" href="javascript:void(0)">
+                        <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                    </a>
+                </div>
+            <?php endif?>
+        </li>
+
+        <?php if(Mage::helper('vendorsrma/config')->allowReasons()): ?>
+            <?php if(Mage::helper('vendorsrma/config')->enableReasons()): ?>
+            <li <?php if($this->isEnableEditReason()): ?>class="apply-update"<?php endif?>>
+                <div class="label"><span><?php echo $this->__('Reason');?></span></div>
+                <div class="value" id="value-reason"  ><span><?php echo Mage::getModel('vendorsrma/source_reason')->getTitleById($request->getData('reason'));?></span></div>
+                <div class="value edit-box" id="edit-box-reason" style="display:none">
+                    <select name="reason" id="reason" style="width: 190px;;" default="<?php echo $request->getData('reason')?>">
+                        <option value=""><?php echo Mage::helper('vendorsrma')->__('--- Select an Reason ---') ?></option>
+                        <?php foreach($reason as $key=>$value):?>
+                            <option value="<?php echo $key ?>" <?php if($request->getData('reason')==$key) echo "selected"?>><?php echo $value?></option>
+                        <?php endforeach;?>
+                    </select>
+                    <a class="rule-chooser-trigger" href="javascript:void(0)" rel="reason">
+                        <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                    </a>
+                    <a class="rule-param-apply" href="javascript:void(0)" rel="reason">
+                        <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                    </a>
+                </div>
+                <?php if($this->isEnableEditReason()): ?>
+                    <div class="edit-field">
+                        <a class="rule-param-edit" href="javascript:void(0)">
+                            <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                        </a>
+                    </div>
+                <?php endif?>
+            </li>
+            <?php endif?>
+            <?php if(Mage::helper('vendorsrma/config')->allowOtherOptionReason()): ?>
+                <li <?php if($this->isEnableEditReason()): ?>class="apply-update"<?php endif ?> >
+                    <div class="label"><span><?php echo $this->__('Other Reason');?></span></div>
+                    <div class="value" id="value-reason"  ><span><?php echo $request->getData('reason_detail');?></span></div>
+                    <div class="value edit-box" id="edit-box-reason-detail" style="display:none">
+                        <input type="text" name="request[reason_detail]" class="input-text" id="reason_detail" value="<?php echo $request->getData('reason_detail')?>" />
+                        <a class="rule-chooser-trigger" href="javascript:void(0)" rel="reason_detail">
+                            <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                        </a>
+                        <a class="rule-param-apply" href="javascript:void(0)" rel="reason">
+                            <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                        </a>
+                    </div>
+                    <?php if($this->isEnableEditReason()): ?>
+                        <div class="edit-field">
+                            <a class="rule-param-edit" href="javascript:void(0)">
+                                <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                            </a>
+                        </div>
+                    <?php endif?>
+                </li>
+            <?php endif?>
+        <?php endif?>
+        <li <?php if($this->isEnableEditPack()): ?>class="apply-update"<?php endif?>>
+            <div class="label"><span><?php echo $this->__('Package Opened');?></span></div>
+            <div class="value" id="value-package-opened"  ><span><?php echo Mage::getModel('vendorsrma/option_pack')->getTitleByKey($request->getData('package_opened'));?></span></div>
+            <div class="value edit-box" id="edit-box-package-opened" style="display:none">
+                <select name="package_opened" id="package_opened" style="width: 190px;;" default="<?php echo $request->getData('package_opened')?>">
+                    <?php foreach($pack as $key=>$value):?>
+                        <option value="<?php echo $key ?>" <?php if($request->getData('package_opened')==$key) echo "selected"?>><?php echo $value?></option>
+                    <?php endforeach;?>
+                </select>
+                <a class="rule-chooser-trigger" href="javascript:void(0)" rel="package_opened">
+                    <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                </a>
+                <a class="rule-param-apply" href="javascript:void(0)" rel="package_opened">
+                    <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+                </a>
+            </div>
+            <?php if($this->isEnableEditPack()): ?>
+                <div class="edit-field">
+                    <a class="rule-param-edit" href="javascript:void(0)">
+                        <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                    </a>
+                </div>
+            <?php endif?>
+        </li>
+
+
+        <li <?php if($this->isEnableEditTracking()): ?>class="apply-update"<?php endif?>>
+            <div class="label"><span><?php echo $this->__('Tracking Code');?></span></div>
+            <div class="value" id="value_tracking_code" ><span><?php echo $request->getData('tracking_code') ?></span></div>
+            <div class="value edit-box" id="edit-box-tracking_code" style="display:none" >
+                <input type="text" class=" input-text required-entry" style="width:250px;" value="<?php echo $request->getData('tracking_code') ?>" name="tracking_code" id="tracking_code" autocomplete="off" />
+                <a class="rule-chooser-trigger" href="javascript:void(0)" rel="tracking_code">
+                    <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+                </a>
+                <a class="rule-param-apply" href="javascript:void(0)" rel="tracking_code">
+                    <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif')  ?> ">
+                </a>
+            </div>
+            <?php if($this->isEnableEditTracking()): ?>
+                <div class="edit-field">
+                    <a class="rule-param-edit" href="javascript:void(0)">
+                        <img class="v-middle" title="<?php echo $this->__('Edit') ?>" alt="<?php echo $this->__('Edit') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/edit_ticket_info.gif') ?> ">
+                    </a>
+                </div>
+            <?php endif?>
+        </li>
+
+        <li>
+            <div class="label"><span><?php echo $this->__('Related order');?></span></div>
+            <div class="value" id="value-order" ><span><?php echo $this->getOrderLink() ?></span></div>
+        </li>
+
+        <li>
+            <div class="label"><span><?php echo $this->__('Created Time');?></span></div>
+            <div class="value" id="value-order" ><span><?php echo Mage::getModel('core/date')->date('F j, Y, g:i a',$request->getData('created_at')) ?></span></div>
+        </li>
+
+        <li>
+            <div class="label"><span><?php echo $this->__('Update Time');?></span></div>
+            <div class="value" id="value-order" ><span><?php echo Mage::getModel('core/date')->date('F j, Y, g:i a',$request->getData('update_at')) ?></span></div>
+        </li>
+    </ul>
+
+</div>
+<?php echo $this->getChildHtml('before_information_end') ?>
+
+
+<?php if($this->displayNoteTab()): ?>
+<div class="request_note_tabs">
+    <?php if($this->getTitleNoteTab()): ?>
+        <h3><?php echo $this->getTitleNoteTab() ?></h3>
+    <?php endif ?>
+    <div id="request_note_tabs_action" style="display:none">
+        <a class="rule-chooser-trigger" href="javascript:void(0)" rel="note">
+            <img class="v-middle rule-chooser-trigger" title="<?php echo $this->__('Apply') ?>" alt="<?php echo $this->__('Apply') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_apply.gif') ?>">
+        </a>
+        <a class="rule-param-apply" href="javascript:void(0)">
+            <img class="v-middle" title="<?php echo $this->__('Cancel') ?>" alt="<?php echo $this->__('Cancel') ?>" src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/rule_component_remove.gif') ?> ">
+        </a>
+    </div>
+    <div id="request_note_tabs_label">
+        <span><?php if($request->getData('note') && $request->getData('note')!= '') echo "<pre>".$request->getData('note').'</pre>';else echo $this->__('<span class="add-notes">Click to add notes</span>')?> </span>
+    </div>
+    <div id="request_note_tabs_content" class="value edit-box"  style="display:none" >
+        <textarea class="input-text" name="ticket[note]" id="note" style = "width:307px; min-height:200px;padding: 15px;" ><?php echo $request->getData('note') ?></textarea>
+    </div>
+</div>
+<?php endif ; ?>
+<?php echo $this->getChildHtml('end_tabs') ?>
+
+<script type="text/javascript">
+    Ajax.Responders.unregister(varienLoaderHandler.handler);
+    var loader_id = "loading-mask-request";
+
+    if($('request_note_tabs_label')) {
+        $('request_note_tabs_label').observe('click', function () {
+            this.hide();
+            $('request_note_tabs_content').show();
+            $('request_note_tabs_action').show();
+            $('request_note_tabs_content').down().focus();
+            $$('#request_note_tabs_action .rule-param-apply').each(function (a) {
+                a.observe('click', function () {
+                    this.parentNode.hide();
+                    $('request_note_tabs_label').show();
+                    $('request_note_tabs_content').hide();
+                    $('note').value = $('note').defaultValue;
+                });
+            });
+        });
+    }
+    $$('#request_note_tabs_action a.rule-chooser-trigger').each(function(a){
+        a.observe('click',function(){
+            var node='note';
+            var value=$(node).value;
+            if(value == "" || value == null) {
+                alert("Please select item");
+                return;
+            }
+            var id=<?php echo $request->getId() ?>;
+            new Ajax.Request('<?php echo $this->getUrlUpdate() ?>', {
+                method:'post',
+                parameters:{node: node,id : id,value:value},
+                onCreate: function(obj) {
+                    Element.show("loading-mask-request");
+                },
+                onComplete: function (transport) {
+                    Element.hide("loading-mask-request");
+                    $('request_note_tabs_action').hide();
+                    $('request_note_tabs_label').show();
+                    $('request_note_tabs_content').hide();
+                },
+                onSuccess: function(transport) {
+                    var response = transport;
+                    $('request_note_tabs_label').innerHTML='<pre>'+response.responseText+'</pre>';
+                },
+            });
+        });
+    });
+    $$('.request_tabs li.apply-update .edit-field').each(function(div){
+        div.observe('click',function(){
+            //this.hide();
+            this.parentNode.select('.edit-field').first().hide()
+            this.parentNode.select('.edit-box').first().show();
+            this.parentNode.select('.edit-box').first().addClassName('active');
+            this.parentNode.select('div.value').first().hide();
+        });
+
+    });
+    $$('.request_tabs .apply-update').each(function(li){
+
+        li.select('a.rule-param-apply').first().observe('click',function(){
+            li.select('div.value').first().show();
+            li.select('.edit-box').first().hide();
+            li.select('.edit-field').first().show();
+            var node=this.getAttribute('rel');
+            var select= $(node).getAttribute('default');
+            if(select){
+                $$('#'+node+' option').each(function(o) {
+                    if(o.readAttribute('value') == select) {
+                        o.selected = true;
+                        throw $break;
+                    }
+                });
+            }
+            else{
+                $(node).value=$(node).defaultValue;
+            }
+        });
+        li.select('a.rule-chooser-trigger').first().observe('click',function(){
+            var node=this.getAttribute('rel');
+            var value=$(node).value;
+
+            if(value == "" || value == null) {
+               // alert("Please select item");
+               // return;
+            }
+
+            var id=<?php echo $request->getId() ?>;
+            new Ajax.Request('<?php echo $this->getUrlUpdate() ?>', {
+                method:'post',
+                parameters:{node: node,id : id,value:value},
+                onCreate: function(obj) {
+                    Element.show("loading-mask-request");
+                },
+                onComplete: function (transport) {
+                    Element.hide("loading-mask-request");
+                    li.select('div.value').first().show();
+                    li.select('.edit-box').first().hide();
+                    li.select('.edit-field').first().show();
+                },
+                onSuccess: function(transport) {
+                    var response = transport;
+                    switch(node){
+                        case 'customer_id':
+                            var data=response.responseText.evalJSON();
+                            if(data.order_id == true){
+                                $('assign-to-order-note').hide();
+                            }
+                            else{
+                                $('assign-to-order-note').show();
+                            }
+                            $('value_name').innerHTML='<span>'+data.url+'</span>';
+                            li.select('div.value').first().innerHTML='<span>'+data.email+'</span>';
+                            $('customer_email').setValue(data.email);
+                            break;
+                        case 'operator_id':
+                            var data=response.responseText.evalJSON();
+                            li.select('div.value').first().innerHTML='<span>'+data.email+'</span>';
+                            $('value-operator-name').update('<span>'+data.name+'</span>');
+                            break;
+                        case 'customer_name':
+                            li.select('div.value').first().innerHTML='<span>'+response.responseText+'</span>';
+                            $(node).update(response.responseText);
+                        default:
+                            li.select('div.value').first().innerHTML='<span>'+response.responseText+'</span>';
+                            $(node).setAttribute('default',value);
+                            break;
+                    }
+                },
+            });
+
+        });
+    });
+</script>

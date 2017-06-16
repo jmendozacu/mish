@@ -1,0 +1,61 @@
+<?php $_item = $this->getItem();?>
+<tr>
+    <td>
+        <?php if ($this->canDisplayContainer()): ?>
+        <div id="<?php echo $this->getHtmlId() ?>" class="item-container">
+        <?php endif; ?>
+        <div class="item-text">
+            <?php echo $this->getColumnHtml($_item, 'name') ?>
+        </div>
+        <?php if ($this->canDisplayContainer()): ?>
+        </div>
+        <?php endif ?>
+    </td>
+    <td class="a-left"><?php echo $_item->getClientComment()?></td>
+    <td class="a-right"><?php echo Mage::helper('core')->currency($_item->getPrice())?><input type="hidden" id="item-<?php echo $_item->getId()?>-origin-price" value="<?php echo $_item->getPrice()?>"/> </td>
+    <td class="a-center qty">
+        <ul id="proposal-qty-container-<?php echo $_item->getId();?>">
+            <?php $i = 0;foreach($_item->getProposals() as $_proposal):?>
+                <li class="proposal-container<?php if($i ==0):?> first<?php endif;?>" id="proposal-qty-<?php echo $_proposal->getId()?>"><?php echo $_proposal->getQty()*1 ?></li>
+                <?php $i++;?>
+            <?php endforeach;?>
+        </ul>
+        <?php if($this->canEditItems()):?>
+        <a href="javascript: void(0)" onclick="addNewProposal(<?php echo $_item->getId()?>,<?php echo $_item->getPrice();?>)"><?php echo $this->__('Add');?></a>
+        <?php endif;?>
+    </td>
+    <td class="a-left price proposal">
+        <div id="proposal-price-container-<?php echo $_item->getId()?>">
+        <?php $i = 0;foreach($_item->getProposals() as $_proposal):?>
+            <div class="clearer proposal-container<?php if($i ==0):?> first<?php endif;?>" id="proposal-<?php echo $_proposal->getId()?>">
+                <?php if($this->canEditItems()):?>
+                    <input type="radio" class="proposal-radio" id="proposal-<?php echo $_proposal->getId()?>-radio" value="<?php echo $_proposal->getId()?>" data-item-id="<?php echo $_item->getId()?>" name="item[<?php echo $_item->getId()?>][default_proposal]" <?php if($_item->getDefaultProposal()==$_proposal->getId()):?> checked="checked"<?php endif;?>>
+                    <?php /*?><span id="label-price-<?php echo $_proposal->getId()?>" class="label-price"><?php echo $_proposal->getPrice()?></span> */?>
+                    <input type="text" id="price-<?php echo $_proposal->getId()?>" class="required-entry validate-zero-or-greater validate-number input-text proposalprice" size="3" value="<?php echo $_proposal->getPrice()?>" name="proposal[<?php echo $_item->getId()?>][<?php echo $_proposal->getId()?>][price]" data-proposal="<?php echo $_proposal->getId()?>" data-item-id="<?php echo $_item->getId()?>"/>
+                    <a href="javascript: void(0);" class="remove-proposal" onclick="removeProposal(<?php echo $_proposal->getId()?>,true)"><?php echo $this->__('Remove')?></a>
+                    <a href="javascript: void(0);" class="save-proposal" style="display: none;" onclick="saveProposal(<?php echo $_proposal->getId()?>,<?php echo $_item->getId()?>)"><?php echo $this->__('Save')?></a>
+                <?php else:?>
+                    <span><?php echo Mage::helper('core')->currency($_proposal->getPrice())?></span>
+                <?php endif;?>
+            </div>
+            <?php $i++;?>
+        <?php endforeach;?>
+        </div>
+        <?php if($this->canEditItems()):?>
+        <a href="javascript: void(0)" onclick="saveAllProposals(<?php echo $_item->getId()?>)"><?php echo $this->__('Save All');?></a>
+        <?php endif;?>
+    </td>
+    <td class="a-center">
+        <ul id="proposal-margin-container-<?php echo $_item->getId();?>">
+            <?php $i = 0;foreach($_item->getProposals() as $_proposal):?>
+                <li class="proposal-container<?php if($i ==0):?> first<?php endif;?>" id="proposal-margin-<?php echo $_proposal->getId()?>"><?php echo round(($_proposal->getPrice()-$_item->getPrice())*100/$_item->getPrice()) ?>%</li>
+                <?php $i++;?>
+            <?php endforeach;?>
+        </ul>
+    </td>
+    <td class="a-center action">
+        <?php if($this->canEditItems()):?>
+        <a class="rm-item-btn" onclick="removeQuoteItem(<?php echo $_item->getId();?>)" href="javascript: void(0);"><?php echo $this->__('Remove')?></a>
+        <?php endif;?>
+    </td>
+</tr>

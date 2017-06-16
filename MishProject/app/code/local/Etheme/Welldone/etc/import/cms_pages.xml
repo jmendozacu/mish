@@ -1,0 +1,750 @@
+<?xml version="1.0"?>
+<dresscode>
+    <resources>
+        <resource>
+            <title>Welldone Home Page - Default</title>
+            <identifier>welldone_home_page_default</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+            {{block type="cms/block" block_id="wd_slider"}}
+{{block type="catalog/product_list" category_id="18" block_name="Eyewear"  template="carousel/products_horizontal.phtml" column_count="4"}}
+{{block type="cms/block" block_id="wd_categories"}}
+<section class="content content--fill">
+      <div class="container">
+        {{block type="cms/block" block_id="wd_brands"}}
+        <div class="divider"></div>
+        {{block type="cms/block" block_id="wd_banners"}}
+      </div>
+    </section>
+{{block type="cms/block" block_id="wd_bottom_products"}}
+
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Art Catalogue</title>
+            <identifier>welldone_home_page_art</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+               {{block type="catalog/product_list" category_id="5" block_name="456,410,404,403,413,"  template="carousel/products_grid_isotop.phtml"}}
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Landing Banners</title>
+            <identifier>welldone_home_page_landing_banners</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+<div class="article-nav" style="height: 50px; position: fixed; z-index: 100000;">
+    <ul>
+      <li data-target="Slide1"><a href="#Slide1">1</a></li>
+      <li data-target="Slide2"><a href="#Slide2">2</a></li>
+      <li data-target="Slide3"><a href="#Slide3">3</a></li>
+    </ul>
+  </div>
+<div id="landingBanners" class="container">
+      <article id="Slide1">
+        <div class="entry-content">
+          <div class="banner banner--1 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-01.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--right banner--image__text--white text-right">
+              <h5>LADIES</h5>
+              <h2><strong>Summer Starts Now!</strong></h2>
+              <a class="btn btn--wd btn--lg btn--alt" href="#">SHOP NOW</a> </div>
+          </div>
+          <div class="banner banner--2 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-02.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--left banner--image__text--white text-left">
+              <h2><strong>Clean slate</strong></h2>
+              <h5>Nix the heavy prints and glitz, and give your style a refreshing detox in head-to-toe white.</h5>
+              <a class="btn btn--wd btn--lg btn--alt" href="#">SHOP NOW</a> </div>
+          </div>
+        </div>
+      </article>
+      <article id="Slide2">
+        <div class="entry-content">
+          <div class="banner banner--4 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-04.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--white text-center">
+              <h5>NEW TRENDS TO TRY</h5>
+              <h2><strong>The Dress Shop</strong></h2>
+            </div>
+          </div>
+          <div class="banner banner--5 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-05.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--left banner--image__text--white text-center">
+              <h2><strong>Dress Obsessed</strong></h2>
+              <h5>Spring Fashions</h5>
+              <a class="btn btn--wd btn--lg btn--alt" href="#">SHOP NOW</a> </div>
+          </div>
+        </div>
+      </article>
+      <article id="Slide3">
+        <div class="entry-content">
+          <div class="banner banner--7 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-07.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--left banner--image__text--white text-center">
+              <h5>Get Contemporary</h5>
+              <h3><strong>The High Halter</strong></h3>
+              <h6>Frame your face and shoulders<br>
+                with the silhouette of season<br>
+                <strong>Up to 65% OFF</strong></h6>
+              <a class="btn btn--wd btn--lg btn--alt" href="#">SHOP NOW</a> </div>
+          </div>
+          <div class="banner banner--8 banner--image"> <img src="{{media url=wysiwyg/welldone/banner-landing-08.jpg}}"  alt=""/>
+            <div class="banner--image__text banner--image__text--left banner--image__text--dark text-center">
+              <h5>New Collection</h5>
+              <h2><strong>Summer 2016</strong></h2>
+              <h6>Explore our summer campaign</h6>
+              <a class="btn btn--wd btn--lg btn--alt" href="#">SHOP NOW</a> </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <script src="{{skin url='js/landing-banners.js'}}"></script>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Landing Categories</title>
+            <identifier>welldone_home_page_landing_categories</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+{{block type="cms/block" block_id="wd_landing_categories"}}
+<section class="content content--fill top-null">
+      <div class="container">
+        {{block type="cms/block" block_id="wd_brands"}}
+      </div>
+    </section>
+{{block type="cms/block" block_id="wd_bottom_products"}}
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Landing Content</title>
+            <identifier>welldone_home_page_landing_content</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+{{block type="cms/block" block_id="wd_slider_full_page"}}
+<div id="landingContent" class=" landing-content">
+    <section id="chapter1" class="content chapter">
+      {{block type="cms/block" block_id="wd_landing_content_categories"}}
+    </section>
+    <section id="chapter2" class="content chapter">
+        {{block type="catalog/product_list" category_id="5" block_name="Featured Products"  template="carousel/products_landing_content.phtml"}}
+    </section>
+    <section id="chapter4" class="content chapter">
+      {{block type="cms/block" block_id="wd_landing_content_social_widgets"}}
+    </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+        <resource>
+            <title>Welldone Home Page - Intro</title>
+            <identifier>welldone_home_page_intro</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+{{block type="cms/block" block_id="wd_slider_intro"}}
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Left column</title>
+            <identifier>welldone_home_page_left_column</identifier>
+            <root_template>two_columns_left</root_template>
+            <content><![CDATA[
+<div class="row">
+  <div class="col-md-8">
+    {{block type="cms/block" block_id="wd_small_slider"}}
+  </div>
+  <div class="col-md-4">
+    {{block type="cms/block" block_id="wd_shipping_returns_links"}}
+  </div>
+</div>
+<div class="divider divider--sm"></div>
+{{block type="cms/block" block_id="wd_small_banners"}}
+{{block type="catalog/product_list" category_id="5" block_name="Featured Products"  template="carousel/products_grid.phtml"}}
+<section class="content">
+{{block type="cms/block" block_id="wd_brands"}}</section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone About</title>
+            <identifier>welldone_about</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+                <section class="content">
+      <div class="container">
+        <h2 class="text-uppercase">About Us</h2>
+        <div class="card card--padding">
+          <div class="row">
+            <div class="col-sm-7 col-md-8">
+              <h4 class="text-uppercase">Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. pulvinar et, egestas vitae, magna.</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 col-md-8"> Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero. Maecenas lacus aliquet et nisl nunc, per sed sed maecenas.Lectus tincidunt pellentesque augue urna sit sed, arcu sed ante ac montes pellentesque consectetuer, neque magnis penatibus laoreet vehicula nulla orci, a malesuada justo laoreet ipsum, in ac fusce. At sapien neque sollicitudin lacus, dolor semper in laoreet, magnis convallis posuere adipiscing. </div>
+            <div class="divider divider--sm visible-xs"></div>
+            <div class="col-sm-5 col-md-4"> <a href="#" class="btn btn--wd btn--xxl animation" data-animation="fadeInUp" data-animation-delay="0.5s">JOIN OUR TEAM</a> </div>
+          </div>
+        </div>
+        <div class="divider divider--md"></div>
+        <div class="row">
+          <div class="col-sm-3 animation" data-animation="fadeInLeft" data-animation-delay="0.5s">
+            <div class="card card--icon">
+              <div class="card--icon__cell"> <a href="#" class="icon card--icon__cell__icon icon-money"></a>
+                <h5 class="card--icon__cell__title text-uppercase">Online PAYMENTS</h5>
+              </div>
+              <div class="card--icon__text text-center"> <em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu nec.</em> </div>
+            </div>
+          </div>
+          <div class="divider divider--sm visible-xs"></div>
+          <div class="col-sm-3 animation" data-animation="fadeInLeft" data-animation-delay="0s">
+            <div class="card card--icon">
+              <div class="card--icon__cell"> <a href="#" class="icon card--icon__cell__icon icon-truck"></a>
+                <h5 class="card--icon__cell__title text-uppercase">FREE SHIPPING</h5>
+              </div>
+              <div class="card--icon__text text-center"> <em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu nec.</em> </div>
+            </div>
+          </div>
+          <div class="divider divider--sm visible-xs"></div>
+          <div class="col-sm-3 animation" data-animation="fadeInRight" data-animation-delay="0s">
+            <div class="card card--icon">
+              <div class="card--icon__cell"> <a href="#" class="icon card--icon__cell__icon icon-responsive"></a>
+                <h5 class="card--icon__cell__title text-uppercase">Many FEATURES</h5>
+              </div>
+              <div class="card--icon__text text-center"> <em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu nec.</em> </div>
+            </div>
+          </div>
+          <div class="divider divider--sm visible-xs"></div>
+          <div class="col-sm-3 animation" data-animation="fadeInRight" data-animation-delay="0.5s">
+            <div class="card card--icon">
+              <div class="card--icon__cell"> <a href="#" class="icon card--icon__cell__icon icon-help"></a>
+                <h5 class="card--icon__cell__title text-uppercase">Dedicated support</h5>
+              </div>
+              <div class="card--icon__text text-center"> <em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu nec.</em> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content content--fill bottom-null">
+      <div class="container">
+        <h2 class="text-center">WE CREATE HIGH <strong>QUALITY PRODUCTS</strong> THAT ARE USED AND LOVED BY THOUSANDS OF CUSTOMERS</h2>
+        <div class="row">
+          <div class="col-sm-4 animation" data-animation="fadeInUp" data-animation-delay="0.5s">
+            <h5 class="text-uppercase">Mauris aliquet ultricies ante, non faucibus ante.</h5>
+            <p>In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero.</p>
+            <div class="divider divider--xs"></div>
+            <p><a href="#" class="btn btn--wd">READ MORE</a></p>
+          </div>
+          <div class="divider divider--sm visible-xs"></div>
+          <div class="col-sm-4 animation" data-animation="fadeInUp" data-animation-delay="0s">
+            <h5 class="text-uppercase">Quisque vestibulum massa.</h5>
+            <p>In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero.</p>
+            <div class="divider divider--xs"></div>
+            <p><a href="#" class="btn btn--wd">READ MORE</a></p>
+          </div>
+          <div class="divider divider--sm visible-xs"></div>
+          <div class="col-sm-4 animation" data-animation="fadeInUp" data-animation-delay="0.5s">
+            <h5 class="text-uppercase">Nulla libero. Donec et mi eu massa labore.</h5>
+            <p>In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero.</p>
+            <div class="divider divider--xs"></div>
+            <p><a href="#" class="btn btn--wd">READ MORE</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Typography</title>
+            <identifier>welldone_typography</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+<section class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2 class="text-uppercase">Typography</h2>
+            <h1 class="text-uppercase h-pad-sm">H1 Heading. Lorem ipsum dolor</h1>
+            <h2 class="text-uppercase h-pad-sm">H2 Heading. Lorem ipsum dolor</h2>
+            <h3 class="text-uppercase h-pad-sm">H3 Heading. Lorem ipsum dolor</h3>
+            <h4 class="text-uppercase h-pad-sm">H4 Heading. Lorem ipsum dolor</h4>
+            <h5 class="text-uppercase h-pad-sm">H5 Heading. Lorem ipsum dolor</h5>
+            <h6 class="text-uppercase h-pad-sm">H6 Heading. Lorem ipsum dolor</h6>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Paragraphs</h2>
+            <p><strong>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. </strong></p>
+            <p><em>Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. </em></p>
+            <p>Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. Curabitur molestie euismod erat. Proin eros odio, mattis rutrum, pulvinar et, egestas vitae, magna. Integer semper, velit ut nisl. Nam isicing elit. Reprehenderit, quam, soluta, quia mollitia sequi voluptas magnam perspiciatis deleniti ratione ad molestias eum minima sed libero enim laborum.</p>
+            <p>Vestibulum justo. Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. Curabitur molestie euismod erat. Proin eros odio, mattis rutrum, pulvinar et, egestas vitae, magna. Integer semper, velit ut interdum malesuada, diam dolor pellentesque lacus, vitae commodo orci. </p>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Dropcaps</h2>
+            <p> <span class="dropcap custom-color">D</span> ullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. Vestibm justo. Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. Curabitur molestie euism od erat. Proin eros odio, mattis rutrum, pulvinar et, egestas vitae, magna. Integer semper, velit ut nisl. Nam lectus nulla, bibendum pretium, dictum a, mattis nec, dolor. </p>
+            <p> <span class="dropcap">D</span> ullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. Vestibm justo. Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. Curabitur molestie euism od erat. Proin eros odio, mattis rutrum, pulvinar et, egestas vitae, magna. Integer semper, velit ut nisl. Nam lectus nulla, bibendum pretium, dictum a, mattis nec, dolor. </p>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">List</h2>
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <h5 class="text-uppercase h-pad-xs">Unordered</h5>
+                <ul class="simple-list">
+                  <li>Lorem ipsum dolor amet</li>
+                  <li>Consectetur adipiscing elit </li>
+                  <li>Integer molestie lorem massa </li>
+                  <li>Facilisis in pretium nisl aliquet
+                    <ul>
+                      <li>Nulla volutpat aliquam velit </li>
+                      <li>Phasellus iaculis neque </li>
+                      <li>Purus sodales ultricies </li>
+                      <li>Vestibulum laot porttitor sem </li>
+                    </ul>
+                  </li>
+                  <li>Ac tristique libero volutpat at </li>
+                  <li>Faucibus porta lacingilla vel </li>
+                  <li>Eget porttitor lorem </li>
+                  <li>Integer vel nibh sit amet </li>
+                </ul>
+                <div class="divider divider--xs visible-sm visible-xs"></div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <h5 class="text-uppercase h-pad-xs">Ordered</h5>
+                <ul class="decimal-list">
+                  <li>Lorem ipsum dolor amet</li>
+                  <li>Consectetur adipiscing elit </li>
+                  <li>Integer molestie lorem massa </li>
+                  <li>Facilisis in pretium nisl aliquet </li>
+                  <li>Nulla volutpat aliquam velit </li>
+                  <li>Phasellus iaculis neque </li>
+                  <li>Purus sodales ultricies </li>
+                  <li>Vestibulum laot porttitor sem </li>
+                  <li>Ac tristique libero volutpat at </li>
+                  <li>Faucibus porta lacingilla vel </li>
+                  <li>Eget porttitor lorem </li>
+                  <li>Integer vel nibh sit amet </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="divider divider-sm visible-xs"></div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h2 class="text-uppercase">Heading Helper Classes</h2>
+            <p> <span class="mark mark--color">Lorem ipsum</span> dolor sit amet, <span class="mark">consectetuer adipiscing elit</span>. Donec eros tellus, scelerisque nec, rhoncus eget, sollicitudin eu, vehicula venenatis, tempor vitae, est. <a href="#" class="custom-color underline">Praesent vitae dui</a>. Morbi id tellus. Nullam ac nisi <a href="#" class="underline">non eros gravida venenatis</a>. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem.</p>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Blockquote</h2>
+            <blockquote class="blockquote--wd">
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu. </p>
+              <footer>Someone famous in</footer>
+            </blockquote>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Testimonials</h2>
+            <div class="testimonial">
+              <div class="testimonial__author">
+                <div class="testimonial__author__image"><a href="#"><img src="{{media url=wysiwyg/welldone/testimonials-author-img-01.jpg}}" alt=""/></a></div>
+                <div class="testimonial__author__name text-uppercase">Paul Grant</div>
+              </div>
+              <div class="testimonial__text"><em>Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu  nec, rhonc us eget, sollicitudin eu, vehicula venenatis, tem por vitae, est. Praesent vitae dui. Morbi id tellus. Nullam massa. Sad dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem.</em></div>
+            </div>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Info Box</h2>
+            <div class="infobox">
+              <div class="infobox__icon"><span class="icon icon-info"></span></div>
+              <div class="infobox__text">Lorem ipsum dolor sit amet, con sectetuer adipiscing elit. Donec eros tellus, scelerisqu  nec, rhonc us eget, sollicitudin eu, vehicula venenatis, tem por vitae, est. Praesent vitae dui. Morbi id tellus. Nullam massa. Sad dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. </div>
+            </div>
+            <div class="divider divider--sm"></div>
+            <h2 class="text-uppercase">Tables</h2>
+            <h5 class="text-uppercase">Striped Table</h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"># </th>
+                  <th scope="col">Table heading</th>
+                  <th scope="col">Table heading </th>
+                  <th scope="col">Table heading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Table cell</td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                </tr>
+                <tr>
+                  <td>Table cell</td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <h5 class="text-uppercase">Bordered Table</h5>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"># </th>
+                  <th scope="col">Table heading</th>
+                  <th scope="col">Table heading </th>
+                  <th scope="col">Table heading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Table cell</td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                </tr>
+                <tr>
+                  <td>Table cell</td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                  <td>Table cell </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="divider divider-xl"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="text-uppercase">Grid</h2>
+          </div>
+          <div class="col-lg-12">
+            <h5>1 COLUMN</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero. Maecenas lacus aliquet et nisl nunc, per sed sed maecenas.Lectus tincidunt pellentesque augue urna sit sed, arcu sed ante ac montes pellentesque consectetuer, neque magnis penatibus laoreet vehicula nulla orci, a malesuada justo laoreet ipsum, in ac fusce. At sapien neque sollicitudin lacus, dolor semper in laoreet, magnis convallis posuere adipiscing, dapibus suspendisse nonummy pellentesque consequat interdum odio.</p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h5>1/2 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero. Maecenas lacus aliquet et nisl nunc, per sed sed maecenas.Lectus tincidunt pellentesque augue urna sit sed, arcu sed ante ac montes pellentesque consectetuer, neque magnis penatibus laoreet vehicula nulla orci, a malesuada justo laoreet ipsum, in ac fusce. At sapien neque sollicitudin lacus, dolor semper in laoreet, magnis convallis posuere adipiscing, dapibus suspendisse nonummy pellentesque consequat interdum odio.</p>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <h5>1/2 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero. Maecenas lacus aliquet et nisl nunc, per sed sed maecenas.Lectus tincidunt pellentesque augue urna sit sed, arcu sed ante ac montes pellentesque consectetuer, neque magnis penatibus laoreet vehicula nulla orci, a malesuada justo laoreet ipsum, in ac fusce. At sapien neque sollicitudin lacus, dolor semper in laoreet, magnis convallis posuere adipiscing, dapibus suspendisse nonummy pellentesque consequat interdum odio.</p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>1/3 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. </p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>1/3 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. </p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>1/3 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. </p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-8 col-md-8 col-lg-8">
+            <h5>2/3 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. Vulputate mi dui suscipit, molestie vulputate libero fusce iaculis suscipit. Sapien pede libero. Maecenas lacus aliquet et nisl nunc, per sed sed maecenas.Lectus tincidunt pellentesque augue urna sit sed, arcu sed ante ac montes pellentesque consectetuer, neque magnis penatibus laoreet magnis convallis posuere adipiscing, dapibus suspendisse nonummy pellentesque consequat interdum odio.</p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <h5>1/3 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellenlaoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor. Fusce lacinia tempor malesuada. Fringilla penatibus orci est non mollit, suspendisse pulvinar egestas a donec. </p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <h5>1/4 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non ante gravida sed. Sed ultrices pel lenlao reet justo ultrices. In pellentesque lorem con dimentum dui morbi pulvinar dui non quam pretium ut lacinia suspe ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <h5>1/4 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non ante gravida sed. Sed ultrices pel lenlao reet justo ultrices. In pellentesque lorem con dimentum dui morbi pulvinar dui non quam pretium ut lacinia suspe ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <h5>1/4 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non ante gravida sed. Sed ultrices pel lenlao reet justo ultrices. In pellentesque lorem con dimentum dui morbi pulvinar dui non quam pretium ut lacinia suspe ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3">
+            <h5>1/4 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non ante gravida sed. Sed ultrices pel lenlao reet justo ultrices. In pellentesque lorem con dimentum dui morbi pulvinar dui non quam pretium ut lacinia suspe ndisse pulvinar donec labore diam. </p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <h5>3/4 COLUMNS</h5>
+            <p>Nam ac ipsum dui, a sollicitudin massa. Pellentesque semper ligula ut eros dapibus sit amet vehicula nisi tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget urna sit amet sapien vestibulum auctor ac blandit erat. Sed sagittis volutpat urna nec lobortis. Aser velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum. Asunt in anim uis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum. Allamco laboris nisi ut aliquip ex ea commodo consequat. Aser velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <h5>1/4 COLUMNS</h5>
+            <p>Mauris aliquet ultricies ante, non ante gravida sed. Sed ultrices pel lenlao reet justo ultrices. In pellentesque lorem con dimentum dui morbi pulvinar dui non quam pretium ut lacinia suspe ndisse pulvinar donec labore diam. </p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+          <div class="col-sm-6 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+        </div>
+        <div class="divider divider--xs"></div>
+        <div class="row">
+          <div class="col-sm-8 col-md-10 col-lg-10">
+            <h5>5/6 COLUMNS</h5>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat. Suspendisse fermentum posuere lectus. Fusce vulputate nibh egestas orci. Aliquam lectus. Morbi eget dolor ullamcorper massa pellentesque sagittis. Morbi sit amet quam sed felis. Quisque vest ibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. </p>
+          </div>
+          <div class="col-sm-4 col-md-2 col-lg-2">
+            <h5>1/6 COLUMNS</h5>
+            <p>Mauris aliquet ultrics ant, ultrices pel lenlao rejusto sed ultrices. In pellesque pretium utlore lacini et ndisse pulvinar donec labore diam. </p>
+          </div>
+        </div>
+      </div>
+    </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Gallery</title>
+            <identifier>welldone_gallery</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+<section class="title-outer content">
+      <div class="container">
+        <h2 class="text-uppercase">Gallery</h2>
+      </div>
+    </section>
+    <section class="content fullwidth top-null">
+      <div class="container">
+        <div class="gallery gallery-isotope" id="gallery">
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-01.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-01.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-02.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-02.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-03.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-03.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-04.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-04.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-05.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-05.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item gallery__item--double">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-06.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-06.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-07.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-07.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-08.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-08.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-09.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-09.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-10.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-10.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-11.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-11.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+          <div class="gallery__item">
+            <div class="gallery__item__image"> <img src="{{media url=wysiwyg/welldone/gallery/gallery-img-12.jpg}}" alt=""/>
+              <div class="gallery__item__image__caption">
+                <h6><a href="#">Integer vel nibh sit amet turpis vulputate</a></h6>
+              </div>
+              <a class="btn btn--round" href="{{media url=wysiwyg/welldone/gallery/gallery-img-12.jpg}}"><span class="icon icon-search"></span></a> </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <script type="text/javascript" src="{{skin url='vendor/magnific-popup/jquery.magnific-popup.min.js'}}"></script>
+    <script type="text/javascript" src="{{skin url='vendor/isotope/isotope.pkgd.min.js'}}"></script>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone Home Page - Lookbook</title>
+            <identifier>welldone_home_page_lookbook</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+<section class="content top-null bottom-null fullwidth">
+                  <div class="container">
+                    <div class="lookbook">
+                      <div class="lookbook__image"><img src="{{media url=wysiwyg/welldone/lookbook.jpg}}" class="img-responsive" alt=""/>
+                        <div class="hint" style="top: 25%; left: 75%;"> <span>1</span> <span class="hint__dot"></span>
+                          <div class="tool tool--right">
+                            <div class="tip"></div>
+                            <span>Headdresses</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                        <div class="hint" style="top: 60%; left: 30%;"> <span>2</span> <span class="hint__dot"></span>
+                          <div class="tool tool--right">
+                            <div class="tip"></div>
+                            <span>Accessories</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                        <div class="hint" style="top: 59%; left: 68%;"> <span>3</span> <span class="hint__dot"></span>
+                          <div class="tool tool--right">
+                            <div class="tip"></div>
+                            <span>Jewelry</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                        <div class="hint" style="top: 47%; left: 58%;"> <span>4</span> <span class="hint__dot"></span>
+                          <div class="tool tool--left">
+                            <div class="tip"></div>
+                            <span>Party dresses</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                        <div class="hint" style="top: 83%; left: 39%;"> <span>5</span> <span class="hint__dot"></span>
+                          <div class="tool tool--right">
+                            <div class="tip"></div>
+                            <span>Women Bag</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                        <div class="hint" style="top: 14%; left: 29%;"> <span>6</span> <span class="hint__dot"></span>
+                          <div class="tool tool--left">
+                            <div class="tip"></div>
+                            <span>Women Shoes</span>
+                            <div class="hover-tool">
+                              <div class="hover-tool__tip"></div>
+                              <span class="hover-tool__text"> <a class="btn btn--wd" href="#">Buy Now</a>Fusce eu dui. Integer vel nibh sit amet turpis vulputate aliquet. Phasellus id nisi vitae odio pretium aliquam.</span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+
+        <resource>
+            <title>Welldone 404 page</title>
+            <identifier>welldone_404</identifier>
+            <root_template>one_column</root_template>
+            <content><![CDATA[
+                <!-- Content section -->
+                <section class="content">
+                  <div class="container">
+                        <div class="not-found-box">
+                            <div class="not-found-box__image">
+                                <img src="{{media url=wysiwyg/welldone/page-404.png}}" alt="">
+                                <div class="not-found-box__text">
+                                    <h2 class="text-left">404 ERROR. <br>PAGE NOT FOUND :(</h2>
+                                    <h4 class="text-left">You can start from the <a href="{{store url=''}}">home page</a> or <a href="#" onClick="history.go(-1); return false;">come back</a> to the previous page</h4>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                </section>
+                <!-- End Content section --> 
+            ]]></content>
+            <sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+    </resources>
+</dresscode>

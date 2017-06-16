@@ -1,0 +1,25 @@
+<div id="ves-livechat-support-index"></div>
+<div id="ves_livechat_loading" class="ves_livechat-loading-box" style="display: none;"><img src="<?php echo $this->getSkinUrl('ves_vendors/images/livechat/loading.gif')?>" /><br /></div>
+<div id="ves_livechat_overlay" class="ves_livechat-overlay" style="display: none;"></div>
+<script type="text/javascript">
+    Ajax.Responders.unregister(varienLoaderHandler.handler);
+    var checkTypeing;
+    var CHANGE_STATUS_URL = '<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/changestatus") ?>';
+    var AUDIO_SOUND = '<?php echo Mage::helper("vendorslivechat")->getAudioUrl() ?>';
+    var UPDATE_TIME_SESSION = '<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/updatetime") ?>';
+    var AVATAR_URL = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>';
+    var livechat ;
+    var audio;
+    var control;
+    var msgTypeObject ;
+    var messageArray = <?php echo $this->getMessageBox() ?>;
+    var commandArray = <?php echo $this->getCommands() ?>;
+    Event.observe(window,"load",function(){
+        control = new ChatControl('<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/control") ?>');
+        livechat = new VesBoxChat(messageArray,commandArray,'<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/process") ?>','<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/deletebox") ?>','<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/updateshowbox") ?>','<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/addtab") ?>','<?php echo Mage::helper("vendorslivechat")->getUrl("vendors/livechat_box/updatestatusbox") ?>',control);
+        msgTypeObject = ChatOption.getObjectMsgType('<?php echo $this->getObjectMessageType() ?>',control);
+        audio = ChatOption.getStatusAudio();
+    });
+    var loadingBox = new LiveChatLoadingBox('ves_livechat_loading','ves_livechat_overlay');
+    var loadingBoxContent = new LiveChatLoadingBox('ves_livechat_content_loading','ves_livechat_content_overlay');
+</script>

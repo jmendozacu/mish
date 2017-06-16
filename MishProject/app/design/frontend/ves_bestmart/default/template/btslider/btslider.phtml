@@ -1,0 +1,61 @@
+<?php
+ $imagepath = Mage::getBaseDir('media').DS."slider".DS;
+ $btmodel = Mage::getModel('btslider/btslider')->getCollection();
+
+ ?>
+
+<link href="<?php echo $this->getSkinUrl('css/base.min.css') ?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->getSkinUrl('css/home.min.css') ?>" rel="stylesheet" type="text/css">
+    
+
+ <div class="bannerCount">
+     <!--  <img src="http://localhost/mish/skin/frontend/base/default/images/banner01.jpg"> -->
+
+ <section class="home-page-right-section animScroll sliderHomeWidget">
+ <section class="home-page-right-card dp-click-widgets">
+  
+<div class="main-banner-wrapper adtechBannerHomePage dp-widget posRelative dp-fired" data-row="1" data-dpidt="plat_ban" data-dpdit="plat_ban" data-dpwlbl="Platinum Banner" data-dpcol="c" data-dpdat="bnr" data-dppos="2" data-dpid="plat_ban_149733937301871533_2601_1497339371924" style="max-width: 847px;">
+        <div class="prev"><i class="prev-i"></i><i class="sd-icon sd-icon-previous"></i></div>
+        <div class="next"><i class="next-i"></i><i class="sd-icon sd-icon-next"></i></div>
+    <div class="banner-area top-banner-area" id="top-banner" style="transform: translate3d(-1698px, 0px, 0px); width: 6792px;">
+<?php 
+ foreach ($btmodel as $imagedata) { 
+  $image = $imagedata['images'];
+  $url = $imagedata['url'];
+  $imagelabel = $imagedata['imagelabel'];
+  $title = $imagedata['title'];
+  $imagethumbnail = $imagepath.$image; ?>
+     <!--  <div class="banner-image  banner-clone" index="0" style="width: 847px;">
+           <img src="http://localhost/mish/media/slider/<?php //echo $image; ?>">
+      </div> -->
+      <div class="banner-image platBanner" index="0" style="width: 847px;">
+        <a class="dp-widget-link" href="<?php echo $url; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>"  style="background-image: url(http://localhost/mish/media/slider/<?php echo $image; ?>);"><div class="white-overlay"></div></a>
+     </div>
+     
+  
+
+<?php } ?>
+
+ </div>  
+ 
+ 
+    <div class="banner-link bar">
+    <?php
+    foreach ($btmodel as $imagedata) { 
+      $imagelabel = $imagedata['imagelabel'];?>
+       <div class="banner-item"><?php echo $imagelabel;?></div>
+       <?php } ?>
+    </div>
+
+    </div>
+    
+        </section>
+        </section>
+ </div>
+
+<div class="bannerrightAdd"><img src="http://localhost/mish/skin/frontend/base/default/images/banner_add_image.jpg"></div>
+
+
+ <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/base.jquery111.min.js.download') ?>"></script>
+        
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js//homePage.min.js.download') ?>"></script>

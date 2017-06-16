@@ -1,0 +1,204 @@
+<?php
+/**
+ * Create account form template
+ *
+ * @var $this VES_Vendors_Block_Form_Register
+ */
+$rootCatId = Mage::app()->getStore()->getRootCategoryId();
+?>
+<div id="registerbox">
+    <h1><?php echo $this->__('MISH STORE CONFIGURATION') ?></h1>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_fields_before') ?>
+    <?php if ($this->getRequest()->getParam('step') == 1) { ?>
+
+        <form class="form-horizontal" action="<?php echo $this->getConfigurationUrl(); ?>" method="post" id="step1-form" enctype="multipart/form-data">
+            <input type="hidden" name="accept_token" value="<?php echo $this->getRequest()->getParam('token'); ?>">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-align-justify"></i>									
+                    </span>
+                    <h5><?php echo $this->__('SELECT CATEGORIES') ?></h5>
+                </div>
+
+                <div class="widget-content" style="max-height: 500px;overflow-y: scroll;">
+                    <?php
+                    $catlistHtml = $this->getTreeCategories($rootCatId, true);
+                    echo $catlistHtml;
+                    ?>                                                        
+                </div>
+            </div>		
+            <!-- <button class="btn btn-inverse" id="btn-inverse" type="button"><?php echo $this->__('Reject') ?></button> -->
+            <button class="btn btn-success" id="btn-success" type="submit"><?php echo $this->__('Next Step') ?></button>
+
+        </form>
+    <?php } else if ($this->getRequest()->getParam('step') == 2) { ?>
+        <?php $bank_data = $this->getConfiguration('bank_data'); ?>
+        <form class="form-horizontal" action="<?php echo $this->getConfigurationUrl(); ?>" method="post" id="step2-form" enctype="multipart/form-data">
+            <input type="hidden" name="accept_token" value="<?php echo $this->getRequest()->getParam('token'); ?>">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-align-justify"></i>									
+                    </span>
+                    <h5><?php echo $this->__('DEPOSITING MONEY DETAILS') ?></h5>
+                </div>
+                <div class="widget-content" style="height:200px;overflow-y: scroll;">				
+                    <div class="control-group">
+                        <label class="control-label"><?php echo $this->__('Work with Bills or Invoices') ?><em>*</em></label>
+
+                        <!-- <div class="controls">  -->
+                        <select name="work_with_bill" id="work_with_bill" class="validate-select">
+                            <option value="1" <?php echo ($bank_data->work_with_bill == 1) ? 'selected="selected"' : '' ?>>Yes</option>
+                            <option value="2" <?php echo ($bank_data->work_with_bill == 2) ? 'selected="selected"' : '' ?>>No</option>
+                        </select>
+                        <!-- </div> -->
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"><?php echo $this->__('Name of Bank') ?><em>*</em></label>
+                        <div class="controls">
+                            <select name="name_of_bank" id="name_of_bank" class="validate-select">
+                                <option value="Banco Santander" <?php echo ($bank_data->name_of_bank == 'Banco Santander') ? 'selected="selected"' : '' ?>>Banco Santander</option>
+                                <option value="Banco de Credito e Inversiones" <?php echo ($bank_data->name_of_bank == 'Banco de Credito e Inversiones') ? 'selected="selected"' : '' ?>>Banco de Credito e Inversiones</option>							
+                                <option value="Banco de Chile" <?php echo ($bank_data->name_of_bank == 'Banco de Chile') ? 'selected="selected"' : '' ?>>Banco de Chile</option>							
+                                <option value="Banco del Estado chile" <?php echo ($bank_data->name_of_bank == 'Banco del Estado chile') ? 'selected="selected"' : '' ?>>Banco del Estado chile</option>							
+                                <option value="Banco BBVA" <?php echo ($bank_data->name_of_bank == 'Banco BBVA') ? 'selected="selected"' : '' ?>>Banco BBVA</option>
+                                <option value="Scotiabank Chile" <?php echo ($bank_data->name_of_bank == 'Scotiabank Chile') ? 'selected="selected"' : '' ?>>Scotiabank Chile</option>
+                                <option value="Itaú-Corpbanca" <?php echo ($bank_data->name_of_bank == 'Itaú-Corpbanca') ? 'selected="selected"' : '' ?>>Itaú-Corpbanca</option>
+                                <option value="Banco Edwards | Citi" <?php echo ($bank_data->name_of_bank == 'Banco Edwards | Citi') ? 'selected="selected"' : '' ?>>Banco Edwards | Citi</option>
+                                <option value="Banco SECURITY" <?php echo ($bank_data->name_of_bank == 'Banco SECURITY') ? 'selected="selected"' : '' ?>>Banco SECURITY</option>
+                                <option value="Banco FALABELLA" <?php echo ($bank_data->name_of_bank == 'Banco FALABELLA') ? 'selected="selected"' : '' ?>>Banco FALABELLA</option>
+                                <option value="Banco RIPLEY" <?php echo ($bank_data->name_of_bank == 'Banco RIPLEY') ? 'selected="selected"' : '' ?>>Banco RIPLEY</option>
+                            </select>                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="col col-left">
+                            <label class="control-label"><?php echo $this->__('Account Type') ?><em>*</em></label>
+                            <div class="controls">
+                                <select name="bank_details" id="bank_details" class="validate-select">
+                                    <option value="Corriente" <?php echo ($bank_data->bank_details == 'Corriente') ? 'selected="selected"' : '' ?>>Corriente</option>
+                                    <option value="Ahorro" <?php echo ($bank_data->bank_details == 'Ahorro') ? 'selected="selected"' : '' ?>>Ahorro</option>							
+                                    <option value="Vista" <?php echo ($bank_data->bank_details == 'Vista') ? 'selected="selected"' : '' ?>>Vista</option>							
+                                    <option value="Electronica" <?php echo ($bank_data->bank_details == 'Electronica') ? 'selected="selected"' : '' ?>>Electronica</option>                                    
+                                </select>                                
+                            </div>
+                        </div>
+                        <div class="col col-right">
+                            <label class="control-label"><?php echo $this->__('Account No.') ?><em>*</em></label>
+                            <div class="controls"><input type="text" name="account_number" id="account_number" value="<?php echo (isset($bank_data->account_number) ? $bank_data->account_number : '' ); ?>" title="<?php echo $this->__('Account No') ?>" placeholder="<?php echo $this->__('Account No.') ?>" class="input-text required-entry validate-number" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>		
+            <a class="btn btn-inverse" id="btn-inverse" type="button" href="<?php echo $this->getUrl('vendors/index/configuration', array('step' => 1, 'token' => $this->getRequest()->getParam('token'))) ?>"><?php echo $this->__('Previous Step') ?></a> 
+            <button class="btn btn-success" id="btn-success" type="submit"><?php echo $this->__('Next Step') ?></button>
+
+        <?php } else if ($this->getRequest()->getParam('step') == 3) { ?>
+            <?php $bank_data = $this->getConfiguration('bank_data'); ?>
+            <form class="form-horizontal" action="<?php echo $this->getConfigurationUrl(); ?>" method="post" id="step3-form" enctype="multipart/form-data">
+                <input type="hidden" name="accept_token" value="<?php echo $this->getRequest()->getParam('token'); ?>">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon">
+                            <i class="icon-align-justify"></i>									
+                        </span>
+                        <h5><?php echo $this->__('CONFIRMATION SUMMARY') ?></h5>
+                    </div>
+                    <div class="widget-content" style="height:500px;overflow-y: scroll;">
+                        <?php
+                        $catlistHtml = $this->getTreeCategories($rootCatId, true);
+                        echo $catlistHtml;
+                        ?>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-content" style="height:200px;overflow-y: scroll;">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->__('Work with Bills or Invoices') ?><em>*</em></label>
+
+                            <!-- <div class="controls">  -->
+                            <select name="work_with_bill" id="work_with_bill" class="validate-select" disabled="disabled">
+                                <option value="1" <?php echo ($bank_data->work_with_bill == 1) ? 'selected="selected"' : '' ?>>Yes</option>
+                                <option value="2" <?php echo ($bank_data->work_with_bill == 2) ? 'selected="selected"' : '' ?>>No</option>
+                            </select>
+                            <!-- </div> -->
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->__('Name of Bank') ?><em>*</em></label>
+                            <div class="controls">
+                                <select name="name_of_bank" id="name_of_bank" class="validate-select" disabled="disabled">
+                                    <option value="Banco Santander" <?php echo ($bank_data->name_of_bank == 'Banco Santander') ? 'selected="selected"' : '' ?>>Banco Santander</option>
+                                    <option value="Banco de Credito e Inversiones" <?php echo ($bank_data->name_of_bank == 'Banco de Credito e Inversiones') ? 'selected="selected"' : '' ?>>Banco de Credito e Inversiones</option>							
+                                    <option value="Banco de Chile" <?php echo ($bank_data->name_of_bank == 'Banco de Chile') ? 'selected="selected"' : '' ?>>Banco de Chile</option>							
+                                    <option value="Banco del Estado chile" <?php echo ($bank_data->name_of_bank == 'Banco del Estado chile') ? 'selected="selected"' : '' ?>>Banco del Estado chile</option>							
+                                    <option value="Banco BBVA" <?php echo ($bank_data->name_of_bank == 'Banco BBVA') ? 'selected="selected"' : '' ?>>Banco BBVA</option>
+                                    <option value="Scotiabank Chile" <?php echo ($bank_data->name_of_bank == 'Scotiabank Chile') ? 'selected="selected"' : '' ?>>Scotiabank Chile</option>
+                                    <option value="Itaú-Corpbanca" <?php echo ($bank_data->name_of_bank == 'Itaú-Corpbanca') ? 'selected="selected"' : '' ?>>Itaú-Corpbanca</option>
+                                    <option value="Banco Edwards | Citi" <?php echo ($bank_data->name_of_bank == 'Banco Edwards | Citi') ? 'selected="selected"' : '' ?>>Banco Edwards | Citi</option>
+                                    <option value="Banco SECURITY" <?php echo ($bank_data->name_of_bank == 'Banco SECURITY') ? 'selected="selected"' : '' ?>>Banco SECURITY</option>
+                                    <option value="Banco FALABELLA" <?php echo ($bank_data->name_of_bank == 'Banco FALABELLA') ? 'selected="selected"' : '' ?>>Banco FALABELLA</option>
+                                    <option value="Banco RIPLEY" <?php echo ($bank_data->name_of_bank == 'Banco RIPLEY') ? 'selected="selected"' : '' ?>>Banco RIPLEY</option>
+                                </select>                                
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="col col-left">
+                                <label class="control-label"><?php echo $this->__('Account Type') ?><em>*</em></label>
+                                <div class="controls">
+                                    <select name="bank_details" id="bank_details" class="validate-select" disabled="disabled">
+                                        <option value="Corriente" <?php echo ($bank_data->bank_details == 'Corriente') ? 'selected="selected"' : '' ?>>Corriente</option>
+                                        <option value="Ahorro" <?php echo ($bank_data->bank_details == 'Ahorro') ? 'selected="selected"' : '' ?>>Ahorro</option>							
+                                        <option value="Vista" <?php echo ($bank_data->bank_details == 'Vista') ? 'selected="selected"' : '' ?>>Vista</option>							
+                                        <option value="Electronica" <?php echo ($bank_data->bank_details == 'Electronica') ? 'selected="selected"' : '' ?>>Electronica</option>                                    
+                                    </select>                                     
+                                </div>
+                            </div>
+                            <div class="col col-right">
+                                <label class="control-label"><?php echo $this->__('Account No.') ?><em>*</em></label>
+                                <div class="controls"><input type="text" name="account_number" id="account_number" value="<?php echo (isset($bank_data->account_number) ? $bank_data->account_number : '' ); ?>" title="<?php echo $this->__('Account No') ?>" placeholder="<?php echo $this->__('Account No.') ?>" class="input-text required-entry validate-number" disabled="disabled" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-content" style="height:50px">
+                        <div class="control-group">
+                            <div class="controls"><input style="width:inherit;" type="checkbox" name="confirmation[]" value="1" title="<?php echo $this->__('I confirm that all the data is correct and I am ready to start sales in MISH') ?>" placeholder="<?php echo $this->__('I confirm that all the data is correct and I am ready to start sales in MISH') ?>" id="confirmation" class="checkbox  validate" />
+                                <label class="control-label1"><?php echo $this->__('I confirm that all the data is correct and I am ready to start sales in MISH') ?><em>*</em></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+                <a class="btn btn-inverse" id="btn-inverse" type="button" href="<?php echo $this->getUrl('vendors/index/configuration', array('step' => 1, 'token' => $this->getRequest()->getParam('token'))) ?>"><?php echo $this->__('Previous Step') ?></a> 
+                <button class="btn btn-success" id="btn-success" type="submit"><?php echo $this->__('Next Step') ?></button>
+            <?php } ?>
+        </form>
+        <script type="text/javascript">
+            //< ![CDATA[
+            var customFormStep1 = new VarienForm('step1-form');
+            var customFormStep2 = new VarienForm('step2-form');
+            var customFormStep3 = new VarienForm('step3-form');
+            //]]>
+        </script>
+        <script type="text/javascript">
+            // this code to add accodion effect to shopby option
+            jQuery(document).ready(function ($) {
+                $('.cat-list li label').click(function () {
+                    if ($(this).next('.sub-cat-list').hasClass('active')) {
+                        $(this).removeClass('active');
+                        $(this).next('.sub-cat-list').removeClass('active').addClass('inactive');
+                    } else {
+                        sub = $(this).next('.sub-cat-list');
+                        sub.removeClass('inactive').addClass('active');
+                    }
+                });
+            });
+        </script>
+        <style>
+            .sub-cat-list.inactive{display: none;}
+            .sub-cat-list.active{display: block !important;}
+            .sub-cat-list.active {margin-left: 50px;}
+        </style>
+</div>

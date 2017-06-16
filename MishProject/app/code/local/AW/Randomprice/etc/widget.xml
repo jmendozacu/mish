@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <awrandomprice_block type="awrandomprice/widget_randomprice" translate="name description" module="awrandomprice">
+        <name>Randomprice Rule</name>
+        <is_email_compatible>0</is_email_compatible>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+        <parameters>
+            <randompriceid type="complex" translate="label">
+                <visible>1</visible>
+                <label>Randomprice ID</label>
+                <type>Text</type>
+                <required>true</required>
+                <sort_order>10</sort_order>
+            </randompriceid>
+        </parameters>
+    </awrandomprice_block>
+</widgets>

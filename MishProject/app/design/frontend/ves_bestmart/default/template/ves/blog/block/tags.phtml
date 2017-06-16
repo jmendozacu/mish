@@ -1,0 +1,14 @@
+<div class="block blog-list-tags">
+	<div class="block-title"><strong><span><?php echo $this->__("Tags"); ?></span></strong></div>
+	<div class="block-content">
+		<?php if( sizeof($tags) > 0 ): ?>
+		    <ul class="tags-list">
+		        <?php foreach ($tags as $key=>$val): ?>
+		            <li><a href="<?php echo Mage::helper('ves_blog')->getTagUrl(trim($key));?>" title="<?php echo $key;?>" style="font-size:<?php echo (int)$val*70+75 ?>%;"><span><?php echo $key; ?><span></a></li>
+		        <?php endforeach; ?>
+		    </ul>
+		<?php else: ?>
+		    <p class="note-msg"><?php echo $this->__('There are no tags available.') ?></p>
+		<?php endif; ?>
+	</div>
+</div>

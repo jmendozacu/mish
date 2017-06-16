@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <vendors_vendor_selectandsell_grid>
+        <reference name="head">
+            <action method="addCss"><css>ves_vendors/css/product.css</css></action>
+        </reference>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="selectandsell/vendor_product_grid" name="selectandsell.vendor.product.grid"/>
+        </block>
+    </vendors_vendor_selectandsell_grid>
+
+    <vendors_vendor_selectandsell_select>
+        <reference name="head">
+            <action method="addCss"><css>ves_vendors/css/product.css</css></action>
+            <action method="addJs"><script>ves_vendors/selectandsell/js.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="selectandsell/vendor_product" name="selectandsell.product.list" />
+        </reference>
+    </vendors_vendor_selectandsell_select>
+
+    <vendors_vendor_selectandsell_load>
+        <update handle="adminhtml_catalog_product_edit" />
+        <reference name="head">
+            <action method="addCss"><css>ves_vendors/css/product.css</css></action>
+        </reference>
+        <block type="selectandsell/vendor_product_edit" name="vendor.product.edit" />
+        <remove name="store_switcher" />
+    </vendors_vendor_selectandsell_load>
+</layout>

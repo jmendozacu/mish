@@ -1,0 +1,32 @@
+<?php if ($this->isShow()): ?>
+<div class="notification-global">
+    <?php
+        $sParts = array();
+
+        if ($this->getMLnewOrdersCount()):
+            $sParts[] = '<a href='.$this->getUrl('items/adminhtml_itemorders/itemorder').'><span class="critical"><strong>'.$this->getMLnewOrdersCount().'</strong> '.$this->__('new orders').'</span></a>';
+        endif;
+
+        if ($this->getMLunansQuesCount()):
+            $sParts[] = '<a href='.$this->getUrl('items/adminhtml_questions/question').'><span class="critical"><strong>'.$this->getMLunansQuesCount().'</strong> '.$this->__('unanswered questions').'</span></a>';
+        endif;
+
+        if ($this->getMLNewFeedbacks()):
+            $sParts[] = '<a href='.$this->getUrl('items/adminhtml_feedbacks').'><span class="critical"><strong>'.$this->getMLNewFeedbacks().'</strong> '.$this->__('new feedbacks').'</span></a>';
+        endif;
+        $msgStats = '';
+        $c = count($sParts);
+        for ($i = 0; $i < $c; $i++) {
+            $msgStats .= $sParts[$i] . ($i == $c-1 ? '' : ($i == $c-2 ? $this->__(' and ') : ', '));
+        }
+
+        $latestNoticeUrl = $this->getLatestNoticeUrl();
+    ?>
+   
+    <span class="f-left">
+		<strong class="label"><?php echo $this->__('MercadoLibre Notification Status:') ?></strong>
+        <?php echo $this->__('You have %s from MercadoLibre.', $msgStats) ?>
+    </span>
+    
+</div>
+<?php endif; ?>

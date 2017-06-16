@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *
+ */
+-->
+<layout version="0.1.0">
+	
+   <default>
+        <reference name="root">
+            <block type="core/template" name="left.permanent.callout">
+                <action method="setTemplate" ifconfig="cms_callouts/general/enableleft">
+                    <template>hybridmodules/hybrid-cmscallouts/hybrid-left-cmscallout.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="root">
+            <block type="core/template" name="right.permanent.callout">
+                <action method="setTemplate" ifconfig="cms_callouts/general/enableright">
+                    <template>hybridmodules/hybrid-cmscallouts/hybrid-right-cmscallout.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+</layout>

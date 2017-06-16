@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsQuote>
+        	<name>B2B Quotation</name>
+        	<url>http://www.vnecoms.com/magento-marketplace/plugins/advanced-group.html</url>
+        	<version>1.0.0.1</version>
+        	
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <VES_Vendors />
+            </depends>
+        </VES_VendorsQuote>
+    </modules>
+</config>

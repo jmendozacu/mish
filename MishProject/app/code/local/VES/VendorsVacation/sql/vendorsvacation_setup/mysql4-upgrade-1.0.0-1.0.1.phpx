@@ -1,0 +1,14 @@
+<?php
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+
+ALTER TABLE {$this->getTable("vendorsvacation/vacation")}
+ADD `vendor` varchar(255) not null ,
+ADD `sort_order` int;
+    ");
+
+$installer->endSetup();

@@ -1,0 +1,6 @@
+<tr>
+    <td class="label">
+        <label><?php echo Mage::helper('vendorsrma')->__('External URL');?></label>
+    </td>
+    <td><label><a href="<?php echo Mage::getUrl('vesrma/rma_guest/view/',array('sc'=>$this->getValue('uid'))) ?>" target="_blank"><?php echo Mage::getUrl('vesrma/rma_guest/view/',array('sc'=>$this->getValue('uid'))) ?></a></td>
+</tr>

@@ -1,0 +1,107 @@
+<?php
+/**
+ * Request For Quote template
+ *
+ * @var $this VES_VendorsQuote_Block_Customer_Quote_View
+ */
+?>
+<?php $_quote = $this->getQuote();?>
+<script type="text/javascript">
+var SEND_QUOTE_MESSAGE_URL = '<?php echo $this->getSendQuoteMessageUrl();?>';
+var UPDATE_DEFAULT_PROPOSAL_URL = '<?php echo $this->getSaveDefaultProposalUrl();?>';
+</script>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="quote-view-container">
+    <div class="page-title title-buttons"><h1><?php echo $this->__('Quote Request #%s',$_quote->getIncrementId())?></h1></div>
+    <p class="order-date"><?php echo $this->__('Quote Request Date: %s',$this->formatDate($_quote->getCreatedAt(),'long'))?></p>
+    
+    <div class="col2-set quote-info-box">
+        <div class="col-1">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Customer Information')?></h2>
+                </div>
+                <div class="box-content">
+                    <table class="form-list quote-customer-info">
+                        <tbody>
+                            <tr>
+                                <td class="label"><label><?php echo $this->__('Customer Name')?></label></td>
+                                <td class="value"><?php echo $_quote->getCustomerName();?></td>
+                            </tr>
+                            <tr>
+                                <td class="label"><label><?php echo $this->__('Email')?></label></td>
+                                <td class="value"><a href="mailto:<?php echo $_quote->getEmail();?>"><?php echo $_quote->getEmail();?></a></td>
+                            </tr>
+                            <?php if($this->showField('account_detail_telephone')):?>
+                            <tr>
+                                <td class="label"><label><?php echo $this->__('Telephone')?></label></td>
+                                <td class="value"><?php echo $_quote->getTelephone();?></td>
+                            </tr>
+                            <?php endif;?>
+                            <?php if($this->showField('account_detail_company')):?>
+                            <tr>
+                                <td class="label"><label><?php echo $this->__('Company')?></label></td>
+                                <td class="value"><?php echo $_quote->getCompany();?></td>
+                            </tr>
+                            <?php endif;?>
+                            
+                            <?php if($this->showField('account_detail_taxvat')):?>
+                            <tr>
+                                <td class="label"><label><?php echo $this->__('VAT/Tax Id')?></label></td>
+                                <td class="value"><?php echo $_quote->getTaxvat();?></td>
+                            </tr>
+                            <?php endif;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Remark with Proposal')?></h2>
+                </div>
+                <div class="box-content"><?php echo $_quote->getClientComment();?></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <strong><?php echo $this->__('Quote status:')?></strong> <?php echo $_quote->getStatusLabel();?>
+    </div>
+    <div class="quote-info-box">
+        <?php echo $this->getChildHtml('items')?>
+    </div>
+    <?php if($this->canConfirm()):?>
+    <div class="buttons-set control-button-set">
+        <button class="button button-secondary reject-proposal" onclick="setLocation('<?php echo $this->getRejectProposalUrl();?>');"><span><span><?php echo $this->__('Reject Proposal')?></span></span></button>
+        <button class="button confirm-proporal" onclick="setLocation('<?php echo $this->getConfirmUrl();?>');"><span><span><?php echo $this->__('Confirm And Add To Cart')?></span></span></button>
+    </div>
+    <?php endif;?>
+    <div class="col2-set quote-info-box">
+        <div class="client-data box">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Message History')?></h2>
+                </div>
+                <div class="box-content">
+                    <textarea id="message_comment" class="message-box" name="message[comment]"></textarea>
+                    <div class="buttons-set">
+                        <button onclick="submitQuoteMessage(<?php echo $_quote->getId()?>,'message_comment','quote-message-list','<?php echo $this->getEmailParam()?>',$(this),$('vendorsquote-message-loading'))" class="button" type="button" title="<?php echo $this->__('Submit Comment')?>"><span><span><span><?php echo $this->__('Send')?></span></span></span></button>
+                        <div id="vendorsquote-message-loading" class="message-loading" style="display: none;"></div>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <?php echo $this->getChildHtml('quote_messages')?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php if($this->getCustomerSession()->isLoggedIn()):?>
+    <div class="buttons-set">
+        <p class="back-link">
+            <a class="left" href="<?php echo $this->getQuotesListUrl()?>"><?php echo $this->__('&laquo; Back to My Quotes')?></a>
+        </p>
+    </div>
+    <?php endif;?>
+</div>
