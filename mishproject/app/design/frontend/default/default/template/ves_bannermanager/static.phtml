@@ -1,0 +1,25 @@
+<?php $banner = $this->getBanner();?>
+<?php if(!$banner):?>
+	<?php echo $this->__("Banner Not Found!")?>
+<?php else:?>
+	<?php if(!$this->getItems()) :?>
+		<?php echo $this->__('Item not fould!');?>
+	<?php else:?>
+	<?php $now = Mage::getModel('core/date')->date('Y-m-d');?>
+	<?php $random = rand(1111,9999)?>
+		<div class="slider_container static_banner">
+			<div id="slider_<?php echo $random?>" style="width: <?php echo $banner->getWidth()?>px; height: <?php echo $banner->getHeight()?>px;">
+				<ul>
+					<?php foreach($this->getItems() as $item):?>
+			  			<?php if( ($item->getFromDate() && ($item->getFromDate() > $now)) || ($item->getToDate() && ($item->getToDate() < $now))) continue;?>
+			  			<?php if($item->getCustomHtml()):?>
+			        		<li style="float:left;"><div style="position:relative;width:<?php echo $banner->getWidth()?>px; height: <?php echo $banner->getHeight()?>px;color:#000;"><?php echo $item->getCustomHtml()?></div></li>
+			        	<?php else:?>
+							<li style="float:left;"><a href="<?php echo $this->getItemUrl($item)?$this->getItemUrl($item):"#".$item->getTitle()?>"><img src="<?php echo Mage::helper('bannermanager/image')->init($item->getFilename())->resize($banner->getWidth(),$banner->getHeight())?>" alt="<?php echo $item->getTitle()?>" /></a></li>
+						<?php endif;?>
+					<?php endforeach;?>		
+				</ul>
+			</div>
+		</div>
+	 <?php endif;?>
+<?php endif;?>

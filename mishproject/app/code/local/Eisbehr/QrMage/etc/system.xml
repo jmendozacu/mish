@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<config>
+   <sections>
+		<qrmage translate="label comment" module="qrmage">
+            <tab>general</tab>
+            <label>QR Codes</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <qrmage translate="label comment" module="qrmage">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Active:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+							<default_value>1</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>activate the view on frontend, default: yes</comment>
+                        </active>
+						<engine translate="label">
+                            <label>Qr Code Engine:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>qrmage/config_engine</source_model>
+                            <sort_order>5</sort_order>
+							<default_value>1</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>witch engine to use, default: google</comment>
+                        </engine>
+						<level translate="label">
+                            <label>Level:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>qrmage/config_level</source_model>
+                            <sort_order>10</sort_order>
+                            <default_value>L</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>error loss level, default: L</comment>
+                        </level>
+						<label translate="label">
+                            <label>Label:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+							<default_value>QR Code</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>image label, default: QR Code</comment>
+                        </label>
+                    </fields>
+                </qrmage>
+				<google translate="label comment" module="qrmage">
+                    <label>Google Engine</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<size translate="label">
+                            <label>Size:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+							<default_value>150</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>width and height in pixels, default: 150, max: 500</comment>
+                        </size>
+						<margin translate="label">
+                            <label>Margin:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+							<default_value>2</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>in rows, not pixels, default: 2</comment>
+                        </margin>
+						<encoding translate="label">
+                            <label>Encoding:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>qrmage/config_encoding</source_model>
+                            <sort_order>10</sort_order>
+                            <default_value>UTF-8</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>encoding for url data, default: UTF-8</comment>
+                        </encoding>
+                    </fields>
+                </google>
+				<swetake translate="label comment" module="qrmage">
+                    <label>Swetake Engine</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<size translate="label">
+                            <label>Size:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>qrmage/config_size</source_model>
+                            <sort_order>0</sort_order>
+							<default_value>4</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>qr code size level, default: 4</comment>
+                        </size>
+						<image translate="label">
+                            <label>Margin:</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>qrmage/config_image</source_model>
+                            <sort_order>5</sort_order>
+							<default_value>P</default_value>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>iamge type, default: png</comment>
+                        </image>
+                    </fields>
+                </swetake>
+            </groups>
+        </qrmage>
+    </sections>
+</config>

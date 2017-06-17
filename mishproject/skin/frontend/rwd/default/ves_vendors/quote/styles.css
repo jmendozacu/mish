@@ -1,0 +1,30 @@
+.quote-vendor-title{display: block; margin-bottom: 10px;}
+.quote-vendor-title:after{display: block; clear: both;content:"."; font-size: 0; line-height: 0; height: 0;overflow: hidden;}
+.submit-quote-btn{float: right;}
+.vquote-address,.client-data{text-align: left;}
+.vquote-address input[type="text"]{width: 98%;}
+.quote-table td .comment{max-width: 200px;}
+
+.quote-info-box{margin-bottom: 40px;margin-top: 20px;}
+.quote-info-box:after{display: block; clear: both; content: "."; height: 0; line-height: 0; overflow: hidden;font-size: 0;}
+.quote-info-box .box-title {padding-right: 10px;width: 100%;}
+.quote-info-box .box-title h2 {font-size: 14px;font-weight: bold;line-height: 1.5;}
+.quote-customer-info .label{width: 130px;}
+.quote-info-box .quote-table{width: 100%;}
+.quote-info-box .quote-item-comment{min-width: 200px;}
+.quote-info-box .quote-item-product{min-width: 200px;}
+.quote-info-box .proposals{min-width: 120px;}
+.proposal-cotnainer{line-height: 25px;}
+.quote-view-container .buttons-set button.reject-proposal{float: left;}
+.quote-view-container .buttons-set button.confirm-proporal{float: right;}
+.quote-view-container  .control-button-set{border-top: 1px solid #d3d3d3; border-bottom: 1px solid #d3d3d3;margin: 10px 0;margin: 10px 0; padding: 10px 0;}
+.quote-view-container .message-box{width: 100%; max-width: 100%;height: 80px;}
+
+
+.quote-message-list{max-height: 450px; overflow-y: auto;}
+.quote-message-list li{border-top: 1px solid #d3d3d3;margin: 20px 0;}
+.quote-message-list .message-title{margin-bottom: 10px;padding-top: 5px;}
+.quote-message-list .customer-message{color: #2EA0A0 !important;}
+.quote-message-list .vendor-message{color: #cc7c22 !important;}
+.quote-message-list .admin-message{color: #BF5050 !important;}
+.message-loading{width: 32px; height: 32px; background: url(images/loading.gif) no-repeat center center;float: right;}

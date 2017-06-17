@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Eisbehr_QrMage>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Eisbehr_QrMage>
+	</modules>
+</config>

@@ -1,0 +1,87 @@
+<?php $sessions = $this->getSessionBox() ?>
+<div class="chat-header" id="ves-tabs-chatlive-header">
+    <div class="tab">
+        <a href="javascript:void(0)" rel="0" id="tab-0" class="tab-selector-0 checked"><?php echo $this->__("Start Page") ?></a>
+    </div>
+    <?php $i=0 ;?>
+    <?php foreach($sessions as $session): ?>
+        <?php if($session->getData("is_closed") == 0 && $session->getData("show_on_backend") == 0): ?>
+            <div class="tab">
+                <a href="javascript:void(0)" rel="<?php echo $session->getId() ?>" id="tab-<?php echo $session->getId() ?>" class="tab-selector-<?php echo $session->getId() ?> <?php //if($i==0) echo "checked" ?>" ><?php echo $session->getName() ?></a>
+            </div>
+         <?php endif ;?>
+    <?php
+    $i++;
+    endforeach; ?>
+</div>
+<div class="clear-shadow"></div>
+<div class="chat-content ves-tabs-chatlive" id="ves-tabs-chatlive-content">
+    <div class="content content-0">
+        <?php echo $this->getChildHtml("geo_tracking") ?>
+    </div>
+    <?php foreach($sessions as $session): ?>
+    <?php if($session->getData("is_closed") == 0 && $session->getData("show_on_backend") == 0): ?>
+    <div class="content content-<?php echo $session->getId() ?> <?php if($session->getData("show_on_backend") == 1) echo "not-show" ?>">
+        <div class="box-content-message">
+            <ol class="discussion">
+                <?php echo $this->getNoteBox($session->getId()) ?>
+
+                <?php $messages = $this->getMessages($session->getId()) ?>
+                <?php foreach($messages as $message ) : ?>
+
+                        <li class="<?php echo $this->getClassNameMessageBox($message->getData("type")) ?>" id="ves-content-message-<?php echo $message->getId() ?>">
+                            <div class="avatar">
+                                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>"/>
+                            </div>
+                            <div class="messages">
+                                <p>
+                                    <span class="title"><?php echo $message->getData("send_by") ?> : </span>
+                                    <?php echo $message->getContent() ?>
+                                </p>
+                                <time datetime="<?php echo $message->getData("created_time") ?>"><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$message->getData("created_time") );?></time>
+                            </div>
+                        </li>
+
+                <?php endforeach; ?>
+
+            </ol>
+        </div>
+        <div class="box-content-reply">
+            <div class="reply-top">
+                <textarea name="<?php echo $this->getVendorsName() ?>"  id="chat_message_<?php echo $session->getId() ?>" cols="3" <?php if($session->getStatus() != VES_VendorsLiveChat_Model_Session_Status::STATUS_ACCEPT) echo 'class="disabled"'." disabled" ; ?> wrap="hard" autocomplete="off"></textarea>
+                <script type="text/javascript">
+                    $('chat_message_<?php echo $session->getId() ?>').observe('keypress', keypressHandler);
+
+                    function keypressHandler (event){
+                        var value = $('chat_message_<?php echo $session->getId() ?>').value;
+                        // alert(value);
+                        var key = event.which || event.keyCode;
+                        switch (key) {
+                            default:
+                                ChatOption.msgType('<?php echo $session->getId() ?>',value,control);
+                                break;
+                            case Event.KEY_RETURN:
+                                event.preventDefault();
+                                control.replyMessage('<?php echo $session->getId() ?>',false);
+                                var object = msgTypeObject[<?php echo $session->getId() ?>];
+                                object.setIsTypeing(false);
+                                object.setUpdatedTypeing(false);
+                                break;
+                        }
+                    }
+                </script>
+            </div>
+            <?php if($session->getStatus() == VES_VendorsLiveChat_Model_Session_Status::STATUS_ACCEPT) :?>
+            <div class="reply-bottom">
+                <button class="scalable reply" style="" onclick="control.replyMessage('<?php echo $session->getId() ?>',false)" type="button" title="Reply"><span><span><?php echo Mage::helper("vendorslivechat")->__("Reply") ?></span></span></button>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+    <?php endif; ?>
+    <?php endforeach ?>
+
+    <div id="ves_livechat_content_loading" class="ves_livechat-loading-box" style="display: none;"><img src="<?php echo $this->getSkinUrl('ves_vendors/images/livechat/loading.gif')?>" /><br /></div>
+    <div id="ves_livechat_content_overlay" class="ves_livechat-overlay" style="display: none;"></div>
+</div>
+

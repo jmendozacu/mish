@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ */
+-->
+<layout>
+
+<!--
+Category default layout
+-->
+
+    <catalog_category_default>
+        <reference name="product_list">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-categoryview.phtml</template>
+            </action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-mobileview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-toolbar.phtml</template>
+            </action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable"><mode>grid</mode><limit>10</limit></action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable"><mode>grid</mode><limit>50</limit></action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-pager.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="directory/currency" name="currency" after="category.products" template="directory/currency.phtml"/>
+        </reference>
+    </catalog_category_default>
+
+<!--
+Category layered navigation layout
+-->
+
+    <catalog_category_layered>
+        <reference name="product_list">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-categoryview.phtml</template>
+            </action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-mobileview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-toolbar.phtml</template>
+            </action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable"><mode>grid</mode><limit>10</limit></action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable"><mode>grid</mode><limit>50</limit></action>
+            <action method="addPagerLimit" ifconfig="hybrid_mobile/general/enable" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-pager.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="directory/currency" name="currency" after="category.products" template="directory/currency.phtml"/>
+        </reference>
+    </catalog_category_layered>
+
+    <tag_product_list>
+        <reference name="search_result_list">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-categoryview.phtml</template>
+            </action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-mobileview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-pager.phtml</template>
+            </action>
+        </reference>
+    </tag_product_list>
+
+<!--
+Set the category view template to show search results
+-->
+
+    <catalogsearch_result_index translate="label">
+        <reference name="search_result_list">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-categoryview.phtml</template>
+            </action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-mobileview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-pager.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_result translate="label">
+        <reference name="search_result_list">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-categoryview.phtml</template>
+            </action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-mobileview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate" ifconfig="hybrid_mobile/general/enable">
+                <template>hybridmodules/hybrid-categoryview/hybrid-pager.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_advanced_result>
+
+</layout>

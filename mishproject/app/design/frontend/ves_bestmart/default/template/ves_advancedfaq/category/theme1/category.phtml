@@ -1,0 +1,94 @@
+<?php 
+	$category		= $this->getCategory() ;
+  	$questionSuffix = $this->getQuestionSuffix();
+  	$urlKey			= $this->getUrlKey();
+?>
+
+<div class="kbase-main kbase">
+	<div class="kbase-block kbase-main-category">
+		<div class="kbase-block-title">
+			<h1><?php echo $category->getData('title')?></h1>
+		</div>
+		<div class="kbase-block-content">
+			<table  id="category-kbase" style="width:100%">
+			    <tbody>
+			        <?php $_odd = ''; ?>
+			        <?php foreach ($this->getFaqs() as $faq): ?>
+			        <tr  class=" kbase-listing-full">
+			            <td class="content-faq">
+			            	<div class="accordion <?php if(!Mage::helper("advancedfaq")->getEnableAccordion()):?>accordion-open<?php endif; ?>" id="section<?php echo $faq->getId()?>"><span><?php echo $faq->getData('question') ?></span></div>
+							  <div class="container">
+						        <div class="content">
+						           <div class="kbase-block-content">
+												<div class="faq-answer">
+												<?php echo $faq->getData('answer') ?>
+												</div>	
+											</div>
+											<div class="clearer kbase-article-footer">
+												<p class="article-date"><?php echo  Mage::getModel('core/date')->date('F j, Y',$faq->getData('created_time')); ?></p>
+												<?php if($this->isEnableRating()):?>
+													 <div id="rate_widget_<?php echo $faq->getId() ?>" class="rate_widget" rel="<?php echo $faq->getId() ?>">
+												
+													  </div>
+												<?php endif;?>
+									</div>
+						        </div>
+			            </td>
+			        </tr>
+			        <?php endforeach; ?>
+			    </tbody>
+			</table>
+			<?php echo $this->getPagerHtml(); ?>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+  <script type="text/javascript">
+    <?php if(Mage::helper("advancedfaq")->getEnableAccordion()): ?>
+    	//$j = jQuery.noConflict();
+    	$j(document).ready(function() {
+	        //custom animation for open/close
+	        $j.fn.slideFadeToggle = function(speed, easing, callback) {
+	            return this.animate({opacity: 'toggle', height: 'toggle'}, speed, easing, callback);
+	        };
+	        $j('.accordion').accordion({
+	            defaultOpen: 'section1',
+	            cookieName: 'nav',
+	            speed: '<?php echo Mage::helper("advancedfaq")->getSpeedAccordion() ?>',
+	            bind : '<?php echo Mage::helper("advancedfaq")->getBindAccordion() ?>',
+	            animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+	                elem.next().stop(true, true).slideFadeToggle(opts.speed);
+	            },
+	            animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+	                elem.next().stop(true, true).slideFadeToggle(opts.speed);
+	            }
+	        });
+		      });
+    <?php endif; ?>
+
+    <?php if($this->isEnableRating()):?>
+	    $j.fn.raty.defaults.path = '<?php echo $this->getSkinUrl("images/otto_advancedfaq") ?>';
+
+	    <?php foreach ($this->getFaqs() as $faq):?>
+	   		 <?php if($this->canShowRatingForm($faq->getId())){ ?>
+	       		 $j('#rate_widget_<?php echo $faq->getId() ?>').raty({score: <?php echo $faq->getData('rating') ?>});<?php }else{ ?>$j('#rate_widget_<?php echo $faq->getId() ?>').raty({readOnly: true,score: <?php echo $faq->getData('rating') ?>});
+		     <?php } ?>
+	    <?php endforeach;?>
+	    		 $j('.rate_widget img').bind('click', function() {
+	 	              var star = this;
+	 	              var widget = $j(this).parent();
+	 				  var rating = $j(star).attr('alt');
+	 				  var widget_id = widget.attr('rel');
+	 	              $j.ajax({
+	 	      		      url: '<?php echo $this->getUrlRatingAjax() ?>',
+	 	      		      type: 'POST',
+	 	      		      dataType: 'html',
+	 	      		      data: "rating="+rating+"&id="+widget_id,
+	 	      		      success : function(transport){
+	 	  	      		    	//  $j(widget).find('.star_' + rating).prevAll().andSelf().addClass('ratings_vote');
+	 	      		    		 $j('#rate_widget_'+widget_id).raty({readOnly: true, score: rating});
+	 	      		       },
+	 	      		   });
+	 	          });
+	<?php endif;?>
+	</script>

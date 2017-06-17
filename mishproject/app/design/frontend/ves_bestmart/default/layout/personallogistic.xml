@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <personallogistic_index_index>
+        <reference name="content">
+            <block type="personallogistic/personallogistic" name="personallogistic" template="personallogistic/personallogistic.phtml" />
+        </reference>
+    </personallogistic_index_index>
+
+    <personallogistic_index_login>
+    	 <reference name="root">
+             <action method="setTemplate">
+                <template>page/personallogistic-layout.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="personallogistic/personallogistic" name="personallogisticlogin" template="personallogistic/login.phtml" />
+        </reference>
+    </personallogistic_index_login>
+
+    <personallogistic_index_dashboard>
+    	 <reference name="root">
+             <action method="setTemplate">
+                <template>page/personallogistic-dashboard.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="personallogistic/personallogistic" name="personallogisticdashboard" template="personallogistic/dashboard.phtml" />
+        </reference>
+    </personallogistic_index_dashboard>
+
+    <personallogistic_index_orderdashboard>
+         <reference name="root">
+             <action method="setTemplate">
+                <template>page/personallogistic-dashboard.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="personallogistic/personallogistic" name="personallogisticorderdashboard" template="personallogistic/orderdashboard.phtml" />
+        </reference>
+    </personallogistic_index_orderdashboard>
+</layout> 

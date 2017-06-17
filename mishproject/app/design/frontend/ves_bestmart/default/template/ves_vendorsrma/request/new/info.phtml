@@ -1,0 +1,129 @@
+
+<?php $requestData =  $this->getRequestData(); ?>
+<h2 class="legend"><?php echo $this->__('Request Information'); ?></h2>
+
+<ul class="form-list">
+
+    <li class="wide">
+        <label for="content_message" class="required"><em>*</em><?php echo Mage::helper('vendorsrma')->__('Order') ?></label>
+        <div class="input-box">
+            <select class="validate-select" name="order_incremental_id" id="order_incremental_id">
+                <option value=""><?php echo Mage::helper('vendorsrma')->__('---Select an order---') ?></option>
+                <?php foreach($this->getOrderByCustomerId() as $order):?>
+                    <option <?php if($requestData["order_incremental_id"] ==  $order->getData('increment_id')) echo "selected" ?> value="<?php echo $order->getData('increment_id') ?>" ><?php echo '#'.$order->getData('increment_id').' at '.Mage::getModel('core/date')->date("j/n/Y",$order->getData('created_at')).' ( '.Mage::helper('core')->currency($order->getGrandTotal()).' )' ?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </li>
+    <li class="wide products">
+        <div class="input-box">
+            <div class="box-customer-request">
+                <table class="data-table my-request-table" id="my-request-table">
+                    <col />
+                    <col width="1" />
+                    <col width="1" />
+                    <col width="1" />
+                    <col width="1" />
+                    <thead>
+                    <tr class="headings" id="ves-items-head">
+                        <th width="10%"><input type="checkbox" name="orderitemsselecttoggle" disabled="" id="ves-items-select-toggle"/></th>
+                        <th><?php echo $this->helper('vendorsrma')->__('Image') ?></th>
+                        <th><?php echo $this->helper('vendorsrma')->__('Product') ?></th>
+                        <th><?php echo $this->helper('vendorsrma')->__('Sku') ?></th>
+                        <th class="last" width="30%"><?php echo $this->helper('vendorsrma')->__('Qty RMA') ?></th>
+                    </tr>
+                    <tr id="ves-items-noorder" style="display: none;">
+                        <td class="last" colspan="5"><?php echo $this->__("No order selected") ?></td>
+                    </tr>
+                        <tr id="ves-items-noorder" style="display: none;">
+                        <td class="last" colspan="5"><?php echo $this->__("No order selected") ?></td>
+                    </tr>
+                        <tr id="ves-items-noitems" style="display: none;">
+                            <td class="last" colspan="5"><?php echo $this->__("No items selected") ?></td>
+                        </tr>
+                        <tr id="ves-items-error" class="last" style="display: none;">
+                            <td class="last" colspan="5"><?php echo $this->__("Some error occurs. Please, try again to select order") ?></td>
+                        </tr>
+                    </thead>
+                    <tbody class="" id="ves-list-product-order">
+                        <tr>
+                            <td colspan="5"><?php echo $this->helper('vendorsrma')->__('No order selected')  ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="ves_request_loading" class="ves_request_loading" style="display: none;"><img src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/ajax-loader.gif')?>" /><br /></div>
+        <div id="ves_request_overlay" class="ves_request_overlay" style="display: none;"></div>
+
+    </li>
+    <li class="fields">
+        <div class="left">
+            <label for="package_opened" class="required"><em>*</em><?php echo Mage::helper('vendorsrma')->__('Package Opened') ?></label>
+            <div class="input-box">
+                <select name="request[package_opened]" id="package_opened" class="validate-select">
+                    <?php foreach($this->getPackOpened() as $key => $value):?>
+                        <option <?php if($requestData["request"]["package_opened"] ==  $key) echo "selected" ?> value="<?php echo $key ?>" ><?php echo $value ?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="right">
+            <label for="type" class="required"><em>*</em><?php echo Mage::helper('vendorsrma')->__('Request Type') ?></label>
+            <div class="input-box">
+                <select name="request[type]" id="type" class="validate-select">
+
+                    <?php foreach($this->getType() as $key => $value):?>
+                        <option  <?php if($requestData["request"]["type"] ==  $key) echo "selected" ?> value="<?php echo $key ?>" ><?php echo $value ?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </li>
+
+    <?php if(Mage::helper('vendorsrma/config')->allowReasons()) :  ?>
+    <?php if(Mage::helper('vendorsrma/config')->enableReasons()) :  ?>
+        <li class="wide">
+            <label for="reason" class="required"><em>*</em><?php echo Mage::helper('vendorsrma')->__('Reason') ?></label>
+            <div class="input-box">
+                <select name="request[reason]" id="reason" class="validate-select" onchange="requestOption.changeReason(this.value)">
+                    <option value=""><?php echo Mage::helper('vendorsrma')->__('--- Select an Reason ---') ?></option>
+                    <?php foreach($this->getReason() as $key => $value):?>
+                        <option <?php if($requestData["request"]["reason"] ==  $key) echo "selected" ?> value="<?php echo $key ?>" ><?php echo $value ?></option>
+                    <?php endforeach;?>
+                     <?php if(Mage::helper('vendorsrma/config')->allowOtherOptionReason()) :  ?>
+                        <option value="other"><?php echo Mage::helper('vendorsrma')->__('Other Reason') ?></option>
+                     <?php endif ; ?>
+                </select>
+            </div>
+        </li>
+    <?php endif ; ?>
+     <?php if(Mage::helper('vendorsrma/config')->allowOtherOptionReason()) :  ?>
+     <li class="wide" style="display:none">
+        <label for="reason_detail"><?php echo Mage::helper('vendorsrma')->__('Other Reason') ?></label>
+        <div class="input-box">
+        <input type="text" name="request[reason_detail]" class="input-text required-entry" id="reason_detail" />
+        </div>
+     </li>
+    <?php endif ; ?>
+    <?php endif ; ?>
+
+    <li class="wide">
+        <label for="content_message"><?php echo Mage::helper('vendorsrma')->__('Comment') ?></label>
+        <div class="input-box">
+            <textarea name="request[comment]" id="content_message" title="<?php echo Mage::helper('vendorsrma')->__('Comment') ?>" class="required-entry input-text" cols="5" rows="3"> <?php if($requestData["request"]["comment"]) echo $requestData["request"]["comment"] ?></textarea>
+            <div id="message-validate"></div>
+        </div>
+    </li>
+
+
+    <li class="wide files">
+        <label for="filename"><?php echo Mage::helper('vendorsrma')->__('File ('.Mage::helper('vendorsrma/config')->maxSizeUpload().'Mb)(Allow extension : '.Mage::helper('vendorsrma/config')->fileExtension().')')?></label>
+        <div id="file0">
+            <input class="input-file" name="filename0" id="filename0"  type="file"/>
+            <button class="button form-button" type="button" onClick="requestOption.add('0')"><span><span><?php echo Mage::helper('vendorsrma')->__('Add File')?></span></span></button>
+            <input type="hidden" id="filename" name="request[filename]" value="0">
+        </div>
+    </li>
+</ul>

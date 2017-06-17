@@ -1,0 +1,65 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_priceslider">
+                <title>VenusTheme</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <priceslider translate="title" module="ves_priceslider">
+                        <title>Ves Price Slider</title>
+                        <children>
+                            <configuration translate="title" module="ves_priceslider">
+                                <title>Configuration</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_priceslider</action>
+                            </configuration>
+                        </children>
+                    </priceslider>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_priceslider">
+			                <title>VenusTheme</title>
+			                <sort_order>50</sort_order>
+			                <children>
+			                    <priceslider translate="title" module="ves_priceslider">
+			                        <title>Ves Price Slider</title>
+			                        <children>
+			                            <configuration translate="title" module="ves_priceslider">
+			                                <title>Configuration</title>
+			                                <sort_order>5</sort_order>
+			                                <action>adminhtml/system_config/edit/section/ves_priceslider</action>
+			                            </configuration>
+			                        </children>
+			                    </priceslider>
+			                </children>
+		            	</vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_priceslider>
+                                            <title>Ves Price Slider</title>
+                                        </ves_priceslider>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_PriceSlider>
+					<files>
+						<default>Ves_PriceSlider.csv</default>
+					</files>
+				</Ves_PriceSlider>
+			</modules>
+		</translate>
+</config>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_banner_index>
+        <reference name="content">
+            <block type="bannermanager/adminhtml_banner" name="bannermanager" />
+        </reference>
+    </adminhtml_banner_index>
+    <adminhtml_banner_edit>
+    	<reference name="head">
+    		<action method="addJs"><script>ves_bannermanager/banner.js</script></action>
+    	</reference>
+    </adminhtml_banner_edit>
+    <adminhtml_banner_item_index>
+        <reference name="content">
+            <block type="bannermanager/adminhtml_item" name="bannermanager" />
+        </reference>
+    </adminhtml_banner_item_index>
+    
+    
+    <vendors_cms_banner_index>
+    	<reference name="content">
+            <block type="bannermanager/vendor_banner" name="bannermanager" />
+        </reference>
+    </vendors_cms_banner_index>
+    
+    <vendors_cms_banner_edit>
+    	<reference name="head">
+    		<action method="addJs"><script>ves_bannermanager/banner.js</script></action>
+    	</reference>
+    </vendors_cms_banner_edit>.
+    
+    <vendors_cms_banner_item_index>
+        <reference name="content">
+            <block type="bannermanager/vendor_item" name="bannermanager" />
+        </reference>
+    </vendors_cms_banner_item_index>
+</layout>

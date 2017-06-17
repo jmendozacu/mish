@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_Commision>
+            <version>0.1.0</version>
+        </VES_Commision>
+    </modules>
+    <frontend>
+        <routers>
+            <commision>
+                <use>standard</use>
+                <args>
+                    <module>VES_Commision</module>
+                    <frontName>commision</frontName>
+                </args>
+            </commision>
+        </routers>
+        <layout>
+            <updates>
+                <commision>
+                    <file>commision.xml</file>
+                </commision>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<commision>
+				<use>admin</use>
+				<args>
+					<module>VES_Commision</module>
+					<frontName>commision</frontName>
+				</args>
+			</commision>
+        </routers>
+    </admin>
+    <adminhtml>
+       <!--   <vendors>
+		<menu>
+			<commision module="commision">
+				<title>Commisionss</title>
+				<sort_order>71</sort_order> 
+                <action>commision/adminhtml_commision/view/</action>
+			</commision>
+		</menu>
+         </vendors> -->
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<VES_Commision>
+							<title>Commision Module</title>
+							<sort_order>10</sort_order>
+						</VES_Commision>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<commision>
+					<file>commision.xml</file>
+				</commision>
+			</updates>
+		</layout>
+    </adminhtml>  
+
+   <!--   <vendors>
+        <menu>
+            <commision module="commision">
+                <title>Commisionss</title>
+                <sort_order>71</sort_order> 
+                <action>commision/adminhtml_commision/view/</action>
+            </commision>
+        </menu>
+         </vendors>   -->
+    <global>
+        <models>
+            <commision>
+                <class>VES_Commision_Model</class>
+                <resourceModel>commision_mysql4</resourceModel>
+            </commision>
+            <commision_mysql4>
+                <class>VES_Commision_Model_Mysql4</class>
+                <entities>
+                    <commision>
+                        <table>commision</table>
+                    </commision>
+                </entities>
+            </commision_mysql4>
+        </models>
+        <resources>
+            <commision_setup>
+                <setup>
+                    <module>VES_Commision</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </commision_setup>
+            <commision_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </commision_write>
+            <commision_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </commision_read>
+        </resources>
+        <blocks>
+            <commision>
+                <class>VES_Commision_Block</class>
+            </commision>
+        </blocks>
+        <helpers>
+            <commision>
+                <class>VES_Commision_Helper</class>
+            </commision>
+        </helpers>
+    </global>
+</config>

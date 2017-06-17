@@ -1,0 +1,91 @@
+<?php
+ $imagepath = Mage::getBaseDir('media').DS."slider".DS;
+ $btmodel = Mage::getModel('btslider/btslider')->getCollection();
+foreach ($btmodel as $imagedata) { 
+  $image = $imagedata['images'];
+  $url = $imagedata['url'];
+  $imagelabel = $imagedata['imagelabel'];
+  $title = $imagedata['title'];
+  $imagethumbnail = $imagepath.$image;
+}
+?>
+
+ <div id="myCarousel" class="carousel slide bannerCount" data-ride="carousel">
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+      <?php $i=0;
+        foreach ($btmodel as $imagedata) { 
+            $id= $imagedata['btbanner_id'];
+            $image = $imagedata['images'];
+            $url = $imagedata['url'];
+            $imagelabel = $imagedata['imagelabel'];
+            $title = $imagedata['title'];
+            $imagethumbnail = $imagepath.$image;
+?>
+        <div class="item <?php if ($i==0) { echo "active";} ?>">
+
+           <a href="<?php echo $url; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>"><img src="http://localhost/mish/media/slider/<?php echo $image; ?>"></a>
+           <div class="carousel-caption">
+         <!--    <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p> -->
+          </div>
+        </div><!-- End Item -->
+<?php $i++; } ?>      
+      </div><!-- End Carousel Inner -->
+
+
+      <ul class="nav nav-pills nav-justified" >
+      <?php $m=0;
+        foreach ($btmodel as $imagedata) { 
+            $id= $imagedata['btbanner_id'];
+            $imagelabel = $imagedata['imagelabel']; ?>
+          <li data-target="#myCarousel" data-slide-to="<?php echo $m; ?>" class="<?php if ($m==0) { echo "active";} ?>"><a href="#"><?php echo $imagelabel; ?></a></li>
+      <?php $m++; } ?>
+        </ul>
+
+
+    </div><!-- End Carousel -->
+
+  <!-- Right side AD image -->
+  <div class="bannerrightAdd">
+     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner-rightside-add')->toHtml();?>
+  </div>
+
+
+
+<style>
+#myCarousel .nav a small {
+    display:block;
+}
+#myCarousel .nav {
+  background:#eee;
+}
+</style>
+<script>
+  
+  $(document).ready( function() {
+    $('#myCarousel').carousel({
+    interval:   4000
+  });
+  
+  var clickEvent = false;
+  $('#myCarousel').on('click', '.nav a', function() {
+      clickEvent = true;
+      $('.nav li').removeClass('active');
+      $(this).parent().addClass('active');    
+  }).on('slid.bs.carousel', function(e) {
+    if(!clickEvent) {
+      var count = $('.nav').children().length -1;
+      var current = $('.nav li.active');
+      current.removeClass('active').next().addClass('active');
+      var id = parseInt(current.data('slide-to'));
+      if(count == id) {
+        $('.nav li').first().addClass('active');  
+      }
+    }
+    clickEvent = false;
+  });
+});
+
+</script>

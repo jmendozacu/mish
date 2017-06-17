@@ -1,0 +1,115 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php  $theme=Mage::helper('welldone');?>
+<footer class="footer">
+    <?php if(!$theme->getLayoutOption('general/footer_short')):?>
+    <?php if($theme->getLayoutOption('general/footer_toplinks')):?>
+    <div class="footer__links hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="h-links-list">
+                        <ul><?php echo $this->getChildHtml('topLinks') ?></ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="h-links-list text-right">
+                        <?php echo $this->getChildHtml('wd_footer_custom_links') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+    <?php if($theme->getLayoutOption('general/footer_info_links')):?>
+    <div class="footer__column-links">
+        <?php if($theme->getConfigOption('general/show_back_to_top')):?>
+        <div class="back-to-top"> <a href="#top" class="btn btn--round btn--round--lg"><span class="icon-arrow-up"></span></a></div>
+        <?php endif;?>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 hidden-xs hidden-sm"> <!--  Logo  -->
+                    <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo logo--footer">
+                        <?php if($theme->getConfigOption('general/logo_footer')):?>
+                            <img  data-retina="true"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'welldone/'.$theme->getConfigOption('general/logo_footer')?>" alt="" />
+                        <?php endif;?>
+                    </a>
+                    <!-- End Logo --> </div>
+                <div class="col-sm-3 col-md-2 mobile-collapse">
+                    <?php echo $this->getChildHtml('wd_footer_column_1_html') ?>
+                </div>
+                <div class="col-sm-3 col-md-2 mobile-collapse">
+                    <?php echo $this->getChildHtml('wd_footer_column_2_html') ?>
+                </div>
+                <div class="col-sm-3 col-md-2 mobile-collapse">
+                    <?php echo $this->getChildHtml('wd_footer_column_3_html') ?>
+                </div>
+                <div class="col-sm-3 col-md-3 mobile-collapse mobile-collapse--last">
+                    <?php echo $this->getChildHtml('wd_footer_contacts') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+    <?php if($theme->getLayoutOption('general/footer_subscribe_line')):?>
+    <div class="footer__subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7 col-md-6">
+                    <?php echo $this->getChildHtml('footer_newsletter')?>
+                </div>
+                <div class="col-sm-5 col-md-6">
+                    <div class="social-links social-links--colorize social-links--large">
+                        <?php  echo Mage::getModel('cms/block')->load('wd_header_social_links')->getContent();?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+
+        <div class="footer__settings visible-xs">
+        <div class="container text-center">
+            <div class="dropdown pull-left">
+                <?php echo $this->getChildHtml('currency_footer_mobile') ?>
+            </div>
+            <div class="dropdown pull-left">
+                <?php echo $this->getChildHtml('languages_footer_mobile') ?>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+    <div class="footer__bottom">
+        <div class="container">
+            <div class="pull-left text-uppercase"><?php echo $this->getCopyright() ?></div>
+            <div class="pull-left text-center">
+                <?php echo $this->getChildHtml('store_switcher');?>
+            </div>
+            <div class="pull-right text-uppercase text-right"><?php  echo Mage::getModel('cms/block')->load('wd_footer_bottom_text')->getContent();?></div>
+        </div>
+    </div>
+</footer>

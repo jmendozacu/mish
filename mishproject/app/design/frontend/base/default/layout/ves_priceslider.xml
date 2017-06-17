@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <catalog_category_view>
+    <reference name="head">
+      <action method="addJs" ifconfig="ves_priceslider/ajax_conf/enable_priceslider"><script>ves_priceslider/ion/ion.rangeSlider.min.js</script></action>
+      <action method="addCss" ifconfig="ves_priceslider/priceslider_setting/show">
+        <script>ves_priceslider/ion/normalize.css</script>
+      </action>
+      <action method="addCss" ifconfig="ves_priceslider/priceslider_setting/show">
+        <script>ves_priceslider/ion/ion.rangeSlider.css</script>
+      </action>
+      <action method="addCss" module="ves_priceslider" ifconfig="ves_priceslider/ajax_conf/enable_priceslider"><stylesheet helper="ves_priceslider/cssgen/getIonSkinFile" /><params></params></action>
+      
+    </reference>
+
+    <reference name="footer">
+      <block type="ves_priceslider/ajax" name="ajax.priceslider" template="ves/priceslider/ajax_result.phtml">
+          <block type="ves_priceslider/html" name="ajax.priceslider.callback" alias="ajax_callback" template="ves/priceslider/callback.phtml"/>
+      </block>
+    </reference>
+  </catalog_category_view>
+
+
+  <catalogsearch_result_index>
+    <reference name="head">
+      <action method="addJs" ifconfig="ves_priceslider/ajax_conf/slider" ><script>ves_priceslider/iron/ion.rangeSlider.min.js</script></action>
+      <action method="addCss" ifconfig="ves_priceslider/ves_priceslider/show">
+        <script>ves_priceslider/ion/normalize.css</script>
+      </action>
+      <action method="addCss" ifconfig="ves_priceslider/ves_priceslider/show">
+        <script>ves_priceslider/ion/ion.rangeSlider.css</script>
+      </action>
+      <action method="addCss" module="ves_priceslider" ifconfig="ves_priceslider/ajax_conf/slider"><stylesheet helper="ves_priceslider/cssgen/getIonSkinFile" /><params></params></action>
+    </reference>
+    <reference name="footer">
+      <block type="ves_priceslider/ajax" name="ajax.priceslider" template="ves/priceslider/ajax_result.phtml">
+          <block type="ves_priceslider/html" name="ajax.priceslider.callback" alias="ajax_callback" template="ves/priceslider/callback.phtml"/>
+      </block>
+    </reference>
+  </catalogsearch_result_index>
+
+  <productlist_rule_view>
+    <reference name="head">
+      <action method="addJs" ifconfig="ves_priceslider/ajax_conf/slider"><script>ves_priceslider/ion/ion.rangeSlider.min.js</script></action>
+      <action method="addCss" ifconfig="ves_priceslider/priceslider_setting/show">
+        <script>ves_priceslider/ion/normalize.css</script>
+      </action>
+      <action method="addCss" ifconfig="ves_priceslider/priceslider_setting/show">
+        <script>ves_priceslider/ion/ion.rangeSlider.css</script>
+      </action>
+      <action method="addCss" module="ves_priceslider" ifconfig="ves_priceslider/ajax_conf/slider"><stylesheet helper="ves_priceslider/cssgen/getIonSkinFile" /><params></params></action>
+      
+    </reference>
+
+    <reference name="footer">
+      <block type="ves_priceslider/ajax" name="ajax.priceslider" template="ves/priceslider/ajax_result.phtml">
+          <block type="ves_priceslider/html" name="ajax.priceslider.callback" alias="ajax_callback" template="ves/priceslider/callback.phtml"/>
+      </block>
+    </reference>
+  </productlist_rule_view>
+</layout>

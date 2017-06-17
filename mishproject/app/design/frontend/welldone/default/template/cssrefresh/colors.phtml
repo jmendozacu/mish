@@ -1,0 +1,202 @@
+/*
+ATTENTION! changes in this css file will be overwritten. If you want to change this template change file  /app/design/frontend/welldone/default/template/cssrefresh/colors.phtml
+*/
+<?php
+$store=Mage::registry('store_for_css');
+?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/general/theme_color',$store)): ?>
+    /*theme color*/
+    .top-link .btn-shopping-cart .badge,.brands-carousel a .after {
+        background: none repeat scroll 0 0 <?php echo $temp ?>;
+    }
+    .navbar-main-submenu .exclusive .icon,.slick-prev,.slick-next,.rating .icon,
+    .product-preview .product-controls-list li a, .product-preview .product-controls-list-row li a, .product-preview .product-controls-list li a.hidden-xs, .product-preview .product-controls-list-row li a.hidden-xs,
+    .btn-cool .icon::before, .filters-by-category li a .icon::before, .btn-cool .icon::after, .filters-by-category li a .icon::after,
+    footer .footer-navbar .arrow,#newsLine .title .icon,button.button:hover,.products-nospace .product-preview .product-controls-list li a:hover .icon{color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/general/text_color',$store)): ?>
+    /*text color*/
+    body{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/general/link_color',$store)): ?>
+    /*link color*/
+    a{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/general/link_hover_color',$store)): ?>
+    /*link hover color*/
+    a:hover{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/general/background_color',$store)): ?>
+    /*Background Color*/
+    body{background-color: <?php echo $temp?>;}
+<?php endif; ?>
+
+    /**************TOPLINE****************/
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/topline/text_color',$store)): ?>
+#newsLine,#openSearch input.search-input { color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/topline/link_color',$store)): ?>
+    /*link color*/
+#newsLine a{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/topline/link_hover_color',$store)): ?>
+    /*link hover color*/
+#newsLine a:hover{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/topline/background_color',$store)): ?>
+    /*Background Color*/
+#newsLine,#openSearch {background-color: <?php echo $temp?>;}
+<?php endif; ?>
+
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/topline/bg_arrows_color',$store)): ?>
+    /*News Arrow Color*/
+.slick-next:hover,.slick-prev:hover {background-color: <?php echo $temp?>;}
+<?php endif; ?>
+
+    /***************Captions***************/
+<?php $temp=Mage::getStoreConfig('coolbabycolors/captions/font',$store);
+if($temp!='Arial' && $temp!='Georgia' && $temp!='Default' && $temp!=''):?>
+.subtitle div span,.vertical_title_outer div span,h3,.block .block-title strong,h1, h2,.filters-by-category.header-filter li a,.services-block .title{font-family:'<?php echo  str_replace('+',' ',$temp) ?>'}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/captions/text_color',$store)): ?>
+.subtitle div span,.vertical_title_outer div span,h3,.block .block-title strong,h1, h2,.filters-by-category.header-filter li a,.services-block .title{color: <?php echo $temp ?>;}
+<?php endif; ?>
+
+    /***************Header***************/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/text_color',$store)): ?>
+    /*text color*/
+.navbar{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/link_color',$store)): ?>
+    /*link color*/
+.navbar a,.navbar-secondary-menu .icon{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/link_hover_color',$store)): ?>
+    /*link color hover*/
+.navbar  a:hover,.navbar .btn-default:hover,.navbar-secondary-menu .icon:hover{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/background_color',$store)): ?>
+    /*Background Color*/
+.navbar .background{ background-color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/background_color_boxes',$store)): ?>
+    /*Dropdown Boxes Background Color*/
+.navbar .dropdown-menu{ background-color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/link_color_dropdown',$store)): ?>
+    /*Dropdown Boxes link Color*/
+.navbar .dropdown-menu a{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/link_hover_color_dropdown',$store)): ?>
+    /*Dropdown Boxes link Color*/
+.navbar .dropdown-menu a:hover{ color:<?php echo $temp ?>}
+<?php endif; ?>
+
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/header/link_bg_hover_color',$store)): ?>
+    /*Dropdown Boxes link Color*/
+.navbar .dropdown-menu a:hover{ background-color:<?php echo $temp ?>}
+<?php endif; ?>
+
+/********************BUTTONS**************************/
+
+    /*Buttons  text  Color*/
+button.button,
+.blog-post a.read-more,
+.content-aside button.button,
+.buttons-set button.button,
+.buttons-set a.back-link,
+p.back-link a,
+button.btn-cart,
+button.btn,
+.my-account button,
+#multiship-addresses-table button,
+#review-button,
+.opc-wrapper-opc .payment-block dt,.btn-cool{
+
+    <?php if($temp=Mage::getStoreConfig('coolbabycolors/buttons/text_color',$store)): ?>
+        color:<?php echo $temp ?>;
+    <?php endif; ?>
+
+    <?php if($temp=Mage::getStoreConfig('coolbabycolors/buttons/background_color',$store)): ?>
+        background-color:<?php echo $temp ?>;
+    <?php endif; ?>
+
+}
+
+
+
+
+    /*Buttons  text  Color Hover*/
+button.button:hover,
+.blog-post a.read-more:hover,
+.content-aside button.button:hover,
+.buttons-set button.button:hover,
+.buttons-set a.back-link:hover,
+p.back-link a:hover,
+button.btn-cart:hover,
+.my-account button:hover,
+#multiship-addresses-table button:hover,
+#review-button:hover,
+.opc-wrapper-opc .payment-block dt:hover,
+.opc-wrapper-opc .payment-block dt.active,
+button.btn:hover,.btn-cool:hover{
+    <?php if($temp=Mage::getStoreConfig('coolbabycolors/buttons/text_color_hover',$store)): ?>
+    color:<?php echo $temp ?> !important;
+    <?php endif; ?>
+
+    <?php if($temp=Mage::getStoreConfig('coolbabycolors/buttons/background_color_hover',$store)): ?>
+    background-color:<?php echo $temp ?> !important;
+    <?php endif; ?>
+
+}
+
+    /***************Products***************/
+    /*discount lable*/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/products/discount_lable',$store)): ?>
+.label-sale-percent{  background-color: <?php echo $temp ?> !important;}
+<?php endif; ?>
+
+    /*sale lable*/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/products/sale_lable',$store)): ?>
+.label-sale{  background-color: <?php echo $temp ?> !important;}
+<?php endif; ?>
+
+    /*new lable*/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/products/new_lable',$store)): ?>
+.label-new{  background-color: <?php echo $temp ?> !important;}
+<?php endif; ?>
+
+
+    /*price*/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/products/regular_price',$store)): ?>
+.price{  color: <?php echo $temp ?> !important;}
+<?php endif; ?>
+
+    /*special price*/
+<?php if($temp=Mage::getStoreConfig('coolbabycolors/products/special_price',$store)): ?>
+.special-price .price{  color: <?php echo $temp ?> !important;}
+<?php endif; ?>   

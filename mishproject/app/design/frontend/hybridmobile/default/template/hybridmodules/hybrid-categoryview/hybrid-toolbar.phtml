@@ -1,0 +1,55 @@
+<?php
+/**
+ * 
+ * Overrides template/catalog/product/list/toolbar.phtml
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+?>
+<?php if($this->getCollection()->getSize()): ?>
+<div class="toolbar">
+    <div class="pager">
+        <?php echo $this->getMobilePagerHtml() ?>
+    </div>
+    <div class="clear"></div>
+
+    <div class="row sorter-amount">
+        <div class="small-4 columns">
+            <p class="amount">
+                <?php if($this->getLastPageNum()>1): ?>
+                    <?php echo $this->__('Items %s to %s of %s total', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
+                <?php else: ?>
+                    <strong><?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?></strong>
+                <?php endif; ?>
+            </p>
+        </div>
+        <?php if( $this->isExpanded() ): ?>
+        <div class="small-8 columns">
+            <div class="sorter">
+                <div><span class="label"><?php echo $this->__('Sort By:') ?></span></div>
+                <div data-role="controlgroup" data-type="horizontal">
+                    <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+                        <?php if($this->isOrderCurrent($_key)): ?>
+                            
+                            <?php if($this->getCurrentDirection() == 'desc'): ?>
+                                <a data-iconpos="notext" data-icon="arrow-d" data-role="button" href="<?php echo $this->getOrderUrl(null, 'asc') ?>" title="<?php echo $this->__('Set Ascending Direction') ?>"><?php echo $this->__('Set Ascending Direction') ?></a>
+                            <?php else: ?>
+                                <a data-iconpos="notext" data-icon="arrow-u" data-role="button" href="<?php echo $this->getOrderUrl(null, 'desc') ?>" title="<?php echo $this->__('Set Descending Direction') ?>"><?php echo $this->__('Set Descending Direction') ?></a>
+                            <?php endif; ?>
+                            
+                        <?php else: ?>
+                            <a data-role="button" href="<?php echo $this->getOrderUrl($_key, 'asc') ?>" title="<?php echo $_order ?>"><?php echo $_order ?></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif ?>

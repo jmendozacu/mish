@@ -1,0 +1,225 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if(!Mage::registry('current_product')->isVirtual() && Mage::getStoreConfig('mageworx_deliveryzone/deliveryzone/shipping_calculator')): ?>
+<style>
+    .sidebar select {
+        /*margin-left: 10px;*/
+        width: 175px;
+    }
+    .sidebar input.input-text {
+        /*margin-left: 10px;*/
+        width: 170px;
+    }
+    .shipping-form {
+        padding: 10px !important;
+        background: none !important;
+        border: none !important;
+    }
+    
+    .buttons-set {
+        margin: 1em 0 0;
+    }
+</style>
+<?php 
+    $session = Mage::getSingleton('customer/session');
+    $sessionData = $session->getData("delivery_zone_product".Mage::registry('current_product')->getId());
+    //echo "<pre>"; print_r($sessionData); exit;
+    $addressData  = new Varien_Object();
+    if($sessionData) {
+        $adrData = isset($sessionData['address'])?$sessionData['address']:array();
+        $addressData->setData($adrData);
+    } else {
+        $addressData->setData(Mage::helper('deliveryzone')->getLocation()->getData());
+    }
+?>
+<div class="block block-list block-compare">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Estimate Shipping') ?></span></strong>
+    </div>
+    <div class="block-content cart">
+        <div class="shipping-form shipping">
+            <form action="<?php echo $this->getUrl('deliveryzone/index/estimatePost') ?>" method="post" id="shipping-zip-form">
+                <input type="hidden" name="product_id" id="prID" value="<?php echo Mage::registry('current_product')->getId() ?>"/>
+                 <p><?php echo $this->__('Enter your destination to get a shipping estimate.') ?></p>
+                 <ul class="form-list">
+                     <li>
+                         <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                         <div class="input-box sidebar">
+                             <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($addressData->getCountryId()) ?>
+                         </div>
+                     </li>
+                     <li>
+                         <label for="region_id"<?php if ($this->isStateProvinceRequired()) echo ' class="required"' ?>><?php if ($this->isStateProvinceRequired()) echo '<em>*</em>' ?><?php echo $this->__('State/Province') ?></label>
+                         <div class="input-box sidebar">
+                             <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
+                                 <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                             </select>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                $('region_id').setAttribute('defaultValue',  "<?php echo $addressData->getRegionId() ?>");
+                            //]]>
+                            </script>
+                            <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($addressData->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                        </div>
+                     </li>
+                 <?php //endif; ?>
+                 <?php if($this->getCityActive()): ?>
+                     <li>
+                         <label for="city"<?php if ($this->isCityRequired()) echo ' class="required"' ?>><?php if ($this->isCityRequired()) echo '<em>*</em>' ?><?php echo $this->__('City') ?></label>
+                         <div class="input-box sidebar">
+                             <input class="input-text<?php if ($this->isCityRequired()):?> required-entry<?php endif;?>" id="city" type="text" name="estimate_city" value="<?php echo $this->escapeHtml($addressData->getEstimateCity()) ?>" />
+                         </div>
+                     </li>
+                 <?php endif; ?>
+                     <li>
+                         <label for="postcode"<?php if ($this->isZipCodeRequired()) echo ' class="required"' ?>><?php if ($this->isZipCodeRequired()) echo '<em>*</em>' ?><?php echo $this->__('Zip/Postal Code') ?></label>
+                         <div class="input-box sidebar">
+                             <input class="input-text validate-postcode<?php if ($this->isZipCodeRequired()):?> required-entry<?php endif;?>" type="text" id="postcode" name="estimate_postcode" value="<?php echo $this->escapeHtml($addressData->getEstimatePostcode()) ?>" />
+                         </div>
+                     </li>
+                 </ul>
+                 <div class="buttons-set">
+                    <button type="button" title="<?php echo $this->__('Estimate') ?>" onclick="cloneProductForm();" class="button"><span><span><?php echo $this->__('Estimate') ?></span></span></button>
+                </div>
+          
+     
+        <?php 
+        if($sessionData) : ?>
+            <dl class="sp-methods">
+                <?php
+                $rates = isset($sessionData['rates'])?$sessionData['rates']:array();
+                arsort($rates);
+                if(count($rates)) {
+                        foreach ($rates as $carrier) {
+                        $_rate = current($carrier);
+                        echo "<dt>".$_rate['carrier_title']."</dt>";
+                        echo "<dd>";
+                        if(count($carrier)>0) {
+                            echo "<ul>";
+                             foreach ($carrier as $rate) {
+                                  echo "<li>".$rate['method_title'].": <b>".Mage::helper('core')->currency($rate['price'], true, false)."</b></li>";
+                             }
+                            echo "</ul>";
+                            echo "</dd>";
+                        }
+                   }
+                } else {
+                    echo "<dt>".$this->__("No available shipping methods")."</dt>";
+                }
+                ?>
+            </dl>
+       <?php  endif; ?>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+             <script type="text/javascript">
+             //<![CDATA[
+                 function cloneProductForm() {
+                     var form = $('product_addtocart_form');
+                     var addtocartForm = new VarienForm('product_addtocart_form', true);
+                     if(!addtocartForm.validator.validate()) {
+                         return false;
+                     }
+                     var list = form.getElements();
+                     list.each(function(el){
+                         if(el.name && el.value) {
+                            var name  = el.name;
+                            var value = el.value;
+                            if(el.type=="select-one" || el.type=="select-multiple") {
+                                var options = $$(name+' option');
+                                var len = options.length;
+                                for (var i = 0; i < len; i++) {
+                                    if(options[i].selected) {
+                                        value = options[i].value;
+                                    }
+                                }
+                            }
+                            if((el.type=="radio" || el.type=="checkbox") && !el.checked) {
+                                return ;
+                            }
+                            
+                            var inputEl   = document.createElement("input");
+                            inputEl.type  = "hidden";
+                            inputEl.name  = name;
+                            inputEl.value = value;
+                            $('shipping-zip-form').insertBefore(inputEl,$('prID'));
+                         }
+                     })
+                  //   return false;
+                     coShippingMethodForm.submit();
+                 }
+             //]]>
+             </script>
+             
+             <script type="text/javascript">
+             //<![CDATA[
+                 new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+             //]]>
+//             $('country').observe("change",function(el){
+//                    var region_id = $('region_id');
+//                    var region = $('region');
+//                    if(region.style.display == "none") {
+//                        region_id.disabled =true;
+//                        region.disabled = false;
+//                     }
+//                     else {
+//                        region_id.disabled =false;
+//                        region.disabled = true;
+//                     }
+//                     
+//                 })
+             </script>
+
+             <script type="text/javascript">
+             //<![CDATA[
+                 var coShippingMethodForm = new VarienForm('shipping-zip-form');
+                 var countriesWithOptionalZip = <?php echo $this->helper('directory')->getCountriesWithOptionalZip(true) ?>;
+
+                 coShippingMethodForm.submit = function () {
+                     var country = $F('country');
+                     var optionalZip = false;
+
+                     for (i=0; i < countriesWithOptionalZip.length; i++) {
+                         if (countriesWithOptionalZip[i] == country) {
+                             optionalZip = true;
+                         }
+                     }
+                     if (optionalZip) {
+                         $('postcode').removeClassName('required-entry');
+                     }
+                     else {
+                         $('postcode').addClassName('required-entry');
+                     }
+                     return VarienForm.prototype.submit.bind(coShippingMethodForm)();
+                 }
+             //]]>
+             </script>
+<?php endif; ?>

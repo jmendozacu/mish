@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="mage-iphone'.$this->getBodyClass().'"':'' ?> ontouchstart="">
+<?php echo $this->getChildHtml('after_body_start') ?>
+<?php echo $this->getChildHtml('global_notices') ?>
+
+<!-- New Dropdown Menu -->
+<?php print $this->getLayout()
+                 ->createBlock("hybridmobile/page_html_topmenu")
+                 ->setTemplate("page/html/category_menu.phtml")
+                 ->toHtml(); 
+?>
+<!-- End Dropdown Menu -->
+
+<div data-role="page">
+    <div class="header">
+        <div class="row">
+            <?php echo $this->getChildHtml('header') ?>
+        </div>
+    </div>
+
+    <div class="middle-container">
+        <div class="middle col-1-layout">
+            <!-- Hide breadcrumbs -->
+            <?php // echo $this->getChildHtml('breadcrumbs') ?>
+            <div class="clear"></div>
+            <div id="main" class="col-main">
+                <div <?php echo $this->getBodyClass()?' class="mage-iphone'.$this->getBodyClass().'"':'' ?>>
+                    <?php echo $this->getChildHtml('hybrid_content_slider') ?>
+                    <!-- Don't show content only on the home page -->
+                    <?php if(
+                        Mage::getSingleton('cms/page')->getIdentifier() != 'home'  ||
+                        Mage::app()->getFrontController()->getRequest()->getRouteName() != 'cms'
+                        ) : ?>
+                        <?php echo $this->getChildHtml('content') ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+    <?php echo $this->getAbsoluteFooter() ?>
+</div>
+
+</body>
+</html>

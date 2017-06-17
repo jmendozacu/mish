@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<widgets>
+	<ves_faq type="ves_faq/widget_faq"  translate="label description" module="ves_faq" >
+		<name>Ves FAQ : Latest Question</name>
+		<description type="desc">Show list latest question</description>
+		<parameters>
+			<title translate="label">
+				<visible>1</visible>
+				<label>Module Title </label>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<description>Empty for hide</description>
+				<value></value>
+			</title>
+			<category_id translate="label" module="core">
+				<visible>1</visible>
+				<label>FAQ Categories</label>
+				<sort_order>5</sort_order>
+				<type>multiselect</type>
+				<source_model>ves_faq/system_config_source_categoryList</source_model>
+				<value>default</value>
+			</category_id>
+			<catsid translate="label">
+		      <visible>1</visible>
+		      <label>Display On Categories: </label>
+		      <type>multiselect</type>
+		      <source_model>ves_faq/system_config_source_ListCatalogCategories</source_model>
+		      <description><![CDATA[Choose catalog categories which just show module in there categories or products in there categories. <br/>Eg: 22,23. Empty for all categories.]]></description>
+		      <sort_order>10</sort_order>
+		    </catsid>
+			<item_number translate="label">
+				<visible>1</visible>
+				<label>Item Number</label>
+				<type>text</type>
+				<sort_order>20</sort_order>
+			</item_number>
+		</parameters>
+	</ves_faq>
+</widgets>

@@ -1,0 +1,33 @@
+<?php
+/**
+ *
+ * Overrides template/page/html/footer.phtml - Adds footer text block
+ */
+?>
+
+<?php
+  // Get Text Box Content
+  // $configData = Mage::getStoreConfig('hybrid_mobile');
+  // $textblocktitle = $configData['footer_settings']['text-box-title'];
+  // $textblockcontent = $configData['footer_settings']['text-box'];
+
+  $cookie = Mage::getModel("core/cookie");
+  $iphone = $cookie->get("iphone");
+?>
+
+<!-- <div class="ui-bar-a">
+  <div class="footer-text" data-role="collapsible" data-theme="a" data-content-theme="c">
+    <h5><?php //echo $textblocktitle ?></h5>
+    <?php //echo $textblockcontent ?>
+  </div>
+</div> -->
+
+<?php if($iphone != 'true'): ?>
+<div class="footer-container" data-role="footer">
+    <div class="footer<?php if($_cartQty == 0) : ?> cart-active<?php endif; ?>">
+        <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('footer-links-hybridmobile')->toHtml(); ?>
+        <div id="copyright"><?php echo $this->getCopyright() ?></div>
+    </div>
+</div>
+<?php endif; ?>
+ 

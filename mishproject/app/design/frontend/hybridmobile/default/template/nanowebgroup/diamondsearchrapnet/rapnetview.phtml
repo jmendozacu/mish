@@ -1,0 +1,261 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<?php
+    $bundleby = Mage::getSingleton('core/session')->getData('bundleby');
+    $dir = Mage::getSingleton('core/session')->getData('dir');
+    if($dir == 'ASC') {
+        $dir = 'DESC';
+        Mage::getSingleton('core/session')->setData('dir', $dir);
+    } else {
+        $dir = 'ASC';
+        Mage::getSingleton('core/session')->setData('dir', $dir);
+    }
+
+    $diamondData= $this->getData('data');
+    $names= $this->getData('names');
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php //$_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view ds-specific">
+    <div class="product-essential single-product-page">
+<? //if($bundleby == NULL) : ?>
+    <!-- <form action="<?=$this->getbaseurl()."rapnetdiamondsearch/index/cart?id=".$diamondData['diamond_id'];?>" method="post" id="product_addtocart_form" data-bundle="none"> -->
+        <?php //echo $this->getBlockHtml('formkey') ?>
+<? //else : ?>
+    <form action="<?=$this->getbaseurl()."rapnetdiamondsearch/index/cart?id=".$diamondData['diamond_id'];?>" method="post" id="product_addtocart_form" data-bundle="<?php echo $this->getbaseurl()."ringbuilder/index/add" ?>">
+<? //endif; ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $diamondData['diamond_id'] ?>" />
+        </div>
+
+        <div class="product-shop row">
+            <br>
+            <div class="columns">
+                <button onclick="history.go(-1);"  class="button btn-cart" type="button"><span><span>Back to Diamond Search</span></span></button>
+            </div>
+
+            <div class="product-img-box">
+                <?php
+                $link = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'frontend/base/default/nanowebgroup/diamondsearch/images/' . strtolower($diamondData['shape']) .'.jpg';
+                ?>
+                <img title="Demo Diamond" alt="<?=$diamondData['shape'];?>" width='300' height='300' src='<?=$link;?>'>
+            </div>
+
+            <div class="product small-12 columns">
+                <h1 class="product product-name"><?php echo $diamondData['shape'] . " " . $diamondData['color'] . " " . $diamondData['clarity']; ?></h1>
+
+                <p class="availability in-stock">
+                    Availability: <span>In stock</span>
+                </p>
+
+                <?php echo $this->getChildHtml('alert_urls') ?>
+                <?php echo $this->getChildHtml('product_type_data') ?>
+                <?
+                    $show = Mage::getStoreConfig('diamond_options/rapnet/rapnet_price', Mage::app()->getStore());
+                    if($show) :
+                ?>
+                    <div class="price-box">
+                        <span id="product-price-1" class="regular-price">
+                            <span class="price"><?php echo "$" . number_format($diamondData['total_sales_price'], 2, '.', '')?></span>
+                        </span>
+                    </div>
+
+                    <?php echo $this->getChildHtml('extrahint') ?>
+
+                    <div class="add-to-box">
+                        <div class="add-to-cart">
+                            <!-- <label for="qty">Qty: 1</label> -->
+                            <!-- <button onclick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>&nbsp; -->
+                            <a href="<?=$this->getbaseurl()."rapnetdiamondsearch/index/wishlist?id=".$diamondData['diamond_id'];?>" class="link-wishlist button"><i class="fa fa-heart-o"></i> <?php echo $this->__('Favorite') ?></a>
+                        <? if($bundleby != NULL) : ?>
+                            <span class="or">OR</span>
+                            <button class="button btn-bundle" title="Add to Cart" type="button"><span><span>Add to Bundle</span></span></button>
+                        <? endif; ?>
+                        </div>
+                    </div>
+
+                    <div id="va-addtocart">
+                        <div id="va-qty" class="ds-product-qty">
+                            Qty: <span>1</span>
+                            <!-- <i class="fa fa-angle-up"></i> -->
+                            <!-- <ul class="va-qty-drop-down">
+                                <li class="active">1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>6</li>
+                                <li class="va-more"><input type="tel" placeholder="more"></li>
+                            </ul> -->
+                        </div>
+                        <a class="va-add-to-cart" href="#_" onclick="productAddToCartForm.submit(this)">
+                            <span>Add to Cart </span>
+                            <i>
+                                <?php echo  Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol() ?>
+                            </i>
+                            <span class="va-price" data-original="<?php echo number_format($diamondData['total_sales_price'], 2, '.', '')?>">
+                                <?php echo number_format($diamondData['total_sales_price'], 2, '.', '')?>
+                            </span>
+                        </a>
+                    </div>
+
+                <? else : ?>
+                    <div class="add-to-box">
+                        <p>Please <a href='<?=$this->getbaseurl()."customer/account/login/";?>'>Log In</a> to purchase</p>
+                    </div>
+                <? endif; ?>
+            </div>
+            <div class="clearer"></div>
+
+            <div data-role="header" class="page-title category-title" role="banner">
+                <h1 role="heading" aria-level="1"><?php echo $this->__('Quick Overview') ?></h1>
+            </div>
+            <div class="short-description">
+               <div class="std"><?php echo 'Rapnet Diamond' ?></div>
+           </div>
+
+        </div>
+
+        <div class="clearer"></div>
+
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+    </div>
+
+    <div class="product-collateral row">
+        <div data-role="header" class="page-title category-title" role="banner">
+            <h1 role="heading" aria-level="1"><?php echo $this->__('Additional Information') ?></h1>
+        </div>
+        <div class="box-collateral small-12 columns">
+
+            <!-- <h2><?php echo $this->__('Additional Information') ?></h2> -->
+            <table class="data-table" id="product-attribute-specs-table">
+                <col width="25%" />
+                <col />
+                <tbody>
+                <?php $show = Mage::getStoreConfig('diamond_options/rapnet/rapnet_sku', Mage::app()->getStore()); ?>
+                <?php foreach ($names as $key => $_data): ?>
+                    <?php if($_data == 'No') : ?>
+                        <tr>
+                            <th class="label"><?php echo $key ?></th>
+                            <td class="data"><?php echo $_data ?></td>
+                        </tr>
+                    <? elseif ($key == "Certificate") : ?>
+                        <tr>
+                            <th class="label"><?php echo $key ?></th>
+                            <? if($diamondData['has_cert_file'] == "True"):?>
+                                <td class="cert_view">
+                                    <a href='http://www.diamondselections.com/GetCertificate.aspx?diamondid=<?=$diamondData['diamond_id']?>'>
+                                        <?php echo $diamondData[$_data] ?>
+                                    </a>
+                                </td>
+                            <? else : ?>
+                                <td class="data"><?php echo $diamondData[$_data] ?></td>
+                            <? endif;?>
+                        </tr>
+
+                    <? elseif($key == 'ID' && $show == True) : ?>
+                        <tr>
+                            <th class="label"><?php echo $key ?></th>
+                            <td class="data"><?php echo $diamondData[$_data] ?></td>
+                        </tr>
+
+                    <? else : ?>
+                        <tr>
+                            <th class="label"><?php echo $key ?></th>
+                            <td class="data"><?php echo $diamondData[$_data] ?></td>
+                        </tr>
+                    <? endif; ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+        </div>
+    </div>
+</div>

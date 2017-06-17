@@ -1,0 +1,34 @@
+<?php $messages = $this->getMessageBox() ; ?>
+<div class="message">
+    <ol class="discussion">
+        <?php foreach($messages as $message): ?>
+            <li class="<?php echo $this->getClassNameMessageBox($message->getData("type")) ?>">
+                <div class="avatar">
+                    <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>"/>
+                </div>
+                <div class="messages">
+                    <p><?php echo $message->getData("content") ?></p>
+                    <time datetime="<?php echo $message->getData("created_time") ?>"><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$message->getData("created_time") );?></time>
+                </div>
+            </li>
+        <?php endforeach ;?>
+        <?php echo $this->getNoteBox($this->getSessionId()) ?>
+    </ol>
+</div>
+<div class="reply">
+    <textarea name="messsage" onkeydown="control.msgType('<?php echo $this->getSessionId() ?>',this.value)"  id="ves_livechat_message_reply_<?php echo $this->getSessionId() ?>" <?php if($this->getStatusSessionBox()) echo 'class="disabled" disabled' ?>></textarea>
+    <script type="text/javascript">
+        $('ves_livechat_message_reply_'+<?php echo $this->getSessionId() ?>).observe('keypress', keypressHandler);
+        function keypressHandler (event){
+            var key = event.which || event.keyCode;
+            switch (key) {
+                default:
+                    break;
+                case Event.KEY_RETURN:
+                    event.preventDefault();
+                    control.replyMessage('<?php echo $this->getSessionId() ?>');
+                    break;
+            }
+        }
+    </script>
+</div>

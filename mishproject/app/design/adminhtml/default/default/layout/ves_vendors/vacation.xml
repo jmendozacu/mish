@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_vendors_vacation_index>
+        <reference name="content">
+            <block type="vendorsvacation/adminhtml_vacation" name="adminhtml.vendors.vendorsvacation.vacation" />
+        </reference>
+    </adminhtml_vendors_vacation_index>
+
+    <vendors_config_index>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+    </vendors_config_index>
+</layout>

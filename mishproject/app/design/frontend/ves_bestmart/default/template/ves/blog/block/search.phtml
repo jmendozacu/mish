@@ -1,0 +1,11 @@
+<div id="ves_blog_search_block" class="block column_block">
+	<div class="block-title"><strong><span><?php echo $this->__("Blog search"); ?></span></strong></div>
+	<form method="get" action="<?php echo $this->getFormAction();?>" id="ves_block_searchbox">
+		<div class="block-content clearfix"> 
+			<input type="hidden" name="orderby" value="position"> 
+			<input type="hidden" name="orderway" value="desc"> 
+			<input class="search_query form-control" type="text" id="ves_search_query_block" name="search_query" value="<?php echo $keyword; ?>" placeholder="<?php echo $this->__('Search'); ?>"> 
+			<button type="submit" id="ves_search_button" class="btn btn-default"><?php echo $this->__('Search');?></button>
+		</div>
+	</form>
+</div>

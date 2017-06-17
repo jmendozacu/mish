@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mish_Promotionscheduler>
+            <version>0.1.0</version>
+        </Mish_Promotionscheduler>
+    </modules>
+    <frontend>
+        <routers>
+            <promotionscheduler>
+                <use>standard</use>
+                <args>
+                    <module>Mish_Promotionscheduler</module>
+                    <frontName>promotionscheduler</frontName>
+                </args>
+            </promotionscheduler>
+        </routers>
+        <layout>
+            <updates>
+                <promotionscheduler>
+                    <file>promotionscheduler.xml</file>
+                </promotionscheduler>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<promotionscheduler>
+				<use>admin</use>
+				<args>
+					<module>Mish_Promotionscheduler</module>
+					<frontName>promotionscheduler</frontName>
+				</args>
+			</promotionscheduler>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<promotionscheduler module="promotionscheduler">
+				<title> Mish Promotion Scheduler</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="promotionscheduler">
+						<title>Promotion Scheduler</title>
+						<sort_order>0</sort_order>
+						<action>promotionscheduler/adminhtml_promotionscheduler</action>
+					</items>
+				</children>
+			</promotionscheduler>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <promotionscheduler translate="title" module="promotionscheduler">
+                                            <title>promotionscheduler</title>
+                                        </promotionscheduler>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+						<Mish_Promotionscheduler>
+							<title>Promotionscheduler Module</title>
+							<sort_order>10</sort_order>
+						</Mish_Promotionscheduler>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<promotionscheduler>
+					<file>promotionscheduler.xml</file>
+				</promotionscheduler>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+
+         <template>
+            <email>
+                <promotionExpiryMail>
+                    <label>When promotion expires this mail will trigger</label>
+                    <file>promotionExpiryMail.html</file>
+                    <type>html</type>
+                </promotionExpiryMail>
+            </email>
+        </template>
+
+            <!-- <crontab>
+                <jobs>
+                    <my_cron>
+                        <run>
+                            <model>promotionscheduler/observer::promotion</model>
+                        </run>
+                    </my_cron>
+                </jobs>
+            </crontab> -->
+
+        <models>
+            <promotionscheduler>
+                <class>Mish_Promotionscheduler_Model</class>
+                <resourceModel>promotionscheduler_mysql4</resourceModel>
+            </promotionscheduler>
+            <promotionscheduler_mysql4>
+                <class>Mish_Promotionscheduler_Model_Mysql4</class>
+                <entities>
+                    <promotionscheduler>
+                        <table>promotionscheduler</table>
+                    </promotionscheduler>
+                </entities>
+            </promotionscheduler_mysql4>
+        </models>
+        <resources>
+            <promotionscheduler_setup>
+                <setup>
+                    <module>Mish_Promotionscheduler</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </promotionscheduler_setup>
+            <promotionscheduler_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </promotionscheduler_write>
+            <promotionscheduler_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </promotionscheduler_read>
+        </resources>
+        <blocks>
+            <promotionscheduler>
+                <class>Mish_Promotionscheduler_Block</class>
+            </promotionscheduler>
+        </blocks>
+        <helpers>
+            <promotionscheduler>
+                <class>Mish_Promotionscheduler_Helper</class>
+            </promotionscheduler>
+        </helpers>
+    </global>
+     <crontab>
+        <jobs>
+            <promotionscheduler>
+                <schedule><cron_expr>*/2 * * * *</cron_expr></schedule>
+                <run><model>promotionscheduler/observer::promotion</model></run>
+            </promotionscheduler>
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mish_Shipit>
+            <active>true</active>
+            <codePool>local</codePool>
+             <depends>
+                <VES_Vendors />
+                <VES_VendorsCheckout />
+                <Mage_Checkout />
+                <Mage_Tax />
+                <Mage_Shipping />
+            </depends>
+        </Mish_Shipit>
+    </modules>
+</config> 

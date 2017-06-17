@@ -1,0 +1,164 @@
+<?php
+$moduleId = rand().time();
+$cols =  (int)$this->getConfig( "columns" );
+$cols = !empty($cols)?$cols:3;
+$span = 12/$cols;
+$mobile_items = 1;
+$tablet_items = 2;
+$tablet_small_items = 2;
+$portrait_items = 3;
+if($cols == 1){
+	$tablet_items = $tablet_small_items = $portrait_items = 1;
+} elseif($cols == 2){
+	$portrait_items = 2;
+}
+
+$itemsperpage = (int)$this->getConfig( "max_items" );
+$itemsperpage = !empty($itemsperpage)?$itemsperpage:3;
+
+$auto_play_mode = $this->getConfig( "auto_play" );
+if ($auto_play_mode) {
+	$auto_play = 'true';
+} else{
+	$auto_play = 'false';
+}
+
+$interval  = (int)$this->getConfig( "interval" );
+//echo $interval;
+$interval = !empty($interval)?$interval:3000;
+
+$show_image = $this->getConfig( "latest_show_image", "module_setting", 1);
+$image_mode = $this->getConfig( 'latest_image_size');
+$sizes = Mage::helper("ves_blog")->getImageSizeModes();
+$key = "small_imagesize";
+$size = "s";
+foreach( $sizes as $k => $v ){
+	if($v == $image_mode) {
+		$key = $k;
+		$size = $v;
+		break;
+	}
+}
+
+$c = $this->getGeneralConfig($key, "");
+$tmp = explode( "x", $c );
+
+
+$thumb_width = $thumb_height = "";
+if( count($tmp) > 0 && (int)$tmp[0] ){
+	$thumb_width = (int)$tmp[0];
+	$thumb_height = (int)$tmp[1];
+}
+
+?>
+<div class="block venus-latest-blog owl-latest-blog" id="module<?php echo $moduleId; ?>"> 
+	<?php if( $this->getConfig("latestmod_title") ) : ?>
+		<div class="block-title">
+	        <strong> <span><?php echo $this->getConfig( "latestmod_title" ); ?> </span> </strong>
+			<?php if( $this->getConfig("latestmod_desc") ) :?>
+				<div class="block-description">
+						<p><?php echo $this->getConfig("latestmod_desc"); ?></p>
+				</div>
+			<?php endif; ?>
+		</div>	
+	<?php endif; ?>
+	
+	<div class="block-content">
+		<div class="box-vesblog" id="vesblogowlcarousel<?php echo $moduleId;?>" class="owl-carousel">
+				<?php $i = 0;?>
+				<?php foreach( $posts as $post ): $i++?>
+					<div class="item <?php if(($i-1) % $cols == 0){echo "first";}  if($i%$cols == 0){echo "last";} ?>">
+							<div class="pull-left icon-blog">
+								<i class="fa fa-pencil"></i>
+							</div>
+							<div class="post-block">
+								<?php
+								$image = "";
+								if($thumb_width && $thumb_height) {
+									$image = Mage::helper('ves_blog')->resizeImage($post->getFile(), "custom-s", $thumb_width, $thumb_height);
+								} else {
+									$image = $post->getImageURL( "s" );
+								}
+								?>
+							<div class="post-images">
+								<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+									<img src="<?php echo $image;?>" class="lazyOwl post-image" alt="<?php echo $post->getTitle();?>"/>
+								</a>
+							</div>
+
+							<h4><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h4>
+							<?php if($this->getConfig("latest_showcreated")) { ?>
+									<div class="created-date"> 
+									    <?php $_ct= new Zend_Date( $post->getCreated()); ?>
+									    <span class="month"><?php echo $_ct->toString('MMM');?></span>
+									    <span class="day"><?php echo $_ct->toString('dd, ');?></span>
+									    <span class="year"><?php echo $_ct->toString('YYY');?></span>
+									</div>
+							<?php } ?>
+
+							<?php if( $this->getConfig("latest_show_commentcouter") || $this->getConfig("latest_showcreated") || $this->getConfig("latest_show_hits")) :?>
+
+								<?php if($this->getConfig("latest_show_commentcouter")) { ?>
+										<div class="blog-comment-count"><i class="fa fa-comments-o"></i> <?php  echo $this->__("Comment");?> <?php echo $this->getCountingComment($post->getId());?></div>
+								<?php } ?>
+							<?php endif; ?>
+
+							<div class="latest-description">
+							<?php 
+								if (strlen($post->getDescription()) > 300) :
+									echo substr($post->getDescription(),0, 200).'...';
+								else : 
+									echo $post->getDescription();
+								endif;
+							?>
+							</div>
+
+								<div class="blog-meta">
+									<span class="author">
+										<span><?php echo $this->__( "By " );?></span><a href="<?php echo $post->getAuthorURL();?>" title="<?php echo $post->getAuthor(); ?>">
+										<?php echo $post->getAuthor(); ?>
+										</a>
+									</span>	
+
+								</div>
+								 
+								<p class="blog-readmore">
+									<a href="<?php echo $post->getURL();?>" class = "btn" title="<?php echo $post->getTitle();?>">
+										<span><?php echo $this->__("Read more");?></span>
+									</a>
+								</p>
+							
+						</div>		
+
+				</div>
+			<?php endforeach; ?>
+	</div>	
+</div>
+</div>
+<script type="text/javascript">
+jQuery(window).load(function() {
+	var owl = jQuery('#vesblogowlcarousel<?php echo $moduleId;?>');
+        owl.owlCarousel({
+            autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+            slideSpeed: <?php echo $interval?(int)$interval:'500';?>,
+            autoplayHoverPause: true,
+            lazyLoad: true,
+            navigationText: ["<span class='md md-arrow-back'></span>","<span class='md md-arrow-forward'></span>"],
+            slideBy: 1,
+            loop: true,
+            margin: 0,
+            navigation: <?php echo (1 == $this->getConfig("enable_blognavmodule"))?'true':'false'; ?>,
+            rtl: false,
+            mouseDrag: true,
+            touchDrag: true,
+            autoWidth: false,
+            responsive: true,
+            items: <?php echo $cols?(int)$cols:1; ?>,
+            itemsDesktop : [1199,<?php echo $cols?(int)$cols:1; ?>], //4 items between 1199px and 980px
+            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>] // itemsMobile disabled - inherit from itemsTablet option
+        });
+});
+</script>

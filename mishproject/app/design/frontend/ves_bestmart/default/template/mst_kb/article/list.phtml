@@ -1,0 +1,31 @@
+<?php
+$_collection = $this->getArticleCollection();
+
+?>
+<div class="kb-article-list">
+<?php if ($_collection->count()):?>
+    <?php echo $this->getChildHtml('kb.toolbar')?>
+
+    <?php foreach($_collection as $_article):?>
+    <div class="article-item">
+        <a class="name" href="<?php echo $_article->getUrl()?>"><?php echo $_article->getName() ?></a>
+        <div class="info">
+            <div class="data">
+                <?php echo $_article->getUserName() ?> <?php echo Mage::helper('core')->formatDate($_article->getCreatedAt(), 'medium') ?>
+            </div>
+            <?php if ($_article->getRating() && $this->isRatingEnabled()): ?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $_article->getRating()*20 ?>%;"></div>
+            </div>
+            <?php endif ?>
+        </div>
+        <p><?php echo Mage::helper('core/string')->truncate(strip_tags($_article->getText()), 300) ?></p>
+    </div>
+    <?php endforeach ?>
+
+<?php echo $this->getChildHtml('kb.toolbar')?>
+    <script type="text/javascript">decorateTable('article-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__("The are no articles") ?></p>
+<?php endif ?>
+</div>

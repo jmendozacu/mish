@@ -1,0 +1,177 @@
+<style type="text/css">
+    label.required em {
+    color: #EB340A;
+    float: right;
+    font-style: normal;
+    position: absolute;
+    right: -8px;
+    top: 0;
+}
+label {
+    color: #666666;
+    font-weight: bold;
+    position: relative;
+    z-index: 0;
+}
+</style>
+<?php $modulecheckout = Mage::app()->getRequest()->getModuleName();?>
+<?php if($modulecheckout!='gomage_checkout'):?>
+<?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
+    <strong><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></strong>
+<?php else: ?>
+<dl class="shipment-methods">
+<?php $storepickup_data = Mage::getSingleton('checkout/session')->getData('storepickup_session')?>
+<?php $is_storepickup = isset($storepickup_data['is_storepickup']) ? $storepickup_data['is_storepickup'] : '2' ?>    
+<?php ?>	
+	<?php foreach ($_shippingRateGroups as $code => $_rates): ?>
+		<?php if( ($is_storepickup=='1' && $code=='storepickup') || ($is_storepickup=='2' && $code !='storepickup')): ?>
+        <dt><?php echo $this->getCarrierName($code) ?></dt>
+        <dd>
+            <ul>
+            <?php foreach ($_rates as $_rate): ?>
+                <li>
+                   <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+                   <?php else: ?>
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> />
+                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->__('Free')/*FEDE$_rate->getMethodTitle()*/; ?>
+                        <strong>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        </strong>
+                        </label>
+                   <?php endif ?>
+                </li>
+            <?php endforeach; ?>         
+			</ul>
+        </dd>
+		<?php if($code == 'storepickup') : ?>
+		<dd>
+			<div id="free-location-box" >
+				<?php echo $this->getChildHtml('storepickup') ?>
+			</div>
+		</dd>
+		<?php endif ?>	   
+		<?php endif ?>	   
+    <?php endforeach; ?>
+</dl>
+<?php endif; ?>
+
+<script type="text/javascript">
+
+//var storepickup2 = new Storepickup('<?php echo Mage::helper('storepickup')->getChangeStoreUrl(); ?>');
+
+$('s_method_storepickup_storepickup').checked = true;
+
+</script>
+<?php else:?>
+
+<?php $_shippingRateGroups = $this->getShippingRates(); ?>
+<?php if (!$_shippingRateGroups): ?>
+    <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
+<?php else: ?>
+    <dl class="sp-methods">
+    <?php $shippingCodePrice = array(); ?>
+    <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
+        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
+        <dd>
+            <ul>
+            <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+                <?php $shippingCodePrice[] = "'".$_rate->getCode()."':".(float)$_rate->getPrice(); ?>
+                <li>
+                   <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $this->escapeHtml($_rate->getErrorMessage()) ?></li></ul></li></ul>
+                   <?php else: ?>
+                        <?php if ($_sole) : ?>
+                        <span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" /></span>
+                        <?php else: ?>
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio"/>
+
+                        <?php if ($_rate->getCode() === $this->getAddressShippingMethod()): ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                                lastPrice = <?php echo (float)$_rate->getPrice(); ?>;
+                            //]]>
+                        </script>
+                        <?php endif; ?>
+
+                        <?php endif; ?>
+                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($this->__('Free')/*FEDE$_rate->getMethodTitle()*/) ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        </label>
+                   <?php endif ?>
+                </li>
+				
+				<script type="text/javascript">
+							if($('s_method_storepickup_storepickup') && $('s_method_storepickup_storepickup').checked){
+									if($('free-location-box'))
+										$('free-location-box').show();
+							}
+							function checkStorepickup(){
+								if($('s_method_storepickup_storepickup').checked){
+									$('free-location-box').show();
+								}else{
+									$('free-location-box').hide();
+								}
+								save_shipping_method(shipping_method_url, update_shipping_payment, update_shipping_review);
+							}
+						</script>
+						<?php if($_rate->getCode()=='storepickup_storepickup'): ?>
+							<dd>
+								<div id="free-location-box" style="display:none;">
+									<?php echo $this->getChildHtml('storepickup'); ?>
+								</div>
+							</dd>
+						<?php endif ?>
+            <?php endforeach; ?>
+            </ul>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+<script type="text/javascript">
+//<![CDATA[
+    <?php if (!empty($shippingCodePrice)): ?>
+        var shippingCodePrice = {<?php echo implode(',',$shippingCodePrice); ?>};
+    <?php endif; ?>
+
+    $$('input[type="radio"][name="shipping_method"]').each(function(el){
+        Event.observe(el, 'click', function(){
+            if (el.checked == true) {
+                var getShippingCode = el.getValue();
+                <?php if (!empty($shippingCodePrice)): ?>
+                    var newPrice = shippingCodePrice[getShippingCode];
+                    if (!lastPrice) {
+                        lastPrice = newPrice;
+                        quoteBaseGrandTotal += newPrice;
+                    }
+                    if (newPrice != lastPrice) {
+                        quoteBaseGrandTotal += (newPrice-lastPrice);
+                        lastPrice = newPrice;
+                    }
+                <?php endif; ?>
+                checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+                return false;
+            }
+       });
+    });
+//]]>
+</script>
+<?php endif; ?>
+
+<?php endif; ?>
+<script type="text/javascript">
+    
+    var url_disable_date = '<?php echo $this->getUrl('storepickup/index/disableDate'); ?>';
+    var date_format = '<?php echo Mage::helper('storepickup')->getDateFormat() ?>';
+    var changedate_url =  '<?php echo Mage::helper('storepickup')->getChangDateUrl(); ?>';   
+</script>

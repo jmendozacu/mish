@@ -1,0 +1,107 @@
+.my-request-table tr{cursor:pointer;}
+.my-request-table tr:hover{background-color:#FDF5DD!important;}
+.my-request-table .ves-validation-failed{border:1px solid red}
+.my-request-table a.cancel{color: red}
+.my-request{background:#ffffff;padding:5px;min-height:600px;}
+.customer-request-title .reply-message{float:right;margin:0px;}
+.customer-request-title{padding:10px 0px;margin:0px 0px 5px 0px!important;}
+.clear{clear: both;}
+.customer-request-title h1{float:left;width:200px;color:#696969;font-weight:bold;text-transform:uppercase}
+.my-request .pager{float: none}
+.box-customer-request{margin-bottom:20px}
+.box-customer-request .pager{background:none!important;border:none!important;margin:10px 0px}
+.box-customer-request .data-table thead th{background:#c7d9e7;color:#696969;text-transform:uppercase; border-right: 1px solid #FFFFFF;border-bottom: 1px solid #FFFFFF!important;padding:5px}
+.box-customer-request .data-table thead th.last{border-right:none!important;}
+.box-customer-request .data-table .odd{background:#f3f3f3;}
+.box-customer-request .data-table .even{background:#eff5ff;}
+.box-customer-request .data-table tbody th,.box-customer-request .data-table tbody td{border-right: 1px solid #FFFFFF;border-bottom: 1px solid #FFFFFF;padding:5px;color:#696969;}
+.request-information{background:#ffffff;padding:5px;font-size:11px;}
+.request-informationn tr{height:25px;}
+.request-information .page-title{border:none;margin-bottom: 30px;}
+
+.request-title{float:left;width:500px}
+.request-title h1{color:#696969;font-weight:bold;}
+.request-title h3{color:#878585;font-size:14px;font-weight:normal;padding-left:5px;}
+
+.action-request{float:right;}
+.group-select{margin-bottom:20px;padding:5px;}
+.group-select .button-set .close-ticket-btn{margin-right:5px;}
+.group-select .button-set{margin-top: 20px;overflow: hidden;}
+.group-select span.required {color: #EB340A;}
+.group-select span.label{font-weight:bold;display: block;float: left;font-weight: bold;width: 180px;color:#696969;font-size:13px}
+.back .left {float: left !important;}
+.back{overflow:hidden;margin-top:20px;}
+
+
+/* css icon attachment*/
+
+.inner-head .header_sp{width:95%!important;}
+.inner-head .header_op{width:94%!important;}
+.message-box .header_sp{width:95%;}
+.message-box .header_op{width:94%;}
+
+.attachment .icon-attachment{padding-left:20px;}
+.attachment .icon-jpg , .message-box .attachment .icon-jpeg{background: url("images/icon/jpg.png") no-repeat scroll left center transparent;}
+.attachment .icon-png{background: url("images/icon/png.png") no-repeat scroll left center transparent;}
+.attachment .icon-gif{background: url("images/icon/gif.png") no-repeat scroll left center transparent;}
+.attachment .icon-pdf{background: url("images/icon/pdf.png") no-repeat scroll left center transparent;}
+.attachment .icon-zip{background: url("images/icon/zip.png") no-repeat scroll left center transparent;}
+.attachment .icon-rar{background: url("images/icon/rar.png") no-repeat scroll left center transparent;}
+.attachment .icon-txt{background: url("images/icon/txt.png") no-repeat scroll left center transparent;}
+.attachment .icon-doc{background: url("images/icon/doc.png") no-repeat scroll left center transparent;}
+.attachment .icon-csv{background: url("images/icon/xls.png") no-repeat scroll left center transparent;}
+.attachment .icon-default{background: url("images/icon/_blank.png") no-repeat scroll left center transparent;}
+.form-reply .button{margin-top:5px}
+.form-reply .button button{width:100px;}
+.form-reply .add-file{float:left;;margin-top:5px;text-align: left}
+.message-box-department{background:#e4f5ff;}
+.message-box-admin{background:#fbdcac;}
+.message-box-customer{background: url("images/bg_ticket_messages.png") repeat scroll 0 0;}
+.message-box {border-color: #c9c9c9 #c9c9c9 #c9c9c9 #c9c9c9;border-style: solid;border-width: 1px;overflow-x: auto;padding:7px 7px;clear:both;border-bottom:none;min-height: 40px;}
+.message-box-last{border-bottom:1px solid #c9c9c9}
+.message-box .message-header {overflow:hidden;cursor:pointer;background: url("images/message-title.png") no-repeat scroll left center transparent;}
+.message-box .attachment{border-top:1px solid #C9C9C9; font-weight: bold; line-height: 2em;margin-bottom: 0;margin-top: 1em; min-height: 2em;padding: 0 0.8em;}
+.message-box .attachment a{color:#696969}
+.message-box .attachment ul li{float:left;margin:0px 5px}
+.message-box .message-body,.message-box .messagedit{padding-top:15px;padding-left:40px}
+.message-box .message-header span.label{width:100%;float:left;color:#696969;font-size: 12px;font-weight: bold;}
+.message-box .message-header span.do-quote{cursor:pointer;}
+.message-box blockquote{background: none repeat scroll 0 0 transparent;border-left: 2px solid #999999;height: auto;padding-left: 10px;padding-top: 0;width: auto;font-style: italic;}
+.arrow_up_ticket{background:#fff;}
+.arrow_up_ticket  .header_link{width: 83%!important;}
+.arrow_up_ticket  .header_link_top{width: 810px!important;}
+.arrow_up_ticket  .header_link_no_edit{width: 86%!important;}
+.arrow_up_ticket  .header_link_no_reply{width: 89%!important;}
+.arrow_up_ticket  .header_link_no_reply_edit{width: 92%!important;}
+.message-box .discription-message{padding-left:40px}
+
+.discription-message .do-discription span,.discription-message .reply span{color:#696969;font-weight:bold}
+.message-box .quote-message {float:right}
+.message-box img{display: inline}
+.message-box .quote-message .do-action{cursor:pointer;padding-left:8px;text-decoration: none;}
+.message-box .header_link{cursor:pointer;display: block;padding-left: 40px;overflow:hidden;float: left;width: 95%;height:22px}
+.message-box .header_link span{float:right}
+.reply-message{margin-top:20px;text-align: center}
+.form-reply{margin-top:20px;}
+.form-reply .add-file {float: left;margin-top: 5px;}
+.form-reply .button-set{float: right;margin-top: 5px;text-align: right;}
+#content_message_reply{height:150px;width:100%;padding:0}
+
+
+.request-new-form .form-list .input-box select ,.request-new-form .form-list .wide .input-box input ,.request-new-form .form-list .wide .input-box textarea{width: 100%;}
+.request-new-form .form-list .fields .left{float: left;width: 48%}
+.request-new-form .form-list .fields .right{float: right;width: 48%}
+.request-new-form .form-list .files div{margin-top: 5px;}
+.request-new-form .form-list .products{position: relative;margin-bottom:0px}
+.ves_request_loading{display: block;  position: absolute; top: 40%; left: 35%;text-align: center;z-index: 99999999;}
+.ves_request_overlay{display: block; width: 100%; height: 100%; position: absolute;top: 0; left: 0; background: #222;opacity: 0.2;z-index: 99999998;}
+.view-note-rma blockquote{
+    background: url("images/quote_mark.gif") no-repeat scroll right top #FDFDFD;
+    border: 1px solid #D4E1E7;
+    margin-top: 10px;
+    padding: 10px;
+    min-height: 30px;
+}
+.view-note-rma .note-attachment{margin-top:10px; }
+.view-note-rma .note-attachment ul li{margin-top: 5px;}
+.view-note-rma .other-attachment{margin-top:10px; }

@@ -1,0 +1,335 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+$_helper = $this->helper('catalog/output');
+$_product = $this->getProduct();
+$modules_enable = Mage::getStoreConfig('advanced/modules_disable_output');
+$theme=Mage::helper('welldone');
+$_customtab = $this->getProduct()->getWd_customtab();
+$_customtabtitle = $this->getProduct()->getWd_customtabtitle();
+$prev_next=($theme->getLayoutOption('product/prevnext') && gettype(Mage::registry('current_category'))!='NULL');
+$catalog_mode=$theme->getConfigOption('general/catalog_mode');
+$sku=$theme->getLayoutOption('product/sku');
+$stars=$theme->getLayoutOption('product/stars');
+$ajax_add_to_cart=Mage::getStoreConfig('ajax_addto/product_btns/to_cart');
+$custom_html_in_product=$this->getProduct()->getWd_customhtml();
+$tabs=$theme->getLayoutOption('product/tabs');
+$theme_ajax=Mage::helper('ajaxaddto');
+$media=$theme->getLayoutOption('product/media');
+
+
+$side_left='col-sm-4 col-md-4 col-lg-5 hidden-xs';
+$side_right='product-info col-sm-8 col-md-4 col-lg-4';
+if(empty($custom_html_in_product))
+{
+    $side_left='col-sm-5 col-md-5 col-lg-6 '.(($media=='cloudzoom')?'hidden-xs':'');
+    $side_right='product-info col-sm-7 col-md-7 col-lg-6';
+}
+?>
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+<section class="content">
+    <div class="container">
+        <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+        <div class="product-view">
+            <div class="row product-info-outer">
+                <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"  id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <?php echo $this->getBlockHtml('formkey') ?>
+                    <div class="no-display">
+                        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                        <input type="hidden" name="related_product" id="related-products-field" value=""/>
+                    </div>
+                    <div class="<?php echo $side_left?>">
+                        <?php echo $this->getChildHtml('media') ?>
+                    </div>
+                    <div class="<?php echo $side_right?>">
+                        <div class="product-info__title">
+                            <h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+                            <div class="rating product-info__rating visible-xs"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></div>
+                        </div>
+                        <?php if (!$catalog_mode):?>
+                        <?php echo $this->getChildHtml('product_type_data')?>
+                        <?php echo $this->getTierPriceHtml()?>
+                        <?php endif; ?>
+                        <?php echo $this->getChildHtml('media_mobile') ?>
+                        <?php if ($stars): ?>
+                            <div class="rating product-info__rating hidden-xs">
+                                <?php  echo $theme->ratingStars('<span class="icon-star"></span>','',$_product,$this);?>
+                            </div>
+                        <?php endif; ?>
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'default', false)?>
+                        <div class="divider divider--xs product-info__divider"></div>
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+                        <?php echo $this->getChildHtml('extrahint') ?>
+                        <?php if ($_product->getShortDescription()): ?>
+                            <div class="product-info__description">
+                                <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="clear"></div>
+                        <?php echo $theme->countdownSpecialPrice($_product,'defaultCountdown',$this)?>
+                        <div class="divider divider--xs product-info__divider"></div>
+                        <?php if (!$catalog_mode): ?>
+                            <?php if (!$this->hasOptions()): ?>
+                                <?php if ($_product->isSaleable()): ?>
+                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                <?php endif; ?>
+                                <?php echo $this->getChildHtml('extra_buttons') ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('other'); ?>
+                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                            <?php endif; ?>
+                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                            <?php endif; ?>
+                            <div class="divider divider--xs"></div>
+                            <ul class="product-links product-links--inline">
+                                <?php  echo $theme_ajax->compareLink('<li><a href="#"><span class="icon icon-bars"></span>Add to compare</a></li>',$_product,$this);?>
+                                <?php  echo $theme_ajax->wishlistLink('<li><a href="#"><span class="icon icon-favorite"></span>Add to wishlist</a></li>',$_product,$this);?>
+                            <?php if ($this->canEmailToFriend()): ?>
+                                <li><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><span class="icon icon-mail-fill"></span><?php echo $this->__('Email to a Friend') ?></a></li>
+                            <?php endif; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <div class="social-buttons">
+                            <?php echo $this->getChildHtml('addthis') ?>
+                        </div>
+                    </div>
+                    <?php if(!empty($custom_html_in_product)):?>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($custom_html_in_product)->toHtml();?>
+                    </div>
+                    <?php endif; ?>
+               </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-------------------------------TABS-------------------------------->
+<?php if($tabs):?>
+    <?php if($tabs=='default'):?>
+        <section class="content content--fill">
+            <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-tabs--wd" role="tablist">
+                <?php $i=0; foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+                    <?php $i++; if ($title = $this->getChildData($alias, 'title')): ?>
+                        <li<?php if($i==1):?> class="active"<?php endif;?>><a href="#Tab<?php echo "{$alias}"?>" role="tab" data-toggle="tab" class="text-uppercase"><?php echo $this->escapeHtml($title); ?></a></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($_customtab):?><li><a href="#CustomBlock" role="tab" data-toggle="tab" class="text-uppercase"><?php echo $_customtabtitle?></a></li><?php endif;?>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content tab-content--wd">
+            <?php  $i=0; foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+                <?php $i++; ?>
+                <div role="tabpanel" class="tab-pane<?php if($i==1):?> active<?php endif;?>" id="Tab<?php echo "{$alias}"?>">
+                    <?php echo $html; ?>
+                </div>
+            <?php endforeach; ?>
+            <?php if ($_customtab):?>
+                <div role="tabpanel" class="tab-pane" id="CustomBlock">
+                    <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_customtab, 'customtab') ?>
+                </div>
+            <?php endif;?>
+            </div>
+            <?php $temp=$this->getChildHtml('product_additional_data'); if (!empty($temp)): ?>
+                <section class="product-additional__box" id="product_additional_data">
+                    <?php echo $temp ?>
+                </section>
+            <?php endif;?>
+            </div>
+        </section>
+    <?php elseif($tabs=='sticky'):?>
+        <section class="content">
+            <div id="navProduct">
+                <div class="nav-product">
+                    <div class="container">
+                        <ul>
+                            <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+                                <?php if ($title = $this->getChildData($alias, 'title')): ?>
+                                    <li class="nav-product__item" data-target="<?php echo "box-{$alias}" ?>"><a href="#<?php echo "box-{$alias}" ?>"><?php echo $this->escapeHtml($title); ?></a></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <?php if ($_customtab):?><li class="nav-product__item" data-target="CustomBlock"><a href="#CustomBlock"><?php echo $_customtabtitle?></a></li><?php endif;?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content top-null">
+            <div class="container product-additional">
+                <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+                    <section class="product-additional__box" id="<?php echo "box-{$alias}" ?>">
+                        <?php echo $html; ?>
+                    </section>
+                <?php endforeach; ?>
+                <?php if ($_customtab):?>
+                    <section class="product-additional__box" id="CustomBlock">
+                        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_customtab, 'customtab') ?>
+                    </section>
+                <?php endif;?>
+                <?php $temp=$this->getChildHtml('product_additional_data'); if (!empty($temp)): ?>
+                    <section class="product-additional__box" id="product_additional_data">
+                        <?php echo $temp ?>
+                    </section>
+                <?php endif;?>
+            </div>
+        </section>
+    <?php endif;?>
+<?php endif; ?>
+<!-------------------------------END TABS-------------------------------->
+
+<?php echo $this->getChildHtml('related_products');?>
+<?php echo $this->getChildHtml('upsell_products'); ?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    <?php if($ajax_add_to_cart){?>
+    productAddToCartForm.submit = function (button, url) {
+        var id=<?php echo $_product->getId()?>;
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            // Start of our new ajax code
+            if (!url) {
+                url = jQuery('#product_addtocart_form').attr('action');
+            }
+
+            if (url.indexOf("?")){
+                url = url.split("?")[0];
+            }
+            url = url.replace("checkout/cart", "ajax/index"); // New Code
+
+            if(window.location.href.match("https://") && !url.match("https://")){
+                url = url.replace("http://", "https://");
+            }
+
+            if(window.location.href.match("http://") && !url.match("http://")){
+                url = url.replace("https://", "http://");
+            }
+
+            var data = jQuery('#product_addtocart_form').serialize();
+            data += '&isAjax=1';
+            showLoader(id);
+            try {
+                jQuery.ajax({
+                    url : url,
+                    dataType : 'json',
+                    type: 'post',
+                    data: data,
+                    success : function(data) {
+                        showMessage(data,id);
+                        if(data.status != 'ERROR'){
+                            ajax_add_to_cart_post_update(data);
+                        }
+                    }
+                });
+            } catch (e) {
+
+            }
+            // End of our new ajax code
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+        }
+    }.bind(productAddToCartForm);
+    <?php }else { ?>
+
+    productAddToCartForm.submit = function (button, url) {
+
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    <?php } ?>
+
+    productAddToCartForm.submitLight = function (button, url) {
+
+        if (this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+
+    //]]>
+</script>

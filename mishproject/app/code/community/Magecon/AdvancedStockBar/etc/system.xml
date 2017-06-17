@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Open Biz Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file OPEN-BIZ-LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://mageconsult.net/terms-and-conditions
+ *
+ * @category   Magecon
+ * @package    Magecon_AdvancedStockBar
+ * @version    1.0.0
+ * @copyright  Copyright (c) 2012 Open Biz Ltd (http://www.mageconsult.net)
+ * @license    http://mageconsult.net/terms-and-conditions
+ */
+-->
+<config>
+    <tabs>
+        <magecon translate="label" module="advancedstockbar">
+            <label>MageConsult</label>
+            <sort_order>100</sort_order>
+        </magecon>
+    </tabs>
+    <sections>
+        <advancedstockbar translate="label" module="advancedstockbar">
+            <label>Advanced Stock Bar</label>
+            <tab>magecon</tab>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <advancedstockbar_settings translate="label">
+                    <label>Bar Settings</label>
+                    <frontend_type>select</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<enable_bar translate="label">
+                            <label>Stock Bar Enable</label>
+                            <comment>Show or hide stock bar</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_bar>
+                    	<animation translate="label">
+                            <label>Show with animation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Enables the animated progress bar.</comment>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </animation>
+                        <nostock_status translate="label">
+                            <label>Out of Stock Status</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>The status that will be displayed when no products are available in stock.</comment>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </nostock_status>
+                        <fullstock_status translate="label">
+                            <label>Full Stock Status</label>
+                            <comment>The status that will be displayed when there are more products available than the maximum threshold value.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </fullstock_status>
+                        <height translate="label">
+                            <label>Bar Status Height</label>
+                            <comment>Set the status bar height (in pixels).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+                        </height>
+                        <threshold translate="label">
+                            <label>Set Threshold Values</label>
+                            <frontend_model>advancedstockbar/threshold</frontend_model>
+                            <backend_model>advancedstockbar/system_config_source_threshold</backend_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </threshold>
+                    </fields>
+                </advancedstockbar_settings>
+            </groups>
+        </advancedstockbar>
+    </sections>
+</config>

@@ -1,0 +1,208 @@
+<?php $map = $this->getMarker();
+	 $position = explode("|",$map->getData("position"));
+?>
+<form id="edit-map-address-form" method="post" action="<?php echo $this->getUrlSave() ?>">
+    <div class="field">
+        <label for = "map_title_edit"><?php echo $this->__("Title : ") ?></label>
+        <input type="text" name="map[title]" id="map_title_edit" class="input-text required-entry local-validation" value="<?php echo $map->getData("title") ?>"/>
+    </div>
+    <div class="field">
+        <label for = "map_telephone_edit"><?php echo $this->__("Telephone : ") ?></label>
+        <input type="text" name="map[telephone]" id="map_telephone_edit" class="input-text required-entry local-validation" value="<?php echo $map->getData("telephone") ?>"/>
+    </div>
+    <div class="field">
+        <label for="map_city_edit"><?php echo $this->__('City')?></label>
+        <input type="text" name="map[city]"  title="<?php echo $this->__('City') ?>"  class="input-text required-entry local-validation" id="map_city_edit" value="<?php echo $map->getData("city") ?>" />
+    </div>
+    <div class="field">
+        <label for="map_region_id_edit"><?php echo $this->__('State/Province')?></label>
+        <select id="map_region_id_edit" name="map[region_id]" title="<?php echo $this->__('State/Province') ?>" class="local-validation validate-select" style="display:none;">
+            <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+        </select>
+        <input type="text" id="map_region_edit" name="map[region]"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" value="<?php echo $map->getRegion() ?>"/>
+    </div>
+    <div class="field">
+        <label for="map_country_id_edit"><?php echo $this->__('Country')?> :</label>
+        <select id="map_country_id_edit" name="map[country_id]" title="<?php echo $this->__('Country') ?>" class="local-validation validate-select">
+            <option value=""><?php echo $this->__('Please select') ?></option>
+            <?php foreach($this->getCountryCollection() as $country ) : ?>
+                <option value="<?php echo $country->getId() ?>"><?php echo $country->getName() ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="field">
+        <label for="map_postcode"><?php echo $this->__('Zip')?></label>
+        <input type="text" name="map[postcode]"  title="<?php echo $this->__('Postcode') ?>" class="input-text required-entry validate-zip-international local-validation" id="map_postcode_edit" value="<?php echo $map->getData("postcode") ?>" />
+    </div>
+    <div class="field">
+        <label for = "map_address_edit"><?php echo $this->__("Address : ") ?></label>
+        <textarea  name="map[address]" id="map_address_edit" class="input-text required-entry local-validation"  ><?php echo $map->getData("address") ?></textarea>
+    </div>
+    <div class="field">
+        <label for="map_attribute_edit"><?php echo $this->__('Select Attributes')?></label>
+        <select id="map_attribute_edit" name="map[attribute][]" title="<?php echo $this->__('Attribute') ?>" class="local-validation validate-select" multiple>
+            <?php foreach($this->getOptionTypeMap() as $key => $option) : ?>
+                <option value="<?php echo $key ?>"><?php echo $option ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="field">
+            <label for = "file-edit-form"><?php echo $this->__("Logo : ") ?></label>
+            <div class="input-box" id="file-edit-form" style="<?php if($map->getLogo()): ?>display: none<?php endif; ?>">
+            </div>
+            <?php if($map->getLogo()): ?>
+            <div class="image-thumbnail"  id="box-map-image-thumbnail-address">
+                <img src="<?php echo $this->getUrlImage($map->getId()) ?>"  width="150px" height="100px">
+                 <a href="javascript:void(0)" onclick="deleteLogoAddress(<?php echo $map->getId() ?>)" title="Delete"><span><span><?php echo Mage::helper("vendorsmap")->__("Delete") ?></span></span></a>
+            </div>
+            <?php endif ?>
+    </div>
+    <input type="hidden" name="map[logo]" id="map_logo_edit" class="input-text" value="<?php echo $map->getLogo() ?>"/><br />
+    <input type="hidden" name="num" id="marker_num" class="input-text" value="<?php echo $this->getNum() ?>" />
+    <input type="hidden" name="position_current" id="map_position_current_lat" class="input-text" value="<?php echo $position[0] ?>" />
+    <input type="hidden" name="position_current" id="map_position_current_lng" class="input-text" value="<?php echo $position[1] ?>" />
+    <input type="hidden" name="map_id"  class="input-text" value="<?php echo $map->getId() ?>" />
+    <input type="hidden" name="map[position]" id="map_position_edit" class="input-text" value="<?php echo str_replace("|", ",", $map->getData("position") ) ?>" /><br />
+    <button class="scalable save" style="" onclick="editMap.submit()" type="button" title="Reset"><span><span><?php echo Mage::helper("vendorsmap")->__("Save") ?></span></span></button>
+    <button class="scalable" style="" onclick="cancelFormEdit()" type="button" title="Cancel"><span><span><?php echo Mage::helper("vendorsmap")->__("Cancel") ?></span></span></button>
+</form>
+<script type="text/javascript">
+        region = new RegionUpdater('map_country_id_edit', 'map_region_edit', 'map_region_id_edit', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        $('map_country_id_edit').value = "<?php echo $map->getCountryId() ?>";
+        region.update();
+        $('map_region_id_edit').value = "<?php echo $map->getRegionId() ?>";
+        $("map_region_edit").value = "<?php echo $map->getRegion() ?>";
+
+        var values="<?php echo $map->getAttribute() ?>";
+        $j.each(values.split(","), function(i,e){
+            $j("#map_attribute_edit option[value='" + e + "']").prop("selected", true);
+        });
+
+        editMap = new varienForm('edit-map-address-form', true);
+        editMap.submit = function() {
+            var form = this.form;
+            if (editMap.validator.validate()) {
+                try {
+                    $("edit-map-address-form").request({
+                        method: 'post',
+                        onSuccess: function(transport) {
+                            try {
+                                if (transport.responseText.isJSON()) {
+                                    var response = transport.responseText.evalJSON();
+                                    if(response.redirect) {window.location = (response.redirect);return;}
+                                    if(response.success){
+                                     var disblel_num = $("marker_num").value ;
+                                     markers[disblel_num].setMap(null);
+                                     var position = new google.maps.LatLng(response.position_lat,response.position_lng);
+                                     var marker = new google.maps.Marker({
+                                                position: position,
+                                                map: map,
+                                                draggable:false,
+                                        });
+                                     markers[disblel_num] = marker;
+                                     messages[disblel_num] = new Array(response.title,response.address,response.city,response.region,response.country,response.telephone,response.postcode);
+
+                                     $('address_list').update(response.list);
+
+                                     findMapAddress(response.position_lat,response.position_lng,disblel_num);
+                                     attachSecretMessage(marker,disblel_num);
+
+                                     $$('#address_list input[type="radio"]:checked').each(function(c){
+                                              $(c).checked = false;
+                                     });
+
+                                      $$('#address_list input[type="radio"]').each(function(c){
+                                              if($(c).value == disblel_num) $(c).checked = true ;
+                                     });
+
+                                    }else{
+                                        alert(response.msg);
+                                    }
+                                }else{
+                                    alert(transport.responseText);
+                                }
+                            }catch(e){console.log(e);}
+                        }
+                    });
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        }.bind(newMap);
+
+        $('map_address_edit').observe('keyup', addresstoKeyupEdit);
+        function addresstoKeyupEdit(event){
+            var title  =  $('map_address_edit').value;
+            $('map-marker-address').update(title);
+        }
+        $('map_title_edit').observe('keyup', titletoKeyupEdit);
+        function titletoKeyupEdit(event){
+            var title  =  $('map_title_edit').value;
+            $('map-marker-title').update(title);
+        }
+        $('map_telephone_edit').observe('keyup', telephonetoKeyupEdit);
+        function telephonetoKeyupEdit(event){
+            var title  =  $('map_telephone_edit').value;
+            $('map-marker-telephone').update(title);
+        }
+
+        $('map_postcode_edit').observe('keyup', postcodetoKeyup);
+        function postcodetoKeyup(event){
+            var title  =  $('map_postcode_edit').value;
+            $('map-marker-postcode').update(title);
+        }
+
+        $('map_city_edit').observe('keyup', citytoKeyup);
+        function citytoKeyup(event){
+            var title  =  $('map_city_edit').value;
+            $('map-marker-city').update(title);
+        }
+
+        $('map_region_edit').observe('keyup', regiontoKeyup);
+        function regiontoKeyup(event){
+            var title  =  $('map_region_edit').value;
+            if($('map-marker-region')) $('map-marker-region').update(title);
+        }
+
+        $('map_region_id_edit').observe('change', regionidtoKeyup);
+        function regionidtoKeyup(event){
+            var option = this.select('option:selected').first();
+            var title  = option.readAttribute("title");
+            if($('map-marker-region')) $('map-marker-region').update(title);
+        }
+
+        $('map_country_id_edit').observe('change', countrytoKeyup);
+        function countrytoKeyup(event){
+            var option = this.select('option:selected').first();
+            var title  = option.innerHTML;
+            $('map-marker-country').update(title);
+        }
+
+
+
+        $j(document).ready(function() {
+            var thumbnailuploader = new qq.FileUploader({
+                element: $j('#file-edit-form')[0],
+                action: '<?php echo $this->getUrlUpload() ?>',
+                debug: true,
+                multiple: false,
+                allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+                sizeLimit: 300000,
+                uploadButtonText: '<i class="icon-plus icon-white"></i> Select Files',
+                onComplete: function(id, fileName, responseJSON) {
+                    if (responseJSON.success) {
+                        $j(".qq-upload-button").hide();
+                        $j(".qq-upload-file").hide();
+                        $j(".qq-upload-size").hide();
+                        var image_url=responseJSON["image_url"];
+                        var filename=responseJSON["filename"];
+                        $j('#file-edit-form').append(responseJSON["html"]);
+                        $j('.qq-upload-failed-text').hide();
+                        $j("#map-marker-logo").html('<img src="'+image_url+'" width="100" />');
+                        document.getElementById('map_logo_edit').value = filename;
+                    }
+                }
+            });
+            //alert(data);
+        });
+</script>

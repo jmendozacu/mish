@@ -1,0 +1,14 @@
+
+<?php $this->getPageProductVendor() ;//$page =  $this->getPageHtml() ?>
+<?php $products =  $this->getProductVendor() ?>
+<?php $_odd = ''; ?>
+<?php foreach ($products as $product): ?>
+    <tr onclick="Comparison.chooseProduct(<?php echo $product->getId() ?>,'<?php echo $product->getName() ?>')">
+        <td><?php echo $product->getId() ?></td>
+        <td><img src="<?php echo $this->getThumbnailImage($product) ?>"></td>
+        <td><?php echo $product->getName() ?></td>
+        <td><?php echo $product->getTypeId() ?></td>
+        <td><?php echo $product->getSku() ?></td>
+        <td><?php echo $this->getPriceHtml($product) ?></td>
+    </tr>
+<?php endforeach; ?>

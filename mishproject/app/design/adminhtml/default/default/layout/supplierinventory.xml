@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <supplierinventory_adminhtml_supplierinventory_index>
+        <reference name="content">
+            <block type="supplierinventory/adminhtml_supplierinventory" name="supplierinventory" />
+        </reference>
+    </supplierinventory_adminhtml_supplierinventory_index>
+  
+    <supplierinventory_adminhtml_unchangedinventory_index>
+        <reference name="content">
+            <block type="supplierinventory/adminhtml_unchangedinventory" name="unchangedinventory"/>
+        </reference>
+    </supplierinventory_adminhtml_unchangedinventory_index>
+    
+    <supplierinventory_adminhtml_lowstock_index>
+        <reference name="content">
+            <block type="supplierinventory/adminhtml_lowstock" name="lowstock" />
+        </reference>
+    </supplierinventory_adminhtml_lowstock_index>
+  
+</layout>

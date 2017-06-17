@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<layout>
+    
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name="attributes_tabs">
+            <block type="tierprices/adminhtml_catalog_product_edit_action_attribute_tab_tierprices" name="tab_tier_prices" template="tierprices/catalog/product/edit/action/tierprices.phtml"/>
+            <action method="addTab"><name>tier_prices</name><block>tab_tier_prices</block></action>
+        </reference>
+    </adminhtml_catalog_product_action_attribute_edit>
+    
+</layout>

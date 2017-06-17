@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Etheme_Welldone>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Etheme_Welldone>
+    </modules>
+</config>

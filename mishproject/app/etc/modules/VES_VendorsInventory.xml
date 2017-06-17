@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsInventory>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.1.0</version>
+            <depends>
+                <VES_Vendors />                
+            </depends>
+        </VES_VendorsInventory>
+    </modules>
+</config>

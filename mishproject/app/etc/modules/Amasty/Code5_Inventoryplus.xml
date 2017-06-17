@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Code5_Inventoryplus>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <VES_Vendors />                
+            </depends>
+        </Code5_Inventoryplus>
+    </modules>
+</config>

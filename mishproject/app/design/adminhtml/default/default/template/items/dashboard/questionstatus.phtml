@@ -1,0 +1,17 @@
+<div class="box" id="dashboard_diagram_totals">
+    <div class="entry-edit">
+        <table cellspacing="0" width="100%">
+            <tr>
+				<td class="a-center bold">
+                    <span>Total UnAnswered Questions</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_questions/'); ?>'><?php echo $this->getData('totalUnAnswered'); ?></a></span>
+                </td>
+             	<td class="a-center bold">
+                    <span>Total Answered Questions</span><br />
+                    <span class="nowrap" style="font-size:18px; color:#EA7601;"><a href='<?php echo Mage::helper('adminhtml')->getUrl('items/adminhtml_questions/'); ?>'><?php echo $this->getData('totalAnswered'); ?></a></span>
+                </td>
+			 </tr>
+        </table>
+    </div>
+</div>
+

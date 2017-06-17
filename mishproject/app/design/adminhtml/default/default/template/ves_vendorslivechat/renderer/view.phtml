@@ -1,0 +1,25 @@
+<?php $messages = $this->getMessages() ?>
+<div class="chat-content ves-tabs-chatlive">
+<div class="content active">
+
+    <div class="box-content-message box-content-message-history">
+        <ol class="discussion">
+            <?php foreach($messages as $message ) : ?>
+                <li class="<?php echo $this->getClassNameMessageBox($message->getData("type")) ?>">
+                    <div class="avatar">
+                        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/avatar.jpg" ?>"/>
+                    </div>
+                    <div class="messages">
+                        <p>
+                            <span class="title"><?php echo $message->getData("send_by") ?> : </span>
+                            <?php echo $message->getContent() ?>
+                        </p>
+                        <time datetime="<?php echo $message->getData("created_time") ?>"><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$message->getData("created_time") );?></time>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,54 @@
+<?php $notes = $this->getNoteRma();  ?>
+<?php if($notes): ?>
+<tr>
+    <td>
+        <div class="view-note-rma">
+            <?php if($note = $this->getNoteRmaCustomer()): ?>
+            <div class="notes note-customer">
+                <h3><?php echo $this->__("Customer") ?></h3>
+                <div class="note-message">
+                    <p><?php echo $this->__("Message:") ?></p>
+                    <blockquote><?php echo $note->getMessage() ?></blockquote>
+                </div>
+                <div class="attachment note-attachment">
+                    <p><?php echo $this->__("Attachment:") ?></p>
+                    <?php if( sizeof(explode(",",$note->getAttachment())) != 0 && $note->getAttachment()):?>
+                       <ul>
+                        <?php foreach (explode(",",$note->getAttachment()) as $key=>$attachment):?>
+                            <li><a href="<?php echo $this->getUrl('vesrma/download/note', array('file'=>base64_encode($attachment))) ?>" title="<?php echo $this->getNameAttachment($attachment) ?>"><span class="icon-attachment <?php echo $this->getClassIcon($attachment) ?>"><?php echo $this->getNameAttachment($attachment) ?></span></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                     <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+            <?php if($notev = $this->getNoteRmaVendor()): ?>
+            <div class="notes note-vendor">
+                <h3><?php echo $this->__("Vendor") ?></h3>
+                <div class="note-message">
+                    <p><?php echo $this->__("Message:") ?></p>
+                    <blockquote><?php echo $notev->getMessage() ?></blockquote>
+                </div>
+                <div class="attachment note-attachment">
+                    <p><?php echo $this->__("Attachment:") ?></p>
+                     <?php if( sizeof(explode(",",$notev->getAttachment())) != 0 && $notev->getAttachment()):?>
+                        <ul>
+                        <?php foreach (explode(",",$notev->getAttachment()) as $key=>$attachment):?>
+                            <li><a href="<?php echo $this->getUrl('vesrma/download/note', array('file'=>base64_encode($attachment))) ?>" title="<?php echo $this->getNameAttachment($attachment) ?>"><span class="icon-attachment <?php echo $this->getClassIcon($attachment) ?>"><?php echo $this->getNameAttachment($attachment) ?></span></a></li>
+                        <?php endforeach; ?>
+                     </ul>
+                      <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </td>
+
+</tr>
+<?php else: ?>
+    <tr>
+        <td>
+            <?php echo $this->__("Request RMA have not notes") ?>
+        </td>
+    </tr>
+<?php endif; ?>

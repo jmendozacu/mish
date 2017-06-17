@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <vesextensions module="ves_blog">
+            <title>VenusTheme</title>
+            <sort_order>50</sort_order>
+            <children>
+                <blog translate="title" module="ves_blog">
+                    <title>Ves Blog</title>
+                    <children>
+                        <add module="ves_blog">
+                            <title>Add post</title>
+                            <sort_order>0</sort_order>
+                            <action>adminhtml/adminblogpost/add</action>
+                        </add>
+                        <categoriess module="ves_blog">
+                            <title>Manage Categories</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/adminblogcategory/index</action>
+                        </categoriess>
+                        <posts module="ves_blog">
+                            <title>Manage Posts</title>
+                            <sort_order>2</sort_order>
+                            <action>adminhtml/adminblogpost/index</action>
+                        </posts>
+                        <comments module="ves_blog">
+                            <title>Manage Comments</title>
+                            <sort_order>4</sort_order>
+                            <action>adminhtml/adminblogcomment/index</action>
+                        </comments>
+                        <configuration translate="title" module="ves_blog">
+                            <title>Configuration</title>
+                            <sort_order>5</sort_order>
+                            <action>adminhtml/system_config/edit/section/ves_blog</action>
+                        </configuration>
+                    </children>
+                </blog>
+            </children>
+        </vesextensions>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <vesextensions module="ves_blog">
+                        <title>VenusTheme</title>
+                        <sort_order>50</sort_order>
+                        <children>
+                            <blog translate="title" module="ves_blog">
+                                <title>Ves Blog</title>
+                                <children>
+                                    <add module="ves_blog">
+                                        <title>Add post</title>
+                                        <sort_order>0</sort_order>
+                                    </add>
+                                    <categoriess module="ves_blog">
+                                        <title>Manage Categories</title>
+                                        <sort_order>1</sort_order>
+                                    </categoriess>
+                                    <category_add module="ves_blog">
+                                        <title>Add Category</title>
+                                        <sort_order>10</sort_order>
+                                    </category_add>
+                                    <category_edit module="ves_blog">
+                                        <title>Edit Category</title>
+                                        <sort_order>15</sort_order>
+                                    </category_edit>
+                                    <category_delete module="ves_blog">
+                                        <title>Delete Category</title>
+                                        <sort_order>16</sort_order>
+                                    </category_delete>
+                                    <posts module="ves_blog">
+                                        <title>Manage Posts</title>
+                                        <sort_order>20</sort_order>
+                                    </posts>
+                                    <post_edit module="ves_blog">
+                                        <title>Edit Post</title>
+                                        <sort_order>30</sort_order>
+                                    </post_edit>
+                                    <post_delete module="ves_blog">
+                                        <title>Delete Post</title>
+                                        <sort_order>35</sort_order>
+                                    </post_delete>
+                                    <comments module="ves_blog">
+                                        <title>Manage Comments</title>
+                                        <sort_order>40</sort_order>
+                                    </comments>
+                                    <configuration translate="title" module="ves_blog">
+                                        <title>Configuration</title>
+                                        <sort_order>50</sort_order>
+                                    </configuration>
+                                </children>
+                            </blog>
+                        </children>
+                    </vesextensions>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ves_blog>
+                                        <title>Ves Blog</title>
+                                    </ves_blog>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Ves_Blog>
+                <files>
+                    <default>Ves_Blog.csv</default>
+                </files>
+            </Ves_Blog>
+        </modules>
+    </translate>
+</config>

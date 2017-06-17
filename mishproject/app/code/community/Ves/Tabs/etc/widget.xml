@@ -1,0 +1,884 @@
+<?xml version="1.0"?>
+<widgets>
+    <!-- Widget tabs-->
+    <widget_categorytabs type="ves_tabs/widget_tab">
+      <name>Ves Base : Categories Tabs</name>
+      <description>Create Categories Tabs To Display Products In Categories</description>
+      <parameters>
+
+        <spacer_1 translate="label">
+            <label>General Setting</label>
+            <type>ves_tabs/system_config_form_field_heading</type>
+            <sort_order>1</sort_order>
+            <visible>1</visible>
+            <description></description>
+        </spacer_1>
+
+        <show translate="label" module="core">
+            <visible>1</visible>
+            <label>Enable</label>
+            <sort_order>2</sort_order>
+            <type>select</type>
+            <values>
+                <yes translate="label">
+                    <label>Yes</label>
+                    <value>true</value>
+                </yes>
+                <no translate="label">
+                    <label>No</label>
+                    <value>false</value>
+                </no>
+            </values>
+            <value>true</value>
+        </show>
+
+        <ajax_type translate="label" module="core">
+            <visible>1</visible>
+            <label>Ajax Type</label>
+            <sort_order>10</sort_order>
+            <type>select</type>
+            <source_model>ves_tabs/system_config_source_listAjaxType</source_model>
+            <value>default</value>
+        </ajax_type>
+
+        <title translate="label">
+            <visible>1</visible>
+            <label>Module Title </label>
+            <type>text</type>
+            <sort_order>15</sort_order>
+            <description>Empty for hide</description>
+            <value></value>
+        </title>
+
+        <tab_index translate="label">
+            <visible>1</visible>
+            <label>Tab Index </label>
+            <description><![CDATA[ Input tab index will show in id of tab wrapper element. The Id will be "j-industry-floor-"+tab_index . The tab index to use to show floor fixed tab panel. Empty will disable fixed tab panel]]></description>
+            <type>text</type>
+            <sort_order>17</sort_order>
+            <value></value>
+        </tab_index>
+
+        <tab_icon translate="label">
+            <visible>1</visible>
+            <label>Tab Icon</label>
+            <description><![CDATA[ Input font awesome icon class or your custom css class, for example: "fa fa-home" which will show on fixed panel. You can find more font icon at here <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">http://fortawesome.github.io/Font-Awesome/icons/</a>]]></description>
+            <type>text</type>
+            <sort_order>19</sort_order>
+            <value></value>
+        </tab_icon>
+
+        <cmsblock translate="label">
+            <visible>1</visible>
+            <label>Static Block</label>
+            <type>select</type>
+            <source_model>ves_tabs/system_config_source_listCms</source_model>
+            <sort_order>20</sort_order>
+            <description>Choose Template for your module</description>
+            <value>0</value>
+        </cmsblock>
+
+        <pretext translate="label">
+            <visible>1</visible>
+            <label>Pretext</label>
+            <type>ves_tabs/widget_wysiwyg</type>
+            <sort_order>25</sort_order>
+            <description>Empty for hide. You put html code such A, H2,H3,H4...</description>
+            <depends><cmsblock><value>0</value></cmsblock></depends>
+        </pretext>
+
+        <prefix translate="label">
+            <visible>1</visible>
+            <label>Prefix Class</label>
+            <type>text</type>
+            <sort_order>30</sort_order>
+        </prefix>
+
+        <desc_maxchar translate="label">
+            <visible>1</visible>
+            <label>Description Max Chars</label>
+            <description>Set maximun products playing in module</description>
+            <type>text</type>
+            <sort_order>35</sort_order>
+            <value>100</value>
+        </desc_maxchar>
+
+        <common_layout translate="label">
+          <visible>1</visible>
+          <label>Layout</label>
+          <description><![CDATA[Input custom layout file name.<br/><hr style="display:none"/>File default is <b>your_theme/template/common/list/defaut.phtml</b>, you should input <b>default.phtml</b>.<br/>Empty for default<br/>Noticed that this option only support default layout]]></description>
+          <type>text</type>
+          <sort_order>36</sort_order>
+      </common_layout>
+
+      <spacer_3 translate="label">
+        <label>Append Block Setting</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>67</sort_order>
+        <visible>1</visible>
+    </spacer_3>
+
+    <show_number_tab translate="label">
+        <label>Show categories number on Navigation Tab</label>
+        <type>text</type>
+        <sort_order>70</sort_order>
+        <visible>1</visible>
+        <value>3</value>
+    </show_number_tab>
+
+    <cmsblock_append translate="label">
+        <label>Select Static Block</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_listCmsChildBlock</source_model>
+        <sort_order>72</sort_order>
+        <description>Choose static block for type Append</description>
+        <visible>1</visible>
+    </cmsblock_append>
+
+    <position_staticblock translate="label">
+        <label>Static Block Position</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_ListPositionBlock</source_model>
+        <sort_order>75</sort_order>
+        <visible>1</visible>
+        <value>pull-right</value>
+    </position_staticblock>
+
+    <spacer_6 translate="label">
+        <label>Config Child Block</label>
+        <type>ves_tabs/system_config_form_field_spacer</type>
+        <sort_order>76</sort_order>
+        <visible>1</visible>
+    </spacer_6>
+
+    <enable_tab>
+        <label>Enable Child Block Tab</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>78</sort_order>
+        <visible>1</visible>
+        <value>false</value>
+        <description>Child Block will show with mode tab</description>
+    </enable_tab>
+
+    <source_type translate="label">
+        <label>Display products in</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_ListType</source_model>
+        <sort_order>80</sort_order>
+        <visible>1</visible>
+        <value>news</value>
+    </source_type>
+
+    <source_limit_item>
+        <label>Item number</label>
+        <type>text</type>
+        <sort_order>85</sort_order>
+        <description>Set maximun products in Child Block</description>
+        <visible>1</visible>
+        <value>4</value>
+    </source_limit_item>
+
+    <position_childblock translate="label">
+        <label>Position</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_ListPositionBlock</source_model>
+        <sort_order>90</sort_order>
+        <visible>1</visible>
+        <value>pull-right</value>
+    </position_childblock>
+
+    <thumbwidth_childblock translate="label">
+        <label>Image width</label>
+        <type>text</type>
+        <sort_order>95</sort_order>
+        <backend_model>ves_tabs/system_config_backend_tabs_checkvalue</backend_model>
+        <visible>1</visible>
+        <value>150</value>
+    </thumbwidth_childblock>
+
+    <thumbheight_childblock translate="label">
+        <label>Image height</label>
+        <type>text</type>
+        <sort_order>100</sort_order>
+        <backend_model>ves_tabs/system_config_backend_tabs_checkvalue</backend_model>
+        <visible>1</visible>
+        <value>150</value>
+    </thumbheight_childblock>
+
+    <width_child_block>
+        <label>Bootstrap Column</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_listWidthBlock</source_model>
+        <sort_order>102</sort_order>
+        <visible>1</visible>
+        <value>3</value>
+    </width_child_block>
+
+    <spacer_11 translate="label">
+        <label>Sub Category Block</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>103</sort_order>
+        <visible>1</visible>
+    </spacer_11>
+
+    <number_subcat translate="label" module="core">
+        <visible>1</visible>
+        <label>Number Sub Category</label>
+        <sort_order>104</sort_order>
+        <type>text</type>
+    </number_subcat>
+
+    <spacer_9 translate="label">
+        <label>Config Tab Label For Source Type</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>106</sort_order>
+        <visible>1</visible>
+    </spacer_9>
+
+    <newsarrival_label translate="label">
+        <label>News Arrival Products Label</label>
+        <type>text</type>
+        <sort_order>115</sort_order>
+        <visible>1</visible>
+        <value>News Arrival</value>
+    </newsarrival_label>
+
+    <latest_label translate="label">
+        <label>Latest Products Label</label>
+        <type>text</type>
+        <sort_order>120</sort_order>
+        <visible>1</visible>
+        <value>Latest</value>
+    </latest_label>
+
+    <bestseller_label translate="label">
+        <label>Best Buy Products Label</label>
+        <type>text</type>
+        <sort_order>125</sort_order>
+        <visible>1</visible>
+        <value>Best Seller</value>
+    </bestseller_label>
+
+    <mostviewed_label translate="label">
+        <label>Most Viewed Products Label</label>
+        <type>text</type>
+        <sort_order>130</sort_order>
+        <visible>1</visible>
+        <value>Most Viewed</value>
+    </mostviewed_label>
+
+    <special_label translate="label">
+        <label>Special Products Label</label>
+        <type>text</type>
+        <sort_order>135</sort_order>
+        <visible>1</visible>
+        <value>Special</value>
+    </special_label>
+
+    <featured_label translate="label">
+        <label>Featured Products Label</label>
+        <type>text</type>
+        <sort_order>140</sort_order>
+        <visible>1</visible>
+        <value>Featured</value>
+    </featured_label>
+
+    <spacer_4 translate="label">
+        <label>Catalog - Products Source Setting</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>142</sort_order>
+        <visible>1</visible>
+    </spacer_4>
+
+    <catsid translate="label">
+        <label>Select Categories</label>
+        <type>multiselect</type>
+        <source_model>ves_tabs/system_config_source_ListCategories</source_model>
+        <description>Eg: 22,23. Empty for all categories.</description>
+        <sort_order>145</sort_order>
+        <visible>1</visible>
+    </catsid>
+
+    <source_products_mode translate="label">
+        <label>Source Type</label>
+        <type>select</type>
+        <source_model>ves_tabs/system_config_source_listType</source_model>
+        <sort_order>150</sort_order>
+        <visible>1</visible>
+    </source_products_mode>
+
+    <limit_item>
+        <label>Item number of categories</label>
+        <type>text</type>
+        <sort_order>155</sort_order>
+        <description>Set maximun products playing in module</description>
+        <visible>1</visible>
+        <value>8</value>
+    </limit_item>
+
+    <itemsrow>
+        <visible>1</visible>
+        <label>Columns</label>
+        <type>text</type>
+        <description>Set maximun products in n Columns</description>
+        <sort_order>156</sort_order>
+        <value>4</value>
+    </itemsrow>
+
+    <itemspage>
+        <label>Maximum items on a page</label>
+        <type>text</type>
+        <sort_order>157</sort_order>
+        <visible>1</visible>
+        <value>4</value>
+    </itemspage>
+
+    <class_tab translate="label">
+        <label>Tab Class</label>
+        <type>textarea</type>
+        <sort_order>160</sort_order>
+        <description><![CDATA[Empty for hide <br/>Example: <b>Position:class-name;</b><br/>1:btn-blue;2:btn-apple;3:btn-electronic;4:btn-fish;5:btn-ring]]></description>
+        <visible>1</visible>
+    </class_tab>
+
+    <show_tab_title>
+        <label>Enable Tab Titles</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>165</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_tab_title>
+
+    <show_tab_icon>
+        <label>Enable Tab Icons</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>170</sort_order>
+        <visible>1</visible>
+        <value>false</value>
+    </show_tab_icon>
+
+    <icon_width translate="label">
+        <label>Tab Icon width</label>
+        <type>text</type>
+        <sort_order>175</sort_order>
+        <backend_model>ves_tabs/system_config_backend_tabs_checkvalue</backend_model>
+        <visible>1</visible>
+        <value>80</value>
+        <depends><show_tab_icon><value>true</value></show_tab_icon></depends>
+    </icon_width>
+
+    <icon_height translate="label">
+        <label>Tab Icon height</label>
+        <type>text</type>
+        <sort_order>180</sort_order>
+        <backend_model>ves_tabs/system_config_backend_tabs_checkvalue</backend_model>
+        <visible>1</visible>
+        <value>80</value>
+        <depends><show_tab_icon><value>true</value></show_tab_icon></depends>
+    </icon_height>
+
+    <spacer_10 translate="label">
+        <label>Item Main Block Setting</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>181</sort_order>
+        <visible>1</visible>
+    </spacer_10>
+
+    <image_width>
+        <label>Image Width</label>
+        <type>text</type>
+        <sort_order>182</sort_order>
+        <visible>1</visible>
+        <value>300</value>
+    </image_width>
+
+    <image_height>
+        <label>Image Height</label>
+        <type>text</type>
+        <sort_order>183</sort_order>
+        <visible>1</visible>
+        <value>300</value>
+    </image_height>
+
+    <show_desc>
+        <label>Enable Main Description </label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>185</sort_order>
+        <visible>1</visible>
+        <value>false</value>
+    </show_desc>
+
+    <show_price>
+        <label>Enable Main Price </label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>190</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+
+    </show_price>
+
+    <show_title>
+        <label>Enable Main Title </label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>195</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_title>
+
+    <show_wc>
+        <label>Enable Wishlist and Compare</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>205</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_wc>
+
+    <show_btn>
+        <label>Enable Button Cart</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>210</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_btn>
+
+    <show_pzoom>
+        <label>Show Product Image Zooming</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>230</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_pzoom>
+
+    <enable_quickview>
+        <label>Enable Quickview</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>240</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </enable_quickview>
+
+    <popup_quickview_width>
+        <label>Popup Quickview Width</label>
+        <type>text</type>
+        <sort_order>250</sort_order>
+        <visible>1</visible>
+        <value>60%</value>
+        <depends><enable_quickview><value>true</value></enable_quickview></depends>
+    </popup_quickview_width>
+
+    <popup_quickview_height>
+        <label>Popup Quickview Height</label>
+        <type>text</type>
+        <sort_order>260</sort_order>
+        <visible>1</visible>
+        <value>80%</value>
+        <depends><enable_quickview><value>true</value></enable_quickview></depends>
+    </popup_quickview_height>
+
+    <enable_swap>
+        <label>Enable Swap Images</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>270</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </enable_swap>
+
+    <swap_image_number>
+        <label>Swap Image Number</label>
+        <description>Input index number of product additional images to use for Swap image (index number start from 0), for example: you want get image 3 for swap image, you should input swap image number = 2 </description>
+        <type>text</type>
+        <sort_order>280</sort_order>
+        <visible>1</visible>
+        <value>0</value>
+        <depends><enable_swap><value>true</value></enable_swap></depends>
+    </swap_image_number>
+
+    <enable_sale_icon>
+        <label>Enable Sale Icon</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>185</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </enable_sale_icon>
+
+    <enable_new_icon>
+        <label>Enable New Icon</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>190</sort_order>
+        <visible>1</visible>
+        <value>false</value>
+    </enable_new_icon>
+
+    <show_review>
+        <label>Enable Rating</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>300</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+    </show_review>
+
+
+
+
+
+
+
+
+    <spacer_7 translate="label">
+        <label>OWL Carousel Setting</label>
+        <type>ves_productcarousel/system_config_form_field_heading</type>
+        <sort_order>410</sort_order>
+        <visible>1</visible>
+    </spacer_7>
+    <enable_owl_carousel>
+        <label>Use OWL Carousel</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <description>Support Ajax Type Layout: None, Carousel, Sub Category Block </description>
+        <visible>1</visible>
+        <sort_order>420</sort_order>
+        <value>false</value>
+    </enable_owl_carousel>
+    <rtl>
+        <label>Enable Right To Left</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <sort_order>430</sort_order>
+        <value>false</value>
+    </rtl>
+
+    <loop>
+        <label>Enable Loop Carousel</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <sort_order>440</sort_order>
+        <value>true</value>
+    </loop>
+    <mouse_drag>
+        <label>Enable Mouse Drag</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <sort_order>450</sort_order>
+        <value>true</value>
+    </mouse_drag>
+    <touch_drag>
+        <label>Enable Touch Drag</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <sort_order>460</sort_order>
+        <value>true</value>
+    </touch_drag>
+    <slide_by>
+        <label>Slide By</label>
+        <type>text</type>
+        <description>Number Items will slide on a time. Default: 1</description>
+        <sort_order>470</sort_order>
+        <visible>1</visible>
+        <value>1</value>
+    </slide_by>
+    <margin_item>
+        <label>Margin Each Items</label>
+        <type>text</type>
+        <description>Default 0</description>
+        <sort_order>480</sort_order>
+        <visible>1</visible>
+        <value>0</value>
+    </margin_item>
+
+    <default_items>
+        <label>Number Columns On Page (Default)</label>
+        <description>Show number items when screen size between 1199px and 980px</description>
+        <type>text</type>
+        <sort_order>490</sort_order>
+        <visible>1</visible>
+        <value>4</value>
+    </default_items>
+
+    <mobile_items>
+        <label>Number Columns On Page (Phones)</label>
+        <description>Show number items when screen size bellow 480px</description>
+        <type>text</type>
+        <sort_order>500</sort_order>
+        <visible>1</visible>
+        <value>1</value>
+    </mobile_items>
+
+    <tablet_small_items>
+        <label>Number Columns On Page (Phones to Small tablets)</label>
+        <description>Show number items when screen size between 641px and 480px</description>
+        <type>text</type>
+        <sort_order>510</sort_order>
+        <visible>1</visible>
+        <value>2</value>
+    </tablet_small_items>
+
+    <tablet_items>
+        <label>Number Columns On Page (Phones to tablets)</label>
+        <description>Show number items when screen size between 768px and 641px</description>
+        <type>text</type>
+        <sort_order>520</sort_order>
+        <visible>1</visible>
+        <value>2</value>
+    </tablet_items>
+
+    <portrait_items>
+        <label>Number Columns On Page (Portrait tablets)</label>
+        <description>Show number items when screen size between 979px and 769px</description>
+        <type>text</type>
+        <sort_order>530</sort_order>
+        <visible>1</visible>
+        <value>3</value>
+    </portrait_items>
+
+    <large_items>
+        <label>Number Columns On Page (Large display)</label>
+        <description>Show number items when screen size 1200px and up</description>
+        <type>text</type>
+        <sort_order>540</sort_order>
+        <visible>1</visible>
+        <value>5</value>
+    </large_items>
+
+    <custom_items>
+        <label>Custom Number Items with any screen sizes</label>
+        <description>For example: [320, 1], [360, 1], [480, 1], [568, 2], [600, 2], [640, 2], [768, 2], [900, 3], [960, 3], [1024, 3] empty to disable</description>
+        <type>text</type>
+        <sort_order>550</sort_order>
+        <visible>1</visible>
+        <value></value>
+    </custom_items>
+
+    <auto_play>
+        <visible>1</visible>
+        <label>Auto Play</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>560</sort_order>
+        <value>false</value>
+    </auto_play>
+
+    <interval>
+        <visible>1</visible>
+        <label>Speed</label>
+        <comment>Determines the duration of the transition in milliseconds.If less than 10, the number is interpreted as a speed (pixels/millisecond).This is probably desirable when scrolling items with variable sizes</comment>
+        <type>text</type>
+        <sort_order>570</sort_order>
+        <value>3000</value>
+    </interval>
+
+    <spacer_8 translate="label">
+        <label>Template Config</label>
+        <type>ves_tabs/system_config_form_field_heading</type>
+        <sort_order>600</sort_order>
+        <visible>1</visible>
+    </spacer_8>
+
+    <template translate="label">
+        <visible>1</visible>
+        <label>Module Template</label>
+        <description>Input custom module template file path. For example: ves/tabs/default.phtml Empty for default</description>
+        <type>text</type>
+        <sort_order>610</sort_order>
+    </template>
+
+</parameters>
+</widget_categorytabs>
+</widgets>

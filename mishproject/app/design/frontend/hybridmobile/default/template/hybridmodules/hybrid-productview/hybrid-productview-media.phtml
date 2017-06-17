@@ -1,0 +1,30 @@
+<?php
+/**
+ * Single product image slider
+ *
+ */
+?>
+
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<div class="swiper-main-device single-product-page" data-snap-ignore="true">
+    <div id="item-slider" class="swiper-container">
+        <div class="swiper-wrapper">
+            <?php foreach($this->getGalleryImages() as $_image): ?>
+                <div class="swiper-slide">
+                    <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(728); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+                </div>
+            <?php endforeach ?>
+        </div>
+        <div class="pagination"></div>
+    </div>
+</div>
+<script>
+jQuery(function($) {
+    $('#item-slider').swiper({
+        pagination: '.pagination'
+    });
+});
+</script>

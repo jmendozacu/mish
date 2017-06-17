@@ -1,0 +1,39 @@
+<?php $banner = $this->getBanner();?>
+<?php if(!$banner):?>
+	<?php echo $this->__("Banner Not Found!")?>
+<?php else:?>
+	<?php if(!$this->getItems()) :?>
+		<?php echo $this->__('Item not fould!');?>
+	<?php else:?>
+	<?php $random = rand(1111,9999)?>
+		<script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_bannermanager/js/jquery.js')?>"></script>
+		<script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_bannermanager/js/jquery.nivo.slider.pack.js')?>"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('ves_bannermanager/css/nivo-slider.css')?>" />
+		<script type="text/javascript">
+			$ves_banner_<?php echo $random?> = jQuery.noConflict();
+		</script>
+		<div class="nivo_slider_container nivo_slider_thumbnail" style="width: <?php echo $banner->getWidth()?>px; height: <?php echo $banner->getHeight()?>px;">
+			<div id="slider_<?php echo $random?>" class="nivoSlider">
+				<?php foreach($this->getItems() as $item):?>
+					<?php $now = Mage::getModel('core/date')->date('Y-m-d H:i:s');?>
+			  		<?php if( ($item->getFromDate() && ($item->getFromDate() > $now)) || ($item->getToDate() && ($item->getToDate() < $now))) continue;?>
+					<?php if($item->getUrl()):?>
+						<a href="<?php echo $this->getItemUrl($item)?>"><img src="<?php echo Mage::helper('bannermanager/image')->init($item->getFilename())->resize($banner->getWidth(),$banner->getHeight())?>" alt="" title="<?php echo $item->getDescription()?"#description_".$item->getId():$item->getTitle();?>" rel="<?php echo Mage::helper('bannermanager/image')->init($item->getFileThumbnail())?>" /></a>
+					<?php else:?>
+						<img src="<?php echo Mage::helper('bannermanager/image')->init($item->getFilename())->resize($banner->getWidth(),$banner->getHeight())?>" alt="" title="<?php echo $item->getDescription()?"#description_".$item->getId():$item->getTitle();?>" rel="<?php echo Mage::helper('bannermanager/image')->init($item->getFileThumbnail())?>" />
+					<?php endif;?>
+				<?php endforeach;?>
+            </div>
+        </div>
+	    <script type="text/javascript">
+	    $ves_banner_<?php echo $random?>(window).load( function(){
+	    	$ves_banner_<?php echo $random?>('#slider_<?php echo $random?>').nivoSlider({
+	    		effect:'<?php echo $banner->getEasing()?>', /*Specify sets like: 'fold,fade,sliceDown'*/
+	            pauseTime:<?php echo $banner->getDelay()?>, /*How long each slide will show*/
+	            controlNavThumbsFromRel:true,
+	            controlNavThumbs:true
+	    	});
+	    });
+	    </script>
+	 <?php endif;?>
+<?php endif;?>

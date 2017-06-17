@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <vendor_page>
+        <reference name="content">
+            <block type="vendorsvacation/vacation" before="-" name="vendor.vacation.notice" template="ves_vendorsvacation/notice.phtml" />
+        </reference>
+    </vendor_page>
+
+    <catalog_product_view>
+    	<remove name="vendor.vacation.notice" />
+        <reference name="content">
+            <block type="vendorsvacation/vacation" before="-" name="vendor.product.vacation.notice" template="ves_vendorsvacation/notice.phtml" />
+        </reference>
+    </catalog_product_view>
+</layout> 

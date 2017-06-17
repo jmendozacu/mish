@@ -1,0 +1,71 @@
+<div class="ves-avatar-vendor">
+    <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/generic_avatar.jpg" ?>"/>
+</div>
+<div class="ves-chatlive-vendor-info">
+    <div class="ves-chatlive-audio">
+        <span class="icon icon-audio" onclick="ChatOption.changeAudioStatus()"><?php echo $this->getVendorsName() ?></span>
+    </div>
+    <div class="ves-chatlive-status">
+        <dl class="dropdown">
+            <dt><a><span><?php echo $this->getStatusChat() ?></span></a></dt>
+            <dd>
+                <ul style="display: none">
+                        <li>
+                            <a href="javascript:void(0)" onclick="ChatOption.changeStatus('online')"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/status/online_box.png" ?>" title="<?php echo $this->__("Online") ?>"/><span><?php echo $this->__("Online") ?></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="ChatOption.changeStatus('busy')"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/status/busy_box.png" ?>" title="<?php echo $this->__("Busy") ?>"/><span><?php echo $this->__("Busy") ?></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="ChatOption.changeStatus('invisible')"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/status/invisible_box.png" ?>" title="<?php echo $this->__("Invisible") ?>"/><span><?php echo $this->__("Invisible") ?></span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="ChatOption.changeStatus('offline')"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."ves_vendors/livechat/status/offline_box.png" ?>" title="<?php echo $this->__("Offline") ?>"/><span><?php echo $this->__("Offline") ?></span></a>
+                        </li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div style="clear: both"></div>
+<script type="text/javascript">
+
+    var VENDORS_MESSAGE_MENU_STATUS = 0;
+    Event.observe(window,'click',function(){
+        if(VENDORS_MESSAGE_MENU_STATUS == 0) {
+            $$(".ves-chatlive-vendor-info .dropdown dd ul").each(function(ul){
+                ul.hide();
+            });
+        }
+    });
+
+    $$(".ves-chatlive-vendor-info .dropdown ul li a").each(function(a){
+        a.observe('click',function(e){
+            var text = a.innerHTML;
+
+            $$(".ves-chatlive-vendor-info .dropdown dt a span").each(function(a){
+                a.update(text);
+            });
+            $$(".ves-chatlive-vendor-info .dropdown dd ul").each(function(ul){
+                ul.hide();
+            });
+        });
+    });
+
+    $$(".ves-chatlive-vendor-info dt a").each(function(a){
+        a.observe('click',function(e){
+            e.stopPropagation();
+            $$(".ves-chatlive-vendor-info .dropdown dd ul").each(function(ul){
+                if(ul.visible()){
+                    ul.hide();
+                    VENDORS_MESSAGE_MENU_STATUS = 1;
+                }
+                else {
+                    VENDORS_MESSAGE_MENU_STATUS = 0;
+                    ul.show();
+                }
+            });
+        });
+    });
+
+</script>

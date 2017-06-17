@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <vendorsrma translate="label" module="vendorsrma">
+            <label>RMA</label>
+            <tab>ves</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <order_expiry_day translate="label tooltip">
+                            <label><![CDATA[Allow to request RMA after order completion,days <strong style="color: #FF0000;">*</strong>]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_expiry_day>
+
+                        <allow_guests_request translate="label tooltip">
+                            <label>Allow guests to request RMA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_guests_request>\
+
+                        <allow_print translate="label tooltip">
+                            <label>Enable 'Print label' button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_print>
+
+                        <enable_reasons translate="label tooltip">
+                            <label>Enable 'Reasons' option</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_reasons>
+
+                        <allow_other_reasons translate="label tooltip">
+                            <label>Allow add 'Other' option for reasons</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_other_reasons>
+
+                        <allow_per_order translate="label tooltip">
+                            <label>Allow per-order item RMA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_per_order>
+<!--  
+                        <allow_send_refund translate="label tooltip">
+                            <label>Allow customer send escalate RMA to Admin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_send_refund>
+
+						
+                        <confirm_shipping translate="label tooltip">
+                            <label>'Confirm Shipping' is required</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirm_shipping>
+
+                        <confirm_shipping_text translate="label tooltip">
+                            <label>Confirm Shipping popup text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirm_shipping_text>
+						-->
+						
+                        <allow_file_extension translate="label tooltip">
+                            <label>Allowed file extensions</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allow_file_extension>
+
+                        <max_size_upload translate="label tooltip">
+                            <label>Max attachment size, kb</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_size_upload>
+                        
+                        <max_time_wait_sate translate="label tooltip">
+                            <label>Wait time (hour)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[After this time the RMA request with state "Awaiting Other Party's Response" will be submitted to admin to process automatically]]></comment>
+                        </max_time_wait_sate>
+
+                    </fields>
+                 </general>
+                 <policy translate="label">
+                    <label>RMA Policy</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label tooltip">
+                            <label>Show policy</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <block translate="label tooltip">
+                            <label>Policy block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/system_config_source_block</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </block>
+                    </fields>
+                </policy>
+
+                <contact translate="label">
+                    <label>Contacts</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label tooltip">
+                            <label>Enable email notifications</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/system_config_source_notify</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <name translate="label tooltip">
+                            <label>RMA department display name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </name>
+                        <email translate="label tooltip">
+                            <label>RMA department email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <address translate="label tooltip">
+                            <label>RMA department address</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </address>
+                    </fields>
+                </contact>
+
+
+                <email translate="label">
+                    <label>Email Template</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <sender translate="label tooltip">
+                            <label>Email sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/option_sender</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sender>
+
+                        <base_template_customer translate="label tooltip">
+                            <label>Base template for customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/system_config_source_template_customer</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </base_template_customer>
+
+                        <base_template_admin translate="label tooltip">
+                            <label>Base template for admin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/system_config_source_template_admin</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </base_template_admin>
+
+                        <base_template_vendor translate="label tooltip">
+                            <label>Base template for vendor</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>vendorsrma/system_config_source_template_vendor</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </base_template_vendor>
+
+                    </fields>
+                </email>
+             </groups>
+        </vendorsrma>
+     </sections>
+</config>
+

@@ -1,0 +1,55 @@
+<?php
+/**
+ * Open Biz Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file OPEN-BIZ-LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://mageconsult.net/terms-and-conditions
+ *
+ * @category   Magecon
+ * @package    Magecon_AdvancedStockBar
+ * @version    1.0.0
+ * @copyright  Copyright (c) 2012 Open Biz Ltd (http://www.mageconsult.net)
+ * @license    http://mageconsult.net/terms-and-conditions
+ */
+?>
+<?php
+$product = $this->getProduct();
+$stockBarInfo = $this->getStockBarInfo($product);
+
+$mageconBarCurrentValue = $stockBarInfo["bar_value"];
+$mageconBarHeight = (int) $stockBarInfo["bar_height"];
+$mageconBarColor = str_replace('\'', "", $stockBarInfo["bar_color"]);
+
+if ($this->getConfig('enable_bar')): ?>
+    <?php if (!$product->getDisableStockBar()): ?> 
+        <p class="availability in-stock"><span><?php echo $stockBarInfo["stock_comment"]; ?></span></p>
+        <div class="html5-progress-bar">
+			<div class="progress-bar-wrapper">
+				<progress id="progressbar" value="<?php echo $mageconBarCurrentValue; ?>" max="100"></progress>
+			</div>
+		</div>
+        <script type="text/javascript">
+            var mageconBarCurrentValue = <?php echo $mageconBarCurrentValue; ?>;
+        </script>
+        <style>
+        	#progressbar {
+        		height: <?php echo $mageconBarHeight; ?>px;
+        	}
+        	
+        	.html5-progress-bar progress::-webkit-progress-value {
+				background: <?php echo $mageconBarColor; ?>;
+				border-radius: 9px;
+			}
+			
+			.html5-progress-bar progress::-moz-progress-bar {
+				background: <?php echo $mageconBarColor; ?>;
+				border-radius: 9px;
+			}
+        </style>
+		
+    <?php endif; ?>
+<?php endif; ?>

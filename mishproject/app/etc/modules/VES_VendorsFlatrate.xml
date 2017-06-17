@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsFlatrate>
+        	<name>Vendor Multiple Flatrate Shipping</name>
+        	<url>http://www.vnecoms.com/magento-marketplace/plugins/vendor-multiple-flatrate-shipping.html</url>
+        	<version>1.2.1.0</version>
+        	
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <VES_Vendors />
+                <Mage_Checkout />
+                <Mage_Tax />
+                <Mage_Shipping />
+            </depends>
+        </VES_VendorsFlatrate>
+    </modules>
+</config>

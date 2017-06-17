@@ -1,0 +1,142 @@
+<?php
+$list_image_width = (int)$this->getConfig("image_width", 300);
+$list_image_height = (int)$this->getConfig("image_height", 300);
+$swap_image_number = (int)$this->getConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getConfig("show_pzoom");
+$enable_new_icon = $this->getConfig("enable_new_icon");
+$enable_sale_icon = $this->getConfig("enable_sale_icon");
+$show_title = $this->getConfig('show_title');
+$enable_short_desc = $this->getConfig('show_desc');
+$show_review = $this->getConfig('show_review');
+$show_price = $this->getConfig('show_price');
+$show_addcart = $this->getConfig("show_btn");
+$show_compare_wishlist = $this->getConfig("show_wc") ;
+$quickview = $this->getConfig("enable_quickview");
+$swap_image = $this->getConfig("enable_swap");
+$itemsperpage = (int)$this->getConfig("itemspage",4);
+$auto_play_mode = (int)$this->getConfig("auto_play");
+$title_maxchar = (int)$this->getConfig("title_maxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getConfig("interval");
+$show_tab_title = $this->getConfig("show_tab_title");
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("itemsrow");
+$cols = !empty($cols)?$cols:1;
+$span = floor(12/$cols);
+$active = 'news';
+
+$qty = $this->getConfig("quanlity", 5);
+$show_tab_icon = $this->getConfig("show_tab_icon");
+$icon_width = $this->getConfig("icon_width", 50);
+$icon_height = $this->getConfig("icon_height", 50);
+$class_prefix =  $this->getConfig("prefix", 50);
+
+$modid = rand(1,9)+rand();
+$modid = $modid.time();
+$price_prefix = "_vestab_".$modid;
+$_helper = $this->helper('catalog/output');
+
+$layout_type = $this->getConfig('ajax_type', "");
+if($layout_type == 'default'){
+	$common_layout = $this->getConfig('common_layout');
+	$enable_deals = true;
+	$module = $modid;
+	if(isset($common_layout) && !empty($common_layout)){
+		$default_layout = $common_layout;
+	}
+}
+$tab_index = $this->getConfig("tab_index", "");
+
+?>
+
+<div <?php if($tab_index): ?> data-index="<?php echo $tab_index; ?>" data-icon="<?php echo $this->getConfig('tab_icon') ?>" data-title="<?php echo $this->getConfig('title'); ?>" <?php endif; ?> class="<?php echo $this->getConfig('prefix');?> block categorytabs <?php if($tab_index): ?> floor-fixed-panel-play <?php endif; ?>"  id="categorytab<?php echo $modid;?>">
+
+	<?php if($this->getConfig('title') || ($pretext=$this->getConfig("pretext")) || isset($cms)) { ?>
+	<div class="block-title">
+		<?php if($this->getConfig('title')) { ?>
+		<h3><?php echo $this->getConfig('title') ?></h3>
+		<?php } ?>
+		<?php if( ($pretext=$this->getConfig("pretext")) && !isset($cms) ) { ?>
+		<div class="pretext"><?php echo $pretext; ?></div>
+		<?php } else if(isset($cms)) {
+			?>
+			<div class="pretext"><?php echo $cms; ?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+
+	<?php if(!empty($items)) { ?>
+
+	<div class="tab-nav">
+		<ul class="nav nav-tabs" id="categorytab<?php echo $modid;?>">
+			<?php
+			$x = 1;
+			foreach( $items as $item ){
+				$icon = $class = '';
+				if($show_tab_icon) {
+					$icon = $this->getCategoryImage( $item['category_id'], $icon_width, $icon_height );
+				}
+				if( isset($tabClass[$x]) && $tabClass[$x] != ''){ $class = 'class="'.$tabClass[$x].'"'; } ?>
+
+				<li><a href="#categorytab-<?php echo $item['category_id'].$modid;?>" data-toggle="tab" <?php echo $class; ?>>
+					<?php if($show_tab_icon && $icon) { ?>
+					<img src="<?php echo $icon; ?>" alt="<?php echo $this->stripTags($item['title']); ?>"/>
+					<?php } ?>
+					<?php if($show_tab_title){ ?>
+					<?php echo $this->htmlEscape( $item['title'] ); ?>
+					<?php } ?>
+				</a></li>
+				<?php $x++; } ?>
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<?php
+			$i=0; foreach( $items as $tab => $item ) {
+				if( isset($item['products']) && $item['products'] ) {
+					$products = $item['products'];
+					if( empty($products) || $products->getSize() <= 0){ continue; }
+					$products = $products->getItems(); ?>
+
+					<div class="tab-pane box-products categorytabcarousel<?php echo $modid; ?> slide" id="categorytab-<?php echo $item['category_id'].$modid;?>">
+
+						<?php if( count($products) > $itemsperpage ){ ?>
+						<div class="carousel-controls">
+							<a class="carousel-control left" href="#categorytab-<?php echo $item['category_id'].$modid;?>"   data-slide="prev"><i class="fa fa-angle-left"></i></a>
+							<a class="carousel-control right" href="#categorytab-<?php echo $item['category_id'].$modid;?>"  data-slide="next"><i class="fa fa-angle-right"></i></a>
+						</div>
+						<?php } ?>
+
+						<div class="carousel-inner ">
+							<?php
+							$pages = array_chunk( $products, $itemsperpage);
+							$price_prefix = $price_prefix."_".$tab;
+							?>
+							<?php foreach ($pages as  $k => $_productCollection ) {  ?>
+							<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> <?php if($k==0) {?>active<?php } ?> products-grid no-margin">
+								<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+									<?php require ($product_module_path); ?>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+						<?php } ?>
+						<?php } ?>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					jQuery(function () {
+						jQuery('#categorytab<?php echo $modid;?> a:first').tab('show');
+						jQuery('.categorytabcarousel<?php echo $modid;?>').carousel({interval:false,auto:false,pause:'hover'});
+					})
+				</script>
+				<?php } ?>

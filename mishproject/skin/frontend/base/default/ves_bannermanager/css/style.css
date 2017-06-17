@@ -1,0 +1,313 @@
+/* --------------------------------------------Lof Slider -----------------------------------------*/
+@charset "utf-8";
+/* CSS Document */
+.lof-slidecontent, .lof-slidecontent a {
+	color:#FFF;	
+}
+.lof-slidecontent a.readmore{
+	color:#58B1EA;
+	font-size:95%;
+	
+}
+.lof-slidecontent{
+	position:relative;
+	overflow:hidden;
+	border:#F4F4F4 solid 1px;
+}
+.lof-slidecontent .preload{
+	height:100%;
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:100000;
+	text-align:center;
+	background:#FFF
+}
+.lof-slidecontent .preload div{
+	height:100%;
+	width:100%;
+	background:transparent url(../images/load-indicator.gif) no-repeat scroll 50% 50%;
+}
+.lof-main-outer{
+	position:relative;
+	height:100%;
+	/*width:900px;*/
+	z-index:3px;
+	overflow:hidden;
+}
+
+
+/*******************************************************/
+.lof-main-item-desc{
+	z-index:100px;
+	position:absolute;
+	bottom:50px;
+	left:0px;
+	width:350px;
+	background:url(../images/bg_trans.png);
+	height:100px;
+	/* filter:0.7(opacity:60) */
+	padding:10px;
+}
+.lof-main-item-desc p{
+	margin:0 8px;
+	padding:8px 0
+}
+.lof-main-item-desc h3{
+	padding:0;
+	margin:0
+}
+.lof-main-item-desc h2{
+	padding:0;
+	margin:15px 0 0 0px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.lof-main-item-desc h3 a{	
+	margin:0;
+	background:#C01F25;
+	font-size:75%;
+	padding:2px 3px;
+	font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,sans-serif;
+	text-transform:uppercase;
+	text-decoration:none
+}
+.lof-main-item-desc h3 a:hover{
+
+	text-decoration:underline;
+}
+.lof-main-item-desc h3 i {
+	font-size:70%;
+}
+
+/* main flash */
+ul.lof-main-wapper{
+	/* margin-right:auto; */
+	overflow:hidden;
+	background:transparent url(../images/load-indicator.gif) no-repeat scroll 50% 50%;
+	padding:0px;
+	margin:0;
+	position:absolute;
+	overflow:hidden;
+}
+
+ul.lof-main-wapper li{
+	overflow:hidden;
+	padding:0px;
+	margin:0px;
+	float:left;
+	position:relative;
+}
+.lof-opacity  li{
+	position:absolute;
+	top:0;
+	left:0;
+	float:inherit;
+}
+ul.lof-main-wapper li img{
+	padding:0px;	
+}
+
+/* item navigator */
+.lof-navigator-wapper {
+	position:absolute;
+	bottom:10px;
+	right:10px;
+	background:url(../images/transparent_bg.png) repeat;
+	padding:5px 0px;
+}
+.lof-navigator-outer{
+	position:relative;
+	z-index:100;
+	height:180px;
+	width:310px;
+	overflow:hidden;
+	color:#FFF;
+	float:left
+}
+ul.lof-navigator{
+	top:0;
+	padding:0;
+	margin:0;
+	position:absolute;
+	width:100%;
+}
+ul.lof-navigator li{
+	cursor:hand; 
+	cursor:pointer;
+	list-style:none;
+	padding:0;
+	margin-left:0px;
+	overflow:hidden;
+	float:left;
+	display:block;
+
+	text-align:center;
+
+}
+ul.lof-navigator li img{
+	border:#666 solid 3px;	
+}
+ul.lof-navigator li.active img, ul.lof-navigator li:hover img {
+	border:#A8A8A8 solid 3px;
+}
+.lof-navigator-wapper .lof-next,  .lof-navigator-wapper .lof-previous{
+	display:block;
+	width:22px;
+	height:30px;
+	color:#FFF;
+	cursor:pointer;
+
+}
+.lof-navigator-wapper .lof-next {
+	float:left;	
+	text-indent:-999px;
+	margin-right:5px;
+	background:url(../images/arrow-r.png) no-repeat right center;
+}
+.lof-navigator-wapper .lof-previous {
+	float:left;	
+	text-indent:-999px;
+	margin-left:5px;
+	background:url(../images/arrow-l.png) no-repeat left center;
+}
+
+.lof-navigator li div {
+    background: url("../images/transparent_bg.png") repeat scroll 0 0 transparent;
+    border-top: 1px solid #E1E1E1;
+    color: #FFFFFF;
+    height: 100%;
+    margin-left: 15px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.lof-navigator li.active div {
+    background: url("../images/grad-bg.gif") repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+}
+.lof-navigator-outer-2 .lof-navigator li img {
+    border: 1px solid #C5C5C5;
+    float: left;
+    height: 60px;
+    margin: 15px 15px 10px 0;
+    padding: 3px;
+    width: 60px;
+}
+
+.lof-navigator-outer-2 .lof-navigator li.active {
+    background: url("../images/arrow-bg.png") no-repeat scroll left center transparent;
+    color: #FFFFFF;
+}
+.lof-navigator-outer-2{
+ 	background: none;
+ 	top:0; 
+ 	right:0;
+ 	position: absolute;
+ 	color: #FFFFFF;
+ 	
+}
+.lof-navigator-outer-2 .lof-navigator li div{
+	text-align: left;
+}
+.lof-navigator-outer-2 h3{
+	color: #FFFFFF;
+	font-size: 13px;
+}
+
+.lof-navigator-outer-3{
+	left:0;
+	right:inherit;
+}
+
+.lof-navigator-outer-3 .lof-navigator li.active {
+    background: url("../images/arrow-bg2.gif") no-repeat scroll right center transparent;
+}
+
+.lof-navigator-outer-3 .lof-navigator li.active div{
+    background: url("../images/grad-bg2.gif") repeat-x scroll left center transparent;
+}
+
+.lof-navigator-outer-3 .lof-navigator li div{
+	margin-right: 15px;
+	margin-left: 0;
+}
+
+.lof-snleft .lof-main-item-desc{
+	left:50px;
+}
+
+.lof-main-outer .lof-next, .lof-main-outer .lof-previous {
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    position: absolute;
+    text-indent: -999px;
+    top: 0;
+    width: 40px;
+    z-index: 3;
+}
+
+.lof-main-outer .lof-previous {
+    background: url("../images/b_prev.png") no-repeat scroll left center transparent;
+    left: 5px;
+}
+
+.lof-main-outer .lof-next {
+    background: url("../images/b_next.png") no-repeat scroll right center transparent;
+    right: 5px;
+}
+/* --------------------------------------------------Easy slider ----------------------------------- */
+.easy_slider_prevbt, .easy_slider_nextbt{
+    display: block;
+    height: 77px;
+    left: -30px;
+    position: absolute;
+    width: 30px;
+    z-index: 1000;
+    text-indent: -8000px;
+}
+.easy_slider_prevbt a, .easy_slider_nextbt a{
+    background: url("../images/btn_prev.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 77px;
+    position: relative;
+    width: 30px;
+}
+.easy_slider_nextbt a {
+    background: url("../images/btn_next.gif") no-repeat scroll 0 0 transparent;
+}
+.slider_container{
+	position: relative;
+}
+.slider_controls{
+    height: 28px;
+    margin: 1em 0;
+    padding: 0;	
+}
+
+.slider_controls li {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    list-style: none outside none;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+.slider_controls li a {
+    background: none repeat scroll 0 0 #DAF3F8;
+    border: 1px solid #CCCCCC;
+    color: #555555;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+    text-decoration: none;
+}
+.slider_controls li.current a {
+    background: none repeat scroll 0 0 #5DC9E1;
+    color: #FFFFFF;
+}

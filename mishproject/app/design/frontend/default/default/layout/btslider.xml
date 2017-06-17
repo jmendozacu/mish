@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <btslider_index_index>
+        <reference name="content">
+            <block type="btslider/btslider" name="btslider" template="btslider/btslider.phtml" />
+        </reference>
+    </btslider_index_index>
+</layout> 

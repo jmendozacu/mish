@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <reference name="top.links"> 
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newlink_config/new1">
+                <label helper="toplinks/data/new1/getNewlink1Label"/>
+                <url helper="toplinks/data/new1/getNewLink1Url"/>
+                <title helper="toplinks/data/new1/getNewlink1Label"/>
+                <prepare>true</prepare>
+                <position>11</position>
+                <!-- <liParams>id="custom"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newlink_config/new2">
+                <label helper="toplinks/data/new1/getNewlink2Label"/>
+                <url helper="toplinks/data/new1/getNewLink2Url"/>
+                <title helper="toplinks/data/new1/getNewlink2Label"/>
+                <prepare>true</prepare>
+                <position>12</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newlink_config/new3">
+                <label helper="toplinks/data/new1/getNewlink3Label"/>
+                <url helper="toplinks/data/new1/getNewLink3Url"/>
+                <title helper="toplinks/data/new1/getNewlink3Label"/>
+                <prepare>true</prepare>
+                <position>13</position>
+                <!--<liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newlink_config/new4">
+                <label helper="toplinks/data/new1/getNewlink4Label"/>
+                <url helper="toplinks/data/new1/getNewLink4Url"/>
+                <title helper="toplinks/data/new1/getNewlink4Label"/>
+                <prepare>true</prepare>
+                <position>14</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newlink_config/new5">
+                <label helper="toplinks/data/new1/getNewlink5Label"/>
+                <url helper="toplinks/data/new1/getNewLink5Url"/>
+                <title helper="toplinks/data/new1/getNewlink5Label"/>
+                <prepare>true</prepare>
+                <position>15</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>  
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/toplink_config/myaccount">
+                <url helper="customer/getAccountUrl"></url>
+            </action>
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/toplink_config/mycart">
+                <url helper="checkout/url/getCartUrl"></url>
+            </action>
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/toplink_config/checkout">
+                <url helper="toplinks/getUrlOf">
+                    <url>checkout</url>
+                </url>
+            </action>
+        </reference>
+
+        <reference name="wishlist_link">
+            <action method="setTemplate" ifconfig="toplinks/toplink_config/mywishlist">
+                <template>RLTS/blank.phtml</template>
+            </action>
+        </reference>
+        <reference name="footer_links">
+            
+            <action method="removeLinkByUrl" ifconfig="toplinks/footer_links/sitemap">
+                <url helper="catalog/map/getCategoryUrl"></url>
+            </action>
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/footer_links/searchterms">
+                <url helper="catalogsearch/getSearchTermUrl"></url>
+            </action>
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/footer_links/advancesearch">
+                <url helper="catalogsearch/getAdvancedSearchUrl"></url>
+            </action>
+
+           <!-- <action method="removeLinkBlock" ifconfig="toplinks/footer_links/order_and_return">
+                <blockName>return_link</blockName>
+            </action>-->
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/footer_links/contact_us">
+                <url helper="toplinks/getUrlOf">
+                    <url>contacts</url>
+                </url>
+            </action>
+
+            <action method="removeLinkByUrl" ifconfig="toplinks/footer_links/rss">
+                <url helper="toplinks/getUrlOf">
+                    <url>rss</url>
+                </url>
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newfooterlink/new1">
+                <label helper="toplinks/data/new1/getNewFooterlink1Label"/>
+                <url helper="toplinks/data/new1/getNewFooterLink1Url"/>
+                <title helper="toplinks/data/new1/getNewFooterlink1Label"/>
+                <prepare>true</prepare>
+                <position>11</position>
+                <!-- <liParams>id="custom"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newfooterlink/new2">
+                <label helper="toplinks/data/new1/getNewFooterlink2Label"/>
+                <url helper="toplinks/data/new1/getNewFooterLink2Url"/>
+                <title helper="toplinks/data/new1/getNewFooterlink2Label"/>
+                <prepare>true</prepare>
+                <position>12</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newfooterlink/new3">
+                <label helper="toplinks/data/new1/getNewFooterlink3Label"/>
+                <url helper="toplinks/data/new1/getNewFooterLink3Url"/>
+                <title helper="toplinks/data/new1/getNewFooterlink3Label"/>
+                <prepare>true</prepare>
+                <position>13</position>
+                <!--<liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newfooterlink/new4">
+                <label helper="toplinks/data/new1/getNewFooterlink4Label"/>
+                <url helper="toplinks/data/new1/getNewFooterLink4Url"/>
+                <title helper="toplinks/data/new1/getNewFooterlink4Label"/>
+                <prepare>true</prepare>
+                <position>14</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>
+
+            <action method="addLink" translate="label title" ifconfig ="toplinks/newfooterlink/new5">
+                <label helper="toplinks/data/new1/getNewFooterlink5Label"/>
+                <url helper="toplinks/data/new1/getNewFooterLink5Url"/>
+                <title helper="toplinks/data/new1/getNewFooterlink5Label"/>
+                <prepare>true</prepare>
+                <position>15</position>
+                <!-- <liParams>id="about-us-li"</liParams>
+                <aParams>class="top-link" id="about-us-top-link"</aParams>
+                <beforeText/>
+                <afterText/>-->
+            </action>  
+        </reference>
+       <!-- <reference name="footer_links2">
+            <action method="removeLinkBlock" ifconfig="toplinks/footer_links/order_and_return">
+                <blockName>return_link</blockName>
+            </action>
+        </reference>-->
+        <reference name="return_link" >
+         <action method="setTemplate" ifconfig="toplinks/footer_links/order_and_return">
+                <template></template>
+            </action>
+            </reference>
+    </default>
+    <customer_logged_out>
+        <reference name="top.links">
+            <action method="removeLinkByUrl" ifconfig="toplinks/toplink_config/loggedin">
+                <url helper="customer/getLoginUrl"/>
+            </action>
+        </reference>
+    </customer_logged_out>
+
+    <customer_logged_in>
+        <reference name="top.links">
+            <action method="removeLinkByUrl" ifconfig="toplinks/toplink_config/loggedout">
+                <url helper="customer/getLogoutUrl"/>
+            </action>
+        </reference>
+    </customer_logged_in>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/dashboard">
+                <name>account</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/account_info">
+                <name>account_edit</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/address_book">
+                <name>address_book</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/myorders">
+                <name>orders</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/mytags">
+                <name>tags</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/mywishlist">
+                <name>wishlist</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/myapplication">
+                <name>OAuth Customer Tokens</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/recurring_profile">
+                <name>recurring_profiles</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/billing_agreement">
+                <name>billing_agreements</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/mydownloadable_products">
+                <name>downloadable_products</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/product_review">
+                <name>reviews</name>
+            </action>
+            <action method="removeLinkByName" ifconfig="toplinks/customer_links/newsletter">
+                <name>newsletter</name>
+            </action>	
+            
+            
+            <action method="addLink" translate="label" ifconfig="toplinks/customer_newlink_config/new1">
+                <name>new_link_1</name>
+                <path helper="toplinks/data/getNewNavigationLink1Url"/>
+                <label helper="toplinks/data/getNewNavigationLabel"/>
+            </action>
+            <action method="addLink" translate="label" ifconfig="toplinks/customer_newlink_config/new2">
+                <name>new_link_2</name>
+                <path helper="toplinks/data/getNewNavigationLink2Url"/>
+                <label helper="toplinks/data/getNewNavigationlink2Label"/>
+            </action>
+            <action method="addLink" translate="label" ifconfig="toplinks/customer_newlink_config/new3">
+                <name>new_link_3</name>
+                <path helper="toplinks/data/getNewNavigationLink3Url"/>
+                <label helper="toplinks/data/getNewNavigationlink3Label"/>
+            </action>
+            <action method="addLink" translate="label" ifconfig="toplinks/customer_newlink_config/new4">
+                <name>new_link_4</name>
+                <path helper="toplinks/data/getNewNavigationLink4Url"/>
+                <label helper="toplinks/data/getNewNavigationlink4Label"/>
+            </action>
+            <action method="addLink" translate="label" ifconfig="toplinks/customer_newlink_config/new5">
+                <name>new_link_5</name>
+                <path helper="toplinks/data/getNewNavigationLink5Url"/>
+                <label helper="toplinks/data/getNewNavigationlink5Label"/>
+            </action>
+
+        </reference>
+    </customer_account>
+</layout>

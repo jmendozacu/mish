@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <rma translate="label" module="rma">
+            <label>RMA</label>
+            <tab>mstcore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <frontend_model>mstcore/system_config_form_fieldset</frontend_model>
+                    <fields>
+                        <return_address translate="label">
+                            <label>Return Address</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </return_address>
+                        <default_status translate="label">
+                            <label>Default status for new RMA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rma/status</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_status>
+                        <default_user translate="label">
+                            <label>Default owner for new RMA</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rma/system_config_source_admin_user</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_user>
+                        <return_period translate="label">
+                            <label>Allow to request RMA after order completion, days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </return_period>
+                        <is_require_shipping_confirmation translate="label">
+                            <label>Ask customer to confirm shipping</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_require_shipping_confirmation>
+                        <shipping_confirmation_text translate="label">
+                            <label>Shipping confirmation text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipping_confirmation_text>
+                        <is_gift_active translate="label">
+                            <label>Enable option "This was a gift"</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_gift_active>
+                        <is_helpdesk_active translate="label">
+                            <label>Enable integration with Help Desk</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                            <![CDATA[works only if you have installed Mirasvit Help Desk MX extension.]]>
+                            </comment>
+                        </is_helpdesk_active>
+                    </fields>
+                </general>
+                <policy>
+                    <label>RMA Policy</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>20</sort_order>
+                    <frontend_model>mstcore/system_config_form_fieldset</frontend_model>
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show policy</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                        <policy_block translate="label">
+                            <label>Policy block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rma/config_source_cms_block</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </policy_block>
+                    </fields>
+                </policy>
+                <notification>
+                    <label>Email Notification Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>30</sort_order>
+                    <frontend_model>mstcore/system_config_form_fieldset</frontend_model>
+                    <fields>
+                        <sender_email translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sender_email>
+                        <customer_email_template translate="label">
+                            <label>Template of Notification Email for Customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rma/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </customer_email_template>
+                        <admin_email_template translate="label">
+                            <label>Template of Notification Email for RMA Owner</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rma/system_config_source_email_template</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </admin_email_template>
+                    </fields>
+                </notification>
+            </groups>
+        </rma>
+    </sections>
+</config>

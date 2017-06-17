@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Best4Mage_ConfigurableProductsSimplePrices/active')) {
+                class MageWorx_InstantCart_Block_Checkout_Cart_Item_Renderer_Configurable_Amasty_Pure extends Best4Mage_ConfigurableProductsSimplePrices_Block_Cart_Item_Configurable {}
+            } else { class MageWorx_InstantCart_Block_Checkout_Cart_Item_Renderer_Configurable_Amasty_Pure extends Mage_Checkout_Block_Cart_Item_Renderer_Configurable {} } ?>
