@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Bluethink_Btslider>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Bluethink_Btslider>
-    </modules>
-</config> 

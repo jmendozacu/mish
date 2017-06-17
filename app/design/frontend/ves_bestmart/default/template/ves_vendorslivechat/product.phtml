@@ -1,7 +1,0 @@
-<?php if($this->checkProductIsVendor()): ?>
-    <?php if($this->getStatusLiveChat() == VES_VendorsLiveChat_Model_Status::STATUS_ONLINE) : ?>
-         <a href="javascript:void(0)" class="livechat-btn livechat-btn-online"  onclick="<?php echo $this->getOnClickLink() ?>"><span><?php echo $this->__("Chat Now !") ?></span></a>
-    <?php else :?>
-         <a href="javascript:void(0)" class="livechat-btn livechat-btn-offline"  onclick="<?php echo $this->getOnClickLink() ?>"><span><?php echo $this->__("Offline") ?></span></a>
-    <?php endif ; ?>
-<?php endif ; ?>

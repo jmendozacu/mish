@@ -1,7 +1,0 @@
-<h2 class="legend"><?php echo $this->__('RMA Policy'); ?></h2>
-<div class="page-content">
-<?php
-    $block = Mage::helper("vendorsrma/config")->policyBlock();
-    echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
-?>
-</div>

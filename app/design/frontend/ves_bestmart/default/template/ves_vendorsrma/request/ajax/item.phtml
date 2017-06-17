@@ -1,6 +1,0 @@
-<?php $_items = $this->getItemsCollection(); ?>
-<?php $_index = 0; ?>
-<?php foreach ($_items as $_item): ?>
-    <?php if ($_item->getParentItem()) continue; ?>
-    <?php echo $this->getItemHtml($_item) ?>
-<?php endforeach; ?>

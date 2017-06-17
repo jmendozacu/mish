@@ -1,3 +1,0 @@
-<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_SeoSingleUrl/active')) {
-                class Mirasvit_SearchIndex_Model_Catalogsearch_Resource_Fulltext_Collection_Amasty_Pure extends Amasty_SeoSingleUrl_Model_Resource_CatalogSearch_Fulltext_Collection {}
-            } else { class Mirasvit_SearchIndex_Model_Catalogsearch_Resource_Fulltext_Collection_Amasty_Pure extends Mirasvit_SearchIndex_Model_Catalogsearch_Resource_Fulltext_Collection_Mediator {} } ?>

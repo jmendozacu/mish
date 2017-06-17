@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <personallogistic_adminhtml_personallogistic_index>
-        <reference name="content">
-            <block type="personallogistic/adminhtml_personallogistic" name="personallogistic" />
-        </reference>
-    </personallogistic_adminhtml_personallogistic_index>
-
-</layout>

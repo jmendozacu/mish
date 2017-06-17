@@ -1,3 +1,0 @@
-<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_Pgrid/active')) {
-                class VES_VendorsProduct_Block_Adminhtml_Catalog_Product_Grid_Amasty_Pure extends Amasty_Pgrid_Block_Adminhtml_Catalog_Product_Grid {}
-            } else { class VES_VendorsProduct_Block_Adminhtml_Catalog_Product_Grid_Amasty_Pure extends Mage_Adminhtml_Block_Catalog_Product_Grid {} } ?>

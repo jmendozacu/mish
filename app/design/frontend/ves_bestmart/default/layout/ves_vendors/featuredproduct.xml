@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<vendor_page>
-		 <reference name="content">
-		 	<block type="vendorsfeaturedproduct/feature" before="-" name="vendor.feature.product" 
-		 	template="ves_vendorsfeaturedproduct/list.phtml" />
-		 </reference>
-</vendor_page>

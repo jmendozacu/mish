@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Mish_Correoschile>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Mish_Correoschile>
-    </modules>
-</config> 

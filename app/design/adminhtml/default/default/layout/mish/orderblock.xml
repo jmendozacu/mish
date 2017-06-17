@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-	<adminhtml_sales_order_view>
-		<reference name="order_info">
-			<block type="adminhtml/sales_order_view_info" name="mish.order.info.block" template="mish/orderblock/sales/order/view/block.phtml" before="order_history" />
-		</reference>
-	</adminhtml_sales_order_view>
-</layout>
