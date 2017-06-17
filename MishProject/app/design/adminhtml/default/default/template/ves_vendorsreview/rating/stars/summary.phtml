@@ -1,7 +1,0 @@
-<?php if($this->getRating()): ?>
-    <div class="rating-box">
-        <div class="rating" style="width:<?php echo $this->getRatingSummaryScore() ?>%;"></div>
-    </div>
-<?php else: ?>
-    <?php echo Mage::helper('rating')->__("Rating isn't Available") ?>
-<?php endif; ?>

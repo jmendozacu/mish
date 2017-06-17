@@ -1,7 +1,0 @@
-<?php
-if ($this->getContactUsIsActive()) {
-    echo $this->getChildHtml('helpdesk_contacts_form_header');
-    echo $this->getChildHtml('helpdesk_contacts_form');
-} else {
-    echo $this->getChildHtml('helpdesk_contacts_form_default');
-}

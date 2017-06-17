@@ -1,9 +1,0 @@
-<?php $_item = $this->getItem()?>
-<li>
-    <a href="<?php echo  $this->getProductUrl() ?>">
-        <img src="<?php echo  $this->helper('catalog/image')->init(Mage::getModel('catalog/product')->load($_item->getProductId()), 'image')->resize(80); ?>">
-        <p><strong><?php echo  $this->htmlEscape($this->getProductName()) ?></strong></p>
-        <span class="ui-li-count"><?php echo  $this->getQty() ?></span>
-    </a>
-    <a href="<?php echo $this->getDeleteUrl()?>">Delete</a>
-</li>

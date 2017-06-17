@@ -1,3 +1,0 @@
-<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/AW_All/active')) {
-                class Magestore_Magenotification_Block_Adminhtml_Notification_Window_Amasty_Pure extends AW_All_Block_Notification_Window {}
-            } else { class Magestore_Magenotification_Block_Adminhtml_Notification_Window_Amasty_Pure extends Mage_Adminhtml_Block_Notification_Window {} } ?>

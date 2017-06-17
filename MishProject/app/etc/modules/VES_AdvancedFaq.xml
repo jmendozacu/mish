@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <OTTO_AdvancedFaq>
-            <active>true</active>
-            <codePool>local</codePool>
-        </OTTO_AdvancedFaq>
-    </modules>
-</config> 

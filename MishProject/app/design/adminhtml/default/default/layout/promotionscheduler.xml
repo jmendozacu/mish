@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <promotionscheduler_adminhtml_promotionscheduler_index>
-        <reference name="content">
-            <block type="promotionscheduler/adminhtml_promotionscheduler" name="promotionscheduler" template="promotionscheduler/promotionscheduler.phtml" />
-        </reference>
-    </promotionscheduler_adminhtml_promotionscheduler_index>
-</layout>

@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <vendors_logged_in>
-        <reference name="vendor_notifications">
-            <block type="vendorscontact/vendor_notification" name="contact.notification" template="ves_vendorscontact/notification.phtml" />
-        </reference>
-    </vendors_logged_in>
-</layout>

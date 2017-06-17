@@ -1,3 +1,0 @@
-<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Cmsmart_AdminTheme/active')) {
-                class MageWorx_Adminhtml_Block_System_Config_Edit_Amasty_Pure extends Cmsmart_AdminTheme_Block_Adminhtml_Block_System_Config_Edit {}
-            } else { class MageWorx_Adminhtml_Block_System_Config_Edit_Amasty_Pure extends Mage_Adminhtml_Block_System_Config_Edit {} } ?>

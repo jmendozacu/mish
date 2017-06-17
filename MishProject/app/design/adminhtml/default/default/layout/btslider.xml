@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <btslider_adminhtml_btslider_index>
-        <reference name="content">
-            <block type="btslider/adminhtml_btslider" name="btslider" template="btslider/adminbtslider.phtml"/>
-        </reference>
-    </btslider_adminhtml_btslider_index>
-</layout>
