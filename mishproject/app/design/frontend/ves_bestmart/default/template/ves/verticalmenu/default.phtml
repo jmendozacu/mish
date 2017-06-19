@@ -22,15 +22,21 @@ $enable_offcanvas = Mage::getStoreConfig("ves_verticalmenu/ves_verticalmenu/enab
 			<div id="verticalmenu" class="verticalmenu offset-canvas-menu-play" role="navigation" data-offcanvas="<?php echo $enable_offcanvas?'true':'false'; ?>">
 				<div class="navbar">
 					<div class="topclassNav">
+					<?php  $topCategoryConfigvalue = Mage::getStoreConfig('btslider/general/topcat');
+						   $topcatValueExpode = explode(',', $topCategoryConfigvalue);
+						
+					?>
 						<ul>
-							<span>TOP CATEGORIES</span>
-							<li><a href="#">All Offers</a></li>
-							<li><a href="#">Mobile & Tablet</a></li>
-							<li><a href="#">Electronics</a></li>
-							<li><a href="#">Computers & Gaming</a></li>
-							<li><a href="#">Home & Kitchen</a></li>
-							<li><a href="#">Men’s & Clothing</a></li>
-							<li><a href="#">Women’s & Clothing</a></li>
+						<span>TOP CATEGORIES</span>
+						<?php 
+							foreach ($topcatValueExpode as $topcatValue) { 
+								$categoryModel = Mage::getModel('catalog/category')->load($topcatValue);
+							
+							 ?>
+							     <li><img src=""><a href="#"><?php echo $categoryModel->getName(); ?></a></li>
+						<?php } ?>
+							
+							
 						</ul>
 					</div>
 					<a href="javascript:;" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
