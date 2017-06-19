@@ -59,7 +59,8 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
   public function deletesliderimageAction()
     {
  
-            $sliderid = Mage::app()->getRequest()->getPost('id');
+            $sliderid = Mage::app()->getRequest()->getParam('id');
+
             $delData = Mage::getModel('btslider/btslider')->load($sliderid);
 
             Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
@@ -72,6 +73,39 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully deleted.'));
 			  $this->_redirect('*/*/');
           }
+
+
+    public function saveCategorysliderdataAction()
+
+    {
+    		$catsliderData = $this->getRequest()->getPost();
+
+    		$catid = $catsliderData['categoryid'];
+    		$productsku = $catsliderData['productsku'];
+    		$btproductModel = Mage::getModel('btslider/btproductslider')->load();
+    		$btproductModel->setCategoryid($catid);
+    		$btproductModel->setProductSku($productsku);
+    		$btproductModel->save();
+    		Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully saved.'));
+			  $this->_redirect('*/*/');
+
+    }
+
+    public function deleteproductsliderAction()
+    {
+    		$prosliderid = Mage::app()->getRequest()->getParam('id');
+            $delprosliderData = Mage::getModel('btslider/btproductslider')->load($prosliderid);
+            Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+              try {
+                 $delprosliderData->delete();
+
+              } catch(Exception $e) {
+                  echo "Row #".$delprosliderData->getId()." could not be removed: ".$e->getMessage();
+              }
+               Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully deleted.'));
+			  $this->_redirect('*/*/');
+    }
+  
 
 	public function editAction() {
 		$id     = $this->getRequest()->getParam('id');

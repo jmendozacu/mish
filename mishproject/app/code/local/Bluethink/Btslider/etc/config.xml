@@ -77,12 +77,19 @@
                 <class>Bluethink_Btslider_Model</class>
                 <resourceModel>btslider_mysql4</resourceModel>
             </btslider>
+             <btproductslider>
+                <class>Bluethink_Btslider_Model</class>
+                <resourceModel>btslider_mysql4</resourceModel>
+            </btproductslider>
             <btslider_mysql4>
                 <class>Bluethink_Btslider_Model_Mysql4</class>
                 <entities>
                     <btslider>
                         <table>btslider</table>
                     </btslider>
+                     <btproductslider>
+                        <table>btproductslider</table>
+                    </btproductslider>
                 </entities>
             </btslider_mysql4>
         </models>
