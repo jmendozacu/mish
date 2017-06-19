@@ -19,7 +19,7 @@
     src: url('../fonts/AMIKO-SEMIBOLD.ttf');
 	}
 
-body {font-family: 'AMIKO-REGULAR' !important;}
+body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .fr {float: right;}
 .container {width: 1312px !important; padding: 0 !important;}
 #header .header1 #topbar {background: #ec2d32 !important;}
@@ -47,14 +47,48 @@ body {font-family: 'AMIKO-REGULAR' !important;}
 #header .header1 .menu-top .block-content {width: 200px;}
 
 .home-page-right-section {padding-left: 0 !important;}
-.bannerCount {margin-left:21%; float: left; width: 847px;}
+.bannerCount {margin-left:17%; float: left; width: 847px; margin-top: 7px;}
 .homerightWidget {width: 180px; float: right;}
-.bannerrightAdd {float: right;}
+.bannerrightAdd {float: left; padding-left: 9px;}
 .layerslider-wrapper {width: 100% !important;}
 #ves-verticalmenu .navbar-nav > li > a {font-size: 11px !important; font-weight: bold;}
 
-.footerCount ul {padding:0; margin:0; list-style-type:none; float:left; width:274px; margin-right:28px;}
-.footerCount ul span {display:block; border-bottom:solid 1px #949683 ; color:#949683 ; text-transform:uppercase; padding-bottom:6px; margin-bottom:10px;}
+.footerCount ul {padding:0; margin:0; list-style-type:none; float:left; width:274px; margin-right:28px; padding-bottom: 20px;}
+.footerCount ul span {display:block;; color:#666666 ; text-transform:uppercase;   font-size: 14px;}
 .footerCount ul:last-child {margin:0;}
-.footerCount ul li {paddin-top:10px;}
-.footerCount ul li a {color:#6b695a ; text-decoration:none;}
+.footerCount ul li {padding-top:10px;}
+.footerCount ul li a {color:#a5a5a5 ; text-decoration:none;}
+#myCarousel .nav {background: #00adef !important;}
+.nav-justified > li > a, .nav-tabs.nav-justified > li > a {color: #fff;}
+.copyrightouter {background: #00adef; padding: 15px 0 10px 0; color: #fff; margin-bottom: 10px;}
+.copyrightouter .fl {float: left;}
+.copyrightouter .fr {float: right; padding-right: 11%;}
+.footertop-section {background: #fff; border-top:solid 1px #ddd;  border-bottom:solid 1px #ddd;}
+.footertop-section ul li { background: #00adef; padding: 30px 0; text-align: center; color: #fff; font-size: 20px; text-transform: uppercase; float: left; width: 321px; margin-right: 7px;}
+.footertop-section ul li:last-child {margin: 0;}
+.footertop-section ul li span {text-transform: none; font-size: 13px; display: block; padding-top: 10px;}
+/*.footerCount {padding: 35px 0 !important;}*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {background: #fe585c !important;}
+.footertop-section ul li .imageBox {text-align: center; padding-bottom: 8px;}
+.footer-pay-sociallinks-section {clear: both; background: #fff; border-radius: 3px; padding: 20px 0 10px 0 !important;}
+.footer-pay-sociallinks-section ul li {padding: 0;}
+.footer-pay-sociallinks-section ul li:first-child {padding: 0 0 0 24px;}
+.footer-pay-sociallinks-section ul.partnerCount {margin-left: 319px; width: 107px; text-align: center;}
+.footer-pay-sociallinks-section ul.partnerCount img {text-align: center; padding-top: 8px;}
+.footer-pay-sociallinks-section .fa {float: left; margin-right: 20px; font-size: 26px; margin-top: 15px;}
+.footer-pay-sociallinks-section .fa-facebook { color: #39579a;}
+.footer-pay-sociallinks-section .fa-twitter {color: #059ff5;}
+.footer-pay-sociallinks-section .fa-google-plus-square {color: #dc4e41;}
+.footer-pay-sociallinks-section .fa-youtube-play {color: #e91d00;}
+.footer-pay-sociallinks-section .fa-instagram {color: #4b7ea7;}
+.footer-pay-sociallinks-section .fa-pinterest {color: #bd091c;}
+.socialiconCount {float: right !important;}
+.fotteraboutMiss {border-bottom: solid 1px #ddd; padding-bottom: 10px; margin-bottom: 20px;}
+.fotteraboutMiss p {color: #777777;}
+.footerlink-section {padding: 35px 0 0 0;}
+.clr {clear: both;}
+.topsellingCount {margin-left: 191px;}
+.bxslider li {width: 200px !important;}
+.bxslider li .productNameing {text-align: center;}
+.rating-box {float: none  !important; margin: auto !important; }
+.productsnameInner {height: 44px;}
