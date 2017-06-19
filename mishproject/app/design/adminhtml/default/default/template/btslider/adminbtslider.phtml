@@ -72,7 +72,7 @@ foreach ($btSLiderModel as $imagedata) {
 <input type="hidden" name="id" value="<?php echo $id; ?>">
     	  <tr>
     	        <td><?php echo $id;?></td>
-    	  		<td> <img height="100px" width="100px" src="http://localhost/mish/media/slider/<?php echo $image; ?>"></td>
+    	  		<td> <img height="100px" width="100px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/".$image; ?>"></td>
     	  		<td><?php echo $imagelabel;?></td>
     	  		<td><?php echo $title; ?></td>
     	  		<td><?php echo $url; ?></td>
