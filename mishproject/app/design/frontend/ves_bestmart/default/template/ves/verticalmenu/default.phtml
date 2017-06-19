@@ -33,7 +33,7 @@ $enable_offcanvas = Mage::getStoreConfig("ves_verticalmenu/ves_verticalmenu/enab
 								$categoryModel = Mage::getModel('catalog/category')->load($topcatValue);
 							
 							 ?>
-							     <li><img src=""><a href="#"><?php echo $categoryModel->getName(); ?></a></li>
+							     <li><a href="<?php echo $categoryModel->getUrl(); ?>"><?php echo $categoryModel->getName(); ?></a></li>
 						<?php } ?>
 							
 							
