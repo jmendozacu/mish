@@ -4,6 +4,93 @@
 <link rel="stylesheet" href="<?php echo $this->getSkinUrl('custom/css/jquery.bxslider.min.css')?>"> 
 
 
+<div>
+    <h3><?php echo __('Top Selling Product'); ?>
+</div>
+
+ <ul class="bxslider">
+<?php 
+        $storeId = (int) Mage::app()->getStore()->getId();
+ 
+        // Date
+        $date = new Zend_Date();
+        $toDate = $date->setDay(1)->getDate()->get('Y-MM-dd');
+        $fromDate = $date->subMonth(1)->getDate()->get('Y-MM-dd');
+ 
+        $collection = Mage::getResourceModel('catalog/product_collection')
+            ->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
+            ->addStoreFilter()
+            ->addPriceData()
+            ->addTaxPercents()
+            ->addUrlRewrite()
+            ->setPageSize(6);
+ 
+        $collection->getSelect()
+            ->joinLeft(
+                array('aggregation' => $collection->getResource()->getTable('sales/bestsellers_aggregated_monthly')),
+                "e.entity_id = aggregation.product_id AND aggregation.store_id={$storeId} AND aggregation.period BETWEEN '{$fromDate}' AND '{$toDate}'",
+                array('SUM(aggregation.qty_ordered) AS sold_quantity')
+            )
+            ->group('e.entity_id')
+            ->order(array('sold_quantity DESC', 'e.created_at'));
+ 
+        Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
+        Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($collection);
+
+        foreach ($collection as $collectiondata) {
+            $bestProductId = $collectiondata['entity_id'];
+            $bestProductData = Mage::getModel('catalog/product')->load($bestProductId);
+             $best_product_image_url = $bestProductData->getImageUrl();
+/*
+            echo "<pre>++";
+            print_r($bestProductData->getData());*/
+            
+                    ?>
+                    <li>
+                        <div>
+                            <img src="<?php echo $best_product_image_url ?>" style="height: 260px; width: 350px;" class="img-responsive"  />
+                       </div>
+                       <div>
+                            <h5><a href="<?php echo $bestProductData->getProductUrl(); ?>"><?php echo __($bestProductData->getName()); ?></a></h5>
+                       <div>
+
+                            <?php echo $this->getChildHtml('related_products') ?>
+               <?php $vendorid= $bestProductData['vendor_id'] ;
+                $ratingsummary=array();
+                $vendorReviewModel = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+
+                foreach ($vendorReviewModel as $vendorReview) {
+                   $ratingsummary[]=$vendorReview['summary_percent'];
+                   $count = count($ratingsummary);
+                   $sum = array_sum($ratingsummary);  
+          }
+                   $average = ($sum/$count);
+      ?>
+
+                                            <div class="ratings">
+                                                <?php if ($average):?>
+                                                    <div class="rating-box">
+                                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+                                                        </div>
+                                                    </div>
+                                                <?php endif;?>
+                                              </div>
+                                               <!--  <i class="price-text-color fa fa-star"></i> -->
+                                             </div>
+                                             <br>
+                                            <h5 class="price-text-color">
+                                                <?php echo __($currency_symbol." ".round($bestProductData->getPrice(),2)); ?></h5>
+                                        </div>
+                    </li>
+           <?php 
+        }
+?>
+</ul>
+
+
+
+<!-- category section starts here -->
+
 <?php 
   $btcatProModel = Mage::getModel('btslider/btproductslider')->getCollection();
   $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
@@ -77,8 +164,8 @@ var con = jQuery.noConflict();
  con('.bxslider').bxSlider({
   auto: true,
   autoControls: true,
-  minSlides: 3,
-  maxSlides: 3,
+  minSlides: 4,
+  maxSlides: 4,
   slideWidth: 360,
   slideMargin: 10
 });
