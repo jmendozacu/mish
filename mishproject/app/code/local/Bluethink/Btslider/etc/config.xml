@@ -37,11 +37,11 @@
     <adminhtml>
 		<menu>
 			<btslider module="btslider">
-				<title>Btslider</title>
+				<title>Mish Homepage Module</title>
 				<sort_order>71</sort_order>               
 				<children>
 					<items module="btslider">
-						<title>Manage Banner</title>
+						<title>Banner and Carousel</title>
 						<sort_order>0</sort_order>
 						<action>btslider/adminhtml_btslider</action>
 					</items>
