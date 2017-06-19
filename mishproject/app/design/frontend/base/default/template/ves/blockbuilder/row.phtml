@@ -3,13 +3,14 @@
 <link rel="stylesheet" href="<?php echo $this->getSkinUrl('custom/css/jquery.bxslider.css')?>"> 
 <link rel="stylesheet" href="<?php echo $this->getSkinUrl('custom/css/jquery.bxslider.min.css')?>"> 
 
-
+<div class="topsellingCount">
 <div>
-    <h3><?php echo __('Top Selling Product'); ?>
+    <h3><?php echo __('Top Selling Product'); ?></h3>
 </div>
 
  <ul class="bxslider">
 <?php 
+ $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
         $storeId = (int) Mage::app()->getStore()->getId();
  
         // Date
@@ -48,10 +49,10 @@
                     ?>
                     <li>
                         <div>
-                            <img src="<?php echo $best_product_image_url ?>" style="height: 260px; width: 350px;" class="img-responsive"  />
+                            <img src="<?php echo $best_product_image_url ?>" style="height: auto; width: 200px;" class="img-responsive"  />
                        </div>
-                       <div>
-                            <h5><a href="<?php echo $bestProductData->getProductUrl(); ?>"><?php echo __($bestProductData->getName()); ?></a></h5>
+                       <div class="productNameing">
+                           <div class="productsnameInner"><a href="<?php echo $bestProductData->getProductUrl(); ?>"><?php echo __($bestProductData->getName()); ?></a></div>
                        <div>
 
                             <?php echo $this->getChildHtml('related_products') ?>
@@ -86,14 +87,20 @@
         }
 ?>
 </ul>
+</div>
 
+<!-- Homepage Banner Ad 1 start-->
 
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Homepage-mish-ad-1')->toHtml(); 
+?>
+
+<!-- Homepage Banner Ad 1 end -->
 
 <!-- category section starts here -->
 
 <?php 
   $btcatProModel = Mage::getModel('btslider/btproductslider')->getCollection();
-  $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+ 
 
 
   foreach ($btcatProModel as $productslider) {
@@ -159,6 +166,14 @@ $pro_sku = explode(',',$productsku);
            <?php } ?>
      </ul>
 <?php } ?>
+
+<!-- Homepage Banner Ad 2 start-->
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Homepage-mish-ad-2')->toHtml(); 
+?>
+
+<!-- Homepage Banner Ad 2 end -->
+
 <script>
 var con = jQuery.noConflict();
  con('.bxslider').bxSlider({

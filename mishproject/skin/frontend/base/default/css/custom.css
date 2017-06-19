@@ -92,3 +92,6 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .bxslider li .productNameing {text-align: center;}
 .rating-box {float: none  !important; margin: auto !important; }
 .productsnameInner {height: 44px;}
+
+.bx-wrapper .bx-pager-item {background: url('../images/banner_left_arrow.png') no-repeat left top;}
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {left: 50%; margin-left: -75px;}

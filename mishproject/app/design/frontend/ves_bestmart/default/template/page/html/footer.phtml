@@ -5,19 +5,23 @@
 
 ?>
 
+
 <!-- Footertop Section (blue color) -->
 <div style="text-align: center">
   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footertop-section')->toHtml();?>
 </div>
-
+<div>
 
 <!-- FooterLink Section -->
-  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footerlink-section')->toHtml();?>
+  <div class="footerlink-section"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footerlink-section')->toHtml();?></div>
 <hr>
 <!-- Footer Payment, Partners and social links Section -->
+  <div class="footer-pay-sociallinks-section container">
   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-pay-sociallinks-section')->toHtml();?>
+    <div class="clr"></div>
+  </div>
 <hr>
-
+<div class="container">
 <!-- Categories Section -->
 <?php
     $rootCategory =  Mage::app()->getStore()->getRootCategoryId(); 
@@ -41,14 +45,23 @@
       </div>
     <?php } ?>
 <hr>
-
+</div>
 <!-- About Mish Footer Section -->
-
-<div>
-<h3><?php echo __("About Mish"); ?></h3>
-  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('about-mish-footer')->toHtml();?>
+</div>
+<div class="fotteraboutMiss">
+  <div class="container">
+  <h3><?php echo __("About Mish"); ?></h3>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('about-mish-footer')->toHtml();?>
+    </div>
 </div>
 
+<div class="copyrightouter">
+  <div class="container">
+    <div class="fl">Copyright 2017 - Mercadito - All rights served. </div>
+    <div class="fr">Powered by bluethink.in</div>
+    <div class="clr"></div>
+  </div>
+</div>
 
 
 

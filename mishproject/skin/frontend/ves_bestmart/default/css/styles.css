@@ -99,9 +99,11 @@ a:hover, a:focus {
   color: #ec7357;
 }
 
+/*
 img {
   max-width: 100%;
 }
+*/
 
 ul.bullet li {
   padding: -2px 0;
