@@ -6,7 +6,7 @@
 
         <Ves_ProductCarousel>
 
-            <active>true</active>
+            <active>false</active>
 
             <codePool>community</codePool>
 

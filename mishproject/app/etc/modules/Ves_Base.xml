@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ves_Base>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </Ves_Base>
     </modules>
