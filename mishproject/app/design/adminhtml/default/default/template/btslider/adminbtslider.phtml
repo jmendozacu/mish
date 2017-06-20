@@ -1,9 +1,14 @@
+  <div class="homepageheading">
+     <h2><?php echo __("Home Page Configurations"); ?></h2>
+  </div>
+
 <div id="homepage-tabs"  class="bannertopTabing">
 
-     <div>
+ <div>
       <ul>
         <li><a href="#tab-1"><?php echo __('Homepage Banner Slider'); ?></a></li>
         <li><a href="#tab-2"><?php echo __('Homepage Category Product Slider'); ?></a></li>
+        <li><a href="#tab-3"><?php echo __('Homepage Category with Brand'); ?></a></li>
         <div class="clr"></div>
       </ul>
 </div>
@@ -15,16 +20,14 @@
   <script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_vendors/js/jquery.pagination-with-hash-change-2.js')?>"></script> 
 	<script>jQuery.noConflict();</script>
 <div id="tab-1">
-	<div class="homepageheading">
-	   <h2><?php echo __("Home Page Configurations"); ?></h2>
-	</div>
+
 
 <h3><?php echo __('Banner Slider : '); ?></h3>
 
 	<div class="bannerslider">
 		 <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/saveBanerimages') ?>" method="POST" enctype="multipart/form-data">
 		     <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
-		      <label>Select images:</label>
+		      <label>Select image:</label>
 		      <input type="file" value="" name="fileToUpload" id="fileToUpload">
 
 		      <label>Image Tab Label:</label>
@@ -35,7 +38,7 @@
 
 			    <label>Banner url:</label>
           <input type="text" name="url" >
-			    <button submit class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+			    <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
 		  </form>
 	</div>
 
@@ -90,9 +93,7 @@ foreach ($btSLiderModel as $imagedata) {
 
 <!-- Homepage Category Slider section start here -->
   <div id="tab-2">
-    <div class="homepageheading">
-       <h2><?php echo __("Home Page Configurations"); ?></h2>
-    </div>
+    
       <div>
          <h3><?php echo __("Category Product Slider : "); ?></h3>
      </div>
@@ -110,7 +111,7 @@ foreach ($btSLiderModel as $imagedata) {
           <input type="text" name="productsku">
           <small><?php echo __('you can enter more than one sku with "," seperated.'); ?></small>
 
-          <button submit class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+          <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
       </form>
      </div>
      <?php
@@ -150,6 +151,91 @@ foreach ($btSLiderModel as $imagedata) {
      </div>
   </div>
 <!-- Homepage Category Slider section start here -->
+
+
+<!-- Homepage Category with brand start here -->
+<div id="tab-3">
+<div>
+    <h3><?php echo __('Category and Brands : '); ?></h3>
+</div>
+
+      <div class="bannerslider">
+      <div>
+          <h4><u><?php echo __('Category and Brand name section'); ?></u>:</h4>
+      </div>
+       <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/saveCategorybranddata') ?>" method="POST" enctype="multipart/form-data">
+         <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+
+          <label>Select featured image:</label>
+          <input type="file" value="" name="featuredimage" id="featuredimage">
+
+          <label>Category id:</label>
+          <input type="text" name="catid">
+
+          <label>Brand:</label>
+          <input type="text" name="brand">
+          <small><?php echo __('you can enter more than one brand name with "," seperated.'); ?></small>
+            <br>
+            <br>
+          <label>Image(1):</label>
+          <input type="file" value="" name="image1" id="image1">
+          <br>
+          <label>Image(2):</label>
+          <input type="file" value="" name="image2" id="image2">
+          <br>
+
+          <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+      </form>
+     </div>
+     <?php
+        $btcatbrandModel = Mage::getModel('btslider/btcatbrand')->getCollection();
+       /* echo "<pre>++";
+        print_r($btcatbrandModel->getData());*/
+        
+      ?>
+     <div class="bannertable">
+             <table border="0" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr class="toprow">
+          <td><?php echo __('Id'); ?></td>
+          <td><?php echo __('Category Id'); ?></td>
+          <td><?php echo __('Brand Name'); ?></td>
+          <td><?php echo __('Featured Image'); ?></td>
+          <td><?php echo __('More Images'); ?></td>
+          <td><?php echo __('Action'); ?></td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php 
+            foreach ($btcatbrandModel as $catbrand) { 
+              $id = $catbrand['catbrand_id'];
+              $catid = $catbrand['catid'];
+              $brand = $catbrand['brand_name'];
+              $featuredImage = $catbrand['featured_image'];
+              $Image1 = $catbrand['imageone'];
+              $Image2 = $catbrand['imagetwo'];
+            ?>
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+        <tr>
+            <td><?php echo $id;?></td>
+            <td><?php echo $catid;?></td>
+            <td><?php echo $brand ?></td>
+            <td><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$featuredImage; ?>" height="100px" width="100px"></td>
+            <td>
+                <div><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$Image1; ?>" height="50px" width="100px"></div><br>
+                <div><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$Image2; ?>" height="50px" width="100px"></div>
+            </td>
+            <td><a  href="<?php echo Mage::helper("adminhtml")->getUrl('*/*/deletecatbrand') ?>?id=<?php echo $id;?>"><?php echo __('Delete'); ?></a></td>
+        </tr>
+  <?php } ?>
+      </tbody>
+    </table>
+   
+     </div>
+</div>
+
+<!-- Homepage Category with brand end here -->
+
 
 </div>
 
