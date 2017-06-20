@@ -23,6 +23,7 @@ $enable_offcanvas = Mage::getStoreConfig("ves_verticalmenu/ves_verticalmenu/enab
 				<div class="navbar">
 					<div class="topclassNav">
 					<?php  $topCategoryConfigvalue = Mage::getStoreConfig('btslider/general/topcat');
+					if($topCategoryConfigvalue != ""){
 						   $topcatValueExpode = explode(',', $topCategoryConfigvalue);
 						
 					?>
@@ -38,6 +39,7 @@ $enable_offcanvas = Mage::getStoreConfig("ves_verticalmenu/ves_verticalmenu/enab
 							
 							
 						</ul>
+						<?php } ?>
 					</div>
 					<a href="javascript:;" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
 				        <span class="icon-bar"></span>
