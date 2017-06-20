@@ -62,6 +62,9 @@
                                         <btslider translate="title" module="btslider">
                                             <title>btslider</title>
                                         </btslider>
+                                        <fastmovingprpoducts translate="title" module="btslider">
+                                            <title>fastmovingprpoducts</title>
+                                        </fastmovingprpoducts>
                                     </children>
                                 </config>
                             </children>
