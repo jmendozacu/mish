@@ -173,7 +173,26 @@ $pro_sku = explode(',',$productsku);
 ?>
 
 <!-- Homepage Banner Ad 2 end -->
+<!-- Top moving product section start here -->
+<div>
+  <div>
+      <h3><?php echo __('Fast Moving Products'); ?></h3>
+  </div>
+<ul class="bxslider">
+<?php
+   $movingproductsku = Mage::getStoreConfig('fastmovingprpoducts/movingproducts/fastmoving');
+   $movingproductExplode = explode(',' ,$movingproductsku);
 
+   foreach ($movingproductExplode as $ProductSku) {
+    $productModel = Mage::getModel('catalog/product')->loadByAttribute('sku',$ProductSku);
+    $productUrl = $productModel->getProductUrl();
+    $product_image = $productModel->getImageUrl();  
+ ?>
+ <li><a href="<?php echo $productUrl;?>"><img src="<?php echo $product_image; ?>"></a></li>
+<?php } ?>
+</ul>
+</div>
+<!-- Top moving product section start here -->
 <script>
 var con = jQuery.noConflict();
  con('.bxslider').bxSlider({
