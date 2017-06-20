@@ -95,6 +95,10 @@
                 <class>Bluethink_Btslider_Model</class>
                 <resourceModel>btslider_mysql4</resourceModel>
             </btproductslider>
+             <btcatbrand>
+                <class>Bluethink_Btslider_Model</class>
+                <resourceModel>btslider_mysql4</resourceModel>
+            </btcatbrand>
             <btslider_mysql4>
                 <class>Bluethink_Btslider_Model_Mysql4</class>
                 <entities>
@@ -104,6 +108,9 @@
                      <btproductslider>
                         <table>btproductslider</table>
                     </btproductslider>
+                    <btcatbrand>
+                        <table>btcatbrand</table>
+                    </btcatbrand>
                 </entities>
             </btslider_mysql4>
         </models>

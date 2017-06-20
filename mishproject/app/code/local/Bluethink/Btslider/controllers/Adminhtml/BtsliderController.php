@@ -32,6 +32,7 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
 	        $uploader->setFilesDispersion(false);
 	        $uploader->save($path,$fname); //save the file on the specified path
 	        $profileimage = $uploader->getUploadedFileName();
+           
          
     }
     catch (Exception $e)
@@ -39,6 +40,8 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
         echo 'Error Message: '.$e->getMessage();
     }
 }
+
+
          $title = $this->getRequest()->getPost('title');
          $url=  $this->getRequest()->getPost('url');
          $serials=  $this->getRequest()->getPost('serials');
@@ -104,6 +107,110 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
               }
                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully deleted.'));
 			  $this->_redirect('*/*/');
+    }
+
+    public function saveCategorybranddataAction()
+    {
+        $data = $this->getRequest()->getPost();
+        if(isset($_FILES['featuredimage']['name']) && $_FILES['featuredimage']['name'] != '')
+            {
+               $fname1 = $_FILES['featuredimage']['name'] ;
+         try
+           {       
+            $path = Mage::getBaseDir('media').DS."slider/brandfeatureimage".DS;  //desitnation directory     
+            $fname =$profileimage; //file name
+            $uploader = new Varien_File_Uploader('featuredimage'); //load class
+            $uploader->setAllowedExtensions(array('jpeg','jpg','png')); //Allowed extension for file
+            $uploader->setAllowCreateFolders(true); //for creating the directory if not exists
+            $uploader->setAllowRenameFiles(true); //if true, uploaded file's name will be changed, if file with the same name already exists directory.
+            $uploader->setFilesDispersion(false);
+            $uploader->save($path,$fname); //save the file on the specified path
+            $profileimage = $uploader->getUploadedFileName();
+           
+         
+    }
+    catch (Exception $e)
+    {
+        echo 'Error Message: '.$e->getMessage();
+    }
+}
+
+      if(isset($_FILES['image1']['name']) && $_FILES['image1']['name'] != '')
+            {
+               $fname1 = $_FILES['image1']['name'] ;
+         try
+           {       
+            $path = Mage::getBaseDir('media').DS."slider/brandfeatureimage".DS;  //desitnation directory     
+            $fname =$profileimage1; //file name
+            $uploader = new Varien_File_Uploader('image1'); //load class
+            $uploader->setAllowedExtensions(array('jpeg','jpg','png')); //Allowed extension for file
+            $uploader->setAllowCreateFolders(true); //for creating the directory if not exists
+            $uploader->setAllowRenameFiles(true); //if true, uploaded file's name will be changed, if file with the same name already exists directory.
+            $uploader->setFilesDispersion(false);
+            $uploader->save($path,$fname); //save the file on the specified path
+            $profileimage1 = $uploader->getUploadedFileName();
+           
+         
+    }
+    catch (Exception $e)
+    {
+        echo 'Error Message: '.$e->getMessage();
+    }
+}
+
+      if(isset($_FILES['image2']['name']) && $_FILES['image2']['name'] != '')
+            {
+               $fname1 = $_FILES['image2']['name'] ;
+         try
+           {       
+            $path = Mage::getBaseDir('media').DS."slider/brandfeatureimage".DS;  //desitnation directory     
+            $fname =$profileimage2; //file name
+            $uploader = new Varien_File_Uploader('image2'); //load class
+            $uploader->setAllowedExtensions(array('jpeg','jpg','png')); //Allowed extension for file
+            $uploader->setAllowCreateFolders(true); //for creating the directory if not exists
+            $uploader->setAllowRenameFiles(true); //if true, uploaded file's name will be changed, if file with the same name already exists directory.
+            $uploader->setFilesDispersion(false);
+            $uploader->save($path,$fname); //save the file on the specified path
+            $profileimage2 = $uploader->getUploadedFileName();
+           
+         
+    }
+    catch (Exception $e)
+    {
+        echo 'Error Message: '.$e->getMessage();
+    }
+}
+
+
+         $catid     = $this->getRequest()->getPost('catid');
+         $brandname = $this->getRequest()->getPost('brand');
+        
+
+            $model = Mage::getModel('btslider/btcatbrand')->load();
+        
+            $model->setCatid($catid);
+            $model->setBrandName($brandname);
+            $model->setFeaturedImage($profileimage);
+            $model->setImageone($profileimage1);
+            $model->setImagetwo($profileimage2);
+            $model->save();
+           Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('Details havebeen saved successfully.'));
+            $this->_redirect('*/*/');
+    }
+
+     public function deletecatbrandAction()
+    {
+            $catbrandid = Mage::app()->getRequest()->getParam('id');
+            $delcatbrandData = Mage::getModel('btslider/btcatbrand')->load($catbrandid);
+            Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+              try {
+                 $delcatbrandData->delete();
+
+              } catch(Exception $e) {
+                  echo "Row #".$delcatbrandData->getId()." could not be removed: ".$e->getMessage();
+              }
+               Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('This record is successfully deleted.'));
+              $this->_redirect('*/*/');
     }
   
 
