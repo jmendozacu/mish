@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Evince_WhatsApp>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>1.0.0</version>
+    </Evince_WhatsApp>
+  </modules>
+</config>

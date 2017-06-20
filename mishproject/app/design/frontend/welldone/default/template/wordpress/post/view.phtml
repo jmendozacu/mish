@@ -1,0 +1,55 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+	<?php $helper = $this->helper('wordpress') ?>
+	<?php $author = $post->getAuthor() ?>
+    <?php $theme=Mage::helper('welldone');?>
+
+    <?php if($theme->getLayoutOption('blog/post_parallax_top')):?>
+    <?php if($theme->getLayoutOption('blog/post_parallax_top_image')){
+        $bg_top=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'welldone/'.$theme->getLayoutOption('blog/post_parallax_top_image');
+    }else
+    {
+        $bg_top=$this->getSkinUrl('images/theme/parallax-bg-01.jpg');
+    }
+    ?>
+    <section class="content content--parallax content--parallax--high top-null" data-image="<?php echo $bg_top ?>">
+        <div class="container">
+            <div class="blog-post-title blog-post-title--light">
+                <h2 class="blog-post-title__title text-uppercase"><?php echo $this->escapeHtml($post->getPostTitle()) ?></h2>
+                <div class="blog-post-title__meta">
+                    <div class="blog-post-title__meta__image"> <a href="#"><img src="images/testimonials-author-img-01.jpg" alt=""></a> </div>
+                    <div class="blog-post-title__meta__text">
+                        <div class="blog-post-title__meta__text__date"><?php echo stripslashes($this->__('This entry was posted on %s<span class=\"by-author\"> by %s</span>.', $post->getPostDate(), $post->getAuthor()->getDisplayName())) ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif;?>
+
+    <section class="content">
+        <div class="container blog-post-content">
+            <?php echo $this->getBeforePostContentHtml() ?>
+            <?php if ($post->isViewableForVisitor()): ?>
+                <?php echo $post->getPostContent() ?>
+                <?php echo $this->getAfterPostContentHtml() ?>
+            <?php else: ?>
+                <?php echo $this->getPasswordProtectHtml() ?>
+            <?php endif; ?>
+        </div>
+    </section>
+
+    <?php if($theme->getLayoutOption('blog/post_comments')):?>
+
+    <?php echo $this->getCommentsHtml() ?>
+    <?php endif;?>
+
+<?php endif; ?>

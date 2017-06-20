@@ -1,0 +1,528 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<ves translate="label" module="ves_faq">
+			<label>Venus Theme</label>
+			<sort_order>211</sort_order>
+		</ves>
+	</tabs>
+	<sections>
+		<ves_faq>
+			<label>Ves FAQ</label>
+			<tab>ves</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general_setting translate="label">
+					<label>General Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>0</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+            <last_update translate="label">
+              <label>Current Update Time</label>
+              <frontend_type>label</frontend_type>
+              <frontend_model>ves_faq/system_config_form_field_notification</frontend_model>
+              <sort_order>0</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </last_update>
+            <enable translate="label" module="core">
+             <label>Enabled</label>
+             <sort_order>1</sort_order>
+             <frontend_type>select</frontend_type>
+             <source_model>adminhtml/system_config_source_yesno</source_model>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </enable>
+           <enable_colorbox translate="label" module="core">
+             <label>Enabled Color Box Popup JS</label>
+             <sort_order>20</sort_order>
+             <frontend_type>select</frontend_type>
+             <source_model>adminhtml/system_config_source_yesno</source_model>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </enable_colorbox>
+           <enable_bootstrap translate="label" module="core">
+             <label>Enabled Bootstrap</label>
+             <sort_order>30</sort_order>
+             <frontend_type>select</frontend_type>
+             <source_model>adminhtml/system_config_source_yesno</source_model>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </enable_bootstrap>
+           <route translate="label">
+             <label>Route</label>
+             <frontend_type>text</frontend_type>
+             <sort_order>150</sort_order>
+             <value>venusfaq</value>
+             <comment>Configure FAQ Link Route, for example: http://domain.com/YOUR_ROUTER (.html)</comment>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </route>
+         </fields>
+       </general_setting>
+       <faq_page translate="label">
+         <label>FAQ Page</label>
+         <frontend_type>text</frontend_type>
+         <sort_order>5</sort_order>
+         <show_in_default>1</show_in_default>
+         <show_in_website>1</show_in_website>
+         <show_in_store>1</show_in_store>
+         <fields>
+          <mode_list translate="label" module="core">
+           <label>Layout Type</label>
+           <sort_order>0</sort_order>
+           <frontend_type>select</frontend_type>
+           <source_model>ves_faq/system_config_source_layoutList</source_model>
+           <show_in_default>1</show_in_default>
+           <show_in_website>1</show_in_website>
+           <show_in_store>1</show_in_store>
+         </mode_list>
+         <questions_count translate="label">
+           <label>Number of Questions to Display</label>
+           <frontend_type>text</frontend_type>
+           <sort_order>1</sort_order>
+           <show_in_default>1</show_in_default>
+           <show_in_website>1</show_in_website>
+           <show_in_store>1</show_in_store>
+           <comment><![CDATA[
+            <script type="text/javascript">
+             var source;
+             function showhideContent(){
+             source = $('ves_faq_faq_page_mode_list').getValue();
+
+             if(source == 'mode4'){
+             $('row_ves_faq_faq_page_questions_count').hide();
+             $('row_ves_faq_faq_page_cols').hide();
+             $('row_ves_faq_faq_page_show_seeall_button').hide();
+             $('row_ves_faq_faq_page_spacer_2').show();
+             }else{
+             $('row_ves_faq_faq_page_questions_count').show();
+             $('row_ves_faq_faq_page_cols').show();
+             $('row_ves_faq_faq_page_show_seeall_button').show();
+             $('row_ves_faq_faq_page_spacer_2').hide();
+             }
+
+             if(source == 'mode3'){
+             $('row_ves_faq_faq_page_cols').hide();
+             }
+             }
+             Event.observe(window, 'load', function() {
+             $('ves_faq_faq_page_mode_list').observe('change', function(){
+             showhideContent();
+             });
+             showhideContent();
+             })
+           </script>
+           ]]></comment>
+         </questions_count>
+         <show_seeall_button translate="label">
+          <label>Show See All Button</label>
+          <frontend_type>select</frontend_type>
+          <source_model>adminhtml/system_config_source_yesno</source_model>
+          <sort_order>2</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </show_seeall_button>
+        <cols translate="label">
+         <label>Column</label>
+         <frontend_type>text</frontend_type>
+         <sort_order>3</sort_order>
+         <show_in_default>1</show_in_default>
+         <show_in_website>1</show_in_website>
+         <show_in_store>1</show_in_store>
+       </cols>
+       <spacer_3 translate="label">
+        <label>Question List</label>
+        <frontend_type>label</frontend_type>
+        <frontend_model>ves_faq/system_config_form_field_spacer</frontend_model>
+        <sort_order>4</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </spacer_3>
+
+      <show_author translate="label">
+        <label>Show Author</label>
+        <frontend_type>select</frontend_type>
+        <source_model>adminhtml/system_config_source_yesno</source_model>
+        <sort_order>5</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </show_author>
+      <show_author_date translate="label">
+        <label>Show Author Date</label>
+        <frontend_type>select</frontend_type>
+        <source_model>adminhtml/system_config_source_yesno</source_model>
+        <sort_order>6</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </show_author_date>
+
+      <spacer_20 translate="label">
+        <label>Search Form</label>
+        <frontend_type>label</frontend_type>
+        <frontend_model>ves_faq/system_config_form_field_spacer</frontend_model>
+        <sort_order>7</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </spacer_20>
+
+      <show_search_box translate="label">
+       <label>Enable Search Form</label>
+       <source_model>adminhtml/system_config_source_yesno</source_model>
+       <frontend_type>select</frontend_type>
+       <sort_order>8</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+      </show_search_box>
+
+      <spacer_2 translate="label">
+        <label>Pagination</label>
+        <frontend_type>label</frontend_type>
+        <frontend_model>ves_faq/system_config_form_field_spacer</frontend_model>
+        <sort_order>10</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </spacer_2>
+      <show_pager translate="label">
+       <label>Display Page Control</label>
+       <source_model>adminhtml/system_config_source_yesno</source_model>
+       <frontend_type>select</frontend_type>
+       <sort_order>15</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+       <depends><mode_list>mode4</mode_list></depends>
+     </show_pager>
+     <list_per_page_values translate="label comment">
+       <label>Questions per Page</label>
+       <comment>Comma-separated.</comment>
+       <frontend_type>text</frontend_type>
+       <validate>validate-per-page-value-list</validate>
+       <sort_order>20</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+       <depends separator=","><show_pager>1</show_pager><mode_list>mode4</mode_list></depends>
+     </list_per_page_values>
+
+     <spacer_5 translate="label">
+        <label>Category FAQ Block</label>
+        <frontend_type>label</frontend_type>
+        <frontend_model>ves_faq/system_config_form_field_spacer</frontend_model>
+        <sort_order>21</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </spacer_5>
+      <show_category translate="label">
+       <label>Enable Category FAQ</label>
+       <source_model>adminhtml/system_config_source_yesno</source_model>
+       <frontend_type>select</frontend_type>
+       <sort_order>22</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+      </show_category>
+      <category_block_title translate="label">
+         <label>Block Title</label>
+         <frontend_type>text</frontend_type>
+         <sort_order>24</sort_order>
+         <show_in_default>1</show_in_default>
+         <show_in_website>1</show_in_website>
+         <show_in_store>1</show_in_store>
+       </category_block_title>
+
+     <spacer_1 translate="label">
+      <label>SEO</label>
+      <frontend_type>label</frontend_type>
+      <frontend_model>ves_faq/system_config_form_field_spacer</frontend_model>
+      <sort_order>26</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </spacer_1>
+    <page_title translate="label">
+      <label>Page Title</label>
+      <frontend_type>text</frontend_type>
+      <sort_order>30</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </page_title>
+    <meta_keywords translate="label">
+      <label>Keywords</label>
+      <frontend_type>textarea</frontend_type>
+      <sort_order>35</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </meta_keywords>
+    <meta_description translate="label">
+      <label>Description</label>
+      <frontend_type>textarea</frontend_type>
+      <sort_order>40</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </meta_description>
+  </fields>
+</faq_page>
+<recaptcha translate="label">
+  <label>Recaptcha Setting</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>10</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <fields>
+   <enabled translate="label">
+    <label>Enable Captcha</label>
+    <frontend_type>select</frontend_type>
+    <source_model>adminhtml/system_config_source_yesno</source_model>
+    <sort_order>10</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </enabled>
+  <public_key translate="label">
+    <label>Public Key</label>
+    <comment>You got this from the signup page: https://www.google.com/recaptcha/admin/create</comment>
+    <frontend_type>text</frontend_type>
+    <sort_order>20</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+    <depends><enabled>1</enabled></depends>
+  </public_key>
+  <private_key translate="label">
+    <label>Private Key</label>
+    <comment>You got this from the signup page: https://www.google.com/recaptcha/admin/create</comment>
+    <frontend_type>text</frontend_type>
+    <sort_order>30</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+    <depends><enabled>1</enabled></depends>
+  </private_key>
+  <theme translate="label">
+    <label>reCaptcha Theme</label>
+    <comment>Customizing the Look of reCAPTCHA</comment>
+    <frontend_type>select</frontend_type>
+    <source_model>ves_faq/system_config_source_theme</source_model>
+    <sort_order>40</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+    <depends><enabled>1</enabled></depends>
+  </theme>
+  <lang translate="label">
+    <label>reCaptcha Language</label>
+    <comment>Which language is used in the reCaptcha interface</comment>
+    <frontend_type>select</frontend_type>
+    <source_model>ves_faq/system_config_source_lang</source_model>
+    <sort_order>50</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+    <depends><enabled>1</enabled></depends>
+  </lang>
+</fields>
+</recaptcha>
+<product_page translate="label">
+  <label>FAQ In Product Page Setting</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>50</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <fields>
+   <enable_faq translate="label">
+    <label>Enable FAQ In Product Page</label>
+    <frontend_type>select</frontend_type>
+    <source_model>adminhtml/system_config_source_yesno</source_model>
+    <sort_order>0</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </enable_faq>
+  <show_all_faq translate="label">
+    <label>Allow Show All FAQs</label>
+    <comment>Allow show all faq questions in product page or not.</comment>
+    <frontend_type>select</frontend_type>
+    <source_model>adminhtml/system_config_source_yesno</source_model>
+    <sort_order>2</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </show_all_faq>
+  <show_pager translate="label">
+   <label>Display Page Control</label>
+   <source_model>adminhtml/system_config_source_yesno</source_model>
+   <frontend_type>select</frontend_type>
+   <sort_order>5</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+   <depends><enable_faq>1</enable_faq></depends>
+ </show_pager>
+ <show_category_filter translate="label">
+   <label>Display Category Filter</label>
+   <source_model>adminhtml/system_config_source_yesno</source_model>
+   <frontend_type>select</frontend_type>
+   <sort_order>6</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+   <depends><enable_faq>1</enable_faq></depends>
+ </show_category_filter>
+ <show_category_info translate="label">
+   <label>Display Category Info</label>
+   <source_model>adminhtml/system_config_source_yesno</source_model>
+   <frontend_type>select</frontend_type>
+   <sort_order>10</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+   <depends><enable_faq>1</enable_faq></depends>
+ </show_category_info>
+
+  <show_author translate="label">
+    <label>Show Author</label>
+    <frontend_type>select</frontend_type>
+    <source_model>adminhtml/system_config_source_yesno</source_model>
+    <sort_order>15</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </show_author>
+  <show_author_date translate="label">
+    <label>Show Author Date</label>
+    <frontend_type>select</frontend_type>
+    <source_model>adminhtml/system_config_source_yesno</source_model>
+    <sort_order>20</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </show_author_date>
+ <questions_count translate="label">
+  <label>Number of Questions to Display</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>50</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <depends><show_pager>0</show_pager><enable_faq>1</enable_faq></depends>
+</questions_count>
+<list_per_page_values translate="label comment">
+ <label>Questions per Page</label>
+ <comment>Comma-separated.</comment>
+ <frontend_type>text</frontend_type>
+ <validate>validate-per-page-value-list</validate>
+ <sort_order>100</sort_order>
+ <show_in_default>1</show_in_default>
+ <show_in_website>1</show_in_website>
+ <show_in_store>1</show_in_store>
+ <depends><show_pager>1</show_pager><enable_faq>1</enable_faq></depends>
+</list_per_page_values>
+<status_question translate="label" module="core">
+  <label>Status Question</label>
+  <sort_order>250</sort_order>
+  <frontend_type>select</frontend_type>
+  <source_model>ves_faq/system_config_source_statusQuestion</source_model>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <comment>Question Status After Submited</comment>
+</status_question>
+</fields>
+</product_page>
+<email translate="label">
+  <label>Email Options</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>50</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <fields>
+    <enabled translate="label">
+      <label>Notify to email</label>
+      <frontend_type>select</frontend_type>
+      <source_model>adminhtml/system_config_source_yesno</source_model>
+      <backend_model>contacts/system_config_backend_links</backend_model>
+      <sort_order>0</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </enabled>
+    <sender_name translate="label">
+      <label>Sender Name</label>
+      <frontend_type>text</frontend_type>
+      <sort_order>5</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <depends><enabled>1</enabled></depends>
+    </sender_name>
+    <sender_email translate="label">
+      <label>Sender Email</label>
+      <frontend_type>text</frontend_type>
+      <sort_order>10</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <depends><enabled>1</enabled></depends>
+    </sender_email>
+    <email_template translate="label">
+      <label>Email Template</label>
+      <frontend_type>select</frontend_type>
+      <source_model>adminhtml/system_config_source_email_template</source_model>
+      <sort_order>15</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <depends><enabled>1</enabled></depends>
+    </email_template>
+  </fields>
+</email>
+<advanded_parameter>
+  <label>Information - Support</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>6003</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <fields>
+    <module_information translate="label">
+      <label>Set Module Visable On Pages, Position</label>
+      <frontend_type>label</frontend_type>
+      <frontend_model>ves_faq/system_config_form_field_information</frontend_model>
+      <sort_order>40</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>0</show_in_website>
+      <show_in_store>0</show_in_store>
+    </module_information>
+  </fields>
+</advanded_parameter>
+</groups>
+</ves_faq>
+</sections>
+</config>

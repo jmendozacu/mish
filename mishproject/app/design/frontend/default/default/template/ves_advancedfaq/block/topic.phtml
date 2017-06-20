@@ -1,0 +1,28 @@
+<?php 
+	$categories		= $this->getAllCategories() ;
+	$catSuffix 		= $this->getCatSuffix();
+	$urlKey			= $this->getUrlKey();
+	$vendor = Mage::registry("current_vendor");
+	$tmp = 1;
+?>
+<div class="block block-faq">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('FAQ') ?></span></strong>
+    </div>
+        <div class="block-content">
+            <p class="block-subtitle"><?php if(sizeof($this->getAllCategories()) != 0) {echo $this->__('Click on the Faqs topic');}else{echo $this->__('No Topic find yet!');} ?></p>
+            <ul id="poll-answers">
+            	
+                <?php foreach( $this->getAllCategories() as $category ):  ?>
+                <li>
+                	<a href="<?php echo  Mage::helper('vendorspage')->getUrl($vendor,$urlKey."/".$category->getData('url_key').$catSuffix) ?>" class="readmore"><span><?php echo $category->getTitle() ?></span></a>
+                </li>
+                <?php 
+                $tmp ++;
+                if($tmp > Mage::helper("advancedfaq")->getMaxTopic()) break;
+                endforeach;
+				 ?>
+            </ul>
+         
+        </div>
+</div>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="notifications">
+			<block type="pricecomparison2/adminhtml_notification" name="vendor.assigned.product.pending.notification" template="ves_vendorspricecomparison2/notification.phtml" />
+		</reference>
+	</default>
+	<adminhtml_vendors_assignedproducts_index>
+		<reference name="content">
+            <block type="pricecomparison2/adminhtml_product" name="selectandsell.product.list" />
+        </reference>
+	</adminhtml_vendors_assignedproducts_index>
+	
+	
+	
+	
+	<vendors_pricecomparison_index>
+        <reference name="content">
+            <block type="pricecomparison2/vendor_product" name="selectandsell.product.list" />
+        </reference>
+    </vendors_pricecomparison_index>
+    
+    <vendors_pricecomparison_selectandsell>
+        <reference name="content">
+            <block type="pricecomparison2/vendor_selectandsell" name="selectandsell.product.search" />
+        </reference>
+    </vendors_pricecomparison_selectandsell>
+
+    <vendors_pricecomparison_add>
+    	<reference name="head">
+    		<action method="addJs"><js>ves_vendors/pricecomparison2/vendor.js</js></action>
+    		<action method="addCss"><css>ves_vendors/pricecomparison2/styles.css</css></action>
+    	</reference>
+    	<reference name="content">
+        	<block type="pricecomparison2/vendor_selectandsell_edit" name="vendor.product.edit" />
+        </reference>
+    </vendors_pricecomparison_add>
+    
+    <vendors_pricecomparison_edit>
+    	<reference name="head">
+    		<action method="addJs"><js>ves_vendors/pricecomparison2/vendor.js</js></action>
+    		<action method="addCss"><css>ves_vendors/pricecomparison2/styles.css</css></action>
+    	</reference>
+    	
+    	<reference name="content">
+        	<block type="pricecomparison2/vendor_product_edit" name="vendor.product.edit" />
+        </reference>
+    </vendors_pricecomparison_edit>
+</layout>

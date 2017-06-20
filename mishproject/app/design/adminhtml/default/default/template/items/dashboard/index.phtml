@@ -1,0 +1,58 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="head-dashboard"><?php echo $this->__('Mercadolibre Dashboard') ?></h3></td>
+        </tr>
+    </table>
+</div>
+<div class="dashboard-container">
+    <?php echo $this->getChildHtml('store_switcher') ?>
+    <table cellspacing="25" width="100%">
+        <tr>
+		<td colspan="2">
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php echo $this->__('Mercadolibre Items Status') ?></h4></div>
+                    <fieldset class="np"><?php echo $this->getChildHtml('totals'); ?></fieldset>
+                </div>
+            </td>
+		</tr>
+		<td colspan="2">
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php echo $this->__('Mercadolibre Questions Status') ?></h4></div>
+                    <fieldset class="np"><?php echo $this->getChildHtml('questionstatus'); ?></fieldset>
+                </div>
+            </td>
+		</tr>
+		<td colspan="2">
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php echo $this->__('Mercadolibre Order Status') ?></h4></div>
+                    <fieldset class="np"><?php echo $this->getChildHtml('orderstatus'); ?></fieldset>
+                </div>
+            </td>
+		</tr>
+		<tr>
+			<!--td>
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php echo $this->__('Mercadolibre Questions') ?></h4></div>
+                    <fieldset class="np"><?php echo $this->getChildHtml('latestQuestions'); ?></fieldset>
+                </div>
+            </td>
+            <td>
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php echo $this->__('Mercadolibre Orders') ?></h4></div>
+                    <fieldset class="np"><?php echo $this->getChildHtml('lastOrders'); ?></fieldset>
+                </div>
+            </td>
+             <td>
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php //echo $this->__('Mercadolibre Latest Orders') ?></h4></div>
+                    <fieldset class="np"><?php //echo $this->getChildHtml('lastOrders'); ?></fieldset>
+                </div>
+                <div class="entry-edit">
+                    <div class="entry-edit-head"><h4><?php //echo $this->__('Mercadolibre Latest Feedback') ?></h4></div>
+                    <fieldset class="np"><?php //echo $this->getChildHtml('lastSearches'); ?></fieldset>
+                </div>
+            </td-->
+         </tr>
+    </table>
+</div>

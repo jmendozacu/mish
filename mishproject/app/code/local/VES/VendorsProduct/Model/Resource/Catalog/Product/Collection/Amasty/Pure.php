@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_SeoSingleUrl/active')) {
+                class VES_VendorsProduct_Model_Resource_Catalog_Product_Collection_Amasty_Pure extends Amasty_SeoSingleUrl_Model_Resource_Product_Collection {}
+            } else { class VES_VendorsProduct_Model_Resource_Catalog_Product_Collection_Amasty_Pure extends Mage_Catalog_Model_Resource_Product_Collection {} } ?>

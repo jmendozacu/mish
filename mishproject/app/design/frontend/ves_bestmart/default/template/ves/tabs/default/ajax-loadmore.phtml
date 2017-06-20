@@ -1,0 +1,244 @@
+<?php
+/*Start copy at here*/
+/*framework: get current theme setting*/
+$list_image_width = (int)$this->getConfig("image_width", 300);
+$list_image_height = (int)$this->getConfig("image_height", 300);
+$swap_image_number = (int)$this->getConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getConfig("popup_quickview_height", "80%");
+
+$show_tab_title = $this->getConfig("show_tab_title");
+$enable_pzoom = $this->getConfig("show_pzoom");
+$enable_new_icon = $this->getConfig("enable_new_icon");
+$enable_sale_icon = $this->getConfig("enable_sale_icon");
+$show_title = $this->getConfig('show_title');
+$enable_short_desc = $this->getConfig('show_desc');
+$show_review = $this->getConfig('show_review');
+$show_price = $this->getConfig('show_price');
+$show_addcart = $this->getConfig("show_btn");
+$show_compare_wishlist = $this->getConfig("show_wc") ;
+$quickview = $this->getConfig("enable_quickview");
+$swap_image = $this->getConfig("enable_swap");
+$itemsperpage = (int)$this->getConfig("itemspage",4);
+$auto_play_mode = (int)$this->getConfig("auto_play");
+$title_maxchar = (int)$this->getConfig("title_maxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getConfig("interval");
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("itemsrow");
+$cols = !empty($cols)?$cols:1;
+$span = floor(12/$cols);
+$active = 'news';
+
+/*end copy at here*/
+
+/*end get setting*/
+
+$qty = $this->getConfig('quanlity', 5);
+$show_tab_icon = $this->getConfig("show_tab_icon");
+$swap_image = $this->getConfig("enable_swap");
+$icon_width = $this->getConfig("icon_width", 50);
+$icon_height = $this->getConfig("icon_height", 50);
+$class_prefix =  $this->getConfig("prefix", 50);
+
+$modid = rand(1,9)+rand();
+$modid = $modid.time();
+$price_prefix = "_vestab_".$modid;
+$_helper = $this->helper('catalog/output');
+$tab_index = $this->getConfig("tab_index", "");
+?>
+<div <?php if($tab_index): ?> data-index="<?php echo $tab_index; ?>" data-icon="<?php echo $this->getConfig('tab_icon') ?>" data-title="<?php echo $this->getConfig('title'); ?>" <?php endif; ?> class="<?php echo $this->getConfig('prefix');?> block categorytabs categorytab block-primary <?php if($tab_index): ?> floor-fixed-panel-play <?php endif; ?>" id="categorytab<?php echo $modid;?>">
+	
+	<?php if( $this->getConfig('title') || ($pretext == $this->getConfig("pretext")) || isset($cms) ) { ?>
+	<div class="block-title">
+		<?php if($this->getConfig('title')) { ?>
+		<h3><?php echo $this->getConfig('title') ?></h3>
+		<?php } ?>
+		<?php if( ( $pretext==$this->getConfig("pretext")) && !isset($cms) ) { ?>
+		<div class="pretext"><?php echo $pretext; ?></div>
+		<?php }elseif(isset($cms)){
+			?>
+			<div class="pretext"><?php echo $cms; ?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+
+	<?php if(!empty($items)) { ?>
+
+
+	<div class="tab-nav">
+		<ul class="nav nav-tabs">
+			<?php $x = 1; foreach($items as $item) { ?>
+			<?php
+			$icon = "";
+			if($show_tab_icon) {
+				$icon = $this->getCategoryImage( $item['category_id'], $icon_width, $icon_height );
+			}
+			?>
+			<?php $class = '';
+			if(isset($tabClass[$x]) && $tabClass[$x] != ''){ $class .= $tabClass[$x]; }
+			$class .= ' btntabs ';
+
+			if($class != ''){
+				$class = 'class = "'.$class.'"';
+			}
+			?>
+			<li><a href="#categorytab-<?php echo $item['category_id'].$modid;?>" data-source="<?php echo $item['source'] ?>" data-toggle="tab" <?php echo $class; ?> data-cat_id="<?php echo $item['category_id'] ?>" ><?php if($show_tab_icon && $icon) { ?>
+				<img src="<?php echo $icon; ?>" class="hidden-sm hidden-xs pull-left"/>
+				<?php } ?><?php if($show_tab_title): ?>
+				<?php echo $this->htmlEscape( $item['title'] ); ?>
+			<?php endif; ?></a></li>
+
+			<?php $x++; } ?>
+		</ul>
+	</div>
+
+	<div class="tab-content">
+
+		<?php $i=0; foreach( $items as $tab => $item ) {
+			?>
+
+			<div class="tab-pane box-products  categorytabcarousel2<?php echo $modid; ?> slide" id="categorytab-<?php echo $item['category_id'].$modid;?>" style="min-height: 300px;">
+
+				<div class="carousel-inner ">
+
+					<?php if( isset($item['products']) && $item['products'] ) { $products = $item['products'];
+					$x = 0;
+					?>
+
+					<?php $products = $products->getItems(); ?>
+
+					<?php
+					$pages = array_chunk( $products, $itemsperpage);
+					$price_prefix = $price_prefix."_".$tab;
+					?>
+
+					<?php foreach ($pages as  $k => $_productCollection ) {  ?>
+
+					<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+						<?php require ($product_module_path); ?>
+						<?php } ?>
+
+						<?php if($x == 0){ ?>
+						<?php if($this->hasNextData($item['category_id'], $item['source'])){ ?>
+						<div class="load-more"><a data-source="<?php echo $item['source'] ?>" data-page="2" data-cat_id="<?php echo $item['category_id'] ?>" href="#categorytab-<?php echo $item['category_id'].$modid;?>"><?php echo $this->__('Load More');?></a></div>
+						<?php }else{ ?>
+						<div class="load-more"><?php echo $this->__('All Ready');?></div>
+						<?php } ?>
+						<?php } $x++; ?>
+
+						<?php } ?>
+						<?php } ?>
+					</div>
+				</div>
+
+				<?php } ?>
+			</div>
+
+			<script type="text/javascript">
+				jQuery(function () {
+					jQuery('#categorytab<?php echo $modid;?> a:first').tab('show');
+					jQuery('.categorytabcarousel2<?php echo $modid;?>').carousel({interval:false,auto:false,pause:'hover'});
+				})
+			</script>
+
+			<script type="text/javascript">
+				var status<?php echo $modid; ?> = 1;
+				function ajaxGetProductsTab<?php echo $modid ?>(source_type, page, moduleid, categoryid, blockid){
+					var url = "<?php echo Mage::getUrl('tabs/index/ajax'); ?>";
+					var dataAjax = {source_type: source_type,
+						page: page,
+						moduleid: moduleid,
+						catsid: categoryid,
+						blockid: blockid,
+						wg: "<?php echo isset($attributes)?$attributes:''; ?>"
+					};
+					jQuery.ajax({
+						url: url,
+						dataType: 'json',
+						type: 'post',
+						data: dataAjax,
+						success: function(data_response){
+							status<?php echo $modid; ?> = 1;
+							jQuery('#'+data_response.moduleid+' #'+data_response.blockid).removeClass('wait');
+
+							jQuery('#'+data_response.moduleid).find('script').remove();
+
+							if(typeof(data_response.row)!='' && data_response.row!=''){
+								jQuery('#'+data_response.moduleid+' #'+data_response.blockid+' .carousel-inner .products-row:last').append(data_response.row);
+							}
+
+							if(typeof(data_response.rows)!=''){
+								jQuery('#'+data_response.moduleid+' #'+data_response.blockid+' .carousel-inner').append(data_response.rows);
+							}
+
+							jQuery('#'+data_response.moduleid+' #'+data_response.blockid+' .load-more').remove();
+
+							if(typeof(data_response.hasNextData)!==''){
+								var next_data_html = "";
+								var next_page = parseInt(page) + 1;
+								if(data_response.hasNextData == 1) {
+									next_data_html = '<div class="load-more"><a data-source="'+source_type+'" data-page="'+next_page+'" data-cat_id="'+data_response.catsid+'" href="#'+blockid+'"><?php echo $this->__('Load More');?></a></div>';
+								} else {
+									next_data_html = '<div class="load-more"><?php echo $this->__('All Ready');?></div>';
+								}
+								jQuery('#'+data_response.moduleid+' #'+data_response.blockid+' .carousel-inner').append(next_data_html);
+							}
+						},
+					});
+}
+
+jQuery(document).ready(function() {
+	var moduleid = 0;
+	jQuery('#categorytab<?php echo $modid;?>').hover(function() {
+		moduleid = jQuery(this).attr("id");
+	}, function() {
+		moduleid = 0;
+	});
+
+	jQuery(document).on('click', '#categorytab<?php echo $modid;?> .nav-tabs .btntabs', function() {
+
+		var source_type = jQuery(this).attr('data-source');
+		var page = 1;
+		var blockid = jQuery(this).attr('href').replace('#','');
+		var categoryid = parseInt(jQuery(this).attr('data-cat_id'));
+		jQuery(this).removeClass('btntabs');
+		jQuery('#'+moduleid+' #'+blockid).addClass('wait');
+		if(source_type != "" || source_type != null) {
+			ajaxGetProductsTab<?php echo $modid ?>(source_type, page, moduleid, categoryid, blockid);
+		}
+	});
+
+	jQuery(document).on('click', '#categorytab<?php echo $modid;?> .load-more a', function() {
+		if(status<?php echo $modid; ?> == 0){
+			return false;
+		}
+		status<?php echo $modid; ?> = 0;
+
+		var source_type = jQuery(this).attr('data-source');
+		var page = jQuery(this).attr('data-page');
+		var blockid = jQuery(this).attr('href').replace('#','');
+		var categoryid = jQuery(this).attr('data-cat_id');
+		if(source_type != "" || source_type != null) {
+			jQuery(this).addClass('loading-more');
+			ajaxGetProductsTab<?php echo $modid ?>(source_type, page, moduleid, categoryid, blockid);
+		}
+		return false;
+	});
+
+	//Fire event click for first tab
+	if(jQuery('#categorytab<?php echo $modid;?> .nav-tabs .btntabs').length > 0 ) {
+		moduleid = jQuery('#categorytab<?php echo $modid;?>').first().attr("id");
+		jQuery('#categorytab<?php echo $modid;?> .nav-tabs .btntabs').first().trigger("click");
+	}
+
+});
+
+</script>
+
+<?php } ?>
+</div>

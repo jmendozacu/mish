@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+
+?>
+<?php
+    $theme=Mage::helper('welldone');
+    if (!$theme->getConfigOption('general/catalog_mode')):
+    $_cartQty = $this->getSummaryCount();
+    if(empty($_cartQty))$_cartQty=0;?>
+        <span class="header__cart__indicator hidden-xs"><?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?></span>
+        <div class="dropdown pull-right">
+            <a href="#" class="btn dropdown-toggle btn--links--dropdown header__cart__button header__dropdowns__button" data-toggle="dropdown"><span class="icon icon-bag-alt"></span><span class="badge badge--menu"><?php echo $_cartQty ?></span></a>
+            <div class="dropdown-menu animated fadeIn shopping-cart" role="menu">
+                <div class="shopping-cart__settings"><a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>" class="icon icon-bag-alt" title="<?php echo $this->__('View shopping cart') ?>"></a></div>
+                <div class="shopping-cart__top text-uppercase"><?php echo $this->__('Recently added item(s)') ?>
+                    (<?php if ($_cartQty==1): ?><?php echo $this->__('1 item') ?><?php else: ?><?php if(empty($_cartQty))$_cartQty=0?><?php echo $this->__('%s items', $_cartQty) ?><?php endif ?>)
+                </div>
+                <?php $_items = $this->getRecentItems() ?>
+                <?php if(count($_items)): ?>
+                    <ul>
+                        <?php foreach($_items as $_item): ?>
+                            <?php echo $this->getItemHtml($_item) ?>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="shopping-cart__bottom">
+                        <div class="pull-left"><?php echo $this->__('Subtotal') ?>: <span class="shopping-cart__total"> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?></span></div>
+                        <div class="pull-right">
+                            <a class="btn btn--wd text-uppercase" href="<?php echo $this->getCheckoutUrl() ?>" title="<?php echo $this->__('Proceed to Checkout') ?>"><?php echo $this->__('Checkout') ?></a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <span class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></span>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php endif;?>

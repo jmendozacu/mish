@@ -1,0 +1,20 @@
+<?php
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+
+DROP TABLE IF EXISTS {$this->getTable('vendorscategory/category_product')};
+CREATE TABLE IF NOT EXISTS {$this->getTable('vendorscategory/category_product')} (
+    `category_id` int(11) unsigned NOT NULL,
+    `product_id` int(11) unsigned NOT NULL,
+    `position` int(11) NULL DEFAULT 1
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    ");
+
+$installer->getConnection()->addForeignKey('FK_CATEGORY_PRODUCT_CATEGORY_ID', $installer->getTable('vendorscategory/category_product'), 'category_id', $installer->getTable('vendorscategory/category'), 'category_id', 'cascade', 'cascade');
+$installer->getConnection()->addForeignKey('FK_CATEGORY_PRODUCT_PRODUCT_ID', $installer->getTable('vendorscategory/category_product'), 'product_id', $installer->getTable('catalog/product'), 'entity_id', 'cascade', 'cascade');
+
+$installer->endSetup();

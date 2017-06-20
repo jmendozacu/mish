@@ -1,0 +1,255 @@
+<script type="text/javascript">
+
+    var formControl = new VENDORRMAAdminRmaFormControl(this, editForm);
+    formControl.observeItemsCount();
+
+    //console.log("test");
+    var pendingCall = { timeStamp: null, procID: null };
+    var loader_id = 'loading-mask';
+    var lastId = 1;
+    var filename=new Array('0');
+    /* ajax find order increment ID */
+
+    var requestOption = function() {
+        return {
+            findOrder : function(html,orde_id){
+                $('order_incremental_id').setValue(html);
+                $('order_id').setValue(orde_id);
+                $('order_button_view').removeClassName('disabled');
+
+            },
+            viewOrder :  function(){
+                var order_id=$('order_id').getValue();
+                window.open("<?php echo $this->getUrl('vendors/sales_order/view') ?>"+"order_id/"+order_id);
+            },
+            slideUp :function(obj){
+                $$('.'+obj).each(function(div) {
+                    div.observe('mouseout', function(e) {
+                        var mouse_over_element;
+                        if (e.toElement) {
+                            mouse_over_element = e.toElement;
+                        } else if (e.relatedTarget) {
+                            mouse_over_element = e.relatedTarget;
+                        }
+
+                        if (mouse_over_element == null) {
+                            return;
+                        }
+                        if (!mouse_over_element.descendantOf(div) && div != mouse_over_element) {
+                            Effect.SlideUp(obj,{ duration: 0.5 });
+                        }
+                    });
+                });
+             },
+            del : function(obj) {
+                if( confirm('Are you sure ?') ) {
+                    var fileRow = document.getElementById('file'+obj);
+                    fileRow.remove();
+                    for (x in filename){
+                        if(obj == filename[x]) filename.splice(x,1);
+                    }
+                    document.getElementById('filename').value=filename;
+                }
+            },
+            addNew : function(obj) {
+                var id = this.createId();
+                var fileRow = document.getElementById('file'+obj);
+                var fileTable = fileRow.parentNode.parentNode;
+                var newRow = fileTable.insertRow(fileTable.rows.length);
+                newRow.innerHTML=this.getTemplateNew(id);
+                newRow.id='file'+id;
+                filename.push(id);
+                document.getElementById('filename').value=filename;
+            },
+            getTemplateNew : function(id) {
+                return '<td class="lable"></td>'
+                + '<td class="value">'
+                + '<input type="file" value="" name="filename'+ id + '" id="filename'+ id + '">'
+                + '<button class="scalable delete delete-file-button" id="deletefile_button" type="button" onclick="requestOption.del('+ id + ')"><span></span></button>'
+            },
+            add : function(obj) {
+                var id = this.createId();
+                var file = document.getElementById('file'+obj);
+                var fileParent = file.parentNode;
+                var newDiv = fileParent.insert({ 'bottom' : this.getTemplate(id) });
+                filename.push(id);
+                document.getElementById('filename').value=filename;
+            },
+            getTemplate : function(id) {
+                return  '<div id="file'+id+'" >'
+                +'<input type="file" value="" name="filename'+ id + '" id="filename'+ id + '">'
+                + '<button class="scalable delete delete-file-button" id="deletefile_button" type="button" onclick="requestOption.del('+ id + ')"><span></span></button>'
+                +'<div>'
+            },
+            createId : function () {
+                return lastId++;
+            },
+
+            showViewMessage : function(mid){
+                if($('message-body-'+mid).getStyle('display') == 'none') {
+                    $('message-body-'+mid).show();
+                    $('quote-message-'+mid).show();
+                    $('message-body-'+mid).up().addClassName('arrow_up_ticket');
+                    $('reply-'+mid).show();
+                    $('do-discription-'+mid).hide();
+                    $('discription-'+mid).hide();
+                }
+                else {
+                    $('message-body-'+mid).hide();
+                    $('quote-message-'+mid).hide();
+                    $('message-body-'+mid).up().removeClassName('arrow_up_ticket');
+                    $('reply-'+mid).hide();
+                    $('do-discription-'+mid).hide();
+                    $('discription-'+mid).show();
+                }
+            },
+            showFormReply : function(){
+                $('form-reply-request').show();
+                $('reply-message-button').hide();
+                Effect.ScrollTo("form-reply-request", { duration: 1.0 });
+            },
+            quoteMessage : function(obj) {
+                var message = document.getElementById("messagebody"+obj).innerHTML;
+                this.showFormReply();
+                if(tinyMCE.getInstanceById('content_message_reply')){
+                    tinyMCE.getInstanceById('content_message_reply').getBody().innerHTML += '<blockquote>'+message+'</blockquote>';
+                }
+                else{
+                    $('content_message_reply').value += '<blockquote>'+message+'</blockquote>';
+                }
+                Effect.ScrollTo("form-reply-request", { duration: 1.0 });
+            },
+
+            editMessage :function(obj){
+                $('message-body-'+obj).hide();
+                $('messagebody'+obj).setStyle({display:'none'});
+                $('messagedit'+obj).show();
+                $('messageBodyText'+obj).focus();
+            },
+            cancelMessage :function(obj){
+                $('message-body-'+obj).show();
+                $('messagebody'+obj).setStyle({display:''});
+                $('messagedit'+obj).hide();
+                $('messageBodyText'+obj).value=$('messageBodyText'+obj).defaultValue;
+            },
+            saveMessage : function(obj){
+                var message=document.getElementById("messageBodyText"+obj).value;
+                new Ajax.Request('<?php echo $this->getUrlUpdateMessage() ?>', {
+                    method:'post',
+                    parameters:{id: obj,message:message},
+                    onCreate: function(obj) {
+                        Element.show(loader_id);
+                    },
+                    onComplete: function (transport) {
+                        Element.hide(loader_id);
+                        $('message-body-'+obj).show();
+                        $('messagebody'+obj).setStyle({display:''});
+                        $('messagedit'+obj).setStyle({display:'none'});;
+                    },
+                    onSuccess: function(transport) {
+                        var response = transport;
+                        document.getElementById("messagebody"+obj).innerHTML=response.responseText;
+
+                    }
+                });
+            },
+            changeReason : function(){
+
+                    if($('reason').value != "" && $('reason').value != null){
+                        if($("reason_detail")){
+                            $("reason_detail").up().up().hide();
+                            $("reason_detail").value ="";
+                        }
+                        if($("reason_detail").hasClassName("required-entry")) $("reason_detail").removeClassName("required-entry");
+                        if($("advice-required-entry-reason_detail")) $("advice-required-entry-reason_detail").remove();
+
+                    }
+                    else{
+
+                        if($("reason_detail")) $("reason_detail").up().up().show();
+                        if(!$("reason_detail").hasClassName("required-entry")) $("reason_detail").addClassName("required-entry");
+                    }
+
+
+            },
+            reasonDetailClick: function(){
+                    if ($('reason_detail').value != "" && $('reason_detail').value != null) {
+                        if ($("reason")) {
+                            $("reason").up().up().hide();
+                            $("reason").value = "";
+                        }
+                        if ($("reason").hasClassName("required-entry")) $("reason").removeClassName("required-entry");
+                        if ($("advice-required-entry-reason")) $("advice-required-entry-reason").remove();
+
+                    }
+                    else {
+                        if ($("reason")) $("reason").up().up().show();
+                        if (!$("reason_detail").hasClassName("required-entry")) $("reason_detail").addClassName("required-entry");
+                    }
+
+            }
+
+        }
+
+    }();
+
+    if($('reason_detail')) $('reason_detail').observe('keyup', requestOption.reasonDetailClick);
+    if($('reason')) $('reason').observe('change', requestOption.changeReason);
+
+
+
+
+    if($('order_incremental_id')) $('order_incremental_id').observe('keyup', ordertoKeyup);
+    function ordertoKeyup(event) {
+        var timeStamp = Date.now();
+        var printCall = function (){
+            var order = document.getElementById('order_incremental_id').value;
+            var vendor_id = document.getElementById('vendor_id').value;
+            $('order_button_view').addClassName('disabled');
+            if(order.length >= 4){
+                new Ajax.Request('<?php echo Mage::getUrl('*/rma_ajax/ajaxOrder') ?>', {
+                    method:'post',
+                    parameters:{order: order , vendor :vendor_id},
+                    onCreate: function(obj) {
+                        Element.show(loader_id);
+                        // $('assign-to-order-exit').hide();
+                    },
+                    onComplete: function (transport) {
+                        Element.hide(loader_id);
+
+                    },
+                    onSuccess: function(transport) {
+                        var response = transport;
+                        document.getElementById("result_order").innerHTML=response.responseText;
+                        Effect.SlideDown('result_order',{ duration: 0.5 });
+                    },
+                });
+                pendingCall.procID = null;
+            }
+        };
+        if (pendingCall.procID) {
+            clearTimeout(pendingCall.procID)
+        };
+        pendingCall = { timeStamp: timeStamp, procID: setTimeout(printCall, 1000) };
+
+    }
+    requestOption.slideUp('result_order');
+
+    var requestTemplateSyntax = /(^|.|\r|\n)({{(\w+)}})/;
+
+    function setSettings(urlTemplate, setElement, typeElement) {
+        var template = new Template(urlTemplate, requestTemplateSyntax);
+        var order_id = $("order_id").value;
+        if(!order_id) alert("Order ID is incorrect . Please select an order !");
+        else setLocation(template.evaluate({order_id:$F(setElement),package_opened:$F(typeElement)}));
+    }
+
+
+    $$('.message-box .message-header').each(function(div){
+        div.observe('click',function(){
+            var id= this.select('.request_message_id').first().getAttribute('value');
+            requestOption.showViewMessage(id);
+        });
+    });
+
+</script>

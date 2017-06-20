@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+
+    <tabs>
+        <btslider translate="label" module="btslider">
+            <label>Top categories and Fast moving product</label>
+            <sort_order>1</sort_order>
+        </btslider>
+    </tabs>
+    
+    <sections>
+        <btslider translate="label" module="btslider">
+            <label>Top Categories</label>
+            <tab>btslider</tab>
+	          <class>separator-top</class>
+            <frontend_type>text</frontend_type>
+            <sort_order>121</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="btslider">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                    	<topcat>
+            							<label>Category Ids</label>
+            							<frontend_type>text</frontend_type>
+            							<sort_order>58</sort_order>
+            							<show_in_default>1</show_in_default>
+            							<show_in_website>1</show_in_website>
+            							<show_in_store>0</show_in_store>
+            							<comment>Enter multiple category ids with "," separated.</comment>
+					          	</topcat>
+                    </fields>
+                </general>                
+            </groups>
+        </btslider>
+
+        <fastmovingprpoducts translate="label" module="btslider">
+            <label>Fast Moving products</label>
+            <tab>btslider</tab>
+              <class>separator-top</class>
+            <frontend_type>text</frontend_type>
+            <sort_order>121</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <movingproducts translate="label" module="btslider">
+                    <label>Fast Moving Products</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                        <fastmoving>
+                                <label>Fast Moving Products Sku's</label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>58</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                                <comment>Enter multiple sku's with "," separated.</comment>
+                        </fastmoving>
+                    </fields>
+                </movingproducts>                
+            </groups>
+        </fastmovingprpoducts>
+
+
+    </sections>
+</config>

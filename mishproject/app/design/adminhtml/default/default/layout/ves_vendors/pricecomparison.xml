@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <vendors_comparison_process_chooseitem>
+        <block type="pricecomparison/product_item" name="root" output="toHtml" template="ves_pricecomparison/vendor_list_ajax.phtml">
+            <block type="pricecomparison/product_price" name="vendors.product.pricecomparison.price" template="ves_pricecomparison/vendor_list/price.phtml"/>
+            <block type="pricecomparison/product_vendor" name="vendors.product.pricecomparison.vendor" template="ves_pricecomparison/vendor_list/vendor.phtml"/>
+            <action method="addColumn" translate="title"><name>product_price</name><title>Price</title><block>vendors.product.pricecomparison.price</block><sortorder>10</sortorder></action>
+            <action method="addColumn" translate="title"><name>product_url</name><title>Vendor</title><block>vendors.product.pricecomparison.vendor</block><sortorder>30</sortorder></action>
+        </block>
+    </vendors_comparison_process_chooseitem>
+
+    <vendors_comparison_process_deleteitem>
+        <block type="pricecomparison/product_item" name="root" output="toHtml" template="ves_pricecomparison/vendor_list_ajax.phtml">
+            <block type="pricecomparison/product_price" name="vendors.product.pricecomparison.price" template="ves_pricecomparison/vendor_list/price.phtml"/>
+            <block type="pricecomparison/product_vendor" name="vendors.product.pricecomparison.vendor" template="ves_pricecomparison/vendor_list/vendor.phtml"/>
+            <action method="addColumn" translate="title"><name>product_price</name><title>Price</title><block>vendors.product.pricecomparison.price</block><sortorder>10</sortorder></action>
+            <action method="addColumn" translate="title"><name>product_url</name><title>Vendor</title><block>vendors.product.pricecomparison.vendor</block><sortorder>30</sortorder></action>
+        </block>
+    </vendors_comparison_process_deleteitem>
+</layout>

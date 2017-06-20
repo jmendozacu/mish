@@ -1,0 +1,86 @@
+<?php
+/**
+ *
+ * Overrides template/page/html/header.phtml - adds backbutton, required data-role attributes etc, combines top links
+ */
+?>
+<?php
+$cookie = Mage::getModel("core/cookie");
+if(isset($_GET['iphone'])){
+    if($_GET['iphone'] != "true") {
+        $iphone = "false";
+        $cookie->delete("iphone");
+    } else if($_GET['iphone'] == "true"){
+        $iphone = 'true';
+        $cookie->set('iphone', $_GET['iphone']);
+    }
+} else {
+    $iphone = $cookie->get("iphone");
+}
+
+// Get Logo
+$configData = Mage::getStoreConfig('hybrid_mobile');
+$store_logo = $configData['header_settings']['store_logo'];
+if (isset($store_logo)) {
+    $store_logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'hybridmobile-logos/'. $store_logo;
+} else {
+    $store_logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'hybridmobile-logos/logo.png';
+    // $store_logo = $this->getLogoSrc();
+}
+?>
+
+<?php if ($iphone!="true"): ?>
+<?php $cookie->delete("iphone"); ?>
+
+<?php //echo $this->getWelcome()?>
+<?php //echo $this->getChildHtml('store_language') ?>
+<?php echo $this->getChildHtml('topSearch') ?>
+<div class="header-top">
+    <div class="header-wrapper">
+        <?php
+            $homepage = false;
+            $baseurl = Mage::getBaseUrl();
+            $curulr = Mage::helper('core/url')->getCurrentUrl();
+            if ($baseurl == $curulr || $baseurl == $curulr.'index.php/') {
+                $bars = true;
+                $homepage = true;
+            }
+        ?>
+        <div class="left-block">
+            <?php if($homepage): ?>
+                <a href="" id="go-back" class="icon-link off"><i class="fa fa-chevron-left"></i></a>
+            <?php else: ?>
+                <a href="" id="go-back" class="icon-link" data-state="page-back"><i class="fa fa-chevron-left"></i></a>
+            <?php endif; ?>
+            <div class="icon-link" id="open-category-menu"><i class="fa fa-bars"></i></div>
+        </div>
+
+        <?php
+            /*$category = Mage::registry('current_category');
+            $product = Mage::registry('current_product');
+            if($product) : ?>
+            <!--Get Product Name-->
+            <div class="center-block">
+                <h5 class="logo-text"><?php echo  $product->getName()?></h5>
+            </div>
+        <?php elseif ($category) : ?>
+            <!--Get Category Name-->
+            <div class="center-block">
+                <h5 class="logo-text"><?php echo  $category->getName()?></h5>
+            </div>
+        <?php else :*/ ?>
+            <!--Get CMS Header-->
+            <div class="center-block">
+                <a href="<?php echo $this->getUrl('') ?>" class="logo">
+                    <img src="<?php echo $store_logo; ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                </a>
+            </div>
+        <?php //endif ?>
+
+        <div class="right-block">
+            <a href="" id="open-search" class="icon-link"><i class="fa fa-search"></i></a>
+            <a href="<?php echo  $this->getUrl('checkout/cart')?>" class="icon-link"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

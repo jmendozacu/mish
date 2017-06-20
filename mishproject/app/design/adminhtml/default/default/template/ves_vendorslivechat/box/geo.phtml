@@ -1,0 +1,25 @@
+<?php $sessions = $this->getSessionBox() ?>
+<div class="page-top">
+    <?php if($this->getContentCmsBlock()){ ?>
+        <?php echo $this->getContentCmsBlock() ?>
+    <?php }else{ ?>
+        <h2><?php echo $this->__("Welcome to livechat") ?></h2>
+    <?php } ?>
+</div>
+<div class="page-bottom">
+    <h5><?php echo $this->__("Visitor") ?></h5>
+    <table class="small" id="ves_livechat_visitor">
+        <?php foreach($sessions as $session ): ?>
+            <?php $geo = $this->getGeoIp($session->getBoxId()) ?>
+            <tr id="ves_livechat_visitor_<?php echo $session->getId() ?>" onclick="ChatOption.viewBox('<?php echo $session->getId() ?>')">
+                <td><?php echo $session->getId() ?></td>
+                <td><?php echo $session->getName() ?></td>
+                <td><?php echo $session->getEmail() ?></td>
+                <td><?php echo $session->getIp() ?></td>
+                <td><img src="<?php echo $geo->getFlags()?>" class="icon-country" style="float:left;margin:0px 10px 0px 0px"/><span><?php echo $geo->getCountryName() ?></span></td>
+                <td><?php echo $geo->getCity() ?></td>
+                <td><?php echo Mage::getModel('core/date')->date("F j, Y, g:i a",$session->getData("created_time") ) ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+</div>

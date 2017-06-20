@@ -1,0 +1,332 @@
+
+
+<div>
+    <div style="text-align: center;">
+     <h3><?php echo $this->__('Selected Categories:')?></h3>
+    </div>
+
+    <?php 
+  
+
+    ?>
+      <?php 
+      $session = Mage::getSingleton('vendors/session');
+      $vendorIDses = $session->getId();
+        $modeladditional = Mage::getModel('vendors/additional')->load($vendorIDses,'vendor_id');
+
+    
+     // $modeladditional = Mage::getModel('vendors/additional')->load(8,'vendor_id');
+        $selected_categories = $modeladditional->getCategories();
+        $categories = explode(',',$selected_categories);
+      //  $vendor_info = Mage::getModel('vendors/vendor')->load(8,'vendor_id');
+        $vendor_info = Mage::getModel('vendors/vendor')->load($vendorIDses,'vendor_id');
+        $groupid = Mage::getModel('vendors/source_group')->getOptionArray();
+        $groupname= $groupid[$vendor_info->getGroupId()];
+        $vendorname= $vendor_info->getFirstname().' '.$vendor_info->getLastname();
+        $commission_model = Mage::getModel('vendorscommission/rule')->getCollection();
+        ?>
+        <?php $_helper = Mage::helper('catalog/category') ?>
+        <?php $categoryId = 2;?>
+        <?php $category = Mage::getModel('catalog/category')->load($categoryId); ?>
+        <?php $_categories = $category->getChildrenCategories(); ?>
+
+
+    <div class="selectedCategories">
+      <table style="border: solid 1px #000;" >
+          <thead>
+            <th style="padding: 5px;">Vendor Name</th>
+            <th style="padding: 5px;">Vendor Id</th>
+            <th  style="padding: 5px;">Selected Categories</th>
+             <th style="padding: 5px;">(%) Commission</th>
+            <th  style="padding: 5px;">Group Id</th>
+            <th style="padding: 5px; border-right: none;">Registration Date</th>
+           <!--  <th>No. of Sku loaded</th> -->
+          </thead>
+          <tbody>
+            <tr>
+                <td style="padding: 5px; width: 1%"><?php echo $vendorname; ?></td>
+            
+                <td style="padding: 5px; width: 1%"><?php echo $vendor_info->getVendorId(); ?></td>
+            
+                <td style="padding: 5px; width: 1%">
+                <?php 
+                  foreach ($categories as $cat) {
+                      $categoryModel = Mage::getModel('catalog/category')->load($cat);
+                      echo $catName=$categoryModel->getName()."<br>";
+                      $selected_cat_id[] = $categoryModel->getEntityId();
+                     
+                   }
+                ?>
+                </td>
+
+              
+            
+                <td style="padding: 5px; width: 1%"><?php //echo $vendor_info->getVendorId(); ?>
+               <?php 
+               foreach ($categories as $cat) {
+                      $catCommission = Mage::getModel('catalog/category')->load($cat)->getData('set_commission');
+                         
+                            // $catCommission = Mage::getModel('catalog/category')->load($_category->getId())->getData('set_commission');
+                                if($catCommission != ''){
+                                  echo $catCommission."%";
+                                  echo "<br>"; 
+                                }
+                            }
+
+                 /* foreach ($commission_model as $comm) {
+                      $assigncat = $comm['vendor_group_ids'];
+                      $arr_group = explode(',',$assigncat);
+
+                      if($vendor_info->getGroupId()==$arr_group[0]){
+                            echo $comm['commission_amount']."<br>";  
+                      }
+                     }   */
+                 
+                     ?>
+                </td>
+
+                  <td style="padding: 5px; width: 1%"><?php echo  $groupname; ?></td>
+            
+                <td style="padding: 5px; width: 1%; border-right: none;">
+                <?php 
+                  echo   $date = date('d-m-Y',strtotime($vendor_info->getCreatedAt()));
+                ?>
+                  
+                </td>
+              
+            </tr>
+          </tbody>
+
+      </table>
+      </div>
+</div>
+
+
+
+
+
+
+
+
+<div>
+    <div  style="text-align: center;">
+        <h3 style="padding-top:15px; ">Add New Category:</h3>
+    </div>
+    <div class="addNewCategory">
+        <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/addnewCat') ?>" enctype="multipart/form-data" method="post" id="category-tree">
+
+        <input type="hidden" name="vendorid" value="<?php echo  $vendorIDses;?>" >
+        
+
+
+
+
+<?php if (count($_categories) > 0): ?>
+    <ul id="tree1">
+        <?php foreach($_categories as $_category): ?>
+            <li>
+             <input type="checkbox"  name="parentcategory[]" id="subcat_<?php echo $_category->getId() ?>" value="<?php echo $_category->getId();?>" <?php if (in_array($_category->getId(), $selected_cat_id)) {echo "checked";} ?> > 
+                <a href="#"><?php echo $_category->getName() ?></a>
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php if($_category->hasChildren()):?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                    <ul>
+                        <?php foreach($_subcategories as $_subcategory): ?>
+                            <li>
+                             <input type="checkbox"  name="parentcategory[]" id="subcat_<?php echo $_subcategory->getId(); ?>" value="<?php echo $_subcategory->getId(); ?>" <?php if (in_array($_subcategory->getId(), $selected_cat_id)) {echo "checked";} ?> > 
+                                <a href="#"><?php echo $_subcategory->getName() ?></a>
+                                <?php $_category2 = Mage::getModel('catalog/category')->load($_subcategory->getId()) ?>
+                                <?php if($_category2->hasChildren()):?>
+                                <?php $_subcategories2 = $_category2->getChildrenCategories() ?>
+                                    <ul>
+                                        <?php foreach($_subcategories2 as $_subcategory2): ?>
+                                            <li>
+                                             <input type="checkbox"  name="parentcategory[]" id="subcat_<?php echo $_subcategory2->getId(); ?>" value="<?php echo $_subcategory2->getId();?>" <?php if (in_array($_subcategory2->getId(), $selected_cat_id)) {echo "checked";} ?> > 
+                                                <a href="#"><?php echo $_subcategory2->getName(); ?></a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+<!-- 
+            <?php 
+                   foreach ($commission_model as $catData) {
+                      $assigncat = $catData['vendor_group_ids'];
+                      $arr_group = explode(',',$assigncat);
+
+                      if($vendor_info->getGroupId()==$arr_group[0]){
+                           $dataunseralize=  unserialize($catData['conditions_serialized']);  
+                           $catIds = explode(',',$dataunseralize[conditions][0][value]); ?>
+                           <div>
+                             <ul>
+                               <?php 
+                               foreach ($catIds as $catId) {
+                                    $categoryModel = Mage::getModel('catalog/category')->load($catId);
+                                    $catName=$categoryModel->getName(); ?>
+                                         <li>
+                                            <input type="checkbox"  name="parentcategory[]" id="subcat_<?php echo $catId ?>" value="<?php echo $catId;?>" <?php if (in_array($catId, $selected_cat_id)) {echo "checked";} ?> > 
+                                            <?php echo $catName; ?> 
+                                        </li> 
+                              <?php  } ?>
+                              </ul>
+
+                          </div>
+                      <?php }
+                     }
+            ?>
+ -->
+
+
+
+<button type="submit" name="Submit" value="Submit">Update</button>
+      
+        </form>
+
+    </div>
+
+</div>
+
+
+
+  
+
+
+
+<style type="text/css">
+.tree, .tree ul {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+.tree ul {
+    margin-left:1em;
+    position:relative
+}
+.tree ul ul {
+    margin-left:.5em
+}
+.tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px solid
+}
+.tree li {
+    margin:0;
+    padding:0 1em;
+    line-height:2em;
+    color:#369;
+    font-weight:700;
+    position:relative
+}
+.tree ul li:before {
+    content:"";
+    display:block;
+    width:10px;
+    height:0;
+    border-top:1px solid;
+    margin-top:-1px;
+    position:absolute;
+    top:1em;
+    left:0
+}
+.tree ul li:last-child:before {
+    background:#fff;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+.indicator {
+    margin-right:5px;
+}
+.tree li a {
+    text-decoration: none;
+    color:#369;
+}
+.tree li button, .tree li button:active, .tree li button:focus {
+    text-decoration: none;
+    color:#369;
+    border:none;
+    background:transparent;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    outline: 0;
+}
+ .selectedCategories tr td {border: solid 1px #000; border-bottom: none; border-left: none;  }
+ .selectedCategories tr th {border: solid 1px #000; border-bottom: none; border-left: none;  border-top:none;  }
+
+</style>
+ <script src="<?php echo $this->getSkinUrl('cattree/jquery.min.js')?>" type="text/javascript"></script>
+ <script>jQuery.noConflict();</script>
+<script>
+jQuery.fn.extend({
+    treed: function (o) {
+      
+      var openedClass = 'glyphicon-minus-sign';
+      var closedClass = 'glyphicon-plus-sign';
+      
+      if (typeof o != 'undefined'){
+        if (typeof o.openedClass != 'undefined'){
+        openedClass = o.openedClass;
+        }
+        if (typeof o.closedClass != 'undefined'){
+        closedClass = o.closedClass;
+        }
+      };
+      
+        //initialize each of the top levels
+        var tree = jQuery(this);
+        tree.addClass("tree");
+        tree.find('li').has("ul").each(function () {
+            var branch = jQuery(this); //li with children ul
+            branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+            branch.addClass('branch');
+            branch.on('click', function (e) {
+                if (this == e.target) {
+                    var icon = jQuery(this).children('i:first');
+                    icon.toggleClass(openedClass + " " + closedClass);
+                    jQuery(this).children().children().toggle();
+                }
+            })
+            branch.children().children().toggle();
+        });
+        //fire event from the dynamically added icon
+      tree.find('.branch .indicator').each(function(){
+       jQuery(this).on('click', function () {
+            jQuery(this).closest('li').click();
+        });
+      });
+        //fire event to open branch if the li contains an anchor instead of text
+        tree.find('.branch>a').each(function () {
+            jQuery(this).on('click', function (e) {
+               jQuery(this).closest('li').click();
+                e.preventDefault();
+            });
+        });
+        //fire event to open branch if the li contains a button instead of text
+        tree.find('.branch>button').each(function () {
+           jQuery(this).on('click', function (e) {
+               jQuery(this).closest('li').click();
+                e.preventDefault();
+            });
+        });
+    }
+});
+
+//Initialization of treeviews
+
+jQuery('#tree1').treed();
+
+</script>

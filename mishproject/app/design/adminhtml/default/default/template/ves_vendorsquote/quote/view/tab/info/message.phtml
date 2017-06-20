@@ -1,0 +1,14 @@
+<?php /** @var $this Mage_Adminhtml_Block_Sales_Order_View_Tab_Info_Message */ ?>
+<?php $_quote = $this->getQuote() ?>
+<ul id="quote-message-list" class="note-list quote-message-list">
+    <?php foreach($_quote->getMessages() as $message):?>
+    <li>
+        <strong><?php echo Mage::getModel('core/date')->date('M d, Y',$message->getCreatedAt())?></strong>  <?php echo Mage::getModel('core/date')->date('h:i:s A',$message->getCreatedAt())?><span class="separator">|</span> by <strong class="<?php echo $this->getMessageClass($message)?>"><?php echo $message->getName()?></strong><?php if($message->getMessageType()==VES_VendorsQuote_Model_Quote_Message::TYPE_ADMIN):?> <?php echo $this->__('[admin]')?><?php endif;?>
+        <?php if($message->isVendorMessage() || $message->isAdminMessage()):?>
+        <br /><small><?php echo $this->__('Customer')?> <strong class="subdue"><?php echo $message->getCustomerNotify()?$this->__('Notified'):$this->__('Not Notified');?></strong></small>
+        <?php endif;?>
+        <br>
+        <?php echo $this->formatComment($message->getMessage());?>
+    </li>
+    <?php endforeach;?>
+</ul>

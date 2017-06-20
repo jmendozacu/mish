@@ -1,0 +1,21 @@
+<?php if($this->getBanner()->getId()):?>
+<ul class="messages">
+	<li class="notice-msg">
+		<ul>
+			<li><?php echo $this->__("You can copy this code below to use in the static page or static block where you want to display this banner")?></li>
+		</ul>
+	</li>
+</ul>
+<pre>
+{{banner banner_id='<?php echo $this->getBanner()->getIdentifier()?>'}}
+</pre>
+<br />
+<?php else:?>
+<ul class="messages">
+	<li class="notice-msg">
+		<ul>
+			<li><?php echo $this->__("You must save this banner first to see the implement code.")?></li>
+		</ul>
+	</li>
+</ul>
+<?php endif;?>

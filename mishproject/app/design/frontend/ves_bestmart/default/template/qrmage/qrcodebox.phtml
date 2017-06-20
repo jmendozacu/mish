@@ -1,0 +1,10 @@
+<?php if( $this->_helper->getActive() ): ?>
+<div class="block block-qrcode">
+	<div class="block-title">
+		<strong><span><?php echo $this->__('Product') ?> <?php echo $this->__('QR Code') ?></span></strong>
+	</div>
+	<div class="block-content" style="padding: 0; text-align: center;">
+    	<?php echo $this->getImageHtml(); ?>
+    </div>
+</div>
+<?php endif; ?>

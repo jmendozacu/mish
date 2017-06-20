@@ -1,0 +1,77 @@
+<?php $messages=$this->getMessage();?>
+<?php $request = $this->getRequestRma() ?>
+    <?php $count=0;?>
+    <?php if(count($messages)): ?>
+    <?php foreach($messages as $message):?>
+        <?php $count++;?>
+        <div class="message-box <?php echo $this->getClassType($message) ?> <?php if($count==sizeof($messages)) echo 'message-box-last arrow_up_ticket'?>" >
+            <div class="message-header inner-head">
+                <a href="javascript:void(0)" class="header_link <?php echo $this->getClassHeader() ?>">
+                    <span class="label">
+                        <?php echo $message->getData('from') ?>
+                        <span>
+                        <?php if( sizeof(unserialize($message->getAttachment())) != 0):?>
+                            <img src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/attachment_ico.png'); ?>" style="margin-right:10px;"/>
+                        <?php endif?>
+                            <?php echo Mage::getModel('core/date')->date('F j, Y, g:i a',$message->getData('created_time'))?>
+                        </span>
+                        <div class="clear"></div>
+                    </span>
+                </a>
+                <?php if($this->isCancelRma($request->getStatus())): ?>
+                <div class="quote-message" style="<?php if($count < sizeof($messages)) echo "display:none"?>" id="quote-message-<?php echo $message->getId() ?>">
+                    <a onclick="return requestOption.showFormReply()" class="do-action" title="<?php echo $this->__('Reply') ?>" rel="reply"><img src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/reply-icon.png'); ?>" /></a>
+                    <a onclick="return requestOption.quoteMessage(<?php echo $message->getId() ?>)" class="do-action" title="<?php echo $this->__('Quote') ?>" rel="quote"><img src="<?php echo $this->getSkinUrl('ves_vendors/rma/images/quote-icon.png'); ?>" /> </a>
+                </div>
+                <?php endif?>
+                <div class="clear"></div>
+                <div class="discription-message">
+			<span class="do-discription" id="do-discription-<?php echo $message->getId() ?>">
+				<?php if($count < sizeof($messages)){?>
+                    <?php echo Mage::helper('vendorsrma')->wordLimiter($message->getData('message'),140)?>
+                <?php }else{
+                    echo $this->__('To: ').'<span>'.$message->getData('to').'</span>';
+                }?>
+			</span>
+			<span class="discription" style="display:none" id="discription-<?php echo $message->getId() ?>">
+				<?php echo Mage::helper('vendorsrma')->wordLimiter($message->getData('message'),140)?>
+			</span>
+			<span class="reply" style="display:none" id="reply-<?php echo $message->getId() ?>">
+				<?php echo $this->__('To: ').'<span>'.$message->getData('to').'</span>'; ?>
+			</span>
+                </div>
+                <input type="hidden" value="<?php echo $message->getId() ?>" class="request_message_id" />
+            </div>
+            <div class="message-body" id="message-body-<?php echo $message->getId() ?>" style="<?php if($count < sizeof($messages)) echo "display:none"?>">
+                <div id="messagebody<?php  echo $message->getId() ?>">
+                    <?php $messageText = $message->getData('message');?>
+                    <?php if($this->isHtmlMessage($messageText)):?>
+                        <?php echo $messageText;?>
+                    <?php else:?>
+                        <pre><?php echo $messageText;?></pre>
+                    <?php endif;?>
+                </div>
+                <?php if( sizeof(explode(",",$message->getAttachment())) != 0 && $message->getAttachment()):?>
+                    <div class="attachment">
+                        <ul>
+                            <?php foreach (explode(",",$message->getAttachment()) as $key=>$attachment):?>
+                                <li><a href="<?php echo $this->getUrl('vesrma/download/index', array('file'=>base64_encode($attachment))) ?>" title="<?php echo $this->getNameAttachment($attachment) ?>"><span class="icon-attachment <?php echo $this->getClassIcon($attachment) ?>"><?php echo $this->getNameAttachment($attachment) ?></span></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif;?>
+            </div>
+        </div>
+<?php endforeach;?>
+
+<script type="text/javascript">
+    $$('.quote-message .do-action').each(function(div){
+        div.observe('click',function(e){
+            Event.stop(e);
+            e.stopPropagation();
+        });
+    });
+</script>
+<?php else: ?>
+    <p class="center"><?php echo $this->__("There is no record found.")?></p>
+<?php endif;?>

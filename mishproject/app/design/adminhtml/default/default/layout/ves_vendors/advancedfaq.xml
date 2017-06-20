@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<sellers_logged_in>
+       	<reference name="head">
+       		<action method="addCss"><stylesheet>otto_sellers/css/advancedfaq.css</stylesheet></action>
+       	</reference>
+    </sellers_logged_in>
+    
+    <adminhtml_advancedfaq_category_index>
+        <reference name="content">
+            <block type="advancedfaq/adminhtml_category" name="category" />
+        </reference>
+    </adminhtml_advancedfaq_category_index>
+    
+    <adminhtml_advancedfaq_faq_index>
+        <reference name="content">
+            <block type="advancedfaq/adminhtml_faq" name="faq" />
+        </reference>
+    </adminhtml_advancedfaq_faq_index>
+    
+    <adminhtml_advancedfaq_faq_edit>
+    	 <reference name="head">
+             <!--  <action method="addItem"><type>skin_css</type><name>otto_kbase/style.css</name><params/></action>-->
+        </reference>
+    	<update handle="editor" />
+    </adminhtml_advancedfaq_faq_edit>
+    
+   <sellers_advancedfaq_faq_index>
+    	<reference name="content">
+            <block type="advancedfaq/seller_faq" name="faq" />
+        </reference>
+    </sellers_advancedfaq_faq_index>
+       
+       
+    <sellers_advancedfaq_category_index>
+    	<reference name="content">
+            <block type="advancedfaq/seller_category" name="topic" />
+        </reference>
+    </sellers_advancedfaq_category_index>
+    
+    <sellers_advancedfaq_category_grid>
+    	<reference name="content">
+            <block type="advancedfaq/seller_category" name="topic" />
+        </reference>
+    </sellers_advancedfaq_category_grid>
+</layout>

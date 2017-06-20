@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Evirtual_Autoimport extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category   	Evirtual
+ * @package		Evirtual_Autoimport
+ * @copyright  	Copyright (c) 2013
+ * @license		http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+	<modules>
+		<Evirtual_Autoimport>
+			<version>0.0.2</version>
+		</Evirtual_Autoimport>
+	</modules>
+	<global>
+		<resources>
+			<evirtual_autoimport_setup>
+				<setup>
+					<module>Evirtual_Autoimport</module>
+					<class>Evirtual_Autoimport_Model_Resource_Setup</class>
+				</setup>
+			</evirtual_autoimport_setup>
+		</resources>
+		<blocks>
+			<autoimport>
+				<class>Evirtual_Autoimport_Block</class>
+			</autoimport>
+		</blocks>
+		<helpers>
+			<autoimport>
+				<class>Evirtual_Autoimport_Helper</class>
+			</autoimport>
+		</helpers>
+		<models>
+			<autoimport>
+				<class>Evirtual_Autoimport_Model</class>
+				<resourceModel>autoimport_resource</resourceModel>
+			</autoimport>
+			<autoimport_resource>
+				<class>Evirtual_Autoimport_Model_Resource</class>
+				<entities>
+					<entry>
+						<table>autoimport_entry</table>
+					</entry>
+					<entry_store>
+						<table>autoimport_entry_store</table>
+					</entry_store>
+					<activiy>
+						<table>autoimport_activiy</table>
+					</activiy>
+					<activiy_store>
+						<table>autoimport_activiy_store</table>
+					</activiy_store>
+				</entities>
+			</autoimport_resource>
+		</models>
+	</global>
+	<adminhtml>
+		<acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <autoimport>
+                                            <title>Evirtual Autoimport Settings</title>
+                                        </autoimport>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+		<layout>
+			<updates>
+				<evirtual_autoimport>
+					<file>evirtual_autoimport.xml</file>
+				</evirtual_autoimport>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Evirtual_Autoimport>
+					<files>
+						<default>Evirtual_Autoimport.csv</default>
+					</files>
+				</Evirtual_Autoimport>
+			</modules>
+		</translate>
+	</adminhtml>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Evirtual_Autoimport before="Mage_Adminhtml">Evirtual_Autoimport_Adminhtml</Evirtual_Autoimport>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	
+	<frontend>
+        <routers>
+            <autoimport>
+                <use>standard</use>
+                <args>
+                    <module>Evirtual_Autoimport</module>
+                    <frontName>autoimport</frontName>
+                </args>
+            </autoimport>
+        </routers>  
+    </frontend>
+	
+	<default>
+		<autoimport>
+		</autoimport>
+	</default>
+	
+	<crontab>
+        <jobs>
+            <evirtual_autoimport>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr><!-- every 5 minutes -->
+                </schedule>
+                <run>
+                    <model>evirtual_autoimport/observer::AutoImportSetup</model>
+                </run>
+            </evirtual_autoimport>
+        </jobs>
+    </crontab>
+</config>

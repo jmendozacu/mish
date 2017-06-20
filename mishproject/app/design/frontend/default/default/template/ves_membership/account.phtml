@@ -1,0 +1,15 @@
+<?php $vendor = $this->getVendor();?>
+<div class="box-content">
+	<?php $vendorStoreUrl = Mage::helper('vendorspage')->getUrl($vendor);?>
+	<ul>
+		<li><label><?php echo $this->__('Status:');?></label> <strong><?php echo $this->getStatusLabel($vendor->getStatus());?></strong></li>
+		<li><label><?php echo $this->__('Store Name:');?></label> <strong><?php echo $vendor->getTitle();?></strong></li>
+		<li><label><?php echo $this->__('Package:');?></label> <?php echo $vendor->getGroup()->getName();?></li>
+		<li><label><?php echo $this->__('Expiry Date:');?></label> <?php echo $this->formatDate($vendor->getExpiryDate());?></li>
+		<?php if($this->canViewStoreUrl()):?>
+			<li><label><?php echo $this->__('Store Url:');?></label> <a href="<?php echo $vendorStoreUrl;?>" target="_blank"><?php echo $vendorStoreUrl;?></a></li>
+			<?php echo $this->getChildHtml('additional_info')?>
+			<li><button class="button" onclick="window.open('<?php echo $this->getStoreManagerUrl()?>','_blank')"><span><span><?php echo $this->__('Manage Your Store')?></span></span></button></li>
+		<?php endif?>
+	</ul>
+</div>

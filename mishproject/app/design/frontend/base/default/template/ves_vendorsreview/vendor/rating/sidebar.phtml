@@ -1,0 +1,13 @@
+<?php 
+/**
+ * block VES_VendorsReview_Block_Vendor_Rating_Sidebar
+ */
+?>
+<ul>
+	<li>
+		<div class="left rating-box">
+			<div style="width:<?php echo $this->getRatingScore()?>%;" class="rating"></div>
+		</div>
+		<div class="left"><a href="<?php echo Mage::helper('vendorspage')->getUrl($this->getVendor(),'rating')?>"><?php echo $this->__('(%s Reviews)',$this->getReviewCount());?></a></div>
+	</li>
+</ul>

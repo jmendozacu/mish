@@ -1,0 +1,24 @@
+<?php $status=$this->getRequestStatusChange();
+if(count($status) >= 1){
+    ?>
+    <thead>
+    <tr>
+        <th><?php echo $this->__('Date') ?></th>
+        <th><?php echo $this->__('Vendor/Customer/Admin') ?></th>
+        <th><?php echo $this->__('Status') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($status as $history):?>
+        <tr>
+            <td class="label"><?php echo Mage::getModel('core/date')->date('F j, Y, g:i a',$history->getData('created_time')) ?></td>
+            <td class="label"><?php echo $this->getPrefixChangeBy($history->getData('type')).' '.$history->getData('change_by'); ?></td>
+            <td><?php echo Mage::getModel('vendorsrma/source_status')->getTitleById($history->getData('status')); ?></td>
+
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+<?php }else{ ?>
+    <span style="text-align:center;font-style:italic;display:block"><?php echo $this->__('No status change history') ?></span>
+<?php } ?>
+

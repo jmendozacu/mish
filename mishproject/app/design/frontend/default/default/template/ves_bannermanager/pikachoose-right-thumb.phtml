@@ -1,0 +1,43 @@
+
+<link type="text/css" rel="stylesheet" href="<?php echo $this->getSkinUrl('pikachoose/css/right.css')?>" />
+	
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('pikachoose/js/jquery-1.8.0.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('pikachoose/js/jquery.jcarousel.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('pikachoose/js/jquery.pikachoose.js') ?>"></script>
+
+
+<?php $banner = $this->getBanner(); ?>
+<?php if(!$banner) echo $this->__('Banner Not Found!'); ?>
+
+<script type="text/javascript">
+	$pika = jQuery.noConflict();
+	$pika(document).ready(function(){
+	
+			$pika("#pikame").PikaChoose({ 
+			carousel:true, carouselVertical:true,
+			transition:[<?php echo $banner->getEasing();?>],
+			});
+			
+			$pika(".pika-stage").css({
+				'left':0,
+				'width':'<?php echo $banner->getWidth(); ?>',
+				'height':'<?php echo $banner->getHeight(); ?>',
+
+			});
+			
+			$pika(".pika-textnav").css({
+				'width':'<?php echo $banner->getWidth(); ?>',
+			});
+			
+	});
+	
+</script>	
+
+	
+<div class="pikachoose">
+	<ul id="pikame" class="jcarousel-skin-pika">
+		<?php foreach($this->getItems() as $items): ?>
+		<li><img src="<?php echo Mage::helper('bannermanager/image')->init($items->getFilename())->resize($banner->getWidth(),$banner->getHeight()) ?>" title="<?php echo $items->getTitle()?>" alt="" /><span><?php echo $items->getDescription()?></span></li>
+		<?php endforeach; ?>
+	</ul>
+</div>

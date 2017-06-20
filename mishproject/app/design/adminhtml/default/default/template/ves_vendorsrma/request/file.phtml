@@ -1,0 +1,8 @@
+<tr id="file0">
+    <td class="label"><label for="filename"><?php echo $this->__('File : (').Mage::helper('vendorsrma/config')->maxSizeUpload().'Mb) (Allow extension :'?><?php echo Mage::helper('vendorsrma/config')->fileExtension()." )" ?></label></td>
+    <td class="value">
+        <input type="file" id="filename0" name="filename0" value="" style="margin-right:-3px"/>
+        <input type="hidden" id="filename" name="request[filename]" value="0">
+        <?php echo $this->getAddButtonHtml() ?>
+    </td>
+</tr>

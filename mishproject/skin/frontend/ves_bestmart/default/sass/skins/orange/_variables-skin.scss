@@ -1,0 +1,7 @@
+$image-theme-path-base:'../../../images/';
+$image-theme-path : '../../../images/';
+
+
+$theme-color-default   : #ff9600; // using for default color of all pages such as background color for top menu, block header
+
+$theme-color-three	   :darken($theme-color-default, 12%);

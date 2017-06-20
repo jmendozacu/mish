@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Etheme_Ajaxaddto>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Etheme_Ajaxaddto>
+    </modules>
+</config> 

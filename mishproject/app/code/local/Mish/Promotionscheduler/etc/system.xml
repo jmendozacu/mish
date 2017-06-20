@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <promotionschedulers translate="label" module="promotionscheduler">
+            <label>Mish Promotion Scheduler</label>
+            <sort_order>100</sort_order>
+        </promotionschedulers>
+    </tabs>
+    <sections>
+        <promotionscheduler translate="label" module="promotionscheduler">
+            <label>Promotion Scheduler</label>
+            <tab>promotionschedulers</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+         <groups>
+           <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                       <enable translate="label">
+                            <label>Enable </label>
+                            <comment>Enable or Disable module</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable>
+
+                       <!--     <enable translate="label">
+                                <label>Enable </label>
+                                <comment>Enable or Disable reminder setting</comment>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>91</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                                <source_model>adminhtml/system_config_source_yesno</source_model>
+                            </enable> -->
+
+                             <days translate="label">
+                                <label>Number of Days </label>
+                                <comment>Promotion Expiry mail will trigger nth days earlier from "To Date" of Promotion rules</comment>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>92</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </days>
+                             <receivername translate="label">
+                                <label>Receiver Name </label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>92</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </receivername>
+                             <receivermail translate="label">
+                                <label>Receiver Mail Id </label>
+                                <frontend_type>text</frontend_type>
+                                <sort_order>92</sort_order>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>1</show_in_store>
+                            </receivermail>
+
+                      
+
+                    </fields>
+                   </general>  
+
+
+                </groups>    
+        </promotionscheduler>
+    </sections>
+</config>

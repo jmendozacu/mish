@@ -1,0 +1,130 @@
+<?php
+
+ $helper = Mage::helper("ves_tempcp/framework")->getFramework( );
+ $themeConfig = $helper->getConfig();
+
+?>
+
+
+<!-- Footertop Section (blue color) -->
+<div style="text-align: center">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footertop-section')->toHtml();?>
+</div>
+<div>
+
+<!-- FooterLink Section -->
+  <div class="footerlink-section"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footerlink-section')->toHtml();?>
+    <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+    </div>
+  </div>
+<hr>
+<!-- Footer Payment, Partners and social links Section -->
+  <div class="footer-pay-sociallinks-section container">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer-pay-sociallinks-section')->toHtml();?>
+    <div class="clr"></div>
+  </div>
+<hr>
+<div class="container categoryListning">
+<!-- Categories Section -->
+<?php
+    $rootCategory =  Mage::app()->getStore()->getRootCategoryId(); 
+    $categorModel = Mage::getModel('catalog/category')->load($rootCategory); 
+    $_categories = $categorModel->getChildrenCategories(); 
+    foreach ($_categories as $category) {
+      $catName = $category->getName();
+      $caturl = $category->geturl(); ?>
+      <div>
+          <span><a href="<?php echo $caturl; ?>"><?php echo $catName; ?></a> : </span>
+          <?php
+              $_subcategories = $category->getChildrenCategories();
+              foreach ($_subcategories as $subcategory) {
+                $subcatName = $subcategory->getName();
+                $subcaturl = $subcategory->geturl(); ?>
+          <span><a href="<?php echo $subcaturl; ?>"><?php echo $subcatName; ?></a> </span>
+             <?php  
+              echo " / ";
+
+             } ?>
+      </div>
+    <?php } ?>
+<hr>
+</div>
+<!-- About Mish Footer Section -->
+</div>
+<div class="fotteraboutMiss">
+  <div class="container">
+  <h3><?php echo __("About Mish"); ?></h3>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('about-mish-footer')->toHtml();?>
+    </div>
+</div>
+
+<div class="copyrightouter">
+  <div class="container">
+    <div class="fl">Copyright 2017 - Mercadito - All rights served. </div>
+    <div class="fr">Powered by bluethink.in</div>
+    <div class="clr"></div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- <?php if(!$themeConfig->get("disable_design",0)){ ?>
+					<?php //echo Mage::helper('ves_tempcp')->__('Developed By');?> <a href="http://www.venusthemes.com" title="Venusthemes - Magento themes clubs">VenusThemes</a><?php } ?>	 -->	
+
+<?php if($themeConfig->get("enable_scrolltop", 0)) { ?>
+	<div id="top"><a class="scrollup" href="#"><i class="fa fa-angle-up"></i><?php echo $this->__('Top');?></a></div>
+<?php } ?>
+<!-- script used in personal logistic start here -->
+ <script type="text/javascript">
+   
+ function radiocheck(id,cost) {
+ 	var inputField = document.querySelector("label[for=s_method_personallogistic_personallogistic] .price").textContent;
+ 	//alert(inputField);
+ var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	document.querySelector("label[for=s_method_personallogistic_personallogistic] .price").innerHTML="";
+        document.querySelector("label[for=s_method_personallogistic_personallogistic] .price").innerHTML=this.responseText;
+     //console.log("********* "+this.responseText);
+     return true;
+    }
+    
+  };
+  
+  xhttp.open("GET",'<?php echo $this->getUrl('personallogistic/index/plcheckoutvalueSet');?>'+"?id="+id+","+cost+","+inputField, true);
+  xhttp.send();
+  //triggershippment();
+  shipping.save();
+  
+    	}
+
+
+    </script>
+
+
+    

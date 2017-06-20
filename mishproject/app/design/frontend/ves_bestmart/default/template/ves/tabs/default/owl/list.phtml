@@ -1,0 +1,201 @@
+<?php
+$list_image_width = (int)$this->getConfig("image_width", 300);
+$list_image_height = (int)$this->getConfig("image_height", 300);
+$swap_image_number = (int)$this->getConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getConfig("show_pzoom");
+$enable_new_icon = $this->getConfig("enable_new_icon");
+$enable_sale_icon = $this->getConfig("enable_sale_icon");
+$show_title = $this->getConfig('show_title');
+$enable_short_desc = $this->getConfig('show_desc');
+$show_review = $this->getConfig('show_review');
+$show_price = $this->getConfig('show_price');
+$show_addcart = $this->getConfig("show_btn");
+$show_compare_wishlist = $this->getConfig("show_wc") ;
+$quickview = $this->getConfig("enable_quickview");
+$swap_image = $this->getConfig("enable_swap");
+$itemsperpage = (int)$this->getConfig("itemspage",4);
+$auto_play_mode = (int)$this->getConfig("auto_play");
+$title_maxchar = (int)$this->getConfig("title_maxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getConfig("interval");
+$show_tab_title = $this->getConfig("show_tab_title");
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("itemsrow");
+$cols = !empty($cols)?$cols:1;
+$span = floor(12/$cols);
+$active = 'news';
+
+$qty = $this->getConfig("quanlity", 5);
+$show_tab_icon = $this->getConfig("show_tab_icon");
+$icon_width = $this->getConfig("icon_width", 50);
+$icon_height = $this->getConfig("icon_height", 50);
+$class_prefix =  $this->getConfig("prefix", 50);
+
+$modid = rand(1,9)+rand();
+$modid = $modid.time();
+
+/*Owl Carousel Setting*/
+
+$auto_play_mode = (int)$this->getConfig("auto_play");
+$interval = (int)$this->getConfig("interval");
+$lazy_load_image = $this->getConfig("lazy_load_image", 0);
+$loop = (int)$this->getConfig("loop", 1);
+$slide_by = (int)$this->getConfig("slide_by", 1);
+$margin_item = $this->getConfig("margin_item", 0);
+$show_nav = (int)$this->getConfig("show_navigator", 1);
+$rtl = (int)$this->getConfig("rtl", 0);
+$mouse_drag = (int)$this->getConfig("mouse_drag", 1);
+$touch_drag = (int)$this->getConfig("touch_drag", 1);
+$mobile_items = (int)$this->getConfig("mobile_items", 1);
+$tablet_items = (int)$this->getConfig("tablet_items", 2);
+$tablet_small_items = (int)$this->getConfig("tablet_small_items", 2);
+$portrait_items = (int)$this->getConfig("portrait_items", 3);
+$large_items = (int)$this->getConfig("large_items", 5);
+$custom_items = $this->getConfig("custom_items", "");
+
+$carousel_responsive = (int)$this->getConfig("carousel_responsive", 1);
+$cols = (int)$this->getConfig("default_items", 4);
+$cols = !empty($cols)?(int)$cols:4;
+$itemsperpage = 1;
+
+$auto_play = $auto_play_mode?"true":"false";
+
+$default_items = $cols;
+$cols = 1;
+$span = 12/$cols;
+
+$price_prefix = "_vestab_".$modid;
+$_helper = $this->helper('catalog/output');
+
+$layout_type = $this->getConfig('ajax_type', "");
+if($layout_type == 'default'){
+	$common_layout = $this->getConfig('common_layout');
+	$enable_deals = true;
+	$module = $modid;
+	if(isset($common_layout) && !empty($common_layout)){
+		$default_layout = $common_layout;
+	}
+}
+$pretext = $this->getConfig("pretext");
+$tab_index = $this->getConfig("tab_index", "");
+?>
+
+<div <?php if($tab_index): ?> data-index="<?php echo $tab_index; ?>" data-icon="<?php echo $this->getConfig('tab_icon') ?>" data-title="<?php echo $this->getConfig('title'); ?>" <?php endif; ?> class="<?php echo $this->getConfig('prefix');?> block categorytabs <?php if($tab_index): ?> floor-fixed-panel-play <?php endif; ?>" id="categorytab<?php echo $modid;?>">
+
+	<?php if($this->getConfig('title') || ($pretext=$this->getConfig("pretext")) || isset($cms)) { ?>
+	<div class="block-title">
+		<?php if($this->getConfig('title')) { ?>
+		<h3><?php echo $this->getConfig('title') ?></h3>
+		<?php } ?>
+		<?php if( ($pretext=$this->getConfig("pretext")) && !isset($cms) ) { ?>
+		<div class="pretext"><?php echo $pretext; ?></div>
+		<?php } else if(isset($cms)) {
+			?>
+			<div class="pretext"><?php echo $cms; ?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+
+	
+	<div class="block-content">	
+	<?php if(!empty($items)) { ?>
+
+	<div class="tab-nav">
+		<ul class="nav nav-tabs" id="categorytab<?php echo $modid;?>">
+			<?php
+			$x = 1;
+			foreach( $items as $item ){
+				$icon = $class = '';
+				if($show_tab_icon) {
+					$icon = $this->getCategoryImage( $item['category_id'], $icon_width, $icon_height );
+				}
+				if( isset($tabClass[$x]) && $tabClass[$x] != ''){ $class = 'class="'.$tabClass[$x].'"'; } ?>
+
+				<li><a href="#categorytab-<?php echo $item['category_id'].$modid;?>" data-toggle="tab" <?php echo $class; ?>>
+					<?php if($show_tab_icon && $icon) { ?>
+					<img src="<?php echo $icon; ?>" alt="<?php echo $this->stripTags($item['title']); ?>"/>
+					<?php } ?>
+					<?php if($show_tab_title){ ?>
+					<?php echo $this->htmlEscape( $item['title'] ); ?>
+					<?php } ?>
+				</a></li>
+				<?php $x++; } ?>
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<?php
+			$i=0; foreach( $items as $tab => $item ) {
+				if( isset($item['products']) && $item['products'] ) {
+					$products = $item['products'];
+					if( empty($products) || $products->getSize() <= 0){ continue; }
+					$products = $products->getItems(); ?>
+
+					<div class="tab-pane box-products categorytabcarousel<?php echo $modid; ?> slide" id="categorytab-<?php echo $item['category_id'].$modid;?>">
+
+						<div id="owlproductcarousel<?php echo $item['category_id'].$modid;?>" class="owl-carousel">
+							<?php
+							$pages = array_chunk( $products, $itemsperpage);
+							$price_prefix = $price_prefix."_".$tab;
+							?>
+							<?php foreach ($pages as  $k => $_productCollection ) {  ?>
+							<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> <?php if($k==0) {?>active<?php } ?> products-grid no-margin">
+								<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+									<?php require ($product_module_path); ?>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</div>
+
+							<script type="text/javascript">
+								jQuery(window).load(function() {
+									var owl  = jQuery('#owlproductcarousel<?php echo $item['category_id'].$modid;?>');
+									owl.owlCarousel({
+										autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+										slideSpeed: <?php echo $interval?(int)$interval:'500';?>,
+										autoplayHoverPause: true,
+										<?php if($lazy_load_image) { ?>
+											lazyLoad:true,
+											<?php } ?>
+											navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+											slideBy: <?php echo (isset($slide_by) && $slide_by)?(int)$slide_by:1; ?>,
+											loop: <?php echo $loop == 1?'true':'false'; ?>,
+
+											margin: <?php echo $margin_item?(int)$margin_item:'0'; ?>,
+											navigation: <?php echo $show_nav == 1?'true':'false'; ?>,
+											rtl: <?php echo $rtl == 1?'true':'false'; ?>,
+											mouseDrag: <?php echo $mouse_drag == 1?'true':'false'; ?>,
+											touchDrag: <?php echo $touch_drag == 1?'true':'false'; ?>,
+											autoWidth: false,
+											responsive: <?php echo $carousel_responsive == 1?'true':'false'; ?>,
+											items: <?php echo $default_items?(int)$default_items:4; ?>,
+					            itemsDesktop : [1199,<?php echo $default_items?(int)$default_items:4; ?>], //4 items between 1199px and 980px
+					            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+					            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+					            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+					            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>], // itemsMobile disabled - inherit from itemsTablet option
+					            itemsCustom: <?php echo (isset($custom_items) && $custom_items)?'['.$custom_items.']':'false';?> // custom numbers item view on screen
+					        });
+});
+</script>
+</div>
+<?php } ?>
+<?php } ?>
+</div>
+
+<script type="text/javascript">
+	jQuery(function () {
+		jQuery('#categorytab<?php echo $modid;?> a:first').tab('show');
+	})
+</script>
+<?php } ?>
+</div>
+
+</div>

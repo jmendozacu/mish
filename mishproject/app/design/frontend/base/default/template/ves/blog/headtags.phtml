@@ -1,0 +1,92 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+$post = $this->getPost();
+$category = $this->getCategory();
+$social_share_data = array();
+if($post) {
+	$social_share_data['image'] = "";
+	if($post->getFile()) {
+		$social_share_data['image'] = $post->getImageURL( $this->getPostConfig("post_imagetype") );
+	}
+	$social_share_data['title'] = $post->getTitle();
+	$social_share_data['description'] = $post->getDescription();
+	$social_share_data['description'] = strip_tags($social_share_data['description']);
+	$social_share_data['description'] = str_replace(array("\n\r", "\n"), "", $social_share_data['description']);
+	$social_share_data['description'] = trim($social_share_data['description']);
+	$social_share_data['url'] = $post->getURL();
+} 
+
+if($category) {
+	$social_share_data['image'] = "";
+	if($category->getFile()) {
+		$social_share_data['image'] = $category->getImageURL('l');
+	}
+	
+	$social_share_data['title'] = $category->getTitle();
+	$social_share_data['description'] = $category->getDescription();
+	$social_share_data['description'] = strip_tags($social_share_data['description']);
+	$social_share_data['description'] = str_replace(array("\n\r", "\n"), "", $social_share_data['description']);
+	$social_share_data['description'] = trim($social_share_data['description']);
+	$social_share_data['url'] = $category->getCategoryLink();
+}
+
+$enable_share_facebook = true;
+$enable_share_twitter = true;
+$enable_share_googleplus = true;
+$enable_share_pinterest= true;
+?>
+
+<?php 
+if($social_share_data){ 
+    if($enable_share_facebook) {
+    	?>
+    	<!-- Facebook Share Meta Tags-->
+    	<meta property="og:title" content="<?php echo $social_share_data['title']; ?>" />
+		<meta property="og:type" content="article" />
+		<meta property="og:image" content="<?php echo $social_share_data['image']; ?>" />
+		<meta property="og:url" content="<?php echo $social_share_data['url']; ?>" />
+		<meta property="og:description" content="<?php echo $social_share_data['description']; ?>" />
+    	<?php
+    }
+    
+    if($enable_share_twitter) {
+    	?>
+    	<!-- Twitter Share Meta Tags-->
+    	<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content="<?php echo $social_share_data['title']; ?>" />
+		<meta name="twitter:description" content="<?php echo $social_share_data['description']; ?>" />
+		<meta name="twitter:image" content="<?php echo $social_share_data['image']; ?>" />
+    	<?php
+    }
+}
+?>
+
+

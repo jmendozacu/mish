@@ -1,0 +1,61 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 3.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <@email:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+.buttons{
+    @include clearfix();
+    padding: 20px 0; 
+    .left{
+       float:left;
+    }
+    .right{
+        float:right;
+    }
+
+}
+
+.btn-outline-inverse{
+    @include button-variant-outline($btn-default-color, $theme-color-default, $theme-color-default, $white, $theme-color-primary , $theme-color-primary );
+} 
+.btn-outline{  
+    border:0;
+    cursor: pointer;
+    text-transform: uppercase;
+    @include transition (all 0.4s ease 0s);
+    @include border-radius(0);
+    color: $white;
+    font-size: $font-size-base;
+    letter-spacing: 0.4px;
+    font-family:  $font-family-three;
+    font-weight: 600;
+    margin: 0 !important;
+    padding-left:25px;
+    padding-right:25px;
+    line-height: 20px;
+    background: $theme-color-secondary;
+    &:hover {
+        background: $theme-color-default;
+        border: 0!important;
+        color: $white;
+        @include transition (all 0.4s ease 0s);
+        text-decoration: none;
+    }
+} 
+
+.btn-default{
+    background: $theme-color-default;
+    border-color: transparent;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.btn-primary{
+    background: $white;
+    color: $black;
+    border-color: transparent;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}

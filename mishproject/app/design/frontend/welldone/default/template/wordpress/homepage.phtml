@@ -1,0 +1,22 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $theme=Mage::helper('welldone');?>
+<?php if($theme->getLayoutOption('blog/grid')):?>
+    <section class="content">
+        <div class="container"><!-- <a id="load-more" href="#">load more</a> -->
+            <div class="posts-isotope">
+                <?php echo $this->getPostListHtml() ?>
+            </div>
+        </div>
+    </section>
+<?php else:?>
+    <div class="blog-content">
+        <?php echo $this->getPostListHtml() ?>
+    </div>
+<?php endif;?>

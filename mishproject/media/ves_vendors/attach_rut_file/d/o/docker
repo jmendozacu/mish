@@ -1,0 +1,18 @@
+install docker machine
+install virtualbox => http://askubuntu.com/questions/367248/how-to-install-virtualbox-from-command-line
+
+
+https://www.howtoforge.com/tutorial/how-to-install-wordpress-with-docker-on-ubuntu/
+https://docs.docker.com/machine/get-started/
+docker-machine -D regenerate-certs default
+
+
+Bios Settings
+Security-> System Security
+Enable Virtualization Technology (VTx) and Virtualization Technology Directed I/O (VTd)
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-and-phpmyadmin-with-docker-compose-on-ubuntu-14-04
+
+
+docker run -e MYSQL_ROOT_PASSWORD=code5 -e MYSQL_USER=wpuser -e MYSQL_PASSWORD=wpuser@ -e MYSQL_DATABASE=wordpress_db -v /root/wordpress/database:/var/lib/mysql --name wordpressdb -d mariadb

@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <NextBits_HelpDesk>
+      <version>0.2.0</version>
+    </NextBits_HelpDesk>
+  </modules>
+  <frontend>
+    <routers>
+      <helpdesk>
+        <use>standard</use>
+          <args>
+            <module>NextBits_HelpDesk</module>
+            <frontName>helpdesk</frontName>
+          </args>
+      </helpdesk>
+    </routers>
+		<layout>
+		  <updates>
+			<helpdesk>
+			  <file>helpdesk.xml</file>
+			</helpdesk>
+		  </updates>
+		</layout>
+  </frontend>
+  <global>
+    <helpers>
+      <helpdesk>
+        <class>NextBits_HelpDesk_Helper</class>
+      </helpdesk>
+    </helpers>
+	<blocks>
+	  <helpdesk>
+		<class>NextBits_HelpDesk_Block</class>
+	  </helpdesk>
+	</blocks>
+	<models>
+	  <helpdesk>
+		<class>NextBits_HelpDesk_Model</class>
+		<resourceModel>helpdesk_mysql4</resourceModel>
+	  </helpdesk>
+	  <helpdesk_mysql4>
+		<class>NextBits_HelpDesk_Model_Mysql4</class>
+		<entities>		  
+			  <ticket>
+				<table>nb_hd_ticket</table>
+			  </ticket>
+			   <comment>
+				<table>nb_hd_comment</table>
+			  </comment>
+        </entities>
+	  </helpdesk_mysql4>
+	</models>
+	<resources>
+	  <helpdesk_setup>
+		<setup>
+		  <module>NextBits_HelpDesk</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </helpdesk_setup>
+	  <helpdesk_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </helpdesk_write>
+	  <helpdesk_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </helpdesk_read>
+	</resources>
+	<template>
+		<email>
+			<help_desk_email_email_template translate="label" module="helpdesk">
+				<label>HelpDesk Email Template</label>
+				<file>helpdesk_email.html</file>
+				<type>html</type>
+			</help_desk_email_email_template>
+		</email>
+    </template>
+  </global>
+  <admin>
+	<routers>
+	  <helpdesk>
+	    <use>admin</use>
+		<args>
+		  <module>NextBits_HelpDesk</module>
+		  <frontName>helpdesk</frontName>
+		</args>
+	  </helpdesk>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <helpdesk module="helpdesk">
+		<title>HelpDesk</title>
+		<sort_order>90</sort_order>
+		<children>
+		  <!-- <helpdeskbackend module="helpdesk">
+			<title>Helpdesk</title>
+			<sort_order>0</sort_order>
+			<action>helpdesk/adminhtml_helpdeskbackend</action>
+		  </helpdeskbackend> -->
+		  <ticket module="helpdesk">
+		    <title>Manage Ticket</title>
+			<sort_order>0</sort_order>
+			<action>helpdesk/adminhtml_ticket</action>
+		  </ticket>
+		</children>
+	  </helpdesk>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<helpdesk translate="title" module="helpdesk">
+			  <title>HelpDesk</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <helpdeskbackend translate="title">
+			<title>Helpdesk</title>
+		  </helpdeskbackend>
+		  <ticket translate="title">
+			<title>Manage Ticket</title>
+			<sort_order>0</sort_order>
+		  </ticket>
+			  </children>
+			</helpdesk>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<helpdesk>
+		  <file>helpdesk.xml</file>
+		</helpdesk>
+	  </updates>
+	</layout>
+  </adminhtml>
+  <default>
+        <help_desk>
+            <email>
+				<enabled>1</enabled>
+				<help_desk_email><![CDATA[helpdesk@yoursite.com]]></help_desk_email>
+				<help_desk_name><![CDATA[HelpDesk Admin]]></help_desk_name>
+                <email_template>help_desk_email_email_template</email_template>
+            </email>
+        </help_desk>
+    </default>
+</config> 

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!-- adminhtml -->
+    <adminhtml_vendors_rating_index>
+        <reference name="content">
+			<block type="vendorsreview/adminhtml_rating" name="vendorsreview.rating" />
+		</reference>
+	</adminhtml_vendors_rating_index>
+	<adminhtml_vendors_review_index>
+        <reference name="content">
+			<block type="vendorsreview/adminhtml_review" name="vendorsreview.review" />
+		</reference>
+	</adminhtml_vendors_review_index>
+    
+<!-- end #adminhtml -->
+    
+    <!-- review -->
+    <vendors_review_index>
+        <reference name="content">
+            <block type="vendorsreview/adminhtml_review" name="frontend.review" />
+        </reference>
+    </vendors_review_index>
+    
+    <vendors_review_edit>
+        <reference name="left">
+            <block type="vendorsreview/adminhtml_review_edit_tabs" name="front.review.edit.tabs" />
+        </reference>
+    	<reference name="content">
+            <block type="vendorsreview/adminhtml_review_edit" name="front.review.edit" />
+        </reference>
+    </vendors_review_edit>
+</layout>

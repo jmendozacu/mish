@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsLiveChat>
+        	<name>Vendor Live Chat</name>
+        	<url>http://www.vnecoms.com/magento-marketplace/plugins/marketplace-vendor-livechat.html</url>
+        	<version>1.0.1.0</version>
+        	
+            <active>true</active>
+            <codePool>local</codePool>
+			<depends>
+                <VES_Vendors />
+				<VES_VendorsPage />
+            </depends>
+        </VES_VendorsLiveChat>
+    </modules>
+</config> 

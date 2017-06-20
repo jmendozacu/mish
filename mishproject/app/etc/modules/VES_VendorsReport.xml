@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VES_VendorsReport>
+        	<name>Vendor Reports</name>
+        	<url>http://www.vnecoms.com/magento-marketplace/plugins/marketplace-vendor-reports.html</url>
+        	<version>1.0.1.0</version>
+        	
+        	
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <VES_Vendors />
+                <Mage_Sales />
+            </depends>
+        </VES_VendorsReport>
+    </modules>
+</config>

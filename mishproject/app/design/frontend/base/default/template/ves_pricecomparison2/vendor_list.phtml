@@ -1,0 +1,75 @@
+<?php $relatedVendorProducts = $this->getVendorRelatedProducts();?>
+<div class="pricecomparison-container">
+	<h4><?php echo $this->__('Sold by %s Sellers',$relatedVendorProducts->count())?></h4>
+	<div id="pricecomparison-table-container" class="pricecomparison-table-container">
+		<table id="pricecomparison-table" cellpadding="0" cellspacing="0" class="pricecomparison-table">
+            <colgroup>
+                <?php foreach($this->getColumns() as $column):?>
+                    <col<?php if(isset($column['width']) && $column['width'])?> width="<?php echo $column['width']?>" />
+                <?php endforeach;?>
+            </colgroup>
+	        <thead>
+	            <tr>
+	                <?php foreach($this->getColumns() as $column):?>
+	                    <th class="<?php echo $column['name']?><?php if(isset($column['sortable']) && $column['sortable']):?> sortable<?php endif;?>"<?php if(isset($column['sortable']) && $column['sortable']):?> data-sortby="<?php echo $column['name']?>"<?php endif;?>><?php echo $column['title']?></th>
+	                <?php endforeach;?>
+	            </tr>
+	        </thead>
+	        <tbody>
+                
+	        </tbody>
+        </table>
+    </div>
+    <div id="pricecomparison-pager" class="pricecomparison-pager" style="display: none;"><a class="load-text"><?php echo $this->__('View all %s Sellers',$relatedVendorProducts->count());?></a></div>
+    <?php $isConfigurable = $this->getProduct()->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE;?>
+    <script type="text/javascript">
+    	<?php
+    	    $rows = array();
+            foreach ($relatedVendorProducts as $priceComparison){
+                $vendor = Mage::getModel('vendors/vendor')->load($priceComparison->getVendorId());
+                $rows[$vendor->getId()] = $this->getVendorDataForFilter($vendor);
+                
+                $rowHtml = '<tr>';
+                foreach($this->getColumns() as $column){
+                    $columnBlock = $this->getColumnBlock($column['block'],$vendor,$priceComparison);
+                    $rowHtml .= '<td class="'.$column['name'].' '.$column['name'].$vendor->getId().'">'.$columnBlock->toHtml().'</td>';
+                    $rows[$vendor->getId()]['column_values'][$column['name']] = $columnBlock->getValueForSorting();
+                    $rows[$vendor->getId()]['column_html'][$column['name']] = $columnBlock->toHtml();
+                }
+                $rowHtml .='</tr>';
+                $rows[$vendor->getId()]['pricecomparison_html'] = $rowHtml;
+                $priceComparisonData = $priceComparison->getData();
+                $priceComparisonData['additional_info'] = json_decode($priceComparisonData['additional_info'],true);
+                $rows[$vendor->getId()]['data'] = $priceComparisonData;
+            }
+        ?>
+        var numOfDisplayProducts = <?php echo $this->getNumberOfShowingProducts();?>;
+        var priceComparisonJson = <?php echo json_encode($rows)?>;
+		var priceComparisonTable = new PriceComparison('pricecomparison-table','pricecomparison-pager',priceComparisonJson,{is_configurable: <?php if($isConfigurable):?>true<?php else:?>false<?php endif;?>,default_sort:'product_price',num_of_display_products:numOfDisplayProducts});
+		var priceComparisonForm = new VarienForm('product_addtocart_form');
+		priceComparisonForm.submit = function(button) {
+            if (this.validator.validate()) {
+                var form   = this.form;
+                var oldUrl = form.action;
+                var pricecomparisonId = button.readAttribute('data-pricecomparison');
+                if(pricecomparisonId){
+                    form.action = form.action+'pricecomparison/'+pricecomparisonId;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(priceComparisonForm);
+		
+	</script>
+</div>

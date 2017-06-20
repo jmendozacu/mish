@@ -1,0 +1,100 @@
+/**
+ * Web Application Prefix Apply For Making Owner Styles
+ */
+$app-brand-prefix        : ves !default;
+
+/**
+ *   Blocks Layout Selectors 
+ */
+
+$block-prefix 			 : block !default;
+$block-selector          : block !default;
+$block-heading-selector  : block-title !default;
+$block-content-selector  : block-content !default;
+
+/**
+ * Product Item Selectors
+ */
+$products-container-selector : products_block !default;
+$products-row-selector 		 : products-row !default;
+$products-col-selector 		 : product-col !default;
+
+
+//------- Path Variables
+$image-path:                   "images/"!default;
+$font-custom-path:             "../font/"!default;
+$image-base-path:              "../../../img/"!default;
+$image-skin-path:              "../../img/icon/"!default;
+$image-module-path:            "../../../img/icon/"!default;
+$module-path:                  "../../../modules/"!default;
+
+
+$image-theme-path:             "../images/" !default;
+$theme-font-path:          	   "../fonts/" !default;
+
+
+/***********************************************************************/
+// some basic colors
+
+$sky:                  			    #7bbd42 !default;  // Skin sky
+$blue:                              #6087D2 !default;  // Skin blue
+$yellow:                  			#ffc801 !default;  // Skin yellow
+$coral:								#EE6C92 !default;  // Slin Coral
+$rico:								#51BAA9 !default;  // Skin Rico
+$green:                 			#29C76A !default;  // Skin Green
+$red:                   			#e27f7a !default;  // Skin Red
+$pink:                  			#c3325f !default;
+$white:			 				    #FFFFFF !default;
+$black:							    #000000 !default;
+$cyandark:   						#4e4d49 !default;
+$orange:                			#df995e !default;
+$aqua: 								#75aab8 !default;
+$turquoise:                         #4ACFD4 !default;  // label new
+$nav-border-color-hover:            #e2e2e2 !default;
+$golden-poppy:                      #F2BE01 !default;
+$valencia:      					#D44A4A !default;
+$tundora:                           #8c8c8c !default;  // Topbar + Vertical Menu Content
+$wild-sand:                         #ffffff !default;  // Background Body - default
+$silver:                            #f5f5f5 !default; 
+
+//------- Themes colors
+$red-light:            				#ff9999!default;
+$yellow-light:           			#ffdc73!default;
+$nocolor:							transparent!default;
+
+// some basic font family
+// ========================================================================
+$font-tamoha: "tahoma";
+$font-arial: "Arial";
+
+
+// Variables paths 
+// ========================================================================
+
+$font-family:			 			 "Noto Sans", sans-serif!default;
+$font-family-secondary :             "Noto Sans", sans-serif!default;
+$font-family-tertiary  :             "Noto Sans", sans-serif!default;
+$font-family-senary    : 		 	 "Noto Sans", sans-serif!default;
+$font-family-three     :             "Noto Sans", sans-serif!default;
+$font-icon-family 	   : 			 "FontAwesome"!default;
+$font-icon-secondary   :			 "Material Design Iconic Font"!default;
+
+//////////////////// Variables defined for Themes + Skins ////////////////
+
+$theme-color-default : 			    #ec7357 !default;
+$theme-color-primary :				#f44336 !default;
+$theme-color-secondary : 			#333 !default;   
+$theme-color-tertiary:              #999 !default;
+$theme-color-three: 				#82b1ff !default;
+
+$font-body-family	   	: "Noto Sans", sans-serif!default;
+$font-headding-family  	: "Asap", sans-serif!default;
+$font-menu-family      	: "Asap", sans-serif!default;
+$font-highlighted-family: "tahoma"!default;
+
+$theme-bg-default		: $gray-lighter!default; 
+$theme-bg-secondary 	: $red!default; // using variable  for Theme  Skin 
+$theme-bg-threedary  	: $brand-warning!default; // using skin product list
+
+$border-color:          #e6e6e6 !default;
+$table-bg-color:        #e8e8e8 !default;

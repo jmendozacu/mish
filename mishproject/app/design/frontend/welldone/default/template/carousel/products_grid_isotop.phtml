@@ -1,0 +1,49 @@
+<?php if ($_productCollection=$this->getLoadedProductCollection()): ?>
+    <?php
+    $theme=Mage::helper('welldone');
+    $theme_ajax=Mage::helper('ajaxaddto');
+    $_helper = $this->helper('catalog/output');
+
+    $double_products=explode(',',$this->getBlockName());
+    if(count($_productCollection)):
+    ?>
+        <section class="content content--fill top-null">
+            <div class="container">
+                <div class="art-catalogue">
+                    <?php foreach ($_productCollection as $_product): ?>
+                    <?php
+                    $image_width=285;
+                    $image_height=357;
+                    ?>
+                    <div class="art-catalogue__item <?php if(in_array($_product->getId(),$double_products)):?>art-catalogue__item--double<?php endif;?>">
+                        <div class="product-preview-wrapper">
+                            <div class="product-preview">
+                                <div class="product-preview__image">
+                                    <?php if(in_array($_product->getId(),$double_products)):?>
+                                    <?php
+                                        $image_width=570;
+                                        $image_height=715;
+                                    ?>
+                                    <?php endif;?>
+                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                                        <img  src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($image_width,$image_height); ?>"  alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" data-image2x="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($image_width*2,$image_height*2); ?>"/>
+                                    </a>
+                                </div>
+                                <?php echo $theme->getProductLabel($_product,$this)?>
+                                <div class="product-preview__info text-center">
+                                    <div class="product-preview__info__more"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="btn btn--round"><span><?php echo $this->__('View<br/>More') ?></span></a></div>
+                                    <div class="product-preview__info__title">
+                                        <h2><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </section>
+        <script src="<?php echo $this->getSkinUrl('vendor/isotope/isotope.pkgd.min.js') ?>"></script>
+        <script src="<?php echo $this->getSkinUrl('vendor/imagesloaded/imagesloaded.pkgd.min.js') ?>"></script>
+    <?php endif; ?>
+<?php endif; ?>

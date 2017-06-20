@@ -1,0 +1,54 @@
+<?php
+$_article = $this->getArticle();
+$_tags    = $this->getTags();
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<div class="kb-article-view">
+    <h1><?php echo $_article->getName() ?></h1>
+    <div class="info">
+        <div class="data">
+            <?php echo $_article->getUser()->getName() ?> posted this on <?php echo Mage::helper('core')->formatDate($_article->getCreatedAt(), 'medium') ?>
+        </div>
+        <?php if ($_article->getRating() && $this->isRatingEnabled()): ?>
+        <div class="rating-box">
+            <div class="rating" style="width:<?php echo $_article->getRating()*20 ?>%;"></div>
+        </div>
+        <?php endif ?>
+    </div>
+
+    <?php echo $_article->getText() ?>
+
+    <div class="categories">
+        <?php echo __('Categories:') ?>
+        <?php foreach($this->getCategories() as $category): ?>
+            <a href='<?php echo $category->getUrl() ?>'><?php echo $category->getName() ?></a>
+        <?php endforeach ?>
+    </div>
+
+    <?php if ($_tags->count()):?>
+    <div class="tags">
+        <?php echo __('Tags:') ?>
+        <?php foreach($_tags as $_tag): ?>
+            <a href='<?php echo $_tag->getUrl() ?>'><?php echo $_tag->getName() ?></a>&nbsp;
+        <?php endforeach ?>
+    </div>
+    <?php endif ?>
+
+    <?php if ($this->isRatingEnabled()): ?>
+        <div class="helpful">
+        <?php if (!$this->getVoteResult()): ?>
+            <a class="yes" href="<?php echo $this->getVoteUrl(5) ?>"><?php echo __('Helpful')?></a>
+            <a class="no" href="<?php echo $this->getVoteUrl(1) ?>"><?php echo __('Not helpful')?></a>
+        <?php else: ?>
+            <?php if ($this->getVoteResult() == 5): ?>
+                <?php if ($_article->getPostiveVoteNum() > 1): ?>
+                    <?php echo __('You and %s people found this helpful.', $_article->getPostiveVoteNum()) ?>
+                <?php else: ?>
+                    <?php echo __('You found this helpful.') ?>
+                <?php endif ?>
+            <?php endif ?>
+        <?php endif ?>
+        </div>
+    <?php endif ?>
+</div>

@@ -1,0 +1,141 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $video=$_product->getWd_videobox();
+    $theme=Mage::helper('welldone');
+    $show_video=$theme->getLayoutOption('product/video');
+    $keep_aspect_ratio=$theme->getLayoutOption('product/keep_image_aspect_ratio');
+    $aspect_ratio_width=$theme->getLayoutOption('product/image_width');
+    $aspect_ratio_height=$theme->getLayoutOption('product/image_height');
+    $media=$theme->getLayoutOption('product/media');
+    $custom_html_in_product=$this->getProduct()->getWd_customhtml();
+    $image_width=457*2;
+    $image_height=574*2;
+
+    $image_thumbs_width=74;
+    $image_thumbs_height=93;
+    if(!$custom_html_in_product)
+    {
+        $image_width=555*1.5;
+        $image_height=696*1.5;
+        $image_thumbs_width=93;
+        $image_thumbs_height=139;
+    }
+    if($theme->getConfigOption('general/site_width')==2)
+    {
+        $image_thumbs_width=159;
+        $image_thumbs_height=200;
+    }
+
+if(!$keep_aspect_ratio && !empty($aspect_ratio_width)){
+    $image_width = $theme->getLayoutOption('product/image_width');
+}
+
+if(!$keep_aspect_ratio && !empty($aspect_ratio_height)){
+    $image_height = $theme->getLayoutOption('product/image_height');
+}
+?>
+<!-------------------------------CLOUDZOOM--------------------------------->
+<?php if($media=='cloudzoom'):?>
+    <div class="product-main-image">
+        <?php
+        if($keep_aspect_ratio && !$free)
+        {
+            $img_src=$this->helper('catalog/image')->init($_product, 'image')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize($image_width);
+        }else
+        {
+            $img_src=$this->helper('catalog/image')->init($_product, 'image')->resize($image_width,$image_height);
+        }
+        ?>
+        <div class="product-main-image__item"><img id="bigImg" class="product-zoom" src="<?php echo $img_src ?>" data-zoom-image="<?php echo $img_src ?>"   alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>" title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>"/></div>
+        <div class="product-main-image__zoom"></div>
+    </div>
+    <?php if (count($this->getGalleryImages()) > 0): ?>
+    <div class="product-images-carousel">
+        <ul id="smallGallery">
+            <?php foreach ($this->getGalleryImages() as $_image): ?>
+                <?php if($_image->getLabel()=='featured') { continue;}?>
+                <?php
+                if($keep_aspect_ratio)
+                {
+                    $img_src=$this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize($image_width);
+                }else
+                {
+                    $img_src=$this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize($image_width,$image_height);
+                }
+                ?>
+                <li><a href="#" data-image="<?php echo $img_src; ?>" data-zoom-image="<?php echo $img_src; ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($image_thumbs_width, null); ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>"></a></li>
+            <?php endforeach; ?>
+            <?php if(!empty($video) && $show_video):?>
+                <li><a href="<?php echo $_helper->productAttribute($this->getProduct(), $video, 'videobox') ?>" class="video-link"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)->resize($image_thumbs_width, null); ?>" alt="" /></a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+<!-------------------------------SCROLL--------------------------------->
+<?php elseif($media=='scroll'): ?>
+    <?php  if (count($this->getGalleryImages()) > 0): ?>
+    <ul id="singleGalleryVertical">
+        <?php foreach ($this->getGalleryImages() as $_image): ?>
+            <?php if ($_image->getLabel() == 'featured') {
+                continue;
+            } ?>
+            <?php
+            if ($keep_aspect_ratio) {
+                $img_src = $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize($image_width);
+            } else {
+                $img_src = $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize($image_width, $image_height);
+            }
+            ?>
+            <li><img src="<?php echo $img_src ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>"></a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php else:?>
+        <?php
+        if($keep_aspect_ratio && !$free)
+        {
+            $img_src=$this->helper('catalog/image')->init($_product, 'image')->constrainOnly(false)->keepAspectRatio(true)->keepFrame(false)->resize($image_width);
+        }else
+        {
+            $img_src=$this->helper('catalog/image')->init($_product, 'image')->resize($image_width,$image_height);
+        }
+        ?>
+        <div class="product-main-image">
+        <div class="product-main-image__item"><img id="bigImg" class="product-zoom" src="<?php echo $img_src ?>" data-zoom-image="<?php echo $img_src ?>"   alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>" title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>"/></div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<?php echo $this->getChildHtml('after'); ?>

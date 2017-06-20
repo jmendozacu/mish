@@ -1,0 +1,287 @@
+<?php 
+  $enableValue = Mage::getStoreConfig('promotionscheduler/general/enable');
+  if($enableValue == 0){  ?>
+
+  <div>
+        <h1><?php echo __('Access Denied'); ?></h1>
+        <h4><?php echo __('This module is disabled..'); ?></h4>
+  </div>
+
+ <?php  }else{ ?>
+
+<div>
+   <h3> <?php echo __('Promotion Scheduler'); ?> </h3>
+</div>
+
+
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_vendors/js/jquery.pagination-with-hash-change-2.js')?>"></script> 
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('custom/css/promotionscheduler.css')?>" media="all"/>
+
+<div id="tabs">
+
+			 <ul>
+			    <li><a href="#tabs-1"><?php echo __('Shopping Cart Price Rules'); ?></a></li>
+			    <li><a href="#tabs-2"><?php echo __('Catalog Price Rules'); ?></a></li>
+			    <li><a href="#tabs-3"><?php echo __('Add New Rule'); ?></a></li>
+			    <div class="clr"></div>
+			</ul>
+
+
+
+
+			<div id="tabs-1">
+			   <div class="clr"></div>
+					<form class="formSearchCount" action="<?php echo Mage::helper('core/url')->getCurrentUrl();?>" method="get">
+					<table cellpadding="0" cellspacing="0" style="float: right;margin-right: 3%%;">
+							    <tbody>
+							    		<tr>
+							    			<td>
+												<div class="input-box">
+													<input type="text" name="couponcode" id="couponcode" placeholder="Search by Coupon code.." />
+												</div>
+											</td>
+											<td>
+												<button type="submit" id="search_info" title="Search" >
+												   <span>Search</span>
+												</button>
+										   </td>
+										    <td>
+						                       <a class="resetButton" href="<?php echo Mage::helper("adminhtml")->getUrl("promotionscheduler/adminhtml_promotionscheduler/index"); ?>" >
+						                          <span>Reset</span>
+						                       </a>
+						                   </td>
+							    		</tr>
+
+							    </tbody>
+							</table>
+					</form>
+			  
+
+
+			<?php 
+			$couponcode = $_GET['couponcode'];
+
+
+			if($couponcode){
+			 $shoppingcartPromotion = Mage::getModel('salesrule/rule')->getCollection()
+			 ->addFieldToFilter('code', array('like'=>'%'.$couponcode.'%'));
+			}else{
+			 $shoppingcartPromotion = Mage::getModel('salesrule/rule')->getCollection();
+			} 
+
+			if(count($shoppingcartPromotion) > 0 ){?>
+			<div class="clr"></div>
+					<h4><?php echo __('Shopping Cart Price Rules'); ?></h4>
+					
+					<ul id="t1" class="clearfix">
+
+				<?php 	foreach ($shoppingcartPromotion as $shoppingcart) { 
+									$ruleId = $shoppingcart->getRuleId();
+									$promoName= $shoppingcart->getName();
+									$fromDate = $shoppingcart->getFromDate();
+									$toDate = $shoppingcart->getToDate();
+									$discountAmount = $shoppingcart->getDiscountAmount();
+									$code = $shoppingcart->getCode();
+									$status = $shoppingcart->getIsActive();
+							 ?>
+						
+						<li>
+							<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><?php echo __('Name'); ?></td>
+										<td><a class="col" target="_blank" href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/promo_quote/edit/id/".$ruleId.""); ?>"><?php echo __($promoName); ?></a></td>
+									</tr>
+									<tr>
+										<td><?php echo __('From Date'); ?></td><td><?php echo __($fromDate); ?></td>
+									</tr>
+									<tr>
+										<td><?php echo __('To Date'); ?></td><td><?php echo __($toDate); ?></td>
+									</tr>
+									<tr>
+										<td><?php echo __('Discount Amount'); ?></td><td><?php echo __($discountAmount); ?></td>
+									</tr>
+									<tr>
+										<td><?php echo __('Code'); ?></td><td><?php echo __($code); ?></td>
+									</tr>
+									<tr>
+										<td><?php echo __('Status'); ?></td><td><?php 
+												if($status == 1){
+													echo "<span style='color:green;'>Active</span>";
+												}else{
+													echo "<span style='color:red;'>Inactive</span>";
+												}
+
+										 ?></td>
+									</tr>
+									
+							</table>
+						</li>
+						
+						<?php }
+					}else{
+						echo "No record found!!";
+					}
+						 ?>
+						</ul>
+				        <span class="paging-nav"></span>
+				</div>
+
+<?php $catalogRule = Mage::getModel('catalogrule/rule')->getCollection();?>
+
+  <div id="tabs-2">
+		<h4><?php echo __('Catalog Price Rules'); ?></h4>
+		<ul id="t2" class="clearfix">
+
+		<?php foreach ($catalogRule as $catalogpromo) { 
+			            $catruleid = $catalogpromo->getRuleId();
+			            $catpromoName= $catalogpromo->getName();
+						$catfromDate = $catalogpromo->getFromDate();
+						$cattoDate = $catalogpromo->getToDate();
+						$catdiscountAmount = $catalogpromo->getDiscountAmount();
+						$catcode = $catalogpromo->getCode();
+						$catstatus = $catalogpromo->getIsActive();
+			?>
+			
+				<li>
+				
+					<table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><?php echo __('Name'); ?></td>
+										<td><a class="col" target="_blank" href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/promo_catalog/edit/id/".$catruleid.""); ?>"><?php echo __($catpromoName); ?></a></td>
+							</tr>
+							<tr>
+								<td><?php echo __('From Date'); ?></td><td><?php echo __($catfromDate); ?></td>
+							</tr>
+							<tr>
+								<td><?php echo __('To Date'); ?></td><td><?php echo __($cattoDate); ?></td>
+							</tr>
+							<tr>
+								<td><?php echo __('Discount Amount'); ?></td><td><?php echo __($catdiscountAmount); ?></td>
+							</tr>
+							<tr>
+								<td><?php echo __('Status'); ?></td><td><?php 
+
+									if($status == 1){
+										echo "<span style='color:green;'>Active</span>";
+									}else{
+										echo "<span style='color:red;'>Inactive</span>";
+									} ?></td>
+							</tr>
+						
+							
+					</table>
+					</li>
+				<?php }
+			 ?>	  
+			 </ul>   
+			   <span class="paging-navi"></span>
+			
+	 </div> 
+
+	 <div id="tabs-3">
+
+	 <h4><?php echo __('Add New Rules'); ?></h4>
+        <div class="formCount">
+		 	<form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/addnewPromorule'); ?>" method="Post">
+		 	 <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+		 			<div>
+			 			<label for="coupon"><?php echo __('Coupon Name'); ?><span style="color:red;">*</span>
+			 			</label>
+			 			<input type="text" name="coupon" id="coupon" placeholder="Enter Coupon Name" required="required"/>
+			 			<div class="clr"></div>
+		 			</div>
+		 			
+		 			<div>
+		 				<label for="ruletype"><?php echo __('Coupon Type'); ?><span style="color:red;">*</span>
+			 			</label>
+			 			<select name="ruletype" id="ruletype" onclick="getvalue();" required="required">
+				 				<option disabled="disabled" selected="selected">--Select--</option>
+				 				<option value="1">Shopping cart Price Rule</option>
+				 				<option value="2">Catalog Price Rule</option>
+			 			</select>
+			 			<div class="clr"></div>
+		 			</div>
+		 			
+		 			<div>
+			 			<label for="fromdate"><?php echo __('From Date'); ?></label>
+			 			<input type="date" name="fromdate" id="fromdate"/>
+			 			<div class="clr"></div>
+		 			</div>
+		 			<div>
+		 				<label for="todate"><?php echo __('To Date'); ?></label>
+		 				<input type="date" name="todate" id="todate"/>
+		 				<div class="clr"></div>
+		 			</div>
+
+		 			<div>
+		 				<label for="discountAmount"><?php echo __('Discount Amount'); ?></label>
+		 				<input type="text" name="discountAmount" id="discountAmount" placeholder="Enter Discount Amount" />
+		 				<div class="clr"></div>
+		 			</div>
+		 			<div>
+		 				<label for="code"><?php echo __('Coupon Code'); ?></label>
+		 				<input type="text" name="code" id="code" placeholder="Enter Coupon Code"/>
+		 				<div class="clr"></div>
+		 			</div>
+
+		 			<div class="submitButton">
+		 				<button type="submit"><?php echo __('Submit'); ?></button>
+		 			</div>
+		 	</form>
+		</div>
+	 </div>
+</div>
+
+<script>
+	var j = jQuery.noConflict();
+	  j( function() {
+	    j( "#tabs" ).tabs();
+	  } );
+</script>
+
+
+
+
+
+  <?php } ?>
+
+<script>
+function getvalue(){
+	var seletvalue = document.getElementById('ruletype').value;
+		if(seletvalue == 2){
+			document.getElementById('code').disabled=true;
+		}else{
+			document.getElementById('code').disabled=false;
+		}
+}
+</script>
+  <script>
+ var bt = jQuery.noConflict();
+    bt(document).ready(function() {
+      bt('#t1').Paginationwithhashchange2({
+        nextSelector: '.next',
+        prevSelector: '.prev',
+        counterSelector: '.counter',
+        pagingSelector: '.paging-nav',
+        itemsPerPage: 8,
+        initialPage: 8
+      });
+    });
+  </script>
+   <script>
+ var b = jQuery.noConflict();
+    b(document).ready(function() {
+      b('#t2').Paginationwithhashchange2({
+        nextSelector: '.next',
+        prevSelector: '.prev',
+        counterSelector: '.counter',
+        pagingSelector: '.paging-navi',
+        itemsPerPage:8,
+        initialPage: 8
+      });
+    });
+  </script>

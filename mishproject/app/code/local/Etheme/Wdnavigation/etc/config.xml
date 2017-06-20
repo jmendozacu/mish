@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Etheme_Wdnavigation>
+            <version>0.1.0</version>
+        </Etheme_Wdnavigation>
+    </modules>
+    <global>
+        <models>
+            <etheme_wdnavigation>
+                <class>Etheme_Wdnavigation_Model</class>
+                <resourceModel>etheme_wdnavigation_resource</resourceModel>
+            </etheme_wdnavigation>
+            <etheme_wdnavigation_resource>
+                <class>Etheme_Wdnavigation_Model_Resource</class>
+            </etheme_wdnavigation_resource>
+        </models>
+        <blocks>
+            <wdnavigation>
+                <class>Etheme_Wdnavigation_Block</class>
+            </wdnavigation>
+        </blocks>
+        <helpers>
+            <etheme_wdnavigation>
+                <class>Etheme_Wdnavigation_Helper</class>
+            </etheme_wdnavigation>
+        </helpers>
+        <resources>
+            <etheme_wdnavigation_setup>
+                <setup>
+                    <module>Etheme_Wdnavigation</module>
+                </setup>
+            </etheme_wdnavigation_setup>
+        </resources>
+    </global>
+</config>

@@ -1,0 +1,354 @@
+<?php
+/*******************************************
+ *
+ * for vendors
+ *
+ *******************************************/
+?>
+<?php $_element         = $this->getElement() ?>
+<?php $_htmlId          = $this->getHtmlId() ? $this->getHtmlId() : '_' . uniqid(); ?>
+<?php $_htmlClass       = $this->getElement()->getClass() ?>
+<?php $_htmlName        = $this->getElement()->getName() ?>
+<?php $_attribute_id    = $this->getAttributeId() ?>
+<?php $_attribute_code  = $_element->getAttributeCode() ?>
+<?php $_attribute_val   = Mage::registry('product')->getData($_attribute_code); ?>
+
+<?php $this->checkFieldDisable() ?>
+<?php
+    $elementToggleCode = $_element->getToggleCode() ? $_element->getToggleCode()
+        : 'toggleValueElements(this, this.parentNode.parentNode)';
+?>
+
+<?php if ($_element->getType()=='hidden'): ?>
+<tr>
+    <td class="hidden" colspan="100"><?php echo trim($_element->getElementHtml()) ?></td>
+</tr>
+<?php else: ?>
+<tr>
+    <td class="label"><?php echo trim($this->getElementLabelHtml()) ?></td>
+    <td class="value">
+        <?php echo trim($this->getElementHtml()) ?>
+
+        <!---------------------------ADD TABLE----------------------------->
+
+            <div class="grid" style="margin-top: 10px; width:68%; " id="grid<?php echo $_htmlId ?>">
+                <table style="" cellpadding="0" cellspacing="0" class="border">
+                    <colgroup>
+                        <col>
+                        <col width="1">
+                        <col width="1">
+                    </colgroup>
+                    <thead>
+                        <tr class="headings" id="headings<?php echo $_htmlId ?>">
+                            <th><?php echo $this->__('Title')?><span class="required">*</span></th>
+                            <th><span class="nobr"><?php echo $this->__('Sort Order') ?></span></th>
+                            <th class="last"><?php echo $this->__('Action') ?></th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr id="addRow<?php echo $_htmlId ?>">
+                            <td class="a-right" colspan="3">
+                                <button style="" onclick="" class="scalable add" type="button" id="addToEndBtn<?php echo $_htmlId ?>">
+                                    <span><span><span><?php echo $this->__('Add option') ?></span></span></span>
+                                </button>
+                                <button style="" onclick="" class="scalable save" type="button" id="saveBtn<?php echo $_htmlId ?>">
+                                    <span><span><span><?php echo $this->__('Save') ?></span></span></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+
+                    <tbody id="tbody<?php echo $_htmlId ?>">
+
+                    </tbody>
+                </table>
+                <input type="hidden" name="<?php echo $this->getElement()->getName() ?>[__empty]" value="" />
+            </div>
+            <div id="empty<?php echo $_htmlId ?>" style="margin-top: 10px;">
+                <button style="" onclick="" class="scalable add" type="button" id="emptyAddBtn<?php echo $_htmlId ?>">
+                    <span><span><span><?php echo $this->__('Add option') ?></span></span></span>
+                </button>
+            </div>
+
+        <!------------------------------------------------------------------>
+        <?php if ($_element->getNote()) : ?>
+            <p class="note"><?php echo $_element->getNote() ?></p>
+        <?php endif; ?>
+    </td>
+    <td class="scope-label"><span class="nobr"><?php echo $this->getScopeLabel() ?></span></td>
+    <?php if ($this->canDisplayUseDefault()): ?>
+    <td class="value use-default">
+        <input <?php if($_element->getReadonly()):?> disabled="disabled"<?php endif; ?> type="checkbox" name="use_default[]" id="<?php echo $_element->getHtmlId() ?>_default"<?php if ($this->usedDefault()): ?> checked="checked"<?php endif; ?> onclick="<?php echo $elementToggleCode; ?>" value="<?php echo $this->getAttributeCode() ?>"/>
+        <label for="<?php echo $_element->getHtmlId() ?>_default" class="normal"><?php echo $this->__('Use Default Value') ?></label>
+    </td>
+    <?php endif; ?>
+</tr>
+<?php endif; ?>
+
+
+<script type="text/javascript">
+//<![CDATA[
+       // if(AJAX_URL !== undefined) var AJAX_URL = '<?php// echo $this->getSaveUrl() ?>';
+        var _primary<?php echo $_htmlId ?> = $('<?php echo $_element->getId() ?>');
+
+        // create row creator
+        var arrayRow<?php echo $_htmlId ?> = {
+            tbody : $('tbody<?php echo $_htmlId ?>'),
+            element : _primary<?php echo $_htmlId ?>,
+            attribute_value : '<?php echo $_attribute_val ?>',
+
+            // define row prototypeJS template
+            template : new Template(
+                '<tr id="#{_id}">'
+                    +'<td>'
+                    +'<input type="text" class="input-text ves-required-entry ves-exist-value" style="width:95% !important;" value="" id="<?php echo $_htmlName ?>_row_#{_id}_title" name="<?php echo $_htmlName ?>[#{_id}][title]" \/>'
+                    +'<\/td>'
+                    +'<td>'
+                    +'<input type="text" class="input-text" style="width:75% !important;" value="" id="<?php echo $_htmlName ?>_row_#{_id}_sort_order" name="<?php echo $_htmlName ?>[#{_id}][sort_order]" \/>'
+                    +'<\/td>'
+                    +'<td><button onclick="arrayRow<?php echo $_htmlId ?>.del(\'#{_id}\')" class="scalable delete icon-btn delete-product-option" id="<?php echo $_htmlName ?>_row_#{_id}_delete_button" type="button">'
+                    +'<span><span><span><?php echo Mage::helper('adminhtml')->__('Delete') ?><\/span><\/span><\/span><\/button><\/td>'
+                    +'<\/tr>'
+            ),
+
+            rowsCount : 0,
+
+            add : function(templateData, insertAfterId)
+            {
+                // generate default template data
+                if ('' == templateData) {
+                    var d = new Date();
+                    var templateData = {
+                        title : '',
+                        sort_order : '',
+                        _id : '_' + d.getTime() + '_' + d.getMilliseconds()
+                    };
+                }
+
+                // insert before last row
+                if ('' == insertAfterId) {
+                    Element.insert(this.tbody, {bottom: this.template.evaluate(templateData)});
+                }
+                // insert after specified row
+                else {
+                    //Element.insert($(insertAfterId), {after: this.template.evaluate(templateData)});
+                }
+
+                this.rowsCount += 1;
+            },
+
+            clearOptions: function() {
+                console.log("clear options");
+                if (this.element == null) return;
+                if (this.element.options == null) return;
+                this.element.options.length = 0;
+            },
+
+            /**
+             * add options from ajax response to select or multiple select
+             * @param data
+             */
+            addOptions: function(data) {
+                this.clearOptions();
+                console.log("add options");
+                //add options
+                //add null option first
+                var option = document.createElement('option');
+                option.setAttribute('value', '');
+                option.text = '';
+                if(this.attribute_value == null) option.setAttribute('selected', 'selected');   //null value is select
+                                                                                                //default
+                this.element.add(option);
+
+                for(var i=0; i < data.length;i++) {
+                    var option_data = data[i];
+                    console.log(option_data);
+                    var option = document.createElement('option');
+                    option.setAttribute('value', option_data.value);
+                    option.text = option_data.label;
+                    if(this.attribute_value == option_data.value) option.setAttribute('selected', 'selected');
+                    this.element.add(option);
+                }
+            },
+
+            clearValidate: function() {
+                var _inputs = this.tbody.select("input.ves-exist-value");
+                _inputs.each(function(input){
+                    if($('advice-exist-value-'+input.id) != null) $('advice-exist-value-'+input.id).remove();
+                    if($('advice-required-entry-'+input.id) != null) $('advice-required-entry-'+input.id).remove();
+                });
+            },
+
+            validateExistValue: function() {
+                var _success = true;        ///flag validate exist value
+                var _inputs = this.tbody.select("input.ves-exist-value");
+                _inputs.each(function(input){
+                    var _value = input.getValue(); if(_value == '') return;
+                    this._primary<?php echo $_htmlId ?>.select('option').each(function(option){
+                        if(_value.toLowerCase() === option.text.toLowerCase()) {
+                            _success = false;
+                            input.addClassName('validation-failed').removeClassName('validation-passed');
+                            var advice = new Element('div', {
+                                class: 'validation-advice',
+                                id : 'advice-exist-value-'+input.id
+                            }).update("<?php echo $this->__('This option is already exist.') ?>");
+
+                            if($('advice-exist-value-'+input.id) == null) {
+                                input.up().insert({bottom: advice});
+                            } else {
+                                $('advice-exist-value-'+input.id).appear({duration: 1});
+                            }
+
+                           $break;
+                        } else {
+                            input.addClassName('validation-passed').removeClassName('validation-failed');
+                            if($('advice-required-entry-'+input.id) != null) {
+                                $('advice-required-entry-'+input.id).fade({duration: 1});
+                            }
+                        }
+                    });
+                });
+
+                return _success;
+            },
+
+            validateEmptyValue: function() {
+                var _success = true;        ///flag validate empty value
+                var _inputs = this.tbody.select("input.ves-required-entry");
+                _inputs.each(function(input){
+                    console.log(input);
+                    if(input.getValue() == '') {
+                        _success = false;
+                        input.addClassName('validation-failed').removeClassName('validation-passed');
+                        var advice = new Element('div', {
+                            class: 'validation-advice',
+                            id : 'advice-required-entry-'+input.id
+                        }).update("<?php echo $this->__('This is a required field.') ?>");
+
+                        if($('advice-required-entry-'+input.id) == null) {
+                            input.up().insert({bottom: advice});
+                        } else {
+                            $('advice-required-entry-'+input.id).appear({duration: 1});
+                        }
+                    } else {
+                        //if input has value
+                        //hide advice
+                        input.addClassName('validation-passed').removeClassName('validation-failed');
+                        if($('advice-required-entry-'+input.id) != null) {
+                            $('advice-required-entry-'+input.id).fade({duration: 1});
+                        }
+                    }
+                });
+
+                return _success;
+            },
+
+            save :function() {
+                this.clearValidate();
+                var _validate_empty = this.validateEmptyValue();
+                var _validate_exist = this.validateExistValue();
+
+                //check validate
+                if(_validate_empty && _validate_exist) {
+                    //confirm to save
+                    if(confirm("<?php echo $this->__('Are you sure?') ?>") === false) return;
+
+                    var _post = Form.serializeElements($('grid<?php echo $_htmlId ?>').select('input'));
+                    _post.attribute_id = '<?php echo $_attribute_id ?>';
+
+                    new Ajax.Request('<?php echo $this->getSaveUrl() ?>', {
+                        evalScripts: true,
+                        parameters: _post,      //params
+                        method:'post',
+                        onCreate:function() {
+                            $('loading-mask').show();
+                        },
+                        onSuccess: function(transport) {
+                            $('loading-mask').hide();
+                            //after things
+                            console.log('ajax response');
+                            var result = transport.responseText.evalJSON();
+                            this.addOptions(result['select_json']);
+
+                            //reset grid
+                            this.reset();
+                            console.log('smt');
+                            alert('<?php echo $this->__("Options have been saved successfully.") ?>');
+                        }.bind(this),
+                        onFailure: this._processFailure.bind(this)
+                    });
+                }
+            },
+
+            _processSuccess : function(transport) {
+                if (transport.responseText.isJSON()) {
+                    var response = transport.responseText.evalJSON()
+                    if (response.error) {
+                        alert(response.message);
+                    }
+                    if(response.ajaxExpired && response.ajaxRedirect) {
+                        setLocation(response.ajaxRedirect);
+                    }
+                    return false;
+                }
+                return true;
+            },
+
+            _processFailure : function(transport) {
+                location.href = BASE_URL;
+            },
+
+            del : function(rowId)
+            {
+                $(rowId).remove();
+                this.rowsCount -= 1;
+                if (0 == this.rowsCount) {
+                    this.showButtonOnly();
+                }
+            },
+
+            showButtonOnly : function()
+            {
+                $('grid<?php echo $_htmlId ?>').hide();
+                $('empty<?php echo $_htmlId ?>').show();
+                $('saveBtn<?php echo $_htmlId ?>').hide();
+            },
+
+
+            reset : function() {
+                var _this = this;
+                _this.tbody.select('tr').each(function(tr) {
+                    _this.del(tr.id);
+                });
+                ///this.showButtonOnly();
+            }
+
+        };
+
+
+
+        // bind add action to "Add" button in last row
+        Event.observe('addToEndBtn<?php echo $_htmlId ?>', 'click', arrayRow<?php echo $_htmlId ?>.add.bind(arrayRow<?php echo $_htmlId ?>, '', ''));
+        Event.observe('saveBtn<?php echo $_htmlId ?>', 'click', arrayRow<?php echo $_htmlId ?>.save.bind(arrayRow<?php echo $_htmlId ?>));
+
+
+        // initialize standalone button
+        $('empty<?php echo $_htmlId ?>').hide();
+
+        Event.observe('emptyAddBtn<?php echo $_htmlId ?>', 'click', function () {
+            $('grid<?php echo $_htmlId ?>').show();
+            $('empty<?php echo $_htmlId ?>').hide();
+            $('saveBtn<?php echo $_htmlId ?>').show();
+            arrayRow<?php echo $_htmlId ?>.add('', '');
+        });
+
+        // if no rows, hide grid and show button only
+        arrayRow<?php echo $_htmlId ?>.showButtonOnly();
+
+        // toggle the grid, if element is disabled (depending on scope)
+        <?php if ($this->getElement()->getDisabled()):?>
+        toggleValueElements({checked:true}, $('grid<?php echo $_htmlId ?>').parentNode);
+        <?php endif;?>
+//]]>
+</script>

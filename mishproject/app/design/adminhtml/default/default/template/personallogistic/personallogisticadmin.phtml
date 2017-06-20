@@ -1,0 +1,64 @@
+
+<style>
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width:30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+/* Float cancel and signup buttons and add an equal width */
+.signupbtn {
+    float: left;
+    width: 30%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+     .signupbtn {
+       width: 30%;
+    }
+}
+</style>
+
+
+<h2>Submit Price form</h2>
+
+<form action="<?php echo $this->getUrl('personallogistic/adminhtml_personallogisticadmin/save/') ?>" method="post" style="border:1px solid #ccc">
+<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+  <div class="container">
+    <label><h4>Price Per Hour</h4></label>
+    <input type="text" placeholder="Enter Price" name="min" required>
+<div class="clearfix">
+     
+      <button type="submit" class="signupbtn">Submit</button>
+    </div>
+  </div>
+</form>

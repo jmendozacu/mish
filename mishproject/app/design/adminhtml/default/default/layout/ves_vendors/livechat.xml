@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addJs"><script>jscolor/jscolor.js</script></action>
+        </reference>
+    </adminhtml_system_config_edit>
+
+    <vendors_livechat_contact_index>
+        <reference name="content">
+            <block type="vendorslivechat/vendor_contact" name="contact" />
+        </reference>
+    </vendors_livechat_contact_index>
+
+    <vendors_livechat_history_view>
+        <reference name="head">
+            <action method="addCss"><css>ves_vendors/css/livechat/box.css</css></action>
+        </reference>
+        <reference name="left">
+            <block type="vendorslivechat/vendor_history_edit_tab_side" name="history_content" />
+        </reference>
+    </vendors_livechat_history_view>
+    <vendors_livechat_history_index>
+
+        <reference name="content">
+            <block type="vendorslivechat/vendor_history" name="history" />
+        </reference>
+    </vendors_livechat_history_index>
+    <vendors_livechat_box_index>
+        <remove name="ves_livechat_before" />
+        <reference name="head">
+            <action method="addCss"><css>ves_vendors/css/livechat/box.css</css></action>
+            <action method="addJs"><js>ves_vendors/livechat/modernizr.custom.34272.js</js></action>
+
+        </reference>
+        <reference name="content">
+            <block type="vendorslivechat/vendor_box" name="box" template="ves_vendorslivechat/box.phtml" >
+                 <block type="vendorslivechat/vendor_box" name="livechat-content" template="ves_vendorslivechat/box/content.phtml" >
+                     <block type="vendorslivechat/vendor_box_geo" name="geo_tracking" template="ves_vendorslivechat/box/geo.phtml" />
+                 </block>
+                <block type="vendorslivechat/vendor_box" name="livechat-side" template="ves_vendorslivechat/box/side.phtml" >
+                    <block type="vendorslivechat/vendor_box" name="livechat-info-vendor" template="ves_vendorslivechat/box/vendor.phtml" />
+                </block>
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <block type="vendorslivechat/vendor_before" name="ves_livechat_box_before" template="ves_vendorslivechat/box/livechat.phtml" />
+        </reference>
+    </vendors_livechat_box_index>
+    <vendors_default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>ves_vendors/css/livechat/box/box.css</stylesheet></action>
+            <action method="addCss"><stylesheet>ves_vendors/css/livechat/box/style.css</stylesheet></action>
+            <action method="addCss"><stylesheet>ves_vendors/css/livechat.css</stylesheet></action>
+            <action method="addJs"><js>ves_vendors/livechat/modernizr.custom.34272.js</js></action>
+            <action method="addJs"><js>ves_vendors/livechat/cookie.js</js></action>
+            <action method="addJs"><js>ves_vendors/livechat/vendor/box.js</js></action>
+            <action method="addJs"><js>ves_vendors/livechat/date.js</js></action>
+            <block type="vendorslivechat/head" name="vendorslivechat.head" />
+        </reference>
+      <reference name="before_body_end">
+          <block type="vendorslivechat/vendor_before" name="ves_livechat_before" template="ves_vendorslivechat/livechat.phtml" />
+      </reference>
+  </vendors_default>
+  <vendors_index_login>
+      <remove name="ves_livechat_before" />
+  </vendors_index_login>
+
+
+</layout>

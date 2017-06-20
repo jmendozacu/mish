@@ -1,0 +1,1 @@
+if(typeof(jQuery) !== false){ jQuery.noConflict(); jQuery.curCSS = jQuery.css}

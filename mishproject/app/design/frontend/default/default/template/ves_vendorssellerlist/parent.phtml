@@ -1,0 +1,11 @@
+<div class="ves_sellers_parent">
+    <?php echo $this->getSellersListHtml() ?>
+    <?php echo $this->getProductsHtml() ?>
+</div>
+<script>
+    $$('.ves_sellers_child_item').each(function(item){
+        item.observe('mouseover',function(){
+            $$('.mp_landing_hover').first().show();
+        });
+    });
+</script>

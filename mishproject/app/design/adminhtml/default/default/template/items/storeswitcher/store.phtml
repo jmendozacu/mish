@@ -1,0 +1,71 @@
+<?php 
+if (($this->getRequest()->getModuleName() == 'items')) 
+{
+	if(($this->getRequest()->getControllerName()=='adminhtml_itemdetailprofile' && $this->getRequest()->getActionName() =='edit') 
+		|| ($this->getRequest()->getControllerName()=='adminhtml_shippingprofile' && $this->getRequest()->getActionName() =='edit') 
+		|| ($this->getRequest()->getControllerName()=='adminhtml_paymentprofile' && $this->getRequest()->getActionName() =='index') 
+		|| ($this->getRequest()->getControllerName()=='adminhtml_itemtemplates' && $this->getRequest()->getActionName() =='edit')
+		|| ($this->getRequest()->getControllerName()=='adminhtml_itemtemplates' && $this->getRequest()->getActionName() =='index')
+		|| ($this->getRequest()->getControllerName()=='adminhtml_mastertemplates' && $this->getRequest()->getActionName() =='edit')
+		)
+	{
+		return false;
+	}else{
+?>
+	<label for="store_switcher"><?php echo $this->__('Choose Store View:') ?></label>
+	<select name="store_switcher" id="store_switcher" onchange="return switchStore(this);">
+	<option value="">All Store Views </option>
+		<?php foreach (Mage::app()->getWebsites() as $website): ?>
+			<?php $showWebsite=false; ?>
+			<?php foreach ($website->getGroups() as $group): ?>
+				<?php $showGroup=false; ?>
+				<?php 
+				$stores = $group->getStores();
+				if(Mage::helper('items')->_getStore()->getId()){
+					$storeId = Mage::helper('items')->_getStore()->getId();
+				} else {
+					$storeId = $this->getStoreId();
+				}
+				foreach ($stores as $store): ?>
+					<?php if ($showWebsite == false): ?>
+						<?php $showWebsite = true; ?>
+						<optgroup label="<?php echo $website->getName() ?>"></optgroup>
+					<?php endif; ?>
+					<?php if ($showGroup == false): ?>
+						<?php $showGroup = true; ?>
+						<optgroup label="&nbsp;&nbsp;&nbsp;<?php echo $group->getName() ?>">
+					<?php endif; ?>
+					<option value="<?php echo $store->getId() ?>"<?php if($storeId == $store->getId()): ?> selected="selected"<?php endif; ?>>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $store->getName() ?></option>
+				<?php endforeach; ?>
+				<?php if ($showGroup): ?>
+					</optgroup>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
+	</select>
+	<?php
+	//display seller's Nickname
+	if(($this->getRequest()->getControllerName()=='adminhtml_itemorders' && $this->getRequest()->getActionName() =='index') || ($this->getRequest()->getControllerName()=='adminhtml_itemlisting' && $this->getRequest()->getActionName() =='index') || ($this->getRequest()->getControllerName()=='adminhtml_itempublishing' && $this->getRequest()->getActionName() =='index') || ($this->getRequest()->getControllerName()=='adminhtml_questions' && $this->getRequest()->getActionName() =='index')){ 
+		$storeId =  Mage::helper('items')->_getStore()->getId();
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$sellerName = $write->fetchCol("SELECT seller_nickname from mercadolibre_token_details WHERE store_id =".$storeId."");
+		if(count($sellerName)>0 && trim($sellerName[0])!=''){
+			echo "<b> &nbsp;Seller : </b> ".$sellerName[0];
+		}
+	}
+	?>
+	<?php echo $this->getHintHtml() ?>
+	<?php 		
+			$paramsArr = $this->getRequest()->getParams();
+			$ParamsStr =  Mage::helper('items')-> getAllParamsStr($paramsArr,array('store'));
+	?>
+	<script type="text/javascript">
+		function switchStore(obj){
+			var ParamsStr = '<?php echo $ParamsStr; ?>';
+			var storeParam = obj.value ? 'store/'+obj.value+'/' : '';	
+			setLocation('<?php echo $this->getUrl('*/*/*');?>' + ParamsStr + storeParam);
+		}
+	</script>
+<?php } } 
+?>
+

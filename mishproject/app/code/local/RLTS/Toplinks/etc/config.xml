@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <RLTS_Toplinks>
+            <version>0.0.1</version>
+        </RLTS_Toplinks>
+    </modules>
+    <global>
+        <helpers>
+            <toplinks>
+                <class>RLTS_Toplinks_Helper</class>
+            </toplinks>
+        </helpers>
+        <blocks>
+            <toplinks>
+                <class>RLTS_Toplinks_Block</class>
+            </toplinks>
+            <customer>
+                <rewrite>
+                    <account_navigation>RLTS_Toplinks_Block_Navigation</account_navigation>
+                </rewrite>
+            </customer>
+        </blocks>
+    </global>
+    <frontend>
+            <layout>
+                <updates>
+                        <toplinks>
+                            <file>RLTS/toplinks.xml</file>
+                        </toplinks>
+                </updates>
+            </layout>
+    </frontend>
+</config>

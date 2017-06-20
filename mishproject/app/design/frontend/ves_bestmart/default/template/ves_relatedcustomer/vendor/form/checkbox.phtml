@@ -1,0 +1,14 @@
+<li class="control">
+	<div class="input-box">
+		<input type="checkbox" name="vendor_is_signed_up" title="<?php echo $this->__('Create Vendor Account') ?>" value="1" id="is_signed_up_vendor"<?php if($this->getFormData()->getVendorIsSigned_Up()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+	</div>
+	<label for="is_signed_up_vendor"><?php echo $this->__('Create Vendor Account') ?></label>
+</li>
+<script type="text/javascript">
+$('is_signed_up_vendor').observe('click',function(){
+	if($('vendor_register_form')){
+		if(this.checked) $('vendor_register_form').show();
+		else $('vendor_register_form').hide();
+	}
+});
+</script>

@@ -1,0 +1,128 @@
+<?php $order = $this->getOrder(); 
+$ordercoll=$order->getData();
+ 
+$vendorid=$ordercoll['vendor_id'];
+// $commision= Mage::getModel('vendorscommission/rule')->load($vendorid)->getData();
+
+//  $commision1=$commision['commission_amount'];
+//  $commision1 = preg_replace('~\.0+$~','',$commision1);
+ $symbol=Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); 
+  
+
+
+ //print_r($commision1);
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Mish Block') ?></h4>
+    </div>
+    <fieldset style="float: left; width: 96.5%;">
+		<!-- <b>This is my custom Block Order Increment=</b> --><?php //echo $order->getIncrementId()?>
+		<?php echo "<p><b>Vendor_id :</b>".$vendorid."</p>"; ?>
+        <?php //echo "<p><strong>% Mish Commission:</strong>".$commision1."</p>" ; ?>
+
+
+		<b>Total Weight:</b><?php echo  $order->getWeight() ?>
+   <?php 
+    foreach(explode(",",$order->getAppliedRuleIds()) as $ruleId){       
+ 
+ $rule = Mage::getModel('salesrule/rule')->load($ruleId); 
+ echo "<p> <b>Applied coupon Code : </b>".$rule->getCouponCode()."</p>";
+// echo "\t";
+ 
+} 
+echo "<b>DiscountAmount:</b>" .$symbol. $order->getDiscountAmount();
+
+?>
+
+
+    </fieldset>
+    <div style="float: left;width:100%;margin-bottom:20px;">
+    <div class="grid np">
+  <div class="hor-scroll">
+	<table class="data order-tables" cellspacing="0">
+    
+    	<p style="text-align: center; background: #fdfab2;margin: 0;" colspan="6">Mish Commision</p>
+   
+   <thead>
+	   <tr class="headings">
+	    <th class="a-center">Sku:</th>
+	    <th class="a-center">Qty:</th>
+	     <th class="a-center">% Mish Commission:</th>      
+	     <th class="a-center">Amount of commission(Multilpy with Qty):</th>
+	    <th class="a-center">Amount to be paid to the supplierMultilpy with Qty):</th>
+	    
+	   </tr>
+   </thead>
+ 
+    <?php
+     
+
+
+
+   
+    $items = $order->getAllVisibleItems();
+    $total = array();
+    $total1=array();
+     $commissions1= array();
+    foreach($items as $item){
+        $sku = $item->getSku();
+        $product = Mage::getModel('catalog/product')->load($item['product_id']);
+        $categoryid = $product->getCategoryIds();
+
+foreach ($categoryid as $cat) {
+                       $categoryss = Mage::getModel('catalog/category')->load($cat);
+                       $categoryName = $categoryss->getName();
+                      
+         
+                       $names = array();
+                           foreach ($categoryss->getParentCategories() as $parent) {
+                               $names[] = $parent->getID();
+                           }
+                         }
+                       $arrCount = count($names);
+                       $parentCategory =  $names[$arrCount-1];
+                      
+                       $parentCategoryModel = Mage::getModel('catalog/category')->load($parentCategory);  
+                       $commission=$parentCategoryModel['set_commission'];
+                       /*echo "<pre>";
+                       print_r($commission);*/
+                     
+ 
+                 $qty=$item->getQtyOrdered();
+                 $qty = preg_replace('~\.0+$~','',$qty);
+                 $price=$product['price'];
+                 
+                 $commission2=$qty*($price*$commission)/100;
+                 $paidvalue=($qty*$price)-$commission2;
+                 $total[]=$commission2;
+                 $total1[]=$paidvalue;
+
+                 //  echo "ghdj<pre>";
+                 // print_r($commission2);   ?>
+                <tbody class="even">
+                 	<tr class="border">
+                   <td style="float: left;"><?php echo $sku ; ?> </td>
+                   <td class="a-center"><?php echo $qty ;?></td>
+                   <td class="a-center"><?php echo $commission ?></td>
+                   <td class="a-center"><?php echo $symbol  ?><?php echo $commission2 ?></td>
+                   <td class="a-center"><?php echo $symbol  ?><?php echo $paidvalue ?></td>
+                   </tr>
+ 
+<?php
+ }
+ ?>
+   <tr class="border">
+   <td class="a-center"><strong>Total:</strong></td>
+   <td></td>
+   <td></td>
+   <td class="a-center"><?php echo $symbol  ?><?php echo array_sum($total); ?></td>
+   	<td class="a-center"><?php echo $symbol  ?><?php echo array_sum($total1); ?></td>
+	</tr>
+<tbody>
+ </table> 
+ </div>
+ </div>
+</div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,140 @@
+<script type="text/javascript" src="<?php echo $this->getJsUrl('tiny_mce/tiny_mce.js')?>"></script>
+
+<?php 
+    if(Mage::registry("note_message_request")):
+?>
+<ul class="messages"><li class="notice-msg"><ul><li><?php echo $this->__("Your buyer has escalated this request  to a claim. We're reviewing all messages related to the request  and need some additional information from you.Please click button 'Escalate to a claim'")?></li></ul></li></ul>
+<?php endif; ?>
+
+<?php $request = $this->getRequestRma() ?>
+<div class="request-information">
+    <div class="page-title">
+        <div class="request-title">
+            <h1><span class="title-ticket"><?php echo 'RMA #'.$request->getData('increment_id')?></span><?php echo $this->__(" - "); ?><?php echo Mage::getModel('vendorsrma/option_state')->getTitleByKey($request->getData('state')); ?>   </h1>
+        </div>
+        <div class="action-request">
+            <?php if($this->isNoteRma($request->getState())): ?>
+                <button class="button right form-button close-request-btn" onclick="setLocation('<?php echo $this->getNoteUrl() ?>')"><span><span><?php echo Mage::helper('vendorsrma')->__('Escalate to a claim')?></span></span></button>
+            <?php endif ;?>
+            <?php if($this->isPrintRma($request->getStatus())): ?>
+            <button class="button right form-button close-request-btn" onclick="setLocation('<?php echo $this->getPrintUrl() ?>')"><span><span><?php echo Mage::helper('vendorsrma')->__('Print Label')?></span></span></button>
+            <?php endif ;?>
+            <?php if($this->isCancelRma($request->getState())): ?>
+                <button class="button right form-button cancel-request-btn" onclick="setLocation('<?php echo $this->getCancelUrl() ?>')"><span><span><?php echo Mage::helper('vendorsrma')->__('Cancel')?></span></span></button>
+            <?php endif ;?>
+            <?php if($this->isConfirmShippingRma($request->getStatus())): ?>
+                <button class="button right form-button cancel-request-btn " id="cd-popup-trigger-confirm"><span><span><?php echo Mage::helper('vendorsrma')->__('Confirm Shipping')?></span></span></button>
+                <div class="cd-popup" role="alert" id="cd-popup-confirm">
+                    <div class="cd-popup-container">
+                        <pre><?php echo Mage::helper("vendorsrma/config")->confirmShippingText()  ?></pre>
+                        <ul class="cd-buttons">
+                            <li><a href="<?php echo $this->getConfirmShippingUrl() ?>"><?php echo $this->__("Yes") ?></a></li>
+                            <li><a href="javascript:void(0)" class="cd-popup-cancel"><?php echo $this->__("No") ?></a></li>
+                        </ul>
+                        <a href="javascript:void(0)" class="cd-popup-close img-replace"><?php echo $this->__("Close") ?></a>
+                    </div>
+
+                </div>
+
+            <?php endif ;?>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="group-select">
+        <!-- Common ticket info -->
+
+
+        <table width="100%">
+            <col width="50%"/>
+            <col width="50%"/>
+            <tbody>
+            <tr>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('RMA ID :')?></span>
+                    <?php echo "#".$request->getData('increment_id') ?>
+                </td>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('Order ID :')?></span>
+                    <a href="<?php echo $this->getUrl("sales/order/view",array("order_id"=>$this->getOrderId())) ?>" target="_blank"><?php echo "#".$request->getData('order_incremental_id') ?></a>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('Create At :')?></span>
+                    <?php echo Mage::getModel('core/date')->date('F j, Y, g:i a',$request->getCreateAt()) ?>
+                </td>
+                
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('State :')?></span>
+                    <?php echo Mage::getModel('vendorsrma/option_state')->getTitleByKey($request->getData('state'),$request->getData('flag_state'),false); ?>
+                </td>
+                
+                <?php /*
+                    <td>
+                        <span class="label"><?php echo Mage::helper('vendorsrma')->__('Status :')?></span>
+                        <?php echo Mage::getModel('vendorsrma/source_status')->getTitleById($request->getData('status')); ?>
+                    </td>
+                    */
+                ?>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('Request Type :')?></span>
+                    <?php echo Mage::getModel('vendorsrma/source_type')->getTitleById($request->getData('type')); ?>
+                </td>
+                <?php if(Mage::helper('vendorsrma/config')->allowReasons()): ?>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('Reason :')?></span>
+                    <?php if(Mage::helper('vendorsrma/config')->allowOtherOptionReason() && $request->getData('reason_detail')){ ?>
+                        <?php echo $request->getData('reason_detail'); ?>
+                    <?php }else{ ?>
+                        <?php echo Mage::getModel('vendorsrma/source_reason')->getTitleById($request->getData('reason')); ?>
+                    <?php } ?>
+                </td>
+                <?php endif ?>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label"><?php echo Mage::helper('vendorsrma')->__('Package Opened :')?></span>
+                    <?php echo Mage::getModel('vendorsrma/option_pack')->getTitleByKey($request->getData('package_opened')); ?>
+                </td>
+                
+             
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tabber" id="tab1">
+
+        <div class="tabbertab tabbertabdefault">
+            <h2><?php echo $this->__("Product Items") ?></h2>
+            <?php echo $this->getChildHtml('items')?>
+        </div>
+
+        <div class="tabbertab">
+            <h2><?php echo $this->__("Messages") ?></h2>
+            <?php echo $this->getChildHtml('message-content')?>
+            
+            <?php if($this->isResolveRma($request->getState())): ?>
+                <?php echo $this->getChildHtml('form-repply')?>
+            <?php endif ?>
+            
+        </div>
+        <?php //if($this->isEnaleClaim($request->getData('status'))): ?>
+            <div class="tabbertab">
+                <h2><?php echo $this->__("Notes") ?></h2>
+               <?php echo $this->getChildHtml('form-note-view')?>
+            </div>
+        <?php //endif ?>
+    </div>
+
+    <div class="clear"></div>
+    <?php if(!$this->getRequest()->getParam('sc')):?>
+    <div class="back">
+        <a href="<?php echo $this->getUrl('vesrma/rma_customer/list');?>" class="left"><?php echo Mage::helper('vendorsrma')->__('&laquo;Back to My Rma')?></a>
+    </div>
+    <?php endif ?>
+</div>
+

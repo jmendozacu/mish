@@ -1,0 +1,20 @@
+table.form-list {width:100%;}
+.ves_category-body {width: 100%; display:block; position: relative;}
+.ves_category-content {display: block; min-height: 50px; position: relative; overflow:hidden; padding: 5px 0 10px; }
+.ves_search_content {width: 800px;}
+#ves_searchForm {height: 33px; clear:both; display:block; margin-bottom: 10px;}
+#ves_searchForm span {padding-right: 8px;}
+#ves_searchForm button {margin-left: 10px;}
+.ves_catsSelect {display: block; height: 190px !important; width: 31.333% !important;}
+.catsContent select {float: left; margin-right: 1.1em;}
+#searchResult {min-height: 190px;}
+.category-selected-label {color: #666666;}
+.category-path-warp {color: #333333; }
+#catsContent select {overflow: hidden; width: auto !important; min-width: 195px;margin-top: 10px;}
+.category-path-warp .hidden {display: none;}
+.category-path-warp .category-success-icon {background-image: url("images/sprite-feedback-addon.png");background-position: -31px -86px;display: inline-block;height: 15px;margin-left: 5px;vertical-align: middle;width: 15px;}
+
+.searchResultUl {width:100%;background: none repeat scroll 0 0 #FFFFFF;border: 1px solid #CCCCCC;height: 260px;list-style: none outside none;overflow-x: hidden;overflow-y: scroll;padding-top: 5px;}
+.searchResultUl .searchResultLi {cursor: pointer;height: 22px;line-height: 22px;margin: 0;padding: 0 10px;white-space: nowrap;}
+.searchResultUl .active {background: none repeat scroll 0 0 #4499FF; color: #FFFFFF;}
+.searchResultUl .searchResultLi:hover {background: none repeat scroll 0 0 #316AC5;}

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<vendor_page>
+		<remove name="store_switcher" />
+		
+		<reference name="footer">
+			<action method="setTemplate"><template>ves_vendorscms/page/html/footer.phtml</template></action>
+		</reference>
+		<!-- 
+		<reference name="left">
+			<action method="unsetChildren" />
+		</reference>
+		<reference name="right">
+			<action method="unsetChildren" />
+		</reference>
+		 -->
+		<reference name="left">
+			<block type="core/text_list" name="vendorscms.left.top" translate="label" before="-"></block>
+			<block type="core/text_list" name="vendorscms.left.bottom" translate="label" after="-"></block>
+		</reference>
+		<reference name="right">
+			<block type="core/text_list" name="vendorscms.right.top" translate="label" before="-"></block>
+			<block type="core/text_list" name="vendorscms.right.bottom" translate="label" after="-"></block>
+		</reference>
+		<reference name="content">
+			<block type="core/text_list" name="vendorscms.content.top" translate="label" before="-"></block>
+			<block type="core/text_list" name="vendorscms.content.bottom" translate="label" after="-"></block>
+		</reference>
+	</vendor_page>
+
+	<vendorscms_page_view translate="label">
+        <label>CMS Pages (All)</label>
+        <reference name="content">
+            <block type="vendorscms/heading" name="page_content_heading" template="ves_vendorscms/content_heading.phtml"/>
+            <block type="page/html_wrapper" name="cms.wrapper" translate="label">
+                <label>CMS Content Wrapper</label>
+                <action method="setElementClass"><value>std vendor-std</value></action>
+                <block type="vendorscms/page" name="cms_page"/>
+            </block>
+        </reference>
+    </vendorscms_page_view>
+    
+    
+    <vendorspage_index_index>
+    	
+    </vendorspage_index_index>
+</layout> 

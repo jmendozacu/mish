@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <catalog_product_view>
+        <block type="awrandomprice/randomprice" name="awrandomprice.block" as="awrandomprice"/>
+        <reference name="product.info.extrahint">
+            <block type="page/html_wrapper" name="product.info.extrahint.awrandomprice.wrapper">
+                <action method="insert">
+                    <block>awrandomprice.block</block>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>
