@@ -95,3 +95,53 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 
 .bx-wrapper .bx-pager-item {background: url('../images/banner_left_arrow.png') no-repeat left top;}
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {left: 50%; margin-left: -75px;}
+.bannerrightAddMobile {display: none;}
+
+@media (min-width:270px) and (max-width:768px){
+    .bannerCount {margin-left: 0 !important; width: 100% !important;}
+    .fotteraboutMiss, .categoryListning, .copyrightouter .fr {display: none;}
+    .container {width: 100% !important; padding: 0 2% !important;}
+    .socialiconCount {width: 100% !important; padding-left: 4% !important;}
+    #header .header1 .cart-top {margin-left: 0; float: right !important;}
+    .footer-pay-sociallinks-section ul.partnerCount {display: none;}
+    .topsellingCount {margin-left: 0;}
+    .cms-homepage1 #header .header1 .menu-top {top: 206px;}
+    #logo-theme {padding: 20px 0 0 0 !important;}
+    #header .header1 #topbar .topLinks .links li > a {color: #000;}
+    .topLinks .dropdown-menu {width: 100%;}
+    .cms-index-index #header .header1 {margin-bottom: 0 !important;}
+    .bannerrightAdd {display: none;}
+    .bannerrightAddMobile {display: block;}
+    .bannerrightAddMobile img {width: 100%; padding: 5px;}
+    .bannerCount {margin-top: 2px;}
+/*    .topLinks a {color: #000;}*/
+    
+}
+
+@media (min-width:270px) and (max-width:480px){
+    .bannerrightAdd {float: none; text-align: center; padding: 0;}
+    .footertop-section ul li {float: none; width: 100%; border-bottom: solid 1px #fff;}
+}
+
+@media (min-width:270px) and (max-width:320px){
+    .footerCount ul {float: none;text-align: center;}
+/*    .cms-homepage1 #header .header1 .menu-top {top: 236px;}*/
+    #header .header1 #topbar .dropdown-toggle {width: 100% !important;}
+    .pull-left {width: 130px;}
+    .pull-right { width: 160px;}
+    .bannerrightAdd img {width: 100%;}
+}
+
+@media (min-width:480px) and (max-width:767px){
+    .footerCount ul {float: left; width: 194px; margin: 0;}
+}
+@media (min-width:480px) and (max-width:736px){
+    .footertop-section ul li {width: 312px; margin-right: 0; border-right: solid 1px #fff; border-bottom: solid 1px #fff;}
+}
+@media (min-width:768px) and (max-width:1024px){
+    #logo-theme {padding: 10px 0 0 0  !important;}
+    .footertop-section ul li {margin-right: 0; font-size: 12px; padding: 20px 0; width: 184px; border-right: solid 1px #fff;}
+    .footertop-section ul li span {font-size: 10px;}
+    .footerCount ul {width: 217px;}
+    .bannerCount {margin-top: 2px;}
+}
