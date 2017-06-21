@@ -24,7 +24,10 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .container {width: 1312px !important; padding: 0 !important;}
 #header .header1 #topbar {background: #ec2d32 !important;}
 .headermainOuter {background: #fe585c}
-.topLinks .dropdown-menu {width:906px;}
+.topLinks .dropdown-menu {width:947px;}
+
+.links li a:hover, #select-language li a:hover, #select-currency li a:hover {background: none !important;}
+
 .topLinks a {line-height: 28px !important; color: #fff;}
 .topLinks .dropdown-menu a {font-size: 11px !importnat; text-transform: uppercase;}
 #header .header1 #topbar .topLinks .links li > a {color: #fff; line-height: 31px !important;}
@@ -114,7 +117,9 @@ ul.socialiconCount {width: 270px !important;}
 .womensCategoryRight .imageF {padding-bottom: 15px;}
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {display: none;}
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto { display: none;}
-
+#ves-paneltool {display: none;}
+a.close {top: 9px !important; color: #000 !important; font-size: 35px !important;}
+.quick-access .modal-box {left: 270px;}
 
 @media (min-width:270px) and (max-width:768px){
     .bannerCount {margin-left: 0 !important; width: 100% !important;}
@@ -133,6 +138,8 @@ ul.socialiconCount {width: 270px !important;}
     .bannerrightAddMobile {display: block;}
     .bannerrightAddMobile img {width: 100%; padding: 5px;}
     .bannerCount {margin-top: 2px;}
+    .topLinks .dropdown-menu a {color: #000 !important;}
+    ul.links li a {margin: 0 !important;}
 /*    .topLinks a {color: #000;}*/
     
 }
