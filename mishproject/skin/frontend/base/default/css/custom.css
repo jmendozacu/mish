@@ -53,7 +53,8 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .layerslider-wrapper {width: 100% !important;}
 #ves-verticalmenu .navbar-nav > li > a {font-size: 11px !important; font-weight: bold;}
 
-.footerCount ul {padding:0; margin:0; list-style-type:none; float:left; width:274px; margin-right:28px; padding-bottom: 20px;}
+.footerCount ul {padding:0; margin:0; list-style-type:none; float:left; width:230px; margin-right:28px; padding-bottom: 20px;}
+.footerCount ul:last-child { width: 200px;}
 .footerCount ul span {display:block;; color:#666666 ; text-transform:uppercase;   font-size: 14px;}
 .footerCount ul:last-child {margin:0;}
 .footerCount ul li {padding-top:10px;}
@@ -96,6 +97,24 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .bx-wrapper .bx-pager-item {background: url('../images/banner_left_arrow.png') no-repeat left top;}
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {left: 50%; margin-left: -75px;}
 .bannerrightAddMobile {display: none;}
+
+.cms-homepage1 .category-products {display: none;}
+.block .block-title {border: none !important;}
+.block-subscribe {float: left; width: 270px;}
+.block-subscribe .actions {position: absolute; top: 50px; right: 0;}
+ul.socialiconCount {width: 270px !important;}
+.womensCategory {padding-bottom: 44px;}
+.womensCategoryleft {float: left; width: 310px; height: 483px; background: #444653; border-radius: 4px;}
+.womensCategoryleft ul { padding: 32px 38px !important; margin: 0; list-style-type: none;}
+.womensCategoryleft ul span {padding-bottom: 30px; display: block; }
+.womensCategoryleft ul li {padding-bottom: 25px;}
+.womensCategoryleft ul li a {color: #fff; text-decoration: none; color: #000;}
+.womensCategoryMid {float: left; width: 615px;}
+.womensCategoryRight {float: right; width: 370px;}
+.womensCategoryRight .imageF {padding-bottom: 15px;}
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {display: none;}
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto { display: none;}
+
 
 @media (min-width:270px) and (max-width:768px){
     .bannerCount {margin-left: 0 !important; width: 100% !important;}

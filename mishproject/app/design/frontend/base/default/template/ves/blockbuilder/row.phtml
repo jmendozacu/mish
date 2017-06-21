@@ -204,7 +204,7 @@ if($productsku != ""){
 <!-- Category and brand section start here -->
 <?php 
 $catbrandModel = Mage::getModel('btslider/btcatbrand')->getCollection();
-
+$i=0;
 foreach ($catbrandModel as $catbrandData) {
    $catid = $catbrandData['catid'];
    $brands = $catbrandData['brand_name'];
@@ -215,26 +215,33 @@ foreach ($catbrandModel as $catbrandData) {
    $catModel = Mage::getModel('catalog/category')->load($catid);
    $catname = $catModel->getName();
    if($catid != ""){
+
+   	$color = array('#444653','#4f6184','#e9e9e9');
+   	$fontcolor = array('#fff','#fff','#000');
  ?>
-<div>
-    <div>
-          <ul><?php echo $catname;?></ul>
+<div class="womensCategory">
+  <?php// for ($i=0; $i <count($color) ; $i++) { ?>
+    <div  class="womensCategoryleft" style="background:<?php echo $color[$i]; ?>">
+          <ul style="color: <?php echo $fontcolor[$i]; ?>">
+          <span><?php echo $catname;?></span>
           <?php foreach($brandexplode as $brand){?>
           <li><?php echo $brand;?></li>
           <?php } ?>
-
+</ul>
     </div>
-    <div>
+    <?php// } ?>
+    <div class="womensCategoryMid">
           <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$featuredimage; ?>">
     </div>
 
-    <div>
-        <div><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$imageone; ?>"></div>
+    <div  class="womensCategoryRight">
+        <div class="imageF"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$imageone; ?>"></div>
         <div><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/brandfeatureimage/".$imagetwo; ?>"></div>
     </div>
+    <div class="clr"></div>
 </div>
 
-<?php } } ?>
+<?php } $i++;} ?>
 <!-- Category and brand section end herejfgjgyjgjgy -->
 
 <script>

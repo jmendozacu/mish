@@ -3508,8 +3508,7 @@ input, select, textarea {
 }
 
 .button, input.button {
-  background-color: #ec7357;
-  border: 1px solid #ec7357;
+  background-color: #333;
   cursor: pointer;
   text-transform: uppercase;
   -webkit-transition: all 0.4s ease 0s;
@@ -3520,8 +3519,8 @@ input, select, textarea {
   font-family: "Noto Sans", sans-serif;
   font-weight: 600;
   margin: 0;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .button:hover, input.button:hover {
   background-color: #444;
@@ -3757,15 +3756,15 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
   background: white;
 }
 .block .block-title {
-  color: #444;
+  color: #666;
   position: relative;
   font-family: "Asap", sans-serif;
-  padding: 35px 20px;
+  
   font-size: 17px;
-  font-weight: 600;
-  border-bottom: 1px dashed #e6e6e6;
+  
+  
   text-transform: uppercase;
-  border-top: 3px solid #ec7357;
+  
 }
 .block .block-title::before {
   content: "";
