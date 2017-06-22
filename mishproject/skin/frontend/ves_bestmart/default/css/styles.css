@@ -5724,6 +5724,7 @@ body.layout-boxed-lg #page {
 #ves-verticalmenu .block-title::before {
   background: none;
 }
+/*
 #ves-verticalmenu .block-title strong::after {
   content: "\f0d7";
   right: 8%;
@@ -5733,6 +5734,7 @@ body.layout-boxed-lg #page {
   color: #dd3e19;
   font-family: "FontAwesome";
 }
+*/
 .rtl #ves-verticalmenu .block-title strong::after {
   left: 8%;
   right: auto;
