@@ -120,6 +120,41 @@ ul.socialiconCount {width: 270px !important;}
 #ves-paneltool {display: none;}
 a.close {top: 9px !important; color: #000 !important; font-size: 35px !important;}
 .quick-access .modal-box {left: 270px;}
+#ves-verticalmenu {position: absolute; top: -44px; left: 60px;}
+.cms-homepage1 .ves-verticalmenu {position: relative !important; left: 0  !important; top: 0  !important;}
+#ves-verticalmenu {background: none;}
+#ves-verticalmenu .block-title {background: none !important;}
+
+.listingTopsection h1 { text-align: center; font-size: 20px; font-weight: bold; text-transform: uppercase;} 
+.listingTopsection .topviwListing {padding: 15px 0; width: 846px; margin: auto;}
+.listingTopsection .topviwListing ul {padding: 0; margin: 0; list-style: none;}
+.listingTopsection .topviwListing ul li {float: left; margin-right: 48px;}
+.listingTopsection .topviwListing ul li:last-child {margin: 0;}
+.listingTopsection .topviwListing ul li img {border: solid 1px #ddd; border-radius: 50%; padding: 15px 12px; background: #fff;}
+.listingTopsection .topviwListing ul li.last {border: solid 1px #ddd; border-radius: 50%; padding: 15px 12px; background: #fff;}
+.listingTopsection .topviwListing ul li .textDetails {font-size: 14px; text-align: center; padding-top: 18px;}
+.listingTopsection .topviwListing ul li .textDetails span {display: block;}
+.listingTopsection .topviwListing ul li a { color: #000; text-transform: uppercase;}
+
+.automobileTypeCount {padding: 25px 0 44px 0;}
+.automobileType { background: #524c4c; float: left; width: 264px; -webkit-border-top-left-radius: 6px; -webkit-border-bottom-left-radius: 6px;
+-moz-border-radius-topleft: 6px; -moz-border-radius-bottomleft: 6px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; padding: 13px 0 93px 12px;}
+.automobileType ul {padding: 0; margin: 0; list-style-type: none;}
+.automobileType ul span {text-transform: uppercase; color: #fff; font-size: 20px; display: block; padding-bottom: 23px;}
+.automobileType ul li { padding-bottom: 20px;}
+.automobileType ul li a {color: #fff; font-size: 16px;}
+.automobileType ul li a:hover {color: #00a5e7;}
+.automobileBanner {float: left;}
+
+
+.automobilebyBrand {margin-bottom: 66px;}
+.automobilebyBrand h1 { text-transform: uppercase; font-size: 20px; color: #000;}
+.automobilebyBrand .innercount {background: #00a5e7; padding: 10px 80px;}
+.automobilebyBrand .innercount ul {padding: 0; margin: 0; list-style-type: none;}
+.automobilebyBrand .innercount ul li {float: left; padding-right: 64px;}
+.automobilebyBrand .innercount ul li:last {padding: 0;}
+
+
 
 @media (min-width:270px) and (max-width:768px){
     .bannerCount {margin-left: 0 !important; width: 100% !important;}
