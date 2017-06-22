@@ -23,7 +23,7 @@ foreach ($btmodel as $imagedata) {
             $title = $imagedata['title'];
             $imagethumbnail = $imagepath.$image;
 ?>
-        <div class="item <?php if ($i) { echo "active";} ?>">
+        <div class="item <?php if ($i==0) { echo "active";} ?>">
 
            <a href="<?php echo $url; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/".$image; ?>"></a>
            <div class="carousel-caption">
