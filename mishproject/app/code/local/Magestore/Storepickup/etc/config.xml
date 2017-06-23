@@ -204,9 +204,9 @@
                 <rewrite>
                     <order_pdf_creditmemo>Magestore_Storepickup_Model_Order_Pdf_Abstract</order_pdf_creditmemo>                
                 </rewrite>
-               <!--  <rewrite>
-                    <order_pdf_shipment>Magestore_Storepickup_Model_Order_Pdf_Abstract</order_pdf_shipment>                
-                </rewrite> -->
+                <rewrite>
+                    <order_pdf_shipment>Magestore_Storepickup_Model_order_pdf_shipment</order_pdf_shipment>                
+                </rewrite>
             </sales>
         </models>
         <resources>
