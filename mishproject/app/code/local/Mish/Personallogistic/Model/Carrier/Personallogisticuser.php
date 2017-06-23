@@ -80,7 +80,8 @@ implements Mage_Shipping_Model_Carrier_Interface
          $shippingcountry = $quote->getShippingAddress()->getCountry();
           $shippingpostcode=$quote->getShippingAddress()->getPostcode();
 
-        $ShippingAddress=($shippingstreet.",".$shippingcity.",".$shippingregion.",".$shippingcountry);
+     $ShippingAddress=($shippingstreet.",".$shippingcity.",".$shippingregion.",".$shippingcountry);
+  
 
                             //customer  longitudea nd latitude
                              $address123 = str_replace(" ", "+",$ShippingAddress);
@@ -124,10 +125,11 @@ implements Mage_Shipping_Model_Carrier_Interface
 
                      
 
-                   $vendorwarehouseaddress=($vendorcollection['street'].",".$vendorcollection['city'].",".$state_name.",".$countryname.",".$vendorcollection['postcode']);
+                   $vendorwarehouseaddress=($vendorcollection['street'].",".$vendorcollection['city'].",".$state_name.",".$countryname);
 
                         //warehouse longitudea nd latitude
                         $vendorwarehouseaddress123 = str_replace(" ", "+",$vendorwarehouseaddress);
+                  
 
                            $url = "http://maps.google.com/maps/api/geocode/json?address=$vendorwarehouseaddress123";
   $ch = curl_init();
@@ -158,7 +160,8 @@ implements Mage_Shipping_Model_Carrier_Interface
 
        $userid =  $data['personallogistic_id'];
       
-       $personallogisticaddress= $data->getRegion();
+      $personallogisticaddress= $data->getRegion();
+   
         $personallogisticprice= $data->getPrice();
        $transportweight=$data->getTransportweight();
         $personallogistictransport= strtolower($data->getTransport());
@@ -358,11 +361,11 @@ implements Mage_Shipping_Model_Carrier_Interface
         if($i<4)
         {
           
-          echo "<input type='radio' name='plusername' style='margin-left:-10px;' onclick='radiocheck(".$data->getPersonallogisticId().','.$data->getTotalestimateprice().");' value='".$data->getPersonallogisticId().",".$data->getTotalestimateprice()."'";
+          echo "<input type='radio' name='plusername' style='margin-left:-10px;' onclick='radiocheck(".$data->getPersonallogisticId().','.str_replace(',','',$data->getTotalestimateprice()).");' value='".$data->getPersonallogisticId().",".str_replace(',','',$data->getTotalestimateprice())."'";
 
           if($sesPLuserId == $userid){echo "checked";}
        
-          echo ">".$data->getFirstname()." ".$data->getLastname()."-".$_weight."kg"."-".$day." ".'day'." ".$hrs." ".'Hrs'." ".$min." ".'Min'." - ".$symbol.$totalestimateprice."<br>";
+          echo ">".$data->getFirstname()." ".$data->getLastname()."-".$_weight."kg"."-".$day." ".'day'." ".$hrs." ".'Hrs'." ".$min." ".'Min'." - ".$symbol.str_replace(',','',$totalestimateprice)."<br>";
 
           Mage::getSingleton('core/session')->unsPluserRadioID();
         }
