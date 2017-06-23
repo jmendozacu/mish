@@ -1,0 +1,133 @@
+  <div class="homepageheading">
+     <h2><?php echo __("Category Page Configurations"); ?></h2>
+  </div>
+
+<div id="homepage-tabs"  class="bannertopTabing">
+
+ <div>
+      <ul>
+        <li><a href="#tab-1"><?php echo __('Category Banner Slider'); ?></a></li>
+    <!--     <li><a href="#tab-2"><?php //echo __('Homepage Category Product Slider'); ?></a></li>
+        <li><a href="#tab-3"><?php //echo __('Homepage Category with Brand'); ?></a></li> -->
+        <div class="clr"></div>
+      </ul>
+</div>
+<!-- Banner Slider section start here -->
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_vendors/js/jquery.pagination-with-hash-change-2.js')?>"></script> 
+	<script>jQuery.noConflict();</script>
+<div id="tab-1">
+
+
+<h3><?php //echo __('Category Banner Slider : '); ?></h3>
+
+	<div class="bannerslider">
+		 <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/savecatBanerimages') ?>" method="POST" enctype="multipart/form-data">
+		     <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+          <label>Category Id:</label>
+          <input type="text" name="category_id">
+
+		      <label>Select image:</label>
+		      <input type="file" value="" name="fileToUploadcat" id="fileToUploadcat">
+
+			    <label>Title:</label>
+          <input type="text" name="titlecat">
+
+			    <label>Banner url:</label>
+          <input type="text" name="urlcat" >
+			    <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+		  </form>
+	</div>
+
+
+<?php 
+  $btcatSLiderModel = Mage::getModel('btslider/btcategoryslider')->getCollection();
+?>
+
+<div class="bannertable">
+<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    
+             <table border="0" cellpadding="0" cellspacing="0">
+    	<thead>
+    		<tr class="toprow">
+    		  <td><?php echo __('Id'); ?></td>
+          <td><?php echo __('Category Id'); ?></td>
+    			<td><?php echo __('Image'); ?></td>
+    			<td><?php echo __('Image Title'); ?></td>
+    			<td><?php echo __('Url'); ?></td>
+    			<td><?php echo __('Action'); ?></td>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	<?php 
+foreach ($btcatSLiderModel as $catimagedata) { 
+  $id = $catimagedata['btcatslider_id'];
+  $catid = $catimagedata['categoryid'];
+  $image = $catimagedata['sliderimage'];
+  $url = $catimagedata['url'];
+  $title = $catimagedata['image_title'];
+  $imagethumbnail = $catimagedata.$image;
+?>
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+    	  <tr>
+    	        <td><?php echo $id;?></td>
+               <td><?php echo $catid;?></td>
+    	  		<td> <img height="100px" width="100px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/".$image; ?>"></td>
+    	  		<td><?php echo $title; ?></td>
+    	  		<td><?php echo $url; ?></td>
+    	  		<td><a href="<?php echo Mage::helper("adminhtml")->getUrl('*/*/deletecatsliderimage') ?>?id=<?php echo $id;?>"><?php echo __('Delete'); ?></a></td>
+    	  </tr>
+  <?php } ?>
+    	</tbody>
+    </table>
+   
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+  var j = jQuery.noConflict();
+    j( function() {
+      j( "#homepage-tabs" ).tabs();
+    } );
+</script>
+
+<style type="text/css">
+  .bannertopTabing ul li {float: left;
+    margin-right: 10px;
+    background: #329f91;
+    padding: 8px;}
+  .bannertopTabing ul li a  {    display: block;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;}
+    .clr {clear: both;}
+    .ui-state-active {
+    background: #eb5f34 !important;
+}
+.homepageheading {padding: 10px 0;}
+.bannerslider {background: #ddd; padding: 15px 10px; padding-bottom: 0; font-size: 15px; margin-bottom: 10px; border-radius: 4px;}
+.bannerslider input {padding: 7px 0;}
+.bannerslider .savebutton {background: #eb5f34;
+    padding: 7px 20px;
+    border: none;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: uppercase; border-radius: 3px;}
+   .bannertable table  {    width: 100%;
+    border: solid 1px #ccc;
+    margin: 0 10px 32px 0;
+    float: left;
+    border-bottom: none;}
+.bannertable table  tr td {padding: 8px; border:solid 1px #ddd;}
+    .bannertable table  tr.toprow {font-weight: bold; background: none;}
+  
+  .bannertable table tr:nth-child(even) {background: #fff}
+.bannertable table tr:nth-child(odd) {background: #ccc}
+</style>

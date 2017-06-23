@@ -128,7 +128,8 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 .listingTopsection h1 { text-align: center; font-size: 20px; font-weight: bold; text-transform: uppercase;} 
 .listingTopsection .topviwListing {padding: 15px 0; width: 846px; margin: auto;}
 .listingTopsection .topviwListing ul {padding: 0; margin: 0; list-style: none;}
-.listingTopsection .topviwListing ul li {float: left; margin-right: 48px;}
+.listingTopsection .topviwListing ul li {float: left; margin-right: 48px; transition:all 0.1s ease-in;cursor:pointer;}
+/*.listingTopsection .topviwListing ul li:hover {background: #fff; box-shadow:0 1px 3px 0 rgba(0,0,0,0.1)}*/
 .listingTopsection .topviwListing ul li:last-child {margin: 0;}
 .listingTopsection .topviwListing ul li img {border: solid 1px #ddd; border-radius: 50%; padding: 15px 12px; background: #fff;}
 .listingTopsection .topviwListing ul li.last {border: solid 1px #ddd; border-radius: 50%; padding: 15px 12px; background: #fff;}
@@ -145,6 +146,8 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 .automobileType ul li a {color: #fff; font-size: 16px;}
 .automobileType ul li a:hover {color: #00a5e7;}
 .automobileBanner {float: left;}
+
+
 
 
 .automobilebyBrand {margin-bottom: 66px;}
@@ -206,3 +209,5 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
     .footerCount ul {width: 217px;}
     .bannerCount {margin-top: 2px;}
 }
+
+.democlassforGit {color: #000;}

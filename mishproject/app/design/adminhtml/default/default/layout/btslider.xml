@@ -5,4 +5,9 @@
             <block type="btslider/adminhtml_btslider" name="btslider" template="btslider/adminbtslider.phtml"/>
         </reference>
     </btslider_adminhtml_btslider_index>
+     <btslider_adminhtml_btslidercat_index>
+        <reference name="content">
+            <block type="btslider/adminhtml_btslidercat" name="btslidercat" template="btslider/adminbtslidercat.phtml"/>
+        </reference>
+    </btslider_adminhtml_btslidercat_index>
 </layout>

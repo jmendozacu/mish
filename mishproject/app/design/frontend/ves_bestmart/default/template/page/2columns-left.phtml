@@ -92,12 +92,14 @@
                 if ($controllername == 'category'){
              ?>
             <div class="custom1column">
-               <?php //echo "current categoryid- ".$currentCategory =  Mage::getModel('catalog/layer')->getCurrentCategory()->getId(); 
+               <?php echo $currentCategory =  Mage::getModel('catalog/layer')->getCurrentCategory()->getId(); 
+                     $catModel = Mage::getModel('catalog/category')->load($currentCategory);
+                     $catName = $catModel->getName();
                 ?>
                 <div class="container">
                 <!-- Start Automobile By Price -->
                     <div class="listingTopsection">
-                        <h1>Automovil by price</h1>
+                        <h1><?php echo $catName;?> by price</h1>
                         <div class="topviwListing">
                             <ul>
                                 <li>

@@ -37,14 +37,19 @@
     <adminhtml>
 		<menu>
 			<btslider module="btslider">
-				<title>Mish Homepage Module</title>
+				<title>Mish Module</title>
 				<sort_order>71</sort_order>               
 				<children>
 					<items module="btslider">
-						<title>Banner and Carousel</title>
+						<title>Homepage Banner and Carousel</title>
 						<sort_order>0</sort_order>
 						<action>btslider/adminhtml_btslider</action>
 					</items>
+                    <items2 module="btslider">
+                        <title>Category Banner</title>
+                        <sort_order>0</sort_order>
+                        <action>btslider/adminhtml_btslidercat</action>
+                    </items2>
 				</children>
 			</btslider>
 		</menu>
@@ -99,6 +104,10 @@
                 <class>Bluethink_Btslider_Model</class>
                 <resourceModel>btslider_mysql4</resourceModel>
             </btcatbrand>
+             <btcategoryslider>
+                <class>Bluethink_Btslider_Model</class>
+                <resourceModel>btslider_mysql4</resourceModel>
+            </btcategoryslider>
             <btslider_mysql4>
                 <class>Bluethink_Btslider_Model_Mysql4</class>
                 <entities>
@@ -111,6 +120,9 @@
                     <btcatbrand>
                         <table>btcatbrand</table>
                     </btcatbrand>
+                     <btcategoryslider>
+                        <table>btcategoryslider</table>
+                    </btcategoryslider>
                 </entities>
             </btslider_mysql4>
         </models>

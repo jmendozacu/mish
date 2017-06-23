@@ -40,7 +40,7 @@ foreach ($btmodel as $imagedata) {
         foreach ($btmodel as $imagedata) { 
             $id= $imagedata['btbanner_id'];
             $imagelabel = $imagedata['imagelabel']; ?>
-          <li data-target="#myCarousel" data-slide-to="<?php echo $m; ?>" class="<?php if ($m==0) { echo "active";} ?>"><a href="#"><?php echo $imagelabel; ?></a></li>
+          <li data-target="#myCarousel" data-slide-to="<?php echo $m; ?>" class="col <?php //if ($m==0) { echo "active";} ?>"><a href="#"><?php echo $imagelabel; ?></a></li>
       <?php $m++; } ?>
         </ul>
 
@@ -66,6 +66,9 @@ foreach ($btmodel as $imagedata) {
 #myCarousel .nav {
   background:#eee;
 }
+.nav > li > a:focus {background-color: #fe585c !important;}
+.nav-justified > li > a:hover, .nav-tabs.nav-justified > li > a {background-color: #fe585c !important; color:#fff;}
+
 </style>
 <script>
   
@@ -94,3 +97,4 @@ foreach ($btmodel as $imagedata) {
 });
 
 </script>
+
