@@ -87,98 +87,6 @@
                 </div>
             </div>
             <?php } ?>
-            <?php 
-                $controllername = $this->getRequest()->getControllerName();
-                if ($controllername == 'category'){
-             ?>
-            <div class="custom1column">
-               <?php echo $currentCategory =  Mage::getModel('catalog/layer')->getCurrentCategory()->getId(); 
-                     $catModel = Mage::getModel('catalog/category')->load($currentCategory);
-                     $catName = $catModel->getName();
-                ?>
-                <div class="container">
-                <!-- Start Automobile By Price -->
-                    <div class="listingTopsection">
-                        <h1><?php echo $catName;?> by price</h1>
-                        <div class="topviwListing">
-                            <ul>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_banner01.jpg"></a>
-                                    <div class="textDetails">Less Than <span>Rs.3,000</span></div>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_banner01.jpg"></a>
-                                    <div class="textDetails">Less Than <span>Rs.3,000</span></div>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_banner01.jpg"></a>
-                                    <div class="textDetails">Less Than <span>Rs.3,000</span></div>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_banner01.jpg"></a>
-                                    <div class="textDetails">Less Than <span>Rs.3,000</span></div>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_banner01.jpg"></a>
-                                    <div class="textDetails">Less Than <span>Rs.3,000</span></div>
-                                </li>
-                                <li>
-                                     <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/detail_toplisting_viewall.jpg">
-                                    <div class="textDetails">View All</div>
-                                </li>
-                                <div class="clr"></div>
-                            </ul>
-                        </div>
-                    </div>
-                <!-- End Automobile By Price -->
-                    
-                    <div class="automobileTypeCount">
-                        <div class="automobileType">
-                            <ul>
-                                <span>AUTOMOVIL  by Type</span>
-                                <li><a href="#">Inkjet Printers</a></li>
-                                <li><a href="#">Laserjet Printers</a></li>
-                                <li><a href="#">DotMatrix Printers</a></li>
-                                <li><a href="#">Thermal Printers</a></li>
-                                <li><a href="#">3D Printers</a></li>
-                                <li><a href="#">Muti Function</a></li>
-                            </ul>
-                        </div>
-                        <div class="automobileBanner"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/automobile_banner.jpg"></div>
-                        <div class="clr"></div>
-                    </div>
-
-                    <div class="automobilebyBrand">
-                        <h1>AUTOMOVIL by brand</h1>
-                        <div class="innercount">
-                            <ul>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage01.png"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage02.png"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage03.png"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage04.png"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage05.png"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/auto_brandimage06.png"></a>
-                                </li>
-                                <div class="clr"></div>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- <img src="http://localhost/miss/mishproject/skin/frontend/base/default/images/banner01.jpg"> -->
-                 </div>
-            </div>
-            <?php } ?>
             <div class="container">
             <div class="row visible-sm visible-xs">
                 <div class="container">
@@ -232,7 +140,12 @@
                             </aside>
                         <?php endif; ?>
                 </div>
+                <?php $controller = $this->getRequest()->getControllerName();
+                if($controller == 'category'){ ?>
+                <?php echo Mage::getModel('catalog/layer')->getCurrentCategory()->getDescription(); 
+                }?>
             </div>
+
         </section>
 
         
@@ -251,6 +164,8 @@
                     <?php echo $footerTop; ?>
                 </div></div>
             </div>
+
+
             <?php } ?>
         <?php if($themeConfig->get("enable_footer_center",1) && $footerCenter = $helper->getModulesByPosition('footerCenter')){ ?>
             <div class="footer-center">
