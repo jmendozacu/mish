@@ -91,7 +91,8 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .fotteraboutMiss p {color: #777777;}
 .footerlink-section {padding: 35px 0 0 0;}
 .clr {clear: both;}
-.topsellingCount {margin-left: 191px;}
+.topsellingCount {float: right; width: 1118px;}
+.topsellingCount .bx-wrapper{float: right; width: 1118px; max-width: auto !important;}
 .bxslider li {width: 200px !important;}
 .bxslider li .productNameing {text-align: center;}
 .rating-box {float: none  !important; margin: auto !important; }
@@ -178,6 +179,8 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
     .bannerCount {margin-top: 2px;}
     .topLinks .dropdown-menu a {color: #000 !important;}
     ul.links li a {margin: 0 !important;}
+    .topsellingCount {margin: 0 !important;}
+    .bxslider li {width: 100% !important;}
 /*    .topLinks a {color: #000;}*/
     
 }
@@ -185,9 +188,21 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 @media (min-width:270px) and (max-width:480px){
     .bannerrightAdd {float: none; text-align: center; padding: 0;}
     .footertop-section ul li {float: none; width: 100%; border-bottom: solid 1px #fff;}
+    .womensCategoryleft, .womensCategoryMid {float: none; width: 100%;}
+    .womensCategoryMid img {width: 100%;}
+    .womensCategoryRight {float: none; width: 100%; text-align: center;}
+    .womensCategoryRight img {text-align: center;}
+    .womensCategoryRight .imageF {padding: 15px 0;}
+    .womensCategoryleft ul li {display: inline-block; padding: 0 10px; text-align: center;}
+    .womensCategoryleft {min-height: 173px; height: 173px; max-height: 400px;}
+    .footerCount ul {float: none; width: 100%;}
+    .footerCount ul li {padding: 10px 6px 7px 0; display: inline-block; text-align: center;}
+    ul.socialiconCount {width: 100% !important; float: none;}
+    .socialiconCount li {float: left; padding: 0 !important;}
+    
 }
 
-@media (min-width:270px) and (max-width:320px){
+@media (min-width:270px) and (max-width:375px){
     .footerCount ul {float: none;text-align: center;}
 /*    .cms-homepage1 #header .header1 .menu-top {top: 236px;}*/
     #header .header1 #topbar .dropdown-toggle {width: 100% !important;}
@@ -201,6 +216,13 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 }
 @media (min-width:480px) and (max-width:736px){
     .footertop-section ul li {width: 312px; margin-right: 0; border-right: solid 1px #fff; border-bottom: solid 1px #fff;}
+    .womensCategoryleft {width: 30%;}
+    .womensCategoryMid {width: 50%;}
+    .womensCategoryRight {clear: both; float: none; width: 100%;}
+    .womensCategoryRight div {float: left; width: 50%; padding: 15px 8px 0 0;}
+    .womensCategoryRight div  img { width: 100%;}
+    .footertop-section ul li {width: 50%;}
+    .footer-pay-sociallinks-section .fa {margin-right: 16px;}
 }
 @media (min-width:768px) and (max-width:1024px){
     #logo-theme {padding: 10px 0 0 0  !important;}
@@ -208,6 +230,12 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
     .footertop-section ul li span {font-size: 10px;}
     .footerCount ul {width: 217px;}
     .bannerCount {margin-top: 2px;}
+    .womensCategoryleft {float: left; width: 35%;}
+    .womensCategoryMid { width: 57%;}
+    .womensCategoryRight {clear: both; float: none; width: 100%;}
+     .womensCategoryRight div {float: left; width: 50%; padding: 15px 8px 0 0;}
+    .womensCategoryRight div  img { width: 100%;}
+    .footertop-section ul li {width: 50%;}
 }
 
 .democlassforGit {color: #000;}
