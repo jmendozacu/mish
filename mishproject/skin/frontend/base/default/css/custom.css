@@ -50,7 +50,8 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 #header .header1 .menu-top .block-content {width: 200px;}
 
 .home-page-right-section {padding-left: 0 !important;}
-.bannerCount {margin-left:17%; float: left; width: 847px; margin-top: 7px;}
+.bannerCount { float: left; width: 847px; margin-top: 7px;}
+.homebannerTopcount{width: 1120px; float: left; margin-left: 249px;}
 .homerightWidget {width: 180px; float: right;}
 .bannerrightAdd {float: left; padding-left: 9px;}
 .layerslider-wrapper {width: 100% !important;}
@@ -91,7 +92,7 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .fotteraboutMiss p {color: #777777;}
 .footerlink-section {padding: 35px 0 0 0;}
 .clr {clear: both;}
-.topsellingCount {float: right; width: 1118px;}
+.topsellingCount {float: right; width: 1118px; margin-top: 37px;}
 .topsellingCount .bx-wrapper{float: right; width: 1118px; max-width: auto !important;}
 .bxslider li {width: 200px !important;}
 .bxslider li .productNameing {text-align: center;}
