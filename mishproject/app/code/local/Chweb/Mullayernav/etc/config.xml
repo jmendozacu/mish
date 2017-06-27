@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Chweb Multi Layered Navigation 
+*
+* @category     Chweb
+* @package      Chweb_Mullayernav 
+* @copyright    Copyright (c) 2014-2015 Chweb (http://www.chaudharyweb.com/)
+* @author       Chweb (Rajesh chaudhary)  
+* @version      Release: 1.0.0
+*/
+-->
+<config>
+    <modules>
+        <Chweb_Mullayernav>
+            <version>1.0.0</version>
+        </Chweb_Mullayernav>
+    </modules>
+    <frontend>
+        <routers>
+            <mullayernav>
+                <use>standard</use>
+                <args>
+                    <module>Chweb_Mullayernav</module>
+                    <frontName>mullayernav</frontName>
+                </args>
+            </mullayernav>
+        </routers>
+        <layout>
+            <updates>
+                <mullayernav>
+                    <file>mullayernav.xml</file>
+                </mullayernav>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Chweb_Mullayernav>
+                    <files>
+                        <default>Chweb_Mullayernav.csv</default>
+                    </files>
+                </Chweb_Mullayernav>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Chweb_Mullayernav>
+                    <files>
+                        <default>Chweb_Mullayernav.csv</default>
+                    </files>
+                </Chweb_Mullayernav>
+            </modules>
+        </translate>
+    </adminhtml> 
+    
+   
+    <global> 
+        <models>
+            <mullayernav>
+                <class>Chweb_Mullayernav_Model</class>
+            </mullayernav>
+        </models>     
+    
+        <blocks>
+            <mullayernav>
+                <class>Chweb_Mullayernav_Block</class>
+            </mullayernav>
+                       
+            <catalog>
+                <rewrite>
+                    <layer_view>Chweb_Mullayernav_Block_Rewrite_RewriteCatalogLayerView</layer_view>
+                </rewrite>
+            </catalog> 
+                
+            <catalogsearch>
+                <rewrite>
+                    <result>Chweb_Mullayernav_Block_Rewrite_RewriteCatalogsearchResult</result>
+                </rewrite> 
+            </catalogsearch>            
+        </blocks>
+        <helpers>
+            <mullayernav>
+                <class>Chweb_Mullayernav_Helper</class>
+            </mullayernav>
+        </helpers>
+        <resources>
+            <mullayernav_setup>
+                <setup>
+                    <module>Chweb_Mullayernav</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mullayernav_setup>
+            <mullayernav_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mullayernav_write>
+            <mullayernav_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mullayernav_read>
+        </resources>
+    </global> 
+	
+    <default>
+        <mullayernav>
+            <mullayernav>
+                <cat_style>breadcrumbs</cat_style>
+                <price_style>default</price_style>
+                <remove_links>0</remove_links>
+                <reset_filters>1</reset_filters>
+            </mullayernav>  
+			   <option>
+                <nonrated>Yet not rated</nonrated>
+                <onestar>One star</onestar>  
+                <twostar>Two star</twostar>
+                <threestar>Three star</threestar>
+                <fourstar>Four star</fourstar>
+                <fivestar>Five star</fivestar>
+			    </option>
+				<settings>
+				<label>Stock availability</label>
+				</settings>
+        </mullayernav>
+    </default>
+</config>
