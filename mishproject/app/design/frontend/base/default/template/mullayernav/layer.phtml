@@ -1,0 +1,63 @@
+<?php if ($this->canShowBlock()): $state = $this->getStateInfo() ?>
+<?php    $input=array('cat','price','stock','rating')   ?>
+    <div class="block block-layered-nav">
+        <div class="block-title">
+            <strong><span><?php echo $this->__('Shop by') ?></span></strong>
+        </div>
+		<input type="hidden" id="loadermode"  value="<?php  echo $this->getMode();  ?>">
+
+        <div class="block-content">
+            <?php echo $this->getStateHtml() ?>
+            <?php if ($this->canShowOptions()): ?>
+                <div class="chweb-filter">
+                    <input type="hidden" id="chweb_layered_url" value="<?php echo $this->htmlEscape($state[0]) ?>"/>
+                    <input type="hidden" id="chweb_layered_params" value="<?php echo $this->htmlEscape($state[1]) ?>"/> 
+                    <input type="hidden" id="chweb_layered_ajax" value="<?php echo $this->htmlEscape($state[2]) ?>"/> 
+                    <dl id="chweb_filters_list">
+                        <?php if ($state[1] AND $this->bNeedClearAll()): ?>
+                            <div class="actions chweb_layered_clear_all"><a class="chweb_layered_clearall" href="<?php echo $this->htmlEscape($this->getClearAllUrl()) ?>"><?php echo $this->__('Clear All') ?></a></div>            
+                        <?php endif ?>
+
+                        <?php $_filters = $this->getFilters();$n=0; ?>
+                        <?php foreach ($_filters as $_filter): ?>
+                            <?php if ($_filter->getItemsCount()): ?>
+                                <dt class="chweb_layered_dt">
+                                <?php if ($clearUrl = $_filter->getClearUrl()): ?>
+                                    <a id="<?php echo $_filter->getVar() ?>-clear" <?php if (!$this->getIsRemoveLinks()): ?>href="#" <?php endif; ?> class="btn-remove chweb_layered_clear" title="<?php echo $this->__('Remove This Item') ?>"><?php echo $this->__('Remove This Item') ?></a>
+                                <?php endif ?>
+                                <?php echo $this->__($_filter->getName()) ?>
+                                </dt>
+                                <dd <?php echo $this->getHeightStyle() ?> id="chweb_layered_<?php echo $_filter->getVar() ?>">
+								<?php if(!in_array($_filter->getVar(),$input)): ?>
+								<div class="inputbox-filter"> <input type="text" 
+placeholder="Search by <?php echo $this->__($_filter->getName()) ?>" size="33" 
+ onkeyup="showMatchingFilterItems(this, 'filter_<?php echo $_filter->getVar() ?>');" 
+ class="input inputBox_filter_<?php echo $this->__($_filter->getVar()) ?>">
+</div><?php endif; ?>
+								<?php echo $_filter->getHtml() ?></dd>
+                            <?php endif;$n++; ?>
+                        <?php endforeach; ?>
+                    </dl>
+                    <script type="text/javascript">
+                        decorateDataList('narrow-by-list');
+                        chweb_layered_init();
+                    </script>
+                </div>
+            <?php endif; ?>
+			
+        </div>
+        <div class="chweb_loading_filters" style="display:none"></div>
+    </div>
+	
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
