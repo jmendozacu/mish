@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+ <default>
+        <reference name="head">
+		  <action method="addItem" ifconfig="mullayernav/mullayernav/load_jquery">
+                <type>skin_js</type>
+                <name>js/chweb/jquery-1.10.2.js</name>
+            </action>
+                           
+            <action method="addItem" ifconfig="mullayernav/mullayernav/show_nav">
+                <type>skin_js</type>
+                <name>js/chweb/jquery-ui.js</name>
+            </action>
+			 <action method="addCss" ifconfig="mullayernav/mullayernav/show_nav">
+                <stylesheet>css/chweb/jquery-ui.css</stylesheet>
+            </action>
+			        <action method="addCss"  ifconfig="mullayernav/mullayernav/show_nav"><stylesheet>css/chweb/chweb_layered_nav.css</stylesheet></action>
+  <action method="addItem" ifconfig="mullayernav/general/enabled">
+                <type>skin_js</type>
+                <name>js/chweb/infinitescroll.js</name>
+            </action>
+            <action method="addItem" ifconfig="mullayernav/general/enabled">
+                <type>skin_css</type>
+                <name>css/chweb/infinitescroll.css</name>
+            </action>
+            <block type="core/text" name="fragment_meta" before="-">
+                <action method="setText">
+                    <text>
+<![CDATA[<meta name="fragment" content="!">]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+		 <reference name="left_first">
+            <action method="unsetChild" ifconfig="mullayernav/mullayernav/show_nav">
+                <name>catalog.leftnav</name>
+            </action>
+        </reference>
+
+    </default>
+<mullayernav_front_category>
+    <remove name="right"/>
+    <remove name="left"/>
+    <block type="mullayernav/layer_view" name="layer"  template="mullayernav/layer.phtml"/>
+    <block type="mullayernav/list" name="root">
+        <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+		                    <action method="setColumnCount"><columns>4</columns></action>
+
+            <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+             <block type="page/html_pager" name="product_list_toolbar_pager"/>
+            </block>
+            <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+            <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+        </block>
+    </block>
+</mullayernav_front_category>
+
+<mullayernav_front_search>
+    <remove name="right"/>
+    <remove name="left"/>
+    <block type="mullayernav/search_layer" name="layer"  template="mullayernav/layer.phtml"/>
+    <block type="mullayernav/list" name="root">
+        <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+  <action method="setColumnCount"><columns>4</columns></action>
+            <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                <block type="page/html_pager" name="product_list_toolbar_pager"/>
+            </block>
+            <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+            <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+            <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+        </block>
+    </block>
+</mullayernav_front_search>
+
+<catalog_category_layered> 
+ <reference name="left_first">
+            <action method="unsetChild" ifconfig="mullayernav/mullayernav/show_nav">
+                <name>catalog.leftnav</name>
+            </action>
+        </reference>
+      <reference name="left">         
+        <block type="mullayernav/layer_view" name="filter.catalog"	before="-" template="mullayernav/layer.phtml"/>
+    </reference>
+	
+</catalog_category_layered> 
+<catalog_category_default translate="label">
+ <reference name="left_first">
+            <action method="unsetChild" ifconfig="mullayernav/mullayernav/show_nav">
+                <name>catalog.leftnav</name>
+            </action>
+        </reference>
+  <reference name="left">
+            <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml"/>
+        </reference>
+<reference name="left">         
+        <block type="mullayernav/layer_view" name="filter.catalog" before="-" template="mullayernav/layer.phtml"/>
+    </reference>
+	
+	
+  
+</catalog_category_default>
+
+<catalogsearch_result_index translate="label">
+ <reference name="left_first">
+            <action method="unsetChild" ifconfig="mullayernav/mullayernav/show_nav">
+                <name>catalogsearch.leftnav</name>
+            </action>
+        </reference>
+       <reference name="left">
+            <block type="mullayernav/search_layer" name="catalogsearch.mullayernav" before="-" template="mullayernav/layer.phtml"/>
+    </reference>
+	
+	
+</catalogsearch_result_index> 
+
+   <mullayernav_init>
+         <reference name="content">
+            <block type="mullayernav/init" name="mullayernav_init" template="mullayernav/init.phtml" />
+        </reference>
+    </mullayernav_init>
+    <catalog_category_default>
+        <update handle="mullayernav_init" />
+    </catalog_category_default>
+    <catalog_category_layered>
+        <update handle="mullayernav_init" />
+    </catalog_category_layered>
+    <catalogsearch_result_index>
+        <update handle="mullayernav_init" />
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+        <update handle="mullayernav_init" />
+    </catalogsearch_advanced_result>
+    <mullayernav_all>
+        <reference name="product_list_toolbar">
+            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+            <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+            <action method="setDefaultListPerPage"><limit>all</limit></action>
+            <action method="setDefaultGridPerPage"><limit>all</limit></action>
+        </reference>
+    </mullayernav_all>
+	
+</layout>
