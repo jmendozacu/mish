@@ -331,7 +331,7 @@ if($vendorid){
     $mediaurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
 
 ?>
-<div>
+<div style="width: 30%;" class="pull-left">
         <div>
             <h3><?php echo __('Seller Details');  ?></h3>
         </div>
@@ -339,7 +339,7 @@ if($vendorid){
         <div class="pull-left">
                 <img src="<?php echo $mediaurl.$logo; ?>" class="img-circle" alt="Cinque Terre" width="60" height="70">
         </div>
-        <div class="pull-right">
+        <div>
                 <span><?php echo __($vendorName); ?></span>
                 <span>
                     <?php if($cityName || $companyName){
@@ -378,12 +378,21 @@ if($vendorid){
                 
         </div>
    </div>  
+
+        <div>
+        <span><?php echo __('Expand your business to millions of customers '); ?></span> 
+        <span><a href="<?php echo $this->getUrl().'vendors/'; ?>">Sell this item on Mish</a></span>
+        </div>
 </div>
+<div style="width: 30%;" class="pull-right">
+    <div>
+        <h4><?php echo __("About the seller"); ?></h4>
+    </div>
+    <div>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>
+    </div>
 </div>
-<div>
-<span><?php echo __('Expand your business to millions of customers '); ?></span> 
-<span><a href="<?php echo $this->getUrl().'vendors/'; ?>">Sell this item on Mish</a></span>
-</div>
+
 
 <?php }   ?>
 <!-- Seller Section end here -->
