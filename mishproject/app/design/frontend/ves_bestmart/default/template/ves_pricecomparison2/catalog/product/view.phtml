@@ -289,9 +289,9 @@
         <div class="ratings">
             <?php if ($ratingsummary):?>
                 <div class="rating-box">
-                    <div class="rating" style="width:<?php echo ceil($ratingsummary) ; ?>%;">
+                  <!--   <div class="rating" style="width:<?php echo ceil($ratingsummary) ; ?>%;">
                 
-                    </div>
+                    </div> -->
                     
                 </div>
 
@@ -314,6 +314,79 @@
    
   </div>
 </div>
+
+
+<!-- Seller Section starts here -->
+<?php 
+$_products = $this->getProduct(); 
+$vendorid = $_products->getVendorId();
+if($vendorid){
+    $vendor_info = Mage::getModel('vendors/vendor')->load($vendorid,'vendor_id');
+    $vendorName = $vendor_info->getFirstname().' '.$vendor_info->getLastname();
+    $companyName = $vendor_info->getCompany();
+    $cityName = $vendor_info->getCity();
+    $logo = $vendor_info->getLogo();
+    $vendorurlid = $vendor_info->getVendorId();
+
+    $mediaurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+?>
+<div>
+        <div>
+            <h3><?php echo __('Seller Details');  ?></h3>
+        </div>
+    <div style="width: 16%;">
+        <div class="pull-left">
+                <img src="<?php echo $mediaurl.$logo; ?>" class="img-circle" alt="Cinque Terre" width="60" height="70">
+        </div>
+        <div class="pull-right">
+                <span><?php echo __($vendorName); ?></span>
+                <span>
+                    <?php if($cityName || $companyName){
+                        echo "(".$cityName;
+                        if($companyName){
+                            echo ",".$companyName;
+                        }
+                        echo ")";
+                        } ?>
+                </span><br>
+                <span>
+                            <?php 
+                             $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+                               foreach ($vendorreview as $vendor123) {
+                                   $ratingsummary=array($vendor123['summary_percent']);
+                                   $count = count($ratingsummary);
+                                   $sum = array_sum($ratingsummary); 
+                                 }
+                                   $average = ($sum/$count);
+                                   //echo "average- ".$average;
+                             ?>
+
+                            <div class="ratings pull-left">
+                                <?php if ($average):?>
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+                                    
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                              </div>
+                    </span><br>
+                    <span>
+                        <a href="<?php echo $this->getUrl().$vendorurlid; ?>">View Store</a>
+                   </span>
+                
+        </div>
+   </div>  
+</div>
+</div>
+<div>
+<span><?php echo __('Expand your business to millions of customers '); ?></span> 
+<span><a href="<?php echo $this->getUrl().'vendors/'; ?>">Sell this item on Mish</a></span>
+</div>
+
+<?php }   ?>
+<!-- Seller Section end here -->
 
 
 <script>
