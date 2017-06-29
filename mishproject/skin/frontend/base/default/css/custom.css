@@ -241,3 +241,6 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 }
 
 .democlassforGit {color: #000;}
+.breadcrumbs{position: absolute !important;z-index: 100 !important;top: 140px !important;margin-left: 155px !important;}
+#ves-breadcrumbs .breadcrumbs a{color:#fff !important;}
+#ves-breadcrumbs .breadcrumb > li + li:before{color: #fff !important;}
