@@ -51,7 +51,7 @@
                                 }
                             ?>
                            <div class="product-img img">
-                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image img">
+                            <a href="<?php echo $this->getUrl().$_product->getUrlKey();//echo $_product->getProductUrl(); ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image img">
 
                             <?php if(isset($enable_lazyload) && $enable_lazyload) { /* Enable lazyload*/ ?>
 
@@ -66,7 +66,7 @@
                             </a>
                             <?php if($swap_image && $hover_image = $helper->getProductImage($_product->getId(), $swap_image_number, $list_image_width, $list_image_height)) { ?>
                                     <span class="hover-image">
-                                        <a class="img" href="<?php echo $_product->getProductUrl(); ?>">
+                                        <a class="img" href="<?php echo $this->getUrl().$_product->getUrlKey();//echo $_product->getProductUrl(); ?>">
 
                                             <?php if(isset($enable_lazyload) && $enable_lazyload) { /* Enable lazyload */?>
 
