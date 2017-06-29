@@ -92,7 +92,8 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .fotteraboutMiss p {color: #777777;}
 .footerlink-section {padding: 35px 0 0 0;}
 .clr {clear: both;}
-.topsellingCount {float: right; width: 1118px; margin-top: 37px;}
+.topsellingCount {float: right; width: 1118px; margin-top: 5px;}
+.topsellingCount h3 { color: #333;}
 .topsellingCount .bx-wrapper{float: right; width: 1118px; max-width: auto !important;}
 .bxslider li {width: 200px !important;}
 .bxslider li .productNameing {text-align: center;}
