@@ -1,14 +1,28 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); 
+echo "<pre>+++";
+print_r($_product->getData());
+echo "</pre>";
+$vendorid = $_product->getVendorId();
+$price = $_product->getPrice();
+$specialprice = $_product->getSpecialPrice();
+$currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
 <!-- Details page left section -->
 <div class="detailspageLeft">
     <div class="imagelistingLeft">
         <ul>
-            <li><img src="http://localhost/miss/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
-            <li><img src="http://localhost/miss/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
-            <li><img src="http://localhost/miss/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
+            <li><img src="http://localhost/mish/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
+            <li><img src="http://localhost/mish/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
+            <li><img src="http://localhost/mish/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
         </ul>
     </div>
     <div class="imageRight">
-        <img src="http://localhost/miss/mishproject/media/wysiwyg/detailpage_printerimage.png">
+        <img src="http://localhost/mish/mishproject/media/wysiwyg/detailpage_printerimage.png">
     </div>
     <div class="clr"></div>
 </div>
@@ -16,9 +30,32 @@
 <!-- Details page Right section -->
 <div class="detailspageRight">
     <div class="topHead">
-        <h1>HP DeskJet 1112 Printer</h1>
+        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
         <ul>
-            <li><a href="#"><img src="http://localhost/miss/mishproject/media/wysiwyg/star_icon.jpg"> <span>(3.6)</span> 706 Ratings</a></li>
+            <li>    
+            <span>
+                            <?php 
+                             $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+                               foreach ($vendorreview as $vendor123) {
+                                   $ratingsummary=array($vendor123['summary_percent']);
+                                   $count = count($ratingsummary);
+                                   $sum = array_sum($ratingsummary); 
+                                 }
+                                   $average = ($sum/$count);
+                                   //echo "average- ".$average;
+                             ?>
+
+                            <div class="ratings pull-left">
+                                <?php if ($average):?>
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+                                    
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                              </div>
+                    </span>
+                    </li>
             <li><a href="#">104 Reviews</a></li>
             <li><a href="#">3Selfies</a></li>
             <li><a href="#">Have a question</a></li>
@@ -29,8 +66,31 @@
     <div class="priceofferCount">
     <!-- Details Price section -->
         <div class="priceCount">
-            <div class="linethroughPrice">Rs, 2,923</div>
-            <div class="currentPrice">Rs. 2,049 <span>30% OFF</span></div>
+       
+            <div class="<?php if($_product->getSpecialPrice()){
+                echo 'linethroughPrice';
+                }else{
+                    echo 'currentPrice';
+                    } 
+                ?>"><?php echo $currenct_symbol." ".number_format($_product->getPrice(),2);; ?></div>
+            
+             <?php if($_product->getSpecialPrice()){ ?>
+                <div class="currentPrice"><?php echo $currenct_symbol." ".number_format($_product->getSpecialPrice(),2); ?>
+                <span>
+                   <?php 
+                        $originalPrice = $_product->getPrice();
+                        $finalPrice = $_product->getSpecialPrice();
+                        $percentage = 0;
+                        if ($originalPrice > $finalPrice) {
+                            $percentage = ($originalPrice - $finalPrice) * 100 / $originalPrice;
+                        }
+
+                        if ($percentage) {
+                            echo $this->__($percentage . '%');
+                        }
+                        ?>
+                </span></div>
+            <?php } ?>
         </div>
     <!-- Details Price section -->  
     <!-- Details Offer Applicable section -->
@@ -38,12 +98,12 @@
             <div>(2) Offers  Applicable on cart</div>
             <div class="innerCount">
                 <div class="textbox">
-                    <div class="left"><img src="http://localhost/miss/mishproject/media/wysiwyg/offer_icon.jpg"></div>
+                    <div class="left"><img src="http://localhost/mish/mishproject/media/wysiwyg/offer_icon.jpg"></div>
                     <div class="right">Get 5% instant discount + 10X rewards using Mish HDFC Bank Credit Card <a href="#">T&C</a></div>
                     <div class="clr"></div>
                 </div>
                 <div class="textbox borderbtmNone">
-                    <div class="left"><img src="http://localhost/miss/mishproject/media/wysiwyg/offer_icon.jpg"></div>
+                    <div class="left"><img src="http://localhost/mish/mishproject/media/wysiwyg/offer_icon.jpg"></div>
                     <div class="right">Get 5X Reward Points Using HDFC Bank Credit Cards <a href="#">T&C</a></div>
                     <div class="clr"></div>
                 </div>
@@ -55,8 +115,22 @@
 
         <div class="addtoCartCount">
             <div class="buttonCount">
-                <input type="button" value="add to cart">
-                <input type="button" value="buy now" class="color">
+           <!--  <button onclick="setLocation('<?php //echo $this->getAddToCartUrl($_product) ?>')" class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button> -->
+                <input type="button" value="add to cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                <input type="button" value="buy now" class="color" onclick="setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo Mage::getUrl('checkout/onepage') ?>')">
+                
+ <script>
+ function setcheckoutLocation(location,chkout)
+ {
+  jQuery.ajax({
+                type:"GET",
+                url:location,
+                success:function(data){
+                     window.location.href = chkout;
+                }
+             });
+}
+</script>
             </div>
 
         </div>
