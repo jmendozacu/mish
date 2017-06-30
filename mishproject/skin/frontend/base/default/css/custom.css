@@ -244,3 +244,58 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 .breadcrumbs{position: absolute !important;z-index: 100 !important;top: 140px !important;margin-left: 155px !important;}
 #ves-breadcrumbs .breadcrumbs a{color:#fff !important;}
 #ves-breadcrumbs .breadcrumb > li + li:before{color: #fff !important;}
+
+.detailspageLeft {float: left; width: 554px; background: #fff; padding: 74px 0; border-right: solid 1px #efefef;}
+.detailspageLeft .imagelistingLeft {float: left; padding-left: 28px;}
+.detailspageLeft .imagelistingLeft ul {padding: 0; margin: 0; list-style-type: none;}
+.detailspageLeft .imagelistingLeft ul li { margin-bottom: 10px;}
+.detailspageLeft .imagelistingLeft ul li img {border: solid 1px #efefef; text-align: center; padding: 18px 5px; cursor: pointer;}
+.detailspageLeft .imagelistingLeft ul li img:hover {border: solid 1px #000;}
+.detailspageLeft .imageRight {float: left; text-align: center; padding-bottom: 390px;}
+
+.detailspageRight {float: right; width: 757px;  background: #fff; padding-top: 35px;}
+.detailspageRight .topHead {border-bottom: solid 1px #ddd; padding-bottom: 10px; margin-bottom: 20px; padding-left: 25px;}
+.detailspageRight .topHead h1 { font-size: 17px; color: #000; padding-bottom: 10px}
+.detailspageRight .topHead ul {padding: 0; margin: 0; list-style-type: none;}
+.detailspageRight .topHead ul li {float: left; margin-right: 8px; border-right: solid 1px #ddd; padding: 0 5px;}
+.detailspageRight .topHead ul li:last-child {border: none;}
+.detailspageRight .topHead ul li span {color: #666;}
+.detailspageRight .topHead ul li a {color: #00adef;}
+.detailspageRight .topHead ul li a:hover {text-decoration: underline;}
+
+.detailspageRight .priceofferCount {padding-bottom: 47px; padding-left: 25px;}
+.detailspageRight .priceCount {float: left; width: 300px;}
+.detailspageRight .linethroughPrice {color: #666; text-decoration: line-through;}
+.detailspageRight .currentPrice {font-size: 20px; color: #ff2341;}
+.detailspageRight .currentPrice span { display: inline-block; border: solid 1px #ddd; padding:4px 7px; color: #666; font-size: 12px; margin-left: 15px;}
+
+.offerApplicable {color: #7f7f7f; font-size: 12px; float: right; padding-right: 18px; width: 288px;}
+.offerApplicable .innerCount {border: dotted 1px #dddddd; border-radius:  3px; padding: 5px 0; margin-top: 10px;}
+.offerApplicable .innerCount .textbox .left {display: inline-block; padding-right: 10px; float: left; padding-left: 10px;}
+.offerApplicable .innerCount .textbox .right {float: right; width: 80%;}
+.offerApplicable .innerCount .textbox {color: #636060; font-size: 12px; border-bottom: solid 1px #ddd; padding-bottom: 10px; margin-bottom: 10px;}
+.offerApplicable .innerCount .textbox a {color: #00adef;}
+.borderbtmNone {border: none !important; margin: 0 !important; padding:0 !important;}
+
+.addtoCartCount { background: #fbfbfb; padding: 41px 0 24px 0px;}
+.addtoCartCount .buttonCount { padding: 0 0 0 99px; }
+.addtoCartCount .buttonCount input {border:none; width: 159px; text-align: center; padding:15px 0; color: #fff; border-radius: 4px;  text-transform: uppercase; background: #00adef; font-size:18px; margin-right: 16px;}
+.addtoCartCount .buttonCount .color {background: #fe585c !important;}
+.deliveryCount { padding: 40px 0 30px 30px;  position: relative;}
+.deliveryCount span { color: #666; display: inline-block; font-size: 12px;}
+.deliveryCount input {border: solid 1px #000; padding: 5px; margin: 0 40px; width: 22%;}
+.deliveryCount .inputbutton {background: #000; color: #fff; padding: 5px 8px; position: absolute; left: 207px; width: 58px;}
+
+.detailspageRight .productType { padding: 32px 0 35px 0px; overflow: hidden; }
+ .p-keyfeatures ul li {font-size: 12px; line-height: 20px; white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;  color: #666666;}
+.detailspageRight .productType .col-xs-8 { width: 33.33333%; float: left;}
+.p-keyfeatures ul li a {color: #00adef;}
+.list-circle {width: 6px; height: 6px; background-color: #cccccc; border-radius: 50%;  display: inline-block;  vertical-align: 2px;
+    margin-right: 8px;  margin-left: 3px; }
+    .mispolicyDiv {padding:0 0 37px 42px;}
+ .pdp-grante-cont .pe-icon { font-size: 13px;}
+ .pdp-grante-cont .pe-head {font-size: 13px;  color: #666666;}
+.pdp-grante-cont #policyEngineGoldText { display: inline-block;  vertical-align: top;   padding-left: 2px; }
+.pdp-grante-cont .pe-innerText { font-size: 12px;  color: #999999; }
+.pdp-grante-cont .know-more { font-size: 13px; color: #25a8ed;  text-decoration: none;  vertical-align: baseline; }
+.pdp-grante-cont .sdGoldCont { font-size: 12px; color: #999999;  margin: 0; line-height: 22px; }
