@@ -311,6 +311,11 @@ Additional block dependant on product type
     <PRODUCT_TYPE_simple translate="label" module="catalog">
         <label>Catalog Product View (Simple)</label>
         <reference name="product.info">
+            <block type="checkdelivery/checkdelivery" before="addtocart" name="checkdelivery" as="deliverycheck"> 
+                <action method="setTemplate" ifconfig="checkdelivery/general/active">
+                    <template>checkdelivery/checkdelivery.phtml</template>
+                </action> 
+            </block>
             <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
                 <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
                     <label>Product Extra Info</label>
