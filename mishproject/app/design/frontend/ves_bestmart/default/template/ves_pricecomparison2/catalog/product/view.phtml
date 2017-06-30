@@ -1,8 +1,8 @@
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); 
-echo "<pre>+++";
+/*echo "<pre>+++";
 print_r($_product->getData());
-echo "</pre>";
+echo "</pre>";*/
 $vendorid = $_product->getVendorId();
 $price = $_product->getPrice();
 $specialprice = $_product->getSpecialPrice();
@@ -13,6 +13,12 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
 </script>
 
 <!-- Details page left section -->
+<!-- <div class="detailspageLeft">
+    <div class="product-img-box">
+            <?php //echo $this->getChildHtml('media') ?>
+        </div>
+    <div class="clr"></div>
+</div> -->
 <div class="detailspageLeft">
     <div class="imagelistingLeft">
         <ul>
@@ -31,6 +37,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
 <div class="detailspageRight">
     <div class="topHead">
         <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+        
         <ul>
             <li>    
             <span>
@@ -66,6 +73,8 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
     <div class="priceofferCount">
     <!-- Details Price section -->
         <div class="priceCount">
+
+         
        
             <div class="<?php if($_product->getSpecialPrice()){
                 echo 'linethroughPrice';
@@ -91,6 +100,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                         ?>
                 </span></div>
             <?php } ?>
+            <div><?php echo $this->getChildHtml('product_type_data');?></div>
         </div>
     <!-- Details Price section -->  
     <!-- Details Offer Applicable section -->
@@ -114,32 +124,43 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
      </div>  
 
         <div class="addtoCartCount">
+         <?php if (!$this->hasOptions()):?>
+            <?php //if($_product->isSaleable()): ?>
             <div class="buttonCount">
-           <!--  <button onclick="setLocation('<?php //echo $this->getAddToCartUrl($_product) ?>')" class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button> -->
                 <input type="button" value="add to cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
                 <input type="button" value="buy now" class="color" onclick="setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo Mage::getUrl('checkout/onepage') ?>')">
-                
- <script>
- function setcheckoutLocation(location,chkout)
- {
-  jQuery.ajax({
-                type:"GET",
-                url:location,
-                success:function(data){
-                     window.location.href = chkout;
+              <!--    <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                            <span class="or"><?php echo $this->__('OR') ?></span>
+                        <?php endif; ?> -->
+                 <?php //endif; ?>
+
+                 <script>
+                 function setcheckoutLocation(location,chkout)
+                 {
+                  jQuery.ajax({
+                                type:"GET",
+                                url:location,
+                                success:function(data){
+                                     window.location.href = chkout;
+                                }
+                             });
                 }
-             });
-}
-</script>
+                </script>
+ <?php elseif (!$_product->isSaleable()): ?>
+                <div class="add-to-box">
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>
             </div>
 
         </div>
 
+            <?php //echo $this->getTierPriceHtml() ?>
+            <?php //echo $this->getChildHtml('extrahint') ?>
+             <?php //echo $this->getChildHtml('other');?>
+
         <div class="deliveryCount">
-            <span>Delivery</span>
-            <input type="text" placeholder="Enter Pincode">
-            <input type="button" value="Check" class="inputbutton">
-            <span>Generally delivered by 5 days</span>
+           <?php echo $this->getChildHtml('deliverycheck');?>
         </div>
 
         <div class="p-keyfeatures kf-below-name productType">
@@ -183,17 +204,66 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
 <!-- Details page Right section -->
 <div class="clr"></div>
 
+
+
 <!-- Seller Details section -->
+<?php 
+$vendorid = $_product->getVendorId();
+if($vendorid){
+    $vendor_info = Mage::getModel('vendors/vendor')->load($vendorid,'vendor_id');
+    $vendorName = $vendor_info->getFirstname().' '.$vendor_info->getLastname();
+    $companyName = $vendor_info->getCompany();
+    $cityName = $vendor_info->getCity();
+    $logo = $vendor_info->getLogo();
+    $vendorurlid = $vendor_info->getVendorId();
+
+    $mediaurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+?>
 <div class="detailsmidSection">
     <div class="sellerDetails">
-        <h1>Seller Details</h1>
+        <h1><?php echo __('Seller Details');  ?></h1>
         <div class="sellerInner">
             <div class="left">
-                <div class="sellerImage"><img src="http://localhost/miss/mishproject/media/wysiwyg/seller_image.jpg"></div>
+                <div class="sellerImage">
+                   <img src="<?php echo $mediaurl.$logo; ?>" class="img-circle" alt="Cinque Terre" width="70" height="70">
+                </div>
                 <div class="sellerinfo">
-                    <div>Sellers Name (City Name, Company Name)</div>
-                    <div><img src="http://localhost/miss/mishproject/media/wysiwyg/star_icon.jpg"></div>
-                    <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div>
+                    <div>
+                        <span><?php echo __($vendorName); ?></span>
+                <span>
+                    <?php if($cityName || $companyName){
+                        echo "(".$cityName;
+                        if($companyName){
+                            echo ",".$companyName;
+                        }
+                        echo ")";
+                        } ?>
+                </span>
+                    </div>
+                    <div>
+                        <?php 
+                             $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+                               foreach ($vendorreview as $vendor123) {
+                                   $ratingsummary=array($vendor123['summary_percent']);
+                                   $count = count($ratingsummary);
+                                   $sum = array_sum($ratingsummary); 
+                                 }
+                                   $average = ($sum/$count);
+                                   //echo "average- ".$average;
+                             ?>
+
+                            <div class="ratings pull-left">
+                                <?php if ($average):?>
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+                                    
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                              </div>
+                    </div>
+                  <br>  <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div>
                 </div>
 
             </div>
@@ -206,11 +276,12 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                 <div class="clr"></div>
         </div>
         <div class="visitStore">
-                    Expand your business to millions of customers   <a href="#">Sell this item on MISH</a><span><a href="#">VIEW STORE</a></span>
+                   <?php echo __('Expand your business to millions of customers '); ?> <a href="<?php echo $this->getUrl().'vendors/'; ?>">Sell this item on MISH</a><span><a href="<?php echo $this->getUrl().$vendorurlid; ?>">VIEW STORE</a></span>
                 </div>
     </div>
 
     <!-- Seller Details section -->
+    <?php } ?>
     <!-- Review and rating section -->
     <div class="ratingReview customer_review">
         <h1>Ratings & Reviews</h1>
@@ -222,7 +293,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                 <div class="chart text">
                     <div class="rating-middle-section clearfix"> 
                         <div class="rating-text"><span class="rating">3.8</span>/5</div> 
-                        <div class="rating-stars product-rating clearfix"><img src="http://localhost/miss/mishproject/media/wysiwyg/star_icon.jpg"></div>
+                        <div class="rating-stars product-rating clearfix"><img src="http://localhost/mish/mishproject/media/wysiwyg/star_icon.jpg"></div>
                         <p class="total-review-txt">751 Ratings &amp; 105 Reviews</p> 
                         <a class="view-all-reviews" >View All Reviews</a>
                         </div>
