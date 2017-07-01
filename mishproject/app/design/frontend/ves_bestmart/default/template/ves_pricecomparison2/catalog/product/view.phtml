@@ -100,6 +100,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                         ?>
                 </span></div>
             <?php } ?>
+            <!-- Availability block , price code is commented from this block -->
             <div><?php echo $this->getChildHtml('product_type_data');?></div>
         </div>
     <!-- Details Price section -->  
@@ -162,7 +163,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         <div class="deliveryCount">
            <?php echo $this->getChildHtml('deliverycheck');?>
         </div>
-
+<!-- 
         <div class="p-keyfeatures kf-below-name productType">
                 <ul class="clr">
                     <li class="col-xs-8 reset-padding" title="Product Type: Inkjet Printers"><span class="list-circle"></span>
@@ -184,7 +185,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                             <span class="h-content viewAllDetails"><a href="javascript: void(0)">View all item details</a></span>
                         </li>
                     </ul>
-            </div>
+            </div> -->
             <div class="mispolicyDiv">
                 <div class="pdp-grante-cont marT15">
                             <span class="pe-head">Mish Guarantee</span>
@@ -262,8 +263,9 @@ if($vendorid){
                                     </div>
                                 <?php endif;?>
                               </div>
-                    </div>
-                  <br>  <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div>
+                    </div><br>
+                    <div><a href = "#" class="view-all-reviews" id="hello"><?php echo __('View Vendor Reviews'); ?></a></div>
+                    <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div>
                 </div>
 
             </div>
@@ -283,6 +285,8 @@ if($vendorid){
     <!-- Seller Details section -->
     <?php } ?>
     <!-- Review and rating section -->
+<?php //echo $this->getChildHtml('product_review') ?>
+
     <div class="ratingReview customer_review">
         <h1>Ratings & Reviews</h1>
 
@@ -293,9 +297,38 @@ if($vendorid){
                 <div class="chart text">
                     <div class="rating-middle-section clearfix"> 
                         <div class="rating-text"><span class="rating">3.8</span>/5</div> 
-                        <div class="rating-stars product-rating clearfix"><img src="http://localhost/mish/mishproject/media/wysiwyg/star_icon.jpg"></div>
-                        <p class="total-review-txt">751 Ratings &amp; 105 Reviews</p> 
-                        <a class="view-all-reviews" >View All Reviews</a>
+                        <div class="rating-stars product-rating clearfix">
+                         <?php 
+                            $ratingsummary=array();
+                $vendor12 = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+                foreach ($vendor12 as $vendor123) {
+                   $ratingsummary[]=$vendor123['summary_percent'];
+
+                   $count = count($ratingsummary);
+
+                   $sum = array_sum($ratingsummary);
+  
+             
+          }
+       
+
+         $average = ($sum/$count);
+      ?>
+
+<div class="ratings">
+    <?php if ($average):?>
+        <div class="rating-box">
+            <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+        
+            </div>
+        </div>
+    <?php endif;?>
+  </div>
+                            
+                        </div>
+                        <p class="total-review-txt">751 Ratings &amp; <?php echo $count; ?> Reviews</p> 
+             
+                        <a class="view-all-reviews">View All Reviews</a>
                         </div>
                 </div>
             </li>
@@ -327,3 +360,226 @@ if($vendorid){
     <!-- Review and rating section -->
 <div class="clr"></div>
 </div>
+
+
+
+<!-- Model for for view all reviews starts here-->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Customer Review</h2>
+       <div class="input_search">
+     <input onkeyup="searchContent();" id="searchContent" type="text" class="form-control SearchBar" placeholder="Search Customer Reviews">
+     <div class="loder" id='loadingmessage' style='display:none'>
+        <img src="<?php echo $this->getSkinUrl('images/loader9.gif') ?>"/>
+     </div>
+     <div id="suggestion"></div>
+</div>
+    </div>
+    <div class="modal-body">
+    <script type="text/javascript">
+ function searchContent() {
+   var value = jQuery('#searchContent').val();
+    jQuery('#loadingmessage').show();
+   jQuery.ajax({
+           type:'POST',
+           url:"<?php echo Mage::getUrl('vendorsreview/review/searchContent/');?>",
+           data: {key:value},
+           success:function(feedback) {
+             jQuery("#suggestion").html(feedback);
+              jQuery('#loadingmessage').hide();
+            },
+           error:function(){            
+           }
+               
+         });
+ }
+</script>
+ 
+          <?php
+           
+         foreach ($vendor12 as $vendor123) :
+         $ratingsummary=$vendor123['summary_percent'];
+         $nickname=$vendor123['nick_name'];
+        $created_time=$vendor123['created_time'];
+        $detail=$vendor123['detail'];   
+
+        $words = explode(" ",$nickname );
+        $acronym = "";
+
+        foreach ($words as $w) 
+        {
+          $acronym .= $w[0];
+        }
+
+                                            ?>
+<div class="review-main">
+    <div class="review-v"><span class="review-span" style="background:#63d6d1"><?php echo ucfirst($acronym) ;?></span>
+        
+    </div>
+
+    <div class="review-box">
+        <div class="ratings">
+            <?php if ($ratingsummary):?>
+                <div class="rating-box">
+                  <!--   <div class="rating" style="width:<?php echo ceil($ratingsummary) ; ?>%;">
+                
+                    </div> -->
+                    
+                </div>
+
+            <?php endif;?>
+
+        </div>
+        <div style="margin-top: 17px;font-size: 10px; color: #999999;">
+            <?php echo "by"." ".$nickname." "."on"." ".$created_time; ?>
+        </div>
+        <div style="margin-top: 2px; font-size: 16px; ">
+            <?php echo $detail ;?>
+        </div>
+    </div>
+
+</div>
+
+    <br>
+    <?php endforeach ;?> 
+    </div>
+   
+  </div>
+</div>
+
+<!-- Model for for view all reviews end here-->
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get the button that opens the modal
+var btn = document.getElementById("hello");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    return false;
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+<style>
+    .review-v{    
+        float: left;
+        border-radius: 45px;
+        margin-right: 20px;
+        margin-top: 10px;
+        display: block;
+    }
+
+    .review-span{
+        background: #63d6d1;
+        padding: 15px;
+        border-radius: 25px;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .review-box{
+        float: left;
+        margin-bottom: 28px;
+    }
+
+    .review-main{
+        float: left;
+        width: 100%;
+    }
+    .input_search
+    {
+      width: 217px;
+    margin-left: 199px;
+    margin-top: -35px;
+
+    }
+</style>
+
+
+
+<!-- modal pop-up css-->
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 16px 16px; overflow: hidden;}
+
+
+</style>
