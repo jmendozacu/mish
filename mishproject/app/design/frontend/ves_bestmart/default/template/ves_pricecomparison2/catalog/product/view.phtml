@@ -19,7 +19,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         </div>
     <div class="clr"></div>
 </div> -->
-<div class="detailspageLeft">
+<!-- <div class="detailspageLeft">
     <div class="imagelistingLeft">
         <ul>
             <li><img src="http://localhost/mish/mishproject/media/wysiwyg/detail_printer_smallimage.jpg"></li>
@@ -31,8 +31,13 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         <img src="http://localhost/mish/mishproject/media/wysiwyg/detailpage_printerimage.png">
     </div>
     <div class="clr"></div>
+</div> -->
+<div class="detailspageLeft">
+  <?php echo $this->getChildHtml('media') ?>
+    <div class="clr"></div>
 </div>
 <!-- Details page left section -->
+
 <!-- Details page Right section -->
 <div class="detailspageRight">
     <div class="topHead">
@@ -41,31 +46,29 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         <ul>
             <li>    
             <span>
-                            <?php 
-                             $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
-                               foreach ($vendorreview as $vendor123) {
-                                   $ratingsummary=array($vendor123['summary_percent']);
-                                   $count = count($ratingsummary);
-                                   $sum = array_sum($ratingsummary); 
-                                 }
-                                   $average = ($sum/$count);
-                                   //echo "average- ".$average;
-                             ?>
+                    <?php 
+                    $summaryData = Mage::getModel('review/review_summary')
+                    ->setStoreId($storeId)
+                    ->load($_product->getId());
+                    $reviewCount = $summaryData['reviews_count']; 
+                    $ratingSummary = $summaryData['rating_summary'];
+                    $ratingNumber = (($ratingSummary*5)/100);
 
-                            <div class="ratings pull-left">
-                                <?php if ($average):?>
-                                    <div class="rating-box">
-                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
-                                    
-                                        </div>
-                                    </div>
-                                <?php endif;?>
-                              </div>
-                    </span>
+                    if ($summaryData['rating_summary']):?>
+                    <div class="ratings">
+                    <div class="rating-box">
+                    <div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+                    </div>
+                    </div>
+                    <?php endif; ?>
+          </span>
                     </li>
-            <li><a href="#">104 Reviews</a></li>
-            <li><a href="#">3Selfies</a></li>
-            <li><a href="#">Have a question</a></li>
+                    <li><?php echo "(".$ratingNumber.")"; ?></li>
+                     <li><a href="#"><?php if($ratingSummary){echo $ratingSummary;}else{echo '0';} ?> Rating(s)</a></li>
+
+            <li><a href="<?php echo $this->getUrl().$_product->getUrlKey().'/'.'reviews/'; ?>"><?php if($ratingSummary){echo $reviewCount;}else{echo '0';} ?> Review(s)</a></li>
+           <!--  <li><a href="#">3Selfies</a></li>
+            <li><a href="#">Have a question</a></li> -->
             <div class="clr"></div>
         </ul>
     </div>
@@ -105,7 +108,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         </div>
     <!-- Details Price section -->  
     <!-- Details Offer Applicable section -->
-        <div class="offerApplicable">
+      <!--   <div class="offerApplicable">
             <div>(2) Offers  Applicable on cart</div>
             <div class="innerCount">
                 <div class="textbox">
@@ -119,7 +122,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                     <div class="clr"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
     <!-- Details Offer Applicable section -->
         <div class="clr"></div>
      </div>  
@@ -251,7 +254,7 @@ if($vendorid){
                                    $sum = array_sum($ratingsummary); 
                                  }
                                    $average = ($sum/$count);
-                                   //echo "average- ".$average;
+                                   //echo "average- ".$average; 
                              ?>
 
                             <div class="ratings pull-left">
@@ -264,7 +267,7 @@ if($vendorid){
                                 <?php endif;?>
                               </div>
                     </div><br>
-                    <div><a href = "#" class="view-all-reviews" id="hello"><?php echo __('View Vendor Reviews'); ?></a></div>
+                    <div><span id="hello" style="cursor: pointer;"><a class="view-all-reviews"><?php echo __('View Vendor Reviews'); ?></a><span id="hello" style="cursor: pointer;"></div>
                     <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div>
                 </div>
 
@@ -285,66 +288,55 @@ if($vendorid){
     <!-- Seller Details section -->
     <?php } ?>
     <!-- Review and rating section -->
-<?php //echo $this->getChildHtml('product_review') ?>
+<?php //echo $this->getChildHtml('product_review'); ?>
+
 
     <div class="ratingReview customer_review">
         <h1>Ratings & Reviews</h1>
 
             <div class="product_review">
-
+ <?php 
+                            $summaryData = Mage::getModel('review/review_summary')
+                            ->setStoreId($storeId)
+                            ->load($_product->getId());
+                            $reviewCount = $summaryData['reviews_count']; 
+                            $ratingSummary = $summaryData['rating_summary'];
+                            $ratingNumber = (($ratingSummary*5)/100); ?>
     <ul itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
         <li class="first  col-xs-8  leftAlignment">
                 <div class="chart text">
                     <div class="rating-middle-section clearfix"> 
-                        <div class="rating-text"><span class="rating">3.8</span>/5</div> 
+                        <div class="rating-text"><span class="rating"><?php echo $ratingNumber; ?></span>/5</div> 
                         <div class="rating-stars product-rating clearfix">
-                         <?php 
-                            $ratingsummary=array();
-                $vendor12 = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
-                foreach ($vendor12 as $vendor123) {
-                   $ratingsummary[]=$vendor123['summary_percent'];
+                           
 
-                   $count = count($ratingsummary);
+                          <?php  
 
-                   $sum = array_sum($ratingsummary);
-  
-             
-          }
-       
-
-         $average = ($sum/$count);
-      ?>
-
-<div class="ratings">
-    <?php if ($average):?>
-        <div class="rating-box">
-            <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
-        
-            </div>
-        </div>
-    <?php endif;?>
-  </div>
-                            
+                            if ($summaryData['rating_summary']):?>
+                            <div class="ratings">
+                            <div class="rating-box">
+                            <div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+                            </div>
+                            </div>
+                            <?php endif; ?>
                         </div>
-                        <p class="total-review-txt">751 Ratings &amp; <?php echo $count; ?> Reviews</p> 
+                        <p class="total-review-txt"><?php echo $ratingSummary; ?> Rating(s) &amp; <?php echo $reviewCount; ?> Review(s) </p> 
              
-                        <a class="view-all-reviews">View All Reviews</a>
+                        <a href = "<?php echo $this->getUrl().$_product->getUrlKey().'/'.'reviews/'; ?>" class="view-all-reviews">View All Reviews</a>
                         </div>
                 </div>
             </li>
-        <li id="user-reviewRec-content-div" class="second col-xs-8" style="border-right: solid 1px #e8e8e8;">
-            <div class="text aligncenter">
-                <div id="rcmnd-text" class="LTgray fs14">
-                    <div class="recom-text"><span class="recom">75<span class="percentText">%</span></span></div> 
-                            <div class="recom-subtext">Based on 173 Recommendations.</div>
-                        </div>
-                <div class="recomBtn marT30">
-                    <span class="LTblack col-xs-13"> Would you like to recommend this item?</span>
-                    <a id="recBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">Yes</a>
-                    <a id="notRecBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">No</a>
-                </div>
-             </div>
-        </li>
+      
+
+
+            	<!-- Recommendation section starts here -->
+            	 <li id="user-reviewRec-content-div" class="second col-xs-8" style="border-right: solid 1px #e8e8e8;">
+                     <?php echo $this->getChildHtml('recommendation');?>
+            	</li>	
+            	<!-- Recommendation section ends here -->
+
+
+
         
         <li id="user-reviewRate-content-div" class="third col-xs-8">
             <div class="aligncenter">
@@ -363,7 +355,8 @@ if($vendorid){
 
 
 
-<!-- Model for for view all reviews starts here-->
+<!-- Model  for view all reviews starts here-->
+
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
@@ -450,8 +443,8 @@ if($vendorid){
   </div>
 </div>
 
-<!-- Model for for view all reviews end here-->
 
+<!-- Model for view all reviews end here-->
 
 
 <script>
