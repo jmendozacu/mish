@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bluethink_Recommendation>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Bluethink_Recommendation>
+    </modules>
+</config> 
