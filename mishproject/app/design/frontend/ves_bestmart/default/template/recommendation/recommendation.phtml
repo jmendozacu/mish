@@ -1,0 +1,81 @@
+ <?php 
+$product = Mage::registry('current_product');
+$id = $product->getId();
+$recommendModel = Mage::getModel('recommendation/recommendation')->load($id,'product_id');
+$recomYes = $recommendModel->getYes();
+$recCount = $recommendModel->getCount();
+$recommendpercent = (($recomYes/$recCount)*100);
+?>
+
+ <div class="text aligncenter">
+        <div id="rcmnd-text" class="LTgray fs14">
+            <div class="recom-text"><span class="recom"><?php echo round($recommendpercent);?><span class="percentText">%</span></span></div> 
+                    <div class="recom-subtext">Based on <?php echo $recommendModel->getYes(); ?> Recommendations.</div>
+        </div>
+        <div class="recomBtn marT30">
+            <span class="LTblack col-xs-13"> Would you like to recommend this item?</span>
+            
+        <form method="post" id="recommedform">
+            <input type="hidden" value="<?php echo $id;?>" name="pro_id">
+            <a id="recBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">Yes</a>
+            <a id="notRecBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">No</a>
+        </form>
+        </div>
+        <div id="err"></div>
+        <div id="voterecorded"></div>
+ </div>
+
+
+<?php 
+
+if(isset($_COOKIE['vote']))
+{ ?>
+    <script>document.getElementById('voterecorded').innerHTML = 'Your vote is already recorder';</script>
+    
+<?php } else{?>
+<script>
+jQuery(document).ready(function(){
+var form=jQuery('#recommedform');
+jQuery('#recBtn').click(function(){
+jQuery.ajax({
+        type:'POST',
+        url:'<?php echo $this->getBaseUrl().'recommendation/index/voteyes' ?>',
+        data:form.serialize(),
+
+        success: function(response){
+        if(response == 1){
+              jQuery('#err').html('Thanks, Your recommendation will reflect soon');
+        }  else {
+            jQuery('#err').html('Thanks, Your recommendation will reflect soon');
+        }
+        }
+    });
+});
+});
+</script>
+
+
+<script>
+jQuery(document).ready(function(){
+var form=jQuery('#recommedform');
+jQuery('#notRecBtn').click(function(){
+jQuery.ajax({
+        type:'POST',
+        url:'<?php echo $this->getBaseUrl().'recommendation/index/voteno' ?>',
+        data:form.serialize(),
+
+        success: function(response){
+        if(response == 1){
+              jQuery('#err').html('Thanks, Your recommendation will reflect soon');//updated
+        }  else {
+            jQuery('#err').html('Thanks, Your recommendation will reflect soon');//updated
+        }
+        }
+    });
+});
+});
+</script>
+<?php 
+ setcookie('vote','yes', time()+ 3600);
+}
+?>
