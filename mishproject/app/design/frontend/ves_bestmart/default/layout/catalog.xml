@@ -220,6 +220,9 @@ Product view
         </reference>
         <reference name="content">
             <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <block type="review/product_view_list" name="product.info.product_additional_data" as="product_review" template="review/product/view/list.phtml">
+<block type="review/form" name="product.review.form" as="review_form"/></block>
+
                 <!--
                 <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
                 <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
@@ -316,6 +319,7 @@ Additional block dependant on product type
                     <template>checkdelivery/checkdelivery.phtml</template>
                 </action> 
             </block>
+              <block type="recommendation/recommendation" name="recommendation" as="recommendation" template="recommendation/recommendation.phtml" />
             <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
                 <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
                     <label>Product Extra Info</label>
