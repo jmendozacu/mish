@@ -35,7 +35,7 @@
         </routers>
     </admin>
     <adminhtml>
-		<menu>
+		<!-- <menu>
 			<recommendation module="recommendation">
 				<title>Recommendation</title>
 				<sort_order>71</sort_order>               
@@ -47,7 +47,7 @@
 					</items>
 				</children>
 			</recommendation>
-		</menu>
+		</menu> -->
 		<acl>
 			<resources>
 				<all>
