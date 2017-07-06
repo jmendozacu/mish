@@ -346,3 +346,101 @@ a#notRecBtn { outline: none; margin-right: 10px !important; background: #fe585c;
 .product_review .btn {overflow: visible; margin: 30px 5px 0; padding: 0px 14px 0px 12px; height: 35px; line-height: 34px;  font-size: 15px;  text-transform: uppercase;     background: #fe585c; color: #fff; border-radius: 4px; padding: 8px 33px; font-size: 17px;}
 .customer_review a {font-size: 14px; color: #999; text-decoration: none; }
 .aligncenter {text-align: center;}
+
+.sort {line-height: 38px; border-bottom: solid 1px #d8d8d8; line-height: 38px;  float: left;  width: 100%; color: #999;}
+.clearfix:before, .clearfix:after {content: " "; display: table;}
+.sort .cust_review {float: left; font-size: 18px; color: #344c55;  padding-right: 20px;  border-right: solid 1px #efefef;}
+.searchReviews {float: left; margin-top: 3px;}
+.searchReviews input {position: relative; left: 2px; height: 30px; border: 0;  outline: 0;  background: transparent;  width: 330px; line-height: normal; top: -4px;  font-size: 14px;  color: #88878c;}
+.sort ul {float: right;}
+.sort li {float: left; margin-left: 13px; font-size: 13px;}
+.sort li.active {border-bottom: 2px solid #00adef;}
+.sort li {margin-top: 1px !important;}
+.sort li a {display: block; cursor: pointer;}
+.customer_review a {font-size: 14px; color: #999; text-decoration: none;}
+.comp-customer-review a {cursor: pointer;}
+#defRevPDP form .selectarea {top: 4px; margin-top: 0; }
+.sort .selectarea {position: relative; width: 100px; margin: 0px 6px 0px -3px; display: inline-block;}
+.sort select { border: solid 1px #dbdbdb; width: 98px; height: 25px; color: #9e9e9e; font-size: 13px;}
+
+.commentlist .userimg {float: left; font-size: 12px; line-height: 17px; padding: 3px;}
+.commentlist .userimg span {margin-top: 10px; display: block; padding: 3px;}
+.reviewer-imgName {padding-left: 2px; font-size: 25px;  line-height: 54px;  color: #fff; text-align: center; width: 52px;  height: 52px;
+    margin-top: 0px; border-radius: 50%;     display: inline-block;
+}
+._reviewUserName { height: 14px;  display: inline-block;  line-height: 13px;  -webkit-box-orient: vertical;   overflow: hidden;     font-size: 13px;  white-space: nowrap;  color: #999999;  margin-top: 5px;}
+.hidden { display: none !important; visibility: hidden !important;}
+.commentlist .text {margin-left: 94px; border-radius: 3px; position: relative;}
+.commentlist .text .user-review {padding: 10px 0px 0 0;}
+.commentlist .rating {font-size: 18px; color: #ececec; display: block; padding: 0 0 6px 0;}
+.commentlist .head {font-size: 15px; line-height: 18px;white-space: pre-wrap; color: #333333;}
+._reviewUserName { height: 14px;  display: inline-block;  line-height: 13px;  -webkit-box-orient: vertical;   overflow: hidden;   font-size: 13px; white-space: nowrap; color: #999999; margin-top: 5px;}
+.verifiedname { font-size: 13px; vertical-align: text-top; border-left: solid 1px #efefef; padding-left: 8px;}
+.light-font {color: #ababab !important;}
+.commentlist p {font-size: 13px; line-height: 20px; white-space: pre-wrap; word-wrap: break-word;  color: #666; margin-top: 15px;}
+.grey-div {font-size: 13px; padding: 0px; height: 36px; line-height: 36px;}
+a.LTblack:hover, .LTgray {color: #999999;}
+.customer_review a {font-size: 14px; color: #999; text-decoration: none;}
+.comp-customer-review a {cursor: pointer;}
+.viewMoreLink { width: 204px; margin: auto; }
+.viewMoreLink  a {background: #00adef; text-align: center; display: block; border-radius: 4px; padding: 10px 0; font-size: 14px; color: #fff; text-decoration: none;}
+
+.tabs {border-bottom: solid 1px #efefef;}
+.tabs ul { float: left; width: 100%; margin-bottom: -6px; border-bottom: solid 1px #efefef; padding-bottom: 10px;}
+.tabs li.activeTab {color: #333;}
+.tabs li {float: left;padding: 25px 15px 5px 33px; cursor: pointer;}
+.activeTab {display: block !important;}
+.tabs li.activeTab a {color: #333;}
+.tabs li a {text-decoration: none; color: #999;}
+.itemdetailsaccordin {margin: 65px 0 0 15px;}
+.itemdetailsaccordin button.accordion {background: none; font-size: 17px;  text-transform: uppercase; color: #212121; cursor: pointer; padding: 18px;   width: 100%;  text-align: left; border: none;  outline: none; transition: 0.4s;}
+.itemdetailsaccordin div.panel {padding: 0 18px; background-color: white; display: none;}
+.itemdetailsaccordin button.accordion:after {content: '\002B'; font-size: 13px; color: #777; font-weight: bold;  float: right;    margin-left: 5px;}
+.itemdetailsaccordin button.accordion.active:after {content: "\2212";}
+
+.section-head { color: #333;  font-size: 18px;  line-height: 30px;  margin-bottom: 10px; }
+.section-head { color: #212121; font-size: 19px; line-height: 30px; margin-bottom: 10px; }
+.sd-qna {  background-color: #fff;   border-radius: 3px;  padding: 0;  margin: 0; }
+.sd-qna .qna-heading-2 { background: #fafafa;  display: block;  position: relative;  height: 50px;  padding: 15px 10px 15px 10px;
+    border-radius: 5px; }
+.sd-qna * {  list-style: none; }
+.searchQnA { position: relative;  float: left;   width: 500px;  height: 30px;  border-radius: 3px; }
+.searchQnA input { position: relative;  left: 15px;  padding-top: 7px;  height: 30px;  border: 0;  outline: 0;  background: transparent;
+    width: 470px;  line-height: normal;  top: -7px;  font-size: 14px; }
+.sd-qna .qna-heading-2 .answers {color: #333; }
+.sd-qna .qna-heading-2 .questions, .sd-qna .qna-heading-2 .answers { display: block;  font-size: 18px;  padding: 0 15px;     position: relative; text-align: center;   width: 152px; }
+.sd-qna .qna-heading-2 .questions { color: #333; }
+.sd-qna .qna-heading-2 .questions, .sd-qna .qna-heading-2 .answers { display: block;  font-size: 18px;  padding: 0 15px;    position: relative;  text-align: center;  width: 152px; }
+.sd-qna .qna-heading-2 .questions>span, .sd-qna .qna-heading-2 .answers>span { border-radius: 2px;  color: #333;   font-size: 14px;
+    padding: 3px 6px 3px 3px; position: relative;  text-align: center;   margin-top: 6px;  width: 86px;  background: #ffe8a6;
+    margin-left: 15px;}
+#qna-count-heading { font-size: 13px; }
+.sd-qna .control-header.row>h4 { margin-top: 20px;  color: #9e9e9e; padding-left: 1px;}
+.sd-qna h4 { font-size: 14px;  font-weight: 400;}
+.sd-qna .control-header>ul { margin: 0; padding: 0px;}
+.sd-qna * { list-style: none;}
+.rfloat { float: right;}
+.container-fluid .col-xs-8 { width: 33.33333%;}
+.sd-qna .qna-question { border-bottom: 1px solid #F5F5F5; padding: 0px 0px 15px 0px !important;    /* position: relative; */}
+.sd-qna .qna-question .qna-ques-head { font-size: 16px;    color: #000000;}
+span.qna-ques-head { width: 89%; display: inline-block;}
+.ques-icon { float: left;}
+.qright-info { margin: 15px 0px 0px -6px; margin-left: 11%;}
+.ques-icon, .ans-icon {padding-left: 2px;  font-size: 20px; line-height: 18px; color: #333; padding-top: 14px; text-align: center;
+    width: 45px; height: 45px; margin-top: 0px; border-radius: 50%; background: #f7f7f7; display: inline-block;}
+.qright-info {margin: 15px 0px 0px -6px; margin-left: 11%;}
+.dotted-line { padding: 11px;  width: 2px; border-right: dashed 1px #cccccc;}
+.sd-qna .response-text { display: table !important; width: 100%; text-overflow: ellipsis; display: -webkit-box;   -webkit-line-clamp: 2;
+    line-height: 1.5em; -webkit-box-orient: vertical; overflow: hidden;  font-size: 13px;  display: block;  padding-bottom: 3px;
+    white-space: pre-wrap; color: #666; font-size: 14px; line-height: 22px;}
+.ques-icon { float: left;}
+.ques-icon, .ans-icon { padding-left: 2px; font-size: 20px; line-height: 18px; color: #333; padding-top: 14px; text-align: center;
+    width: 45px; height: 45px; margin-top: 0px; border-radius: 50%; background: #f7f7f7; display: inline-block;}
+.right-info {display: table; margin: 10px; width: 90%; margin-left: 10%;  margin-top: 0;}
+.sd-qna .view-hide-answers {margin: 15px 0 15px 10% !important;}
+.qna-upvote-border { height: 34px;  border-radius: 3px;  border: 1.5px solid #efefef; color: #9e9e9e;  display: inline-block;
+}
+.sd-qna .btnload.LTgray {background: #fafafa; border-radius: 2px; color: #9e9e9e;  font-size: 14px; display: block;    line-height: 35px; margin-top: 5px; text-align: center;  text-decoration: none !important; margin-bottom: 5px;}
+.sd-qna a.btnload.LTgray:hover { background: #dfdfdf; color: #212121;}
+.qna-ans-cnt {margin-left: 10%;}
+.view-hide-answers {cursor: pointer; width: 20%; margin: 10px auto;}
