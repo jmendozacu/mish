@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <NextBits_CheckDelivery>
+        <Bluethink_Quesanswer>
             <active>true</active>
             <codePool>local</codePool>
-        </NextBits_CheckDelivery>
+        </Bluethink_Quesanswer>
     </modules>
 </config> 
