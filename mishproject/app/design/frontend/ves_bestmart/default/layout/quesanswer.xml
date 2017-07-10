@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <quesanswer_index_index>
+        <reference name="content">
+            <block type="quesanswer/quesanswer" name="quesanswer" template="quesanswer/quesanswer.phtml" />
+        </reference>
+    </quesanswer_index_index>
+
+    <quesanswer_index_viewmoreques>
+    	<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="quesanswer/quesanswer" name="viewmorequesanswer" template="quesanswer/viewmorequesanswer.phtml" />
+        </reference>
+    </quesanswer_index_viewmoreques>
+</layout> 
