@@ -27,6 +27,18 @@ class Bluethink_Quesanswer_Block_Adminhtml_Quesanswer_Grid extends Mage_Adminhtm
           'index'     => 'quesanswer_id',
       ));
 
+      $this->addColumn('cust_name', array(
+          'header'    => Mage::helper('quesanswer')->__('Customer Name'),
+          'align'     =>'left',
+          'index'     => 'cust_name',
+      ));
+
+      $this->addColumn('cust_email', array(
+          'header'    => Mage::helper('quesanswer')->__('Customer Email'),
+          'align'     =>'left',
+          'index'     => 'cust_email',
+      ));
+
       $this->addColumn('sku', array(
           'header'    => Mage::helper('quesanswer')->__('Product Sku'),
           'align'     =>'left',
@@ -43,6 +55,12 @@ class Bluethink_Quesanswer_Block_Adminhtml_Quesanswer_Grid extends Mage_Adminhtm
           'header'    => Mage::helper('quesanswer')->__('Answer'),
           'align'     =>'left',
           'index'     => 'answer',
+      ));
+
+         $this->addColumn('status', array(
+          'header'    => Mage::helper('quesanswer')->__('Status'),
+          'align'     =>'left',
+          'index'     => 'status',
       ));
 
 	  /*

@@ -1,6 +1,30 @@
 <?php
 class Bluethink_Quesanswer_IndexController extends Mage_Core_Controller_Front_Action
 {
+
+	public function customerAskQuesAction(){
+		$data = $this->getRequest()->getPost();
+		$currentProSku = $data['currentproductsku'];
+		$custName      = $data['custName'];
+		$custEmail     = $data['custEmail'];
+		$custmessage   = $data['custContent'];
+
+		$questModel = Mage::getModel('quesanswer/quesanswer')->load();
+		$questModel->setSku($currentProSku);
+		$questModel->setQuestion($custmessage);
+		$questModel->setCustName($custName);
+		$questModel->setCustEmail($custEmail);
+		$questModel->setStatus(2);
+		$questModel->save();
+		Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('quesanswer')->__('Query Succefully submitted'));
+		$this->_redirect('*/*/');
+		
+	}
+
+	public function viewmorequesAction(){
+		$this->loadLayout();     
+		$this->renderLayout();
+	}
     public function indexAction()
     {
     	

@@ -1,23 +1,23 @@
 <?php
 
-$installer = $this;
+// $installer = $this;
 
-$installer->startSetup();
+// $installer->startSetup();
 
-$installer->run("
+// $installer->run("
 
--- DROP TABLE IF EXISTS {$this->getTable('quesanswer')};
-CREATE TABLE {$this->getTable('quesanswer')} (
-  `quesanswer_id` int(11) unsigned NOT NULL auto_increment,
-  `title` varchar(255) NOT NULL default '',
-  `filename` varchar(255) NOT NULL default '',
-  `content` text NOT NULL default '',
-  `status` smallint(6) NOT NULL default '0',
-  `created_time` datetime NULL,
-  `update_time` datetime NULL,
-  PRIMARY KEY (`quesanswer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+// -- DROP TABLE IF EXISTS {$this->getTable('quesanswer')};
+// CREATE TABLE {$this->getTable('quesanswer')} (
+//   `quesanswer_id` int(11) unsigned NOT NULL auto_increment,
+//   `title` varchar(255) NOT NULL default '',
+//   `filename` varchar(255) NOT NULL default '',
+//   `content` text NOT NULL default '',
+//   `status` smallint(6) NOT NULL default '0',
+//   `created_time` datetime NULL,
+//   `update_time` datetime NULL,
+//   PRIMARY KEY (`quesanswer_id`)
+// ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-    ");
+//     ");
 
-$installer->endSetup(); 
+// $installer->endSetup(); 
