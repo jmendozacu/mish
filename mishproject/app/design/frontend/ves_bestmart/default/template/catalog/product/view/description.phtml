@@ -32,7 +32,7 @@
 ?>
 <?php $_description = $this->getProduct()->getDescription(); ?>
 <?php if ($_description): ?>
-	    <h2><?php echo $this->__('Details') ?></h2>
+	    <h3><?php echo $this->__('Description') ?></h3>
 	    <div class="std">
 	    	<?php
 	    		$product_description = $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description');
