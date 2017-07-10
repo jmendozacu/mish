@@ -170,11 +170,14 @@ foreach ($btSLiderModel as $imagedata) {
           <input type="file" value="" name="featuredimage" id="featuredimage">
 
           <label>Category id:</label>
-          <input type="text" name="catid">
+          <input type="text" name="catid" id="catid">
 
-          <label>Brand:</label>
-          <input type="text" name="brand">
-          <small><?php echo __('you can enter more than one brand name with "," seperated.'); ?></small>
+          <label>Sub Category Id:</label><span style="color: red;">*</span>
+          <input type="text" name="subcatid " id="subcatid" required="required">
+        <!--   <input type="button" onclick="validate();" value="Validate" id="validate" /> -->
+        <a href="javascript:void(0)" onclick="validate();">Validate</a>
+          <small><?php echo __('you can enter more than one id name with "," seperated.'); ?></small>
+          <span id="result"></span>
             <br>
             <br>
           <label>Image(1):</label>
@@ -184,9 +187,46 @@ foreach ($btSLiderModel as $imagedata) {
           <input type="file" value="" name="image2" id="image2">
           <br>
 
-          <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+          <button type="submit" class="savebutton" id="savebtn" ><?php echo __('Save'); ?></button><br><br>
       </form>
      </div>
+
+
+     <script>
+          document.getElementById('savebtn').disabled= true;
+         
+    </script>
+
+    <script>
+
+
+    function validate(){
+      var formkey = '<?php echo Mage::getSingleton('core/session')->getFormKey() ?>';
+       var subcatvalue = document.getElementById("subcatid").value;
+       var catvalue = document.getElementById("catid").value;
+      // alert(formkey);
+          jQuery.ajax(
+                    {
+              type: "POST",
+              url: '<?php echo Mage::helper("adminhtml")->getUrl('*/*/validateSubCatdata') ?>',
+              data: {subcatvalue: subcatvalue, form_key: formkey, catvalue: catvalue},
+              success: function(result)
+            {
+
+              if(result == 1 && result!= 0){
+                document.getElementById('savebtn').disabled= false;
+                jQuery("#result").html('Correct ids');
+          
+              }else{
+                jQuery("#result").html('Please check entered Ids');
+              }
+              
+            }
+                });
+    }
+
+       
+     </script>
      <?php
         $btcatbrandModel = Mage::getModel('btslider/btcatbrand')->getCollection();
        /* echo "<pre>++";
@@ -199,7 +239,7 @@ foreach ($btSLiderModel as $imagedata) {
         <tr class="toprow">
           <td><?php echo __('Id'); ?></td>
           <td><?php echo __('Category Id'); ?></td>
-          <td><?php echo __('Brand Name'); ?></td>
+          <td><?php echo __('Sub Category Id'); ?></td>
           <td><?php echo __('Featured Image'); ?></td>
           <td><?php echo __('More Images'); ?></td>
           <td><?php echo __('Action'); ?></td>
