@@ -39,7 +39,9 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
     </div>
     <div class="clr"></div>
 </div> -->
+ <div class="detailspageLeft">
   <?php echo $this->getChildHtml('media') ?>
+  </div>
 
 <!-- Details page left section -->
 
@@ -68,7 +70,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                     <?php endif; ?>
           </span>
                     </li>
-                    <li><?php echo "(".$ratingNumber.")"; ?></li>
+                    <li style="color: #7f7f7f;"><?php echo "(".$ratingNumber.")"; ?></li>
                      <li><a href="#"><?php if($ratingSummary){echo $ratingSummary;}else{echo '0';} ?> Rating(s)</a></li>
 
             <li><a href="<?php echo $this->getUrl().$_product->getUrlKey().'/'.'reviews/'; ?>"><?php if($ratingSummary){echo $reviewCount;}else{echo '0';} ?> Review(s)</a></li>
@@ -103,7 +105,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                         }
 
                         if ($percentage) {
-                            echo $this->__($percentage . '%');
+                            echo $this->__(round($percentage) . '% OFF');
                         }
                         ?>
                 </span></div>
@@ -113,7 +115,7 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         </div>
     <!-- Details Price section -->  
     <!-- Details Offer Applicable section -->
-      <!--   <div class="offerApplicable">
+       <!--  <div class="offerApplicable">
             <div>(2) Offers  Applicable on cart</div>
             <div class="innerCount">
                 <div class="textbox">
@@ -255,6 +257,7 @@ if($vendorid){
                              $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
                                foreach ($vendorreview as $vendor123) {
                                    $ratingsummary=array($vendor123['summary_percent']);
+                                   $ratesum = $vendor123['summary_percent'];
                                    $count = count($ratingsummary);
                                    $sum = array_sum($ratingsummary); 
                                  }
@@ -270,9 +273,9 @@ if($vendorid){
                                         </div>
                                     </div>
                                 <?php endif;?>
-                              </div>
-                    </div><br>
-                    <div><span id="hello" style="cursor: pointer;"><a class="view-all-reviews"><?php echo __('View Vendor Reviews'); ?></a><span id="hello" style="cursor: pointer;"></div>
+                              </div><span style="color: #7f7f7f; font-size: 12px;">(<?php echo (($ratesum*5)/100); ?>)</span>
+                    </div>
+                    <div><span id="hello" style="cursor: pointer;"><a class="view-all-reviews"><?php echo __('View Vendor Reviews'); ?></a></span></div>
                     <!-- <div><a href="#">5 more sellers starting from Rs. 2,049 </a></div> -->
                 </div>
 
@@ -306,7 +309,7 @@ if($vendorid){
                             ->setStoreId($storeId)
                             ->load($_product->getId());
                             $reviewCount = $summaryData['reviews_count']; 
-                            $ratingSummary = $summaryData['rating_summary'];
+                           $ratingSummary = $summaryData['rating_summary'];
                             $ratingNumber = (($ratingSummary*5)/100); ?>
     <ul itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
         <li class="first  col-xs-8  leftAlignment">
@@ -347,7 +350,7 @@ if($vendorid){
         <li id="user-reviewRate-content-div" class="third col-xs-8">
             <div class="aligncenter">
                 <p id="rev-text"><span>Have you used this product?</span></p>
-                <a class="btn btn-orange rippleWhite js-userReviewed reviewBtn")">Review</a>
+                <a class="btn btn-orange rippleWhite js-userReviewed reviewBtn scrollbutton" >Review</a>
             </div>
         </li>
     </ul>
@@ -456,9 +459,10 @@ if($vendorid){
 
 <!-- customer review section start here -->
 
-<div id="defaultReviewsCard">
+ <div id="defaultReviewsCard">
 
 <?php echo $this->getChildHtml('product_review') ?>
+
 </div>
 
 <!-- customer review section ends here -->
@@ -467,17 +471,21 @@ if($vendorid){
 
 
 <?php 
-    $quesModel = Mage::getModel('quesanswer/quesanswer')->getCollection()->addFieldToFilter('sku',array('eq'=>$_product->getSku()));
+    $quesModel = Mage::getModel('quesanswer/quesanswer')->getCollection()->addFieldToFilter('sku',array('eq'=>$_product->getSku()))->addFieldToFilter('status',array('eq'=> 1));
     $quescount = count($quesModel->getData());
 
 ?>
- <div class="comp comp-question-ans">
+ <div class="comp comp-question-ans" style="clear: both;">
         <h2 class="section-head fnt-19">Questions &amp; Answers</h2>      
 </div>
 <ul class="clearfix qna-question-wrapper" id="qna-questions-wrapper">
 <?php 
+$i= 0;
 
 foreach ($quesModel as $quesans) {
+    if($i >2){
+        break;
+    }
     $ques = $quesans['question'];
     $ans = $quesans['answer'];
 
@@ -496,11 +504,13 @@ foreach ($quesModel as $quesans) {
                 </div> 
             </div>
       </li>
-      <?php } ?>
+      <?php $i++;
+       } ?>
  </ul>
      <div class="clear"></div>
     
-                <div class="viewMoreLink"><a href="">View more helpful reviews</a></div>
+                <div class="viewMoreLink"><a href="<?php echo $this->getUrl('quesanswer/index/viewmoreques'); ?>?sku=<?php echo $_product->getSku();?>" target="_blank">View more</a>
+                <a class="btn btn-orange rippleWhite js-userReviewed reviewBtn scrollbutton" >Ask Questions</a></div>
             <div class="clear"></div>
 
 <!-- Question answer section ends here -->
@@ -561,7 +571,7 @@ foreach ($quesModel as $quesans) {
                                                     </div>
                                                 <?php endif;?>
                                               </div>
-                                               <!--  <i class="price-text-color fa fa-star"></i> -->
+                                             
                                             
                                              <br>
                                             <h5 style="text-align: center;" class="price-text-color">
@@ -575,20 +585,39 @@ foreach ($quesModel as $quesans) {
   </ul>
 </div>
 
+
+
+<div class="product-collateral">
+<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+       <!--  <div class="box-collateral <?php// echo "box-{$alias}"?>">
+            <?php //if ($title = $this->getChildData($alias, 'title')):?>
+            <h2><?php //echo $this->escapeHtml($title); ?></h2>
+            <?php //endif;?>
+            <?php //echo $html; ?>
+        </div> -->
+<?php endforeach;?>
+        <?php echo $this->getChildHtml('upsell_products') ?>
+        <?php //echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+
 <!-- Similar product slider end here -->
 
+<?php 
 
-
-
-<!-- <div class="tabs clearfix">
-    <ul>
-        <li class="desc-tab tab activeTab active"><a href="javascript: void(0)">Item Details</a></li>
-        <li class="desc-tab tab ratingTab"><a href="javascript: void(0)">Ratings &amp; Reviews</a></li>
-        <li class="desc-tab tab qnaTab"><a href="javascript: void(0)">Questions &amp; Answers</a></li>
-    </ul>
+?>
+<div class="tab" id="scroll">
+  <button class="tablinks" onclick="openTab(event, 'Items')" id="defaultOpen">Item Details</button>
+  <button class="tablinks" onclick="openTab(event, 'Rating')">Ratings &amp; Reviews</button>
+  <button class="tablinks" onclick="openTab(event, 'Qa')">Question &amp; Answer</button>
 </div>
-<div class="itemdetailsaccordin">
+
+<div id="Items" class="tabcontent">
+
+  <?php echo $this->getChildHtml('additional') ?>
+    <?php echo $this->getChildHtml('description') ?>
+<!--   <div class="itemdetailsaccordin">
     <button class="accordion">Highlights</button>
+
     <div class="panel">
       <p>Lorem ipsum...</p>
     </div>
@@ -603,9 +632,125 @@ foreach ($quesModel as $quesans) {
       <p>Lorem ipsum...</p>
     </div>
 </div> -->
+</div>
+
+<div id="Rating" class="tabcontent">
+ <?php //echo $this->getChildHtml('review_form') 
+ echo $this->getLayout()->createBlock('review/form')->setTemplate('review/form.phtml')->toHtml();
+ ?>
+</div>
+
+<div id="Qa" class="tabcontent">
+    <div>
+            <h4><?php echo __("Ask Questions"); ?>
+    </div>
+    <div>
+        <form id="quesansform" action="<?php echo $this->getUrl('quesanswer/index/customerAskQues') ?>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="currentproductsku" value="<?php echo $_product->getSku(); ?>">
+                <div>
+                   <lable for="custName"><?php echo __('Name: '); ?><span style="color: red;">*</span></lable>
+                   <input type="text" name="custName" id="custName" class="input-text required-entry">
+                </div>
+
+                <div>
+                   <lable for="custEmail"><?php echo __('Email: '); ?><span style="color: red;">*</span></lable>
+                   <input type="text" name="custEmail" id="custEmail" class="input-text required-entry validate-email">
+                </div>
+
+                <div>
+                   <lable for="custContent"><?php echo __('Message: '); ?><span style="color: red;">*</span></lable>
+                   <textarea name="custContent" id="custContent" rows="6" cols="8" class="input-text required-entry"></textarea>
+                </div>
+
+                <div>
+                   <button class="btn" type="submit"><?php echo __('Save'); ?></button>
+                </div>
+        </form>
+    </div>
+</div>
+<script>
+jQuery(".scrollbutton").click(function() {
+    jQuery('html, body').animate({
+        scrollTop: jQuery("#scroll").offset().top
+    }, 2000);
+});
+</script>
 
 
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('quesansform');
+    //]]>
+</script>
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<style>
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* Style the close button */
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.topright:hover {color: red;}
+</style>
+
+<!-- <?php echo $this->getChildHtml('additional') ?> -->
 
 <!-- Model for view all reviews end here-->
 
