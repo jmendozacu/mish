@@ -1,0 +1,40 @@
+<?php 
+
+$pro_sku = $this->getRequest()->getParam('sku');
+
+    $quesModel = Mage::getModel('quesanswer/quesanswer')->getCollection()->addFieldToFilter('sku',array('eq'=>$pro_sku))->addFieldToFilter('status',array('eq'=> 1));
+    $quescount = count($quesModel->getData());
+
+?>
+ <div class="comp comp-question-ans" style="clear: both;">
+        <h2 class="section-head fnt-19">Questions &amp; Answers</h2>      
+</div>
+<ul class="clearfix qna-question-wrapper" id="list">
+<?php 
+
+foreach ($quesModel as $quesans) {
+    $ques = $quesans['question'];
+    $ans = $quesans['answer'];
+
+?>
+   <li class="qna-question clearfix " style="padding:0px 0px 0px 0px;">
+         <div class="qBlock">
+            <span class="qna-ques-head">
+               <span class="ques-icon">Q</span>
+               <div class="qright-info"><a href=""><span class="ques"><?php echo __($ques); ?></span></a></div>
+            </span>
+         </div>
+         <!-- For Question-Answer pair -->
+         <div class="dotted-line"></div>
+            <div class="response-text"><span class="ques-icon">A</span>
+                <div class="right-info"><span class="ans"><?php echo __($ans); ?></span>
+                </div> 
+            </div>
+      </li>
+      <?php } ?>
+ </ul>
+
+
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="<?php //echo $this->getSkinUrl('custom/css/style.css')?>"> 
