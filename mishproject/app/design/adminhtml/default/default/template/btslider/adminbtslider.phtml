@@ -14,33 +14,33 @@
 </div>
 <!-- Banner Slider section start here -->
 
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="<?php echo $this->getSkinUrl('ves_vendors/js/jquery.pagination-with-hash-change-2.js')?>"></script> 
-	<script>jQuery.noConflict();</script>
+  <script>jQuery.noConflict();</script>
 <div id="tab-1">
 
 
 <h3><?php echo __('Banner Slider : '); ?></h3>
 
-	<div class="bannerslider">
-		 <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/saveBanerimages') ?>" method="POST" enctype="multipart/form-data">
-		     <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
-		      <label>Select image:</label>
-		      <input type="file" value="" name="fileToUpload" id="fileToUpload">
+  <div class="bannerslider">
+     <form action="<?php echo Mage::helper("adminhtml")->getUrl('*/*/saveBanerimages') ?>" method="POST" enctype="multipart/form-data">
+         <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+          <label>Select image:</label>
+          <input type="file" value="" name="fileToUpload" id="fileToUpload">
 
-		      <label>Image Tab Label:</label>
+          <label>Image Tab Label:</label>
           <input type="text" name="imagelabel">
 
-			    <label>Title:</label>
+          <label>Title:</label>
           <input type="text" name="title">
 
-			    <label>Banner url:</label>
+          <label>Banner url:</label>
           <input type="text" name="url" >
-			    <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
-		  </form>
-	</div>
+          <button type="submit" class="savebutton" ><?php echo __('Save'); ?></button><br><br>
+      </form>
+  </div>
 
 
 <?php 
@@ -52,18 +52,18 @@
 <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
     
              <table border="0" cellpadding="0" cellspacing="0">
-    	<thead>
-    		<tr class="toprow">
-    		    <td><?php echo __('Id'); ?></td>
-    			<td><?php echo __('Image'); ?></td>
-    			<td><?php echo __('Tab Label'); ?></td>
-    			<td><?php echo __('Image Title'); ?></td>
-    			<td><?php echo __('Url'); ?></td>
-    			<td><?php echo __('Action'); ?></td>
-    		</tr>
-    	</thead>
-    	<tbody>
-    	<?php 
+      <thead>
+        <tr class="toprow">
+            <td><?php echo __('Id'); ?></td>
+          <td><?php echo __('Image'); ?></td>
+          <td><?php echo __('Tab Label'); ?></td>
+          <td><?php echo __('Image Title'); ?></td>
+          <td><?php echo __('Url'); ?></td>
+          <td><?php echo __('Action'); ?></td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php 
 foreach ($btSLiderModel as $imagedata) { 
   $id = $imagedata['btslider_id'];
   $image = $imagedata['images'];
@@ -73,16 +73,16 @@ foreach ($btSLiderModel as $imagedata) {
   $imagethumbnail = $imagepath.$image;
 ?>
 <input type="hidden" name="id" value="<?php echo $id; ?>">
-    	  <tr>
-    	        <td><?php echo $id;?></td>
-    	  		<td> <img height="100px" width="100px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/".$image; ?>"></td>
-    	  		<td><?php echo $imagelabel;?></td>
-    	  		<td><?php echo $title; ?></td>
-    	  		<td><?php echo $url; ?></td>
-    	  		<td><a href="<?php echo Mage::helper("adminhtml")->getUrl('*/*/deletesliderimage') ?>?id=<?php echo $id;?>"><?php echo __('Delete'); ?></a></td>
-    	  </tr>
+        <tr>
+              <td><?php echo $id;?></td>
+            <td> <img height="100px" width="100px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?><?php echo "slider/".$image; ?>"></td>
+            <td><?php echo $imagelabel;?></td>
+            <td><?php echo $title; ?></td>
+            <td><?php echo $url; ?></td>
+            <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('*/*/deletesliderimage') ?>?id=<?php echo $id;?>"><?php echo __('Delete'); ?></a></td>
+        </tr>
   <?php } ?>
-    	</tbody>
+      </tbody>
     </table>
    
   </div>
@@ -175,10 +175,14 @@ foreach ($btSLiderModel as $imagedata) {
           <label>Sub Category Id:</label><span style="color: red;">*</span>
           <input type="text" name="subcatid " id="subcatid" required="required">
         <!--   <input type="button" onclick="validate();" value="Validate" id="validate" /> -->
-        <a href="javascript:void(0)" onclick="validate();">Validate</a>
-          <small><?php echo __('you can enter more than one id name with "," seperated.'); ?></small>
-          <span id="result"></span>
-            <br>
+    
+        <a href="javascript:void(0)" onclick="validate();">Validate</a> <span id="result" style="font-weight: bold;"></span>
+       
+            <img id="loading-image" src='https://cdn-us-east.velaro.com/Content/Images/loading.gif' style="display: none;height: 10px; width: 10px;"  />
+        
+     
+        <br>
+          <small><?php echo __('you can enter more than one id name with "," seperated.'); ?></small><br>
             <br>
           <label>Image(1):</label>
           <input type="file" value="" name="image1" id="image1">
@@ -194,6 +198,7 @@ foreach ($btSLiderModel as $imagedata) {
 
      <script>
           document.getElementById('savebtn').disabled= true;
+          document.getElementById('savebtn').style.background='#000000';
          
     </script>
 
@@ -205,6 +210,7 @@ foreach ($btSLiderModel as $imagedata) {
        var subcatvalue = document.getElementById("subcatid").value;
        var catvalue = document.getElementById("catid").value;
       // alert(formkey);
+      jQuery('#loading-image').show();
           jQuery.ajax(
                     {
               type: "POST",
@@ -212,13 +218,16 @@ foreach ($btSLiderModel as $imagedata) {
               data: {subcatvalue: subcatvalue, form_key: formkey, catvalue: catvalue},
               success: function(result)
             {
-
+              jQuery('#loading-image').hide();
               if(result == 1 && result!= 0){
                 document.getElementById('savebtn').disabled= false;
-                jQuery("#result").html('Correct ids');
+                document.getElementById('savebtn').style.background='#eb5f34';
+                jQuery("#result").html('Correct id(s)');
           
               }else{
-                jQuery("#result").html('Please check entered Ids');
+                 document.getElementById('savebtn').disabled= true;
+                 document.getElementById('savebtn').style.background='#000000';
+                jQuery("#result").html('Please check sub category Id(s).');
               }
               
             }
