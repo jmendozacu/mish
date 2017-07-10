@@ -183,19 +183,51 @@ class Bluethink_Btslider_Adminhtml_BtsliderController extends Mage_Adminhtml_Con
 
 
          $catid     = $this->getRequest()->getPost('catid');
-         $brandname = $this->getRequest()->getPost('brand');
-        
+         $subcatid = $this->getRequest()->getPost('subcatid');
+         //$subcatidexplode = explode(',',$subcatid);
+          
 
             $model = Mage::getModel('btslider/btcatbrand')->load();
         
             $model->setCatid($catid);
-            $model->setBrandName($brandname);
+            $model->setBrandName($subcatid);
             $model->setFeaturedImage($profileimage);
             $model->setImageone($profileimage1);
             $model->setImagetwo($profileimage2);
             $model->save();
            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('btslider')->__('Details havebeen saved successfully.'));
             $this->_redirect('*/*/');
+    }
+
+    public function validateSubCatdataAction(){
+      $data = $this->getRequest()->getParams();
+      $subcatid = $data['subcatvalue'];
+      $catid = $data['catvalue'];
+
+      $subcatidexplode = explode(',',$subcatid);
+
+      $category = Mage::getModel('catalog/category')->load($catid)->getChildrenCategories();
+
+      foreach ($category as $childcat) {
+        $childcatid = $childcat->getEntityId();
+
+        foreach ($subcatidexplode as $subcatmatch) {
+            if($subcatmatch == $childcatid){
+
+              echo "1";
+            }else{
+              echo "0";
+            }
+        }
+/*
+        if(in_array($childcatid, $subcatidexplode)){
+          echo "Correct Ids";
+        }else{
+          echo "Wrong Ids";
+        }*/
+      }
+
+
     }
 
      public function deletecatbrandAction()
