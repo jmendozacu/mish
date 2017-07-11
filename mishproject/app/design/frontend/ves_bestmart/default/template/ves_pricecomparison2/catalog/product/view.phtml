@@ -74,6 +74,8 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
                      <li><a href="#"><?php if($ratingSummary){echo $ratingSummary;}else{echo '0';} ?> Rating(s)</a></li>
 
             <li><a href="<?php echo $this->getUrl().$_product->getUrlKey().'/'.'reviews/'; ?>"><?php if($ratingSummary){echo $reviewCount;}else{echo '0';} ?> Review(s)</a></li>
+
+            <li class="pull-right"><?php echo $this->getChildHtml('addto') ?></li>
            <!--  <li><a href="#">3Selfies</a></li>
             <li><a href="#">Have a question</a></li> -->
             <div class="clr"></div>
@@ -134,6 +136,15 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
         <div class="clr"></div>
      </div>  
 
+<!-- Custom options starts here -->
+ <?php //if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            <?php //endif;?>
+<!-- Custom options ends here -->
+
+
+
+
         <div class="addtoCartCount">
          <?php if (!$this->hasOptions()):?>
             <?php //if($_product->isSaleable()): ?>
@@ -165,6 +176,8 @@ $currenct_symbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->ge
             </div>
 
         </div>
+
+
 
             <?php //echo $this->getTierPriceHtml() ?>
             <?php //echo $this->getChildHtml('extrahint') ?>
