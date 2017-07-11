@@ -351,11 +351,11 @@ if($vendorid){
       
 
 
-            	<!-- Recommendation section starts here -->
-            	 <li id="user-reviewRec-content-div" class="second col-xs-8" style="border-right: solid 1px #e8e8e8;">
+                <!-- Recommendation section starts here -->
+                 <li id="user-reviewRec-content-div" class="second col-xs-8" style="border-right: solid 1px #e8e8e8;">
                      <?php echo $this->getChildHtml('recommendation');?>
-            	</li>	
-            	<!-- Recommendation section ends here -->
+                </li>   
+                <!-- Recommendation section ends here -->
 
 
 
@@ -587,34 +587,94 @@ foreach ($quesModel as $quesans) {
 <div class="detailsRightCount">
     <div class="head">Sold by</div>
     <div class="innerCount">
-        <div class="productName">EBUY365 BLR_DASANA_S...</div>
-        <div class="ratingDiv">For Rating</div>
-        <div><a href="">View Store</a></div>
+        <div class="productName"><?php echo $_product->getName(); ?></div>
+        <div class="ratingDiv">
+                   <?php 
+                    $summaryData = Mage::getModel('review/review_summary')
+                    ->setStoreId($storeId)
+                    ->load($_product->getId());
+                    $reviewCount = $summaryData['reviews_count']; 
+                    $ratingSummary = $summaryData['rating_summary'];
+                    $ratingNumber = (($ratingSummary*5)/100);
+
+                    if ($summaryData['rating_summary']):?>
+                    <div class="ratings" style="float: left;">
+                    <div class="rating-box">
+                    <div class="rating" style="width:<?php echo $summaryData['rating_summary']; ?>%"></div>
+                    </div>
+                    </div>
+                    <?php endif; ?>
+                    <span><?php echo "(".$ratingNumber.")"; ?></span>
+
+        </div>
+        <div><a href="<?php echo $this->getUrl().$vendorurlid; ?>">View Store</a></div>
         <div class="sellerInfo">
             <div class="sellerImg"><img src="<?php echo $mediaurl.$logo; ?>" class="img-circle" alt="Cinque Terre" width="50" height="50"></div>
             <div class="sellerText">
-                <div>Seller Name</div>
-                <div class="ratingDiv">Rating</div>
-                <div><a href="">View Seller Details</a></div>
+                <div  style="text-transform: capitalize;"><?php echo __($vendorName); ?></div>
+                <div class="ratingDiv">
+                    
+                     <div>
+                        <?php 
+                             $vendorreview = Mage::getModel('vendorsreview/review')->getCollection()->addFieldToFilter('vendor_id',$vendorid);
+                               foreach ($vendorreview as $vendor123) {
+                                   $ratingsummary=array($vendor123['summary_percent']);
+                                   $ratesum = $vendor123['summary_percent'];
+                                   $count = count($ratingsummary);
+                                   $sum = array_sum($ratingsummary); 
+                                 }
+                                   $average = ($sum/$count);
+                                   //echo "average- ".$average; 
+                             ?>
+
+                            <div class="ratings pull-left">
+                                <?php if ($average):?>
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?php echo ceil($average) ; ?>%;">
+                                    
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                              </div><span style="color: #7f7f7f; font-size: 12px;">(<?php echo (($ratesum*5)/100); ?>)</span>
+                    </div>
+                </div>
+                <div><a href="<?php echo $this->getUrl().$vendorurlid; ?>">View Seller Details</a></div>
             </div>
             <div class="clr"></div>
         </div>
         <div class="moreseller">
-            <span><a href="">5 more sellers</a></span>
-            <span><a href="">Sell On MISH</a></span>
+           <!--  <span><a href="">5 more sellers</a></span> -->
+            <span><a href="<?php echo $this->getUrl().'vendors/'; ?>">Sell On MISH</a></span>
         </div>
     </div>
 
     <div class="productList">
-        <div class="productImg">for product image</div>
-        <div>Hp DeskJet 1112 Printer</div>
-        <div class="priceCount">Rs. 2,049 <span>Rs. 2,049</span></div>
+        <div class="productImg">
+            <img src="<?php echo $_product->getImageUrl(); ?>" style="height: 156px;width: 156px;">
+        </div>
+        <div><?php echo $_product->getName(); ?></div>
+        <div class="priceCount"><?php echo $currency_symbol.' '.number_format($_product->getSpecialPrice(),2)." "; ?><?php ?><span><?php echo $currency_symbol.' '.number_format($_product->getPrice(),2); ?></span>
+       </div>
+
+        
         <div>
-            <input type="button" class="button" value="buy now">
+            <input type="button" class="button" value="buy now" onclick="setcheckoutLocationside('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo Mage::getUrl('checkout/onepage') ?>')">
         </div>
     </div>
 
 </div>
+<script>
+                 function setcheckoutLocationside(location,chkout)
+                 {
+                  jQuery.ajax({
+                                type:"GET",
+                                url:location,
+                                success:function(data){
+                                     window.location.href = chkout;
+                                }
+                             });
+                }
+                </script>
 <!-- below space for Right side add block -->
 <div class="clr"></div>
 
