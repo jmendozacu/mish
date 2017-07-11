@@ -17,26 +17,21 @@ $recommendpercent = (($recomYes/$recCount)*100);
             
         <form method="post" id="recommedform">
             <input type="hidden" value="<?php echo $id;?>" name="pro_id">
-            <a id="recBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">Yes</a>
-            <a id="notRecBtn" class="btn white-btn rippleWhite col-xs-4 reset-margin");">No</a>
+            <a id="recBtn" class="white-btn rippleWhite col-xs-4 reset-margin");">Yes</a>
+            <a id="notRecBtn" class="white-btn rippleWhite col-xs-4 reset-margin");">No</a>
         </form>
         </div>
-        <div id="err"></div>
+        <div id="err" style="float: left;"></div>
        <!--  <div id="voterecorded"></div> -->
  </div>
 
 
-<?php 
 
-if(isset($_COOKIE['vote']))
-{ ?>
-    <!-- code -->
-    
-<?php } else{?>
 <script>
 jQuery(document).ready(function(){
 var form=jQuery('#recommedform');
 jQuery('#recBtn').click(function(){
+
 jQuery.ajax({
         type:'POST',
         url:'<?php echo $this->getBaseUrl().'recommendation/index/voteyes' ?>',
@@ -75,7 +70,3 @@ jQuery.ajax({
 });
 });
 </script>
-<?php 
- setcookie('vote','yes', time()+ 3600);
-}
-?>

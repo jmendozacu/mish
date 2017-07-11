@@ -19,7 +19,7 @@
     src: url('../fonts/AMIKO-SEMIBOLD.ttf');
 	}
 
-body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
+body {font-family: 'Amiko', sans-serif !important; background: #f7f7f7 !important;}
 .fr {float: right;}
 .container {width: 1312px !important; padding: 0 !important;}
 #header .header1 #topbar {background: #ec2d32 !important;}
@@ -89,7 +89,7 @@ body {font-family: 'AMIKO-REGULAR' !important; background: #f7f7f7 !important;}
 .footer-pay-sociallinks-section .fa-pinterest {color: #bd091c;}
 .socialiconCount {float: right !important;}
 .fotteraboutMiss {border-bottom: solid 1px #ddd; padding-bottom: 10px; margin-bottom: 20px;}
-.fotteraboutMiss p {color: #777777;}
+.fotteraboutMiss p {color: #777777; font-size: 14px; line-height: 22px; text-align: justify; padding-bottom: 20px;}
 .footerlink-section {padding: 35px 0 0 0;}
 .clr {clear: both;}
 .topsellingCount {float: right; width: 1118px; margin-top: 5px;}
@@ -241,23 +241,23 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 }
 
 .democlassforGit {color: #000;}
-.breadcrumbs{position: absolute !important;z-index: 100 !important;top: 140px !important;margin-left: 155px !important;}
+.breadcrumbs{position: absolute !important;z-index: 100 !important;top: 140px !important;margin-left: 177px !important;}
 #ves-breadcrumbs .breadcrumbs a{color:#fff !important;}
 #ves-breadcrumbs .breadcrumb > li + li:before{color: #fff !important;}
 
-.detailspageLeft {float: left; width: 554px; background: #fff; padding: 74px 0; border-right: solid 1px #efefef;}
+.detailspageLeft {float: left; width: 554px; background: #fff; /*padding: 74px 0;*/ border-right: solid 1px #efefef;}
 .detailspageLeft .imagelistingLeft {float: left; padding-left: 28px;}
 .detailspageLeft .imagelistingLeft ul {padding: 0; margin: 0; list-style-type: none;}
 .detailspageLeft .imagelistingLeft ul li { margin-bottom: 10px;}
 .detailspageLeft .imagelistingLeft ul li img {border: solid 1px #efefef; text-align: center; padding: 18px 5px; cursor: pointer;}
 .detailspageLeft .imagelistingLeft ul li img:hover {border: solid 1px #000;}
-.detailspageLeft .imageRight {float: left; text-align: center; padding-bottom: 390px;}
+.detailspageLeft .imageRight {float: left; text-align: center; /*padding-bottom: 390px;*/}
 
-.detailspageRight {float: right; width: 757px;  background: #fff; padding-top: 35px;}
+.detailspageRight {float: right; width: 757px;  background: #fff;/* padding-top: 35px;*/}
 .detailspageRight .topHead {border-bottom: solid 1px #ddd; padding-bottom: 10px; margin-bottom: 20px; padding-left: 25px;}
-.detailspageRight .topHead h1 { font-size: 17px; color: #000; padding-bottom: 10px}
+.detailspageRight .topHead h1 { font-size: 20px; color: #2f2d2d; padding-bottom: 10px; font-weight: 300;}
 .detailspageRight .topHead ul {padding: 0; margin: 0; list-style-type: none;}
-.detailspageRight .topHead ul li {float: left; margin-right: 8px; border-right: solid 1px #ddd; padding: 0 5px;}
+.detailspageRight .topHead ul li {float: left; margin-right: 8px; border-right: solid 1px #ddd; padding: 0 5px; font-size: 12px;}
 .detailspageRight .topHead ul li:last-child {border: none;}
 .detailspageRight .topHead ul li span {color: #666;}
 .detailspageRight .topHead ul li a {color: #00adef; text-decoration: none;}
@@ -279,11 +279,11 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 
 .addtoCartCount { background: #fbfbfb; padding: 41px 0 24px 0px;}
 .addtoCartCount .buttonCount { padding: 0 0 0 99px; }
-.addtoCartCount .buttonCount input {border:none; width: 159px; text-align: center; padding:15px 0; color: #fff; border-radius: 4px;  text-transform: uppercase; background: #00adef; font-size:18px; margin-right: 16px;}
+.addtoCartCount .buttonCount input {border:none; width: 159px; height: 50px; text-align: center; padding:15px 0; color: #fff; border-radius: 4px;  text-transform: uppercase; background: #00adef; font-size:18px; margin-right: 16px;}
 .addtoCartCount .buttonCount .color {background: #fe585c !important;}
-.deliveryCount { padding: 40px 0 30px 30px;  position: relative;}
+.deliveryCount { padding: 10px 0 10px 20px;  position: relative;}
 .deliveryCount span { color: #666; display: inline-block; font-size: 12px;}
-.deliveryCount input {border: solid 1px #000; padding: 5px; margin: 0 40px; width: 22%;}
+.deliveryCount input {border: solid 1px #000; padding: 5px; margin: 0 60px 0 15px; width: 22%;}
 .deliveryCount .inputbutton {background: #000; color: #fff; padding: 5px 8px; position: absolute; left: 207px; width: 58px;}
 
 .detailspageRight .productType { padding: 32px 0 35px 0px; overflow: hidden; }
@@ -303,16 +303,17 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 .detailsmidSection {float: left; width: 1104px; padding-top: 14px;}
 .detailsmidSection .sellerDetails {background: #fff; padding:26px 30px; }
 .detailsmidSection .sellerDetails h1 {border-bottom: solid 1px #ddd; font-size: 17px; padding-bottom: 20px; margin-bottom: 20px; font-weight: normal;}
-.detailsmidSection .sellerInner {padding-bottom: 10px;  overflow: hidden;}
+.detailsmidSection .sellerInner {padding-bottom: 10px;  overflow: hidden; margin-top: 25px;}
 .detailsmidSection .sellerInner .left {float: left; width: 414px;}
 .detailsmidSection .sellerInner .right {float: right; width: 535px;}
 .detailsmidSection .sellerInner .sellerImage {float: left; padding-right: 22px;}
 .detailsmidSection .sellerInner .sellerinfo {width: 318px; float: right; font-size: 15px;}
+.sellerinfo span { text-transform: capitalize; }
 .detailsmidSection .sellerInner .sellerinfo div {padding-bottom: 14px;}
 .detailsmidSection .sellerInner .sellerinfo a {color: #25a8ed; text-decoration: none;}
-.detailsmidSection .sellerInner .abouttheSeller {width: 533px; float: right; padding: 14px; background: #f7f7f7; font-size: 12px;}
+.detailsmidSection .sellerInner .abouttheSeller {width: 533px; float: right; padding: 20px; background: #f7f7f7; font-size: 12px;}
 .detailsmidSection .sellerInner .abouttheSeller p {margin: 0; padding: 0;}
-.detailsmidSection .sellerInner .abouttheSeller span {display: block; font-size: 14px;}
+.detailsmidSection .sellerInner .abouttheSeller span {display: block; font-size: 14px; margin-bottom: 7px;}
 .detailsmidSection .visitStore {font-size: 14px; border-top: solid 1px #ddd; padding: 30px 0 10px 0;}
 .detailsmidSection .visitStore a {color: #25a8ed; text-decoration: none;}
 .detailsmidSection .visitStore span {display: inline-block; padding-left: 10px;}
@@ -332,6 +333,7 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
     height: 14px;  float: left; line-height: 10px; }
 .customer_review .rating-middle-section .total-review-txt { font-size: 14px; color: #999999; }
 .product_review p {font-size: 12px;  line-height: 15px; margin-top: 10px; padding: 8px 0; padding-bottom: 10px;}
+#rev-text span { font-size: 15px; }
 .customer_review .rating-middle-section a {color: #25a8ed;}
 .customer_review a {font-size: 14px; color: #999; text-decoration: none;}
 .customer_review .rating-middle-section .rating-text .rating {font-size: 45px;color: #333;}
@@ -339,11 +341,11 @@ a.close {top: 9px !important; color: #000 !important; font-size: 35px !important
 .recom-text .recom {font-size: 45px; color: #666;}
 .recom-subtext {font-size: 14px;line-height: 17px; text-align: center; color: #9e9e9e;}
 .recomBtn .LTblack {text-align: left; font-size: 14px; color: #666;  margin-right: 21px; padding: 0px; line-height: 19px;}
-a#recBtn {outline: none; margin-right: 10px !important; background: #00adef; color: #fff; padding: 5px 10px; border-radius: 4px;}
-a#notRecBtn { outline: none; margin-right: 10px !important; background: #fe585c; color: #fff; padding: 5px 10px; border-radius: 4px;}
-.aligncenter .col-xs-13 {width: 54.16667%; float: left;}
+a#recBtn {outline: none; margin-right: 10px !important; background: #00adef; color: #fff; padding: 5px 10px; border-radius: 4px; width: 60px;}
+a#notRecBtn { outline: none; margin-right: 10px !important; background: #fe585c; color: #fff; padding: 5px 10px; border-radius: 4px; width: 60px;}
+.aligncenter .col-xs-13 {width: 44.16667%; float: left;}
 .marT30 {margin-top: 30px;}
-.product_review .btn {overflow: visible; margin: 30px 5px 0; padding: 0px 14px 0px 12px; height: 35px; line-height: 34px;  font-size: 15px;  text-transform: uppercase;     background: #fe585c; color: #fff; border-radius: 4px; padding: 8px 33px; font-size: 17px;}
+.product_review .btn {overflow: visible;     margin: -6px 5px 0; padding: 0px 14px 0px 12px; height: 42px; line-height: 34px;  font-size: 15px;  text-transform: uppercase;     background: #fe585c; color: #fff; border-radius: 4px; padding: 8px 33px; font-size: 17px;}
 .customer_review a {font-size: 14px; color: #999; text-decoration: none; }
 .aligncenter {text-align: center;}
 
@@ -382,8 +384,8 @@ a#notRecBtn { outline: none; margin-right: 10px !important; background: #fe585c;
 a.LTblack:hover, .LTgray {color: #999999;}
 .customer_review a {font-size: 14px; color: #999; text-decoration: none;}
 .comp-customer-review a {cursor: pointer;}
-.viewMoreLink { width: 204px; margin: auto; }
-.viewMoreLink  a {background: #00adef; text-align: center; display: block; border-radius: 4px; padding: 10px 0; font-size: 14px; color: #fff; text-decoration: none;}
+.viewMoreLink { width: 500px; margin: auto; }
+.viewMoreLink  a {background: #00adef; text-align: center; display: block; border-radius: 4px; padding: 10px 0; font-size: 14px; color: #fff; text-decoration: none; float: left; width: 41%; margin-right: 2%;}
 
 .tabs {border-bottom: solid 1px #efefef;}
 .tabs ul { float: left; width: 100%; margin-bottom: -6px; border-bottom: solid 1px #efefef; padding-bottom: 10px;}
@@ -429,12 +431,16 @@ span.qna-ques-head { width: 89%; display: inline-block;}
 .ques-icon, .ans-icon {padding-left: 2px;  font-size: 20px; line-height: 18px; color: #333; padding-top: 14px; text-align: center;
     width: 45px; height: 45px; margin-top: 0px; border-radius: 50%; background: #f7f7f7; display: inline-block;}
 .qright-info {margin: 15px 0px 0px -6px; margin-left: 11%;}
+
+.qright-info span { color: #333; font-size: 16px; }
+.right-info span { line-height: 20px; }
+
 .dotted-line { padding: 11px;  width: 2px; border-right: dashed 1px #cccccc;}
 .sd-qna .response-text { display: table !important; width: 100%; text-overflow: ellipsis; display: -webkit-box;   -webkit-line-clamp: 2;
     line-height: 1.5em; -webkit-box-orient: vertical; overflow: hidden;  font-size: 13px;  display: block;  padding-bottom: 3px;
     white-space: pre-wrap; color: #666; font-size: 14px; line-height: 22px;}
 .ques-icon { float: left;}
-.ques-icon, .ans-icon { padding-left: 2px; font-size: 20px; line-height: 18px; color: #333; padding-top: 14px; text-align: center;
+.ques-icon, .ans-icon { padding-left: 2px; font-size: 18px; line-height: 18px; color: #333; padding-top: 14px; text-align: center;
     width: 45px; height: 45px; margin-top: 0px; border-radius: 50%; background: #f7f7f7; display: inline-block;}
 .right-info {display: table; margin: 10px; width: 90%; margin-left: 10%;  margin-top: 0;}
 .sd-qna .view-hide-answers {margin: 15px 0 15px 10% !important;}
@@ -444,3 +450,67 @@ span.qna-ques-head { width: 89%; display: inline-block;}
 .sd-qna a.btnload.LTgray:hover { background: #dfdfdf; color: #212121;}
 .qna-ans-cnt {margin-left: 10%;}
 .view-hide-answers {cursor: pointer; width: 20%; margin: 10px auto;}
+
+#products-grid .product-col.first { border: none !important; }
+.row.products-row .product-col { border: none !important; }
+.category-products .toolbar { border: none !important; }
+#products-grid, #products-list { border: none !important; }
+.products-grid .row.products-row { border: none !important; }
+
+.catdesciption h3 { text-transform: uppercase; color: #121212 !important; font-size: 20px; font-weight: 300; }
+.catdesciption p { color: #777 !important; text-align: justify; line-height: 22px; }
+
+.block .block-title { margin-left: 20px; }
+.chweb_layered_dt { border: none !important; border-style: none; border-color: none; }
+.block-content .chweb-filter > dl > dd { border: none !important; border-style: none; border-color: none; }
+div.chweb-filter a.chweb_layered_attribute { padding: 4px 30px !important; }
+.mullayenav_range_input .mullayenav_range_from { width: 51% !important; }
+#chweb_layered_price li { padding: 0 !important; }
+
+#header .header1 .menu-top { min-height: 0; }
+.product_review p .btn { margin-top: 20px; }
+
+.qna-question-wrapper { background: #fff; }
+
+.tabcontent, div.tab {background: #fff;}
+div.tab {border-bottom: solid 1px #ccc; border-left: none; border-right: none; border-top: none;}
+div.tab button.active {background: none; border-bottom: solid 2px #e12341; color: #000;}
+.button:hover, input.button:hover { background: #00adef  !important; border: none !important;}
+
+.questionansCount {background: #fff; padding: 10px;}
+.similarProduct {background: #fff; margin-top: 25px;}
+.similarProduct .bx-wrapper {box-shadow: none;}
+.similarProduct h3 {border-bottom: solid 1px #ddd; padding-top: 10px; margin-bottom: 20px; padding-left: 25px;}
+.button, input.button { background: #00adef !important;}
+input, select, textarea {width: 26%;}
+.qustionansDiv {padding-top: 15px;}
+.qustionansDiv input, .qustionansDiv textarea { width: 40%;}
+.qustionansDiv lable {padding-bottom: 3px; display: block;}
+.btn {padding: 10px 30px !important;}
+.defaultReviewsCard { background: #fff; margin: 25px 0;}
+.defaultReviewsCard h2 {margin: 0; border-bottom: solid 1px #ddd; padding:10px 0 10px 25px;}
+.defaultReviewsCard dl {padding: 15px;}
+.defaultReviewsCard dd, .defaultReviewsCard dt {padding-top: 10px;}
+.box-reviews .pager, .my-account .pager { background: #fff; padding: 10px 15px 10px 0; }
+
+.defaultReviewsCard h2, .ratingReview h1, .detailsmidSection .sellerDetails h1, .questionansCount h2 { padding: 0; margin: 0; color: #333; font-size: 18px !important; border-bottom: solid 1px #ddd;}
+.product_review  {margin-top: 25px;}
+.defaultReviewsCard h2, .questionansCount h2 {margin-left: 25px; padding-top: 20px;}
+.questionansCount h2  {margin-bottom: 25px;}
+.detailsRightCount{float: right; width: 195px;  margin-top: 12px;}
+.detailsRightCount .head { background: #fe585c; padding: 8px 12px; color: #fff; font-size: 13px; text-transform: uppercase;}
+.detailsRightCount .innerCount {padding: 15px 0 31px 13px; background: #fff;}
+.detailsRightCount .productName{color: #5a5a59; font-size: 13px; text-transform: uppercase;}
+.detailsRightCount .ratingDiv {padding: 8px 0;}
+.detailsRightCount a {font-size: 13px; color: #25a8ed;}
+.detailsRightCount .sellerInfo {padding: 15px 0;}
+.detailsRightCount .sellerInfo .sellerImg {float: left;}
+.detailsRightCount .sellerInfo .sellerText {float: right; width: 126px;}
+.detailsRightCount .moreseller {text-transform: uppercase; padding: 10px 0 0 0;}
+.detailsRightCount .moreseller span { display: block; padding-bottom: 5px;}
+
+.detailsRightCount .productList { background: #fff; color: #212121; font-size: 13px; margin-top: 16px; text-align: center; padding-bottom: 15px;}
+.detailsRightCount .productList .productImg { padding: 83px 0 67px 0;}
+.detailsRightCount .productList .priceCount { color: #ff2341; padding: 5px 0;}
+.detailsRightCount .productList .priceCount span {text-decoration: line-through; color: #666;}
+.detailsRightCount .productList .button { width: 165px; margin: auto; background: #fe585c !important; text-align: center; color: #fff; padding: 8px 0; text-transform: uppercase;}

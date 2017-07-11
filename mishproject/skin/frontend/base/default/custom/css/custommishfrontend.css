@@ -9,7 +9,7 @@ html {
 
 h2 {
   margin: 1.75em 0 0;
-  font-size: 5vw;
+  font-size: 1.5rem; font-weight: normal;
 }
 
 h3 { font-size: 1.3em; }
@@ -30,24 +30,16 @@ h3 { font-size: 1.3em; }
 }
 
 .btn {
-  font-size: 3vmin;
-  padding: 0.75em 1.5em;
-  background-color: #fff;
-  border: 1px solid #bbb;
-  color: #333;
+  background-color: #00adef;
+  color: #fff;
   text-decoration: none;
   display: inline;
   border-radius: 4px;
-  -webkit-transition: background-color 1s ease;
-  -moz-transition: background-color 1s ease;
-  transition: background-color 1s ease;
 }
 
 .btn:hover {
-  background-color: #ddd;
-  -webkit-transition: background-color 1s ease;
-  -moz-transition: background-color 1s ease;
-  transition: background-color 1s ease;
+  background-color: #00adef;
+  
 }
 
 .btn-small {
