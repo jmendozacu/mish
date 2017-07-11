@@ -61,6 +61,7 @@ class Bluethink_Quesanswer_Block_Adminhtml_Quesanswer_Grid extends Mage_Adminhtm
           'header'    => Mage::helper('quesanswer')->__('Status'),
           'align'     =>'left',
           'index'     => 'status',
+          'renderer' => 'Bluethink_Quesanswer_Block_Adminhtml_Quesanswer_Grid_Renderer_Status',
       ));
 
 	  /*
