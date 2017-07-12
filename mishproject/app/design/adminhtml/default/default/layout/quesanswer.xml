@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <quesanswer_adminhtml_quesanswer_index>
+        <reference name="content">
+            <block type="quesanswer/adminhtml_quesanswer" name="quesanswer" />
+        </reference>
+    </quesanswer_adminhtml_quesanswer_index>
+  <!--   <vendors_promo_quesanswer_index>
+        <reference name="content">
+            <block type="quesanswer/vendors_quesanswer" name="quesanswer" />
+        </reference>
+    </vendors_promo_quesanswer_index>
+ -->
+  <vendors_vendors_quesanswer_index>
+        <reference name="content">
+          <block type="quesanswer/vendors_quesanswer" name="quesanswer" />
+        </reference>
+  </vendors_vendors_quesanswer_index>
+</layout>
