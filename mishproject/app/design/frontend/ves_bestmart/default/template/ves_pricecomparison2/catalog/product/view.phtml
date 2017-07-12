@@ -653,7 +653,16 @@ foreach ($quesModel as $quesans) {
             <img src="<?php echo $_product->getImageUrl(); ?>" style="height: 156px;width: 156px;">
         </div>
         <div><?php echo $_product->getName(); ?></div>
-        <div class="priceCount"><?php echo $currency_symbol.' '.number_format($_product->getSpecialPrice(),2)." "; ?><?php ?><span><?php echo $currency_symbol.' '.number_format($_product->getPrice(),2); ?></span>
+        <div class="priceCount">
+        <?php if($_product->getSpecialPrice()){ ?>
+        <?php echo $currency_symbol.' '.number_format($_product->getSpecialPrice(),2)." "; ?><?php ?>
+        <?php }else{
+            echo $currency_symbol.' '.number_format($_product->getPrice(),2);
+            } ?>
+            <?php if($_product->getSpecialPrice()){ ?>
+        <span><?php echo $currency_symbol.' '.number_format($_product->getPrice(),2); ?></span>
+        <?php } ?>
+
        </div>
 
         
