@@ -6,7 +6,21 @@
         </Bluethink_Quesanswer>
     </modules>
     <frontend>
-        <routers>
+         <routers>
+          <!--  <vendors>
+                <args>
+                    <modules>
+                        <quesanswer before="VES_Vendors">Bluethink_Quesanswer_Vendors</quesanswer>
+                    </modules>
+                </args>
+            </vendors> -->
+            <vendors>
+                <args>
+                    <modules>
+                        <quesanswer before="VES_Vendors">Bluethink_Quesanswer</quesanswer>
+                    </modules>
+                </args>
+            </vendors>
             <quesanswer>
                 <use>standard</use>
                 <args>
@@ -70,7 +84,25 @@
 				</quesanswer>
 			</updates>
 		</layout>
-    </adminhtml>   
+    </adminhtml>  
+     <vendors>
+       <menu>
+               <quesanswer module="quesanswer">
+                           <title>Ques and Ans</title>
+                           <sort_order>71</sort_order>
+                         
+               <children>
+                   <items module="quesanswer">
+                       <title>Manage QA</title>
+                       <sort_order>0</sort_order>
+                        <action>vendors/vendors_quesanswer/index/</action> 
+                       
+                   </items>
+                   
+               </children>
+           </quesanswer>
+       </menu>
+   </vendors> 
     <global>
         <models>
             <quesanswer>
