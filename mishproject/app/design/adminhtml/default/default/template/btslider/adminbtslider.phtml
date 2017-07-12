@@ -173,12 +173,12 @@ foreach ($btSLiderModel as $imagedata) {
           <input type="text" name="catid" id="catid">
 
           <label>Sub Category Id:</label><span style="color: red;">*</span>
-          <input type="text" name="subcatid " id="subcatid" required="required">
+          <input type="text" name="subcatid " id="subcatid" required="required" onfocusout="validate()">
         <!--   <input type="button" onclick="validate();" value="Validate" id="validate" /> -->
     
-        <a href="javascript:void(0)" onclick="validate();">Validate</a> <span id="result" style="font-weight: bold;"></span>
+      <!--   <a href="javascript:void(0)" onclick="validate();">Validate</a> --> <span id="result" style="font-weight: bold;"></span>
        
-            <img id="loading-image" src='https://cdn-us-east.velaro.com/Content/Images/loading.gif' style="display: none;height: 10px; width: 10px;"  />
+            <img id="loading-image" src='https://cdn-us-east.velaro.com/Content/Images/loading.gif' style="display: none;height: 20px; width: 20px;"  />
         
      
         <br>
