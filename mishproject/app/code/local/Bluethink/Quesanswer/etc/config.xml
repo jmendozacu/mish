@@ -17,7 +17,7 @@
             <vendors>
                 <args>
                     <modules>
-                        <quesanswer before="VES_Vendors">Bluethink_Quesanswer</quesanswer>
+                        <quesanswer before="VES_Vendors">Bluethink_Quesanswer_Vendors</quesanswer>
                     </modules>
                 </args>
             </vendors>
