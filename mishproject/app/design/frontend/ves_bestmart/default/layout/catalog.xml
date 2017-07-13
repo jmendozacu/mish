@@ -136,9 +136,9 @@ Category layered navigation layout
             <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
         <reference name="left">
-            <block type="catalog/layer_view" name="catalog.leftnav" after="treemenu" template="catalog/layer/view.phtml">
+           <!--  <block type="catalog/layer_view" name="catalog.leftnav" after="treemenu" template="catalog/layer/view.phtml">
                 <block type="core/text_list" name="catalog.leftnav.state.renderers" as="state_renderers" />
-            </block>
+            </block> -->
            <!--  <block type="ves_productcarousel2/list" after="catalog.leftnav" name="productcarousel2.list"/>  -->
         </reference>
         <reference name="content">
