@@ -8,6 +8,15 @@
         </reference>
     </personallogistic_index_index>
 
+     <personallogistic_index_signupform>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="personallogistic/personallogistic" name="personallogisticlogin" template="personallogistic/personallogistic.phtml" />
+        </reference>
+    </personallogistic_index_signupform>
+
     <personallogistic_index_login>
     	 <reference name="root">
              <action method="setTemplate">
