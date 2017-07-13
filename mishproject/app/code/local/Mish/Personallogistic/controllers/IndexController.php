@@ -7,6 +7,12 @@ class Mish_Personallogistic_IndexController extends Mage_Core_Controller_Front_A
 		$this->renderLayout();
     }
 
+    public function signupformAction()
+    {
+		$this->loadLayout();     
+		$this->renderLayout();
+    }
+
     public function updateorderstatusAction()
     {
 		$rowId = $this->getRequest()->getParam('id');
