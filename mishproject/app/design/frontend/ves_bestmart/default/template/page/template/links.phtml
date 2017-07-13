@@ -44,20 +44,8 @@
 
       <li>
 <!-- Personal Logistics section -->
-  <a style="color:#fff;" class= "js-open-modal" href="#" data-modal-id="popup1"><?php echo __('Personal Logistics'); ?></a>
-<div id="popup1" class="modal-box">
-  <header> <a style="margin-bottom: 10px" href="#" class="js-modal-close close">×</a>
-    <h3><?php echo __('Personal Logistics Registration');?></h3>
-  </header>
-  <div class="modal-body">
-       <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('personallogistic/personallogistic.phtml')->toHtml(); ?>
-  </div>
-
-  <footer> 
-   <!--  <a href="#" class="btn btn-small js-modal-close">Close</a>
-   -->
-
-</div></li>
+  <a style="color:#fff;" target="_blank" href="<?php echo $this->getUrl('personallogistic/index/signupform'); ?>"><?php echo __('Personal Logistic'); ?></a>
+</li>
 <li style="color:#fff;"><div class="fr"><a style="color:#fff;" href="<?php echo $this->getBaseUrl().'personallogistic/index/login' ?>">Personal Logistic Login</a></div></li>
 		</ul>
 	
@@ -68,7 +56,7 @@
 
 
 
-<script>
+<!-- <script>
 var ok = jQuery.noConflict();
 ok(function(){
 
@@ -102,5 +90,5 @@ ok(window).resize();
  
 });
 </script>
-
+ -->
 <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('custom/css/custommishfrontend.css')?>" media="all"/>
